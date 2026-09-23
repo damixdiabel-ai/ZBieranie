@@ -1,181 +1,382 @@
+```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZBieranie 💰</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZBieranie 💰</title>
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #111827;
-            color: white;
-        }
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background:
+        radial-gradient(circle at 50% 0%, #063b25 0%, transparent 35%),
+        linear-gradient(135deg, #020807, #07140f 50%, #020807);
+}
 
-        header {
-            text-align: center;
-            padding: 40px 20px;
-            background: #1f2937;
-        }
+/* NAGŁÓWEK */
 
-        header h1 {
-            font-size: 42px;
-            margin: 0 0 10px;
-        }
+header {
+    text-align: center;
+    padding: 55px 20px 35px;
+}
 
-        header p {
-            color: #cbd5e1;
-            font-size: 18px;
-        }
+.logo {
+    font-size: 60px;
+    margin-bottom: 5px;
+    filter: drop-shadow(0 0 18px #22ff88);
+}
 
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
+header h1 {
+    margin: 0;
+    font-size: 48px;
+    color: #7dffb2;
+    text-shadow:
+        0 0 8px #22ff88,
+        0 0 25px #22ff88;
+}
 
-        .card {
-            background: #1f2937;
-            border-radius: 20px;
-            padding: 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-        }
+header p {
+    color: #9fb8aa;
+    font-size: 18px;
+}
 
-        .money {
-            text-align: center;
-            font-size: 48px;
-            font-weight: bold;
-            margin: 15px 0;
-        }
+/* GŁÓWNY KONTENER */
 
-        .target {
-            text-align: center;
-            color: #cbd5e1;
-        }
+.container {
+    width: min(950px, 92%);
+    margin: auto;
+}
 
-        .progress-bg {
-            width: 100%;
-            height: 25px;
-            background: #374151;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-top: 20px;
-        }
+/* KARTY */
 
-        .progress {
-            height: 100%;
-            width: 0%;
-            background: #22c55e;
-            border-radius: 20px;
-            transition: 0.5s;
-        }
+.card {
+    position: relative;
+    overflow: hidden;
+    background: rgba(7, 22, 15, 0.88);
+    border: 1px solid rgba(45, 255, 135, 0.16);
+    border-radius: 28px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.35),
+        inset 0 0 30px rgba(30,255,130,.025);
+}
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 25px;
-        }
+.card h2 {
+    color: #a8ffc7;
+}
 
-        .stat {
-            background: #111827;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-        }
+/* SALDO */
 
-        .stat-number {
-            font-size: 28px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
+.balance-box {
+    text-align: center;
+    padding: 10px 0 5px;
+}
 
-        .stat-name {
-            color: #94a3b8;
-        }
+.balance-label {
+    color: #8fa99c;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
 
-        button {
-            border: none;
-            border-radius: 12px;
-            padding: 12px 18px;
-            margin: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            background: #22c55e;
-            color: white;
-        }
+.balance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+    margin: 8px 0 18px;
+}
 
-        button:hover {
-            opacity: 0.85;
-        }
+.dollar {
+    font-size: 55px;
+    color: #48ff91;
+    text-shadow:
+        0 0 8px #22ff70,
+        0 0 25px #22ff70,
+        0 0 45px rgba(34,255,112,.7);
+}
 
-        .danger {
-            background: #ef4444;
-        }
+.money {
+    font-size: 62px;
+    font-weight: 900;
+    color: #8dffb5;
+    text-shadow:
+        0 0 8px #22ff70,
+        0 0 25px #22ff70,
+        0 0 50px rgba(34,255,112,.6);
+}
 
-        .history {
-            margin-top: 20px;
-        }
+/* PASEK POSTĘPU */
 
-        .history-item {
-            padding: 12px;
-            border-bottom: 1px solid #374151;
-        }
+.progress-wrap {
+    margin-top: 25px;
+}
 
-        footer {
-            text-align: center;
-            color: #64748b;
-            padding: 30px;
-        }
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    color: #a5b8ae;
+    margin-bottom: 10px;
+}
 
-        @media (max-width: 600px) {
-            .stats {
-                grid-template-columns: 1fr;
-            }
+.progress-bg {
+    position: relative;
+    height: 58px;
+    border-radius: 30px;
+    overflow: hidden;
+    background: #07120d;
+    border: 2px solid #153e2a;
+    box-shadow:
+        inset 0 0 15px rgba(0,0,0,.8);
+}
 
-            header h1 {
-                font-size: 32px;
-            }
+.progress-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0%;
+    border-radius: 30px;
+    overflow: hidden;
+    background: linear-gradient(
+        90deg,
+        #087b3d,
+        #18bd62,
+        #35f47e
+    );
+    transition: width 1.5s cubic-bezier(.2,.8,.2,1);
+}
 
-            .money {
-                font-size: 38px;
-            }
-        }
-    </style>
+/* RUCHOME ZAKRZYWIONE PASKI */
+
+.progress-fill::before {
+    content: "";
+    position: absolute;
+    inset: -30px;
+    width: 220%;
+    background:
+        repeating-linear-gradient(
+            105deg,
+            transparent 0px,
+            transparent 25px,
+            rgba(2,80,38,.55) 26px,
+            rgba(2,80,38,.55) 42px,
+            transparent 43px,
+            transparent 70px
+        );
+    animation: moveStripes 2.4s linear infinite;
+    transform: skewX(-8deg);
+}
+
+.progress-fill::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.10),
+        transparent
+    );
+    animation: shine 3s linear infinite;
+}
+
+@keyframes moveStripes {
+    from {
+        transform: translateX(0) skewX(-8deg);
+    }
+    to {
+        transform: translateX(-90px) skewX(-8deg);
+    }
+}
+
+@keyframes shine {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.progress-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 5;
+    text-shadow: 0 2px 5px #000;
+}
+
+/* STATYSTYKI */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.stat {
+    padding: 22px;
+    text-align: center;
+    border-radius: 20px;
+    background: rgba(2,12,8,.7);
+    border: 1px solid #123d27;
+}
+
+.stat-number {
+    font-size: 30px;
+    font-weight: bold;
+    color: #6cff9e;
+}
+
+.stat-name {
+    margin-top: 6px;
+    color: #82998d;
+}
+
+/* PRZYCISKI */
+
+button {
+    border: none;
+    border-radius: 14px;
+    padding: 13px 20px;
+    margin: 5px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    background: #159447;
+    box-shadow: 0 0 15px rgba(21,148,71,.3);
+    transition: .2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(34,255,112,.5);
+}
+
+.red {
+    background: #b52d3b;
+    box-shadow: 0 0 15px rgba(255,45,60,.3);
+}
+
+.red:hover {
+    box-shadow: 0 0 25px rgba(255,45,60,.5);
+}
+
+/* HISTORIA */
+
+.history-item {
+    padding: 13px;
+    margin: 7px 0;
+    border-radius: 12px;
+    background: #07140e;
+    border-left: 4px solid #24d66c;
+}
+
+.expense {
+    border-left-color: #ff3d4d;
+    color: #ff9ba3;
+}
+
+/* STOPKA */
+
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #53665c;
+}
+
+/* TELEFON */
+
+@media(max-width:650px) {
+
+    header h1 {
+        font-size: 38px;
+    }
+
+    .money {
+        font-size: 42px;
+    }
+
+    .dollar {
+        font-size: 40px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-    <h1>🧴 ZBieranie</h1>
-    <p>Moja droga do celu 💰</p>
+    <div class="logo">🧴</div>
+    <h1>ZBieranie</h1>
+    <p>Każda złotówka przybliża nas do celu.</p>
 </header>
 
 <div class="container">
 
+    <!-- SALDO -->
+
     <div class="card">
-        <h2>🎯 Mój cel</h2>
+        <div class="balance-box">
 
-        <div class="money" id="money">0,00 zł</div>
+            <div class="balance-label">
+                Aktualne saldo
+            </div>
 
-        <div class="target">
-            Cel: <strong>6868 zł</strong>
+            <div class="balance">
+                <div class="dollar">$</div>
+                <div class="money" id="money">0,00 zł</div>
+            </div>
+
+            <div class="progress-wrap">
+
+                <div class="progress-info">
+                    <span>Postęp do celu</span>
+                    <span>6868 zł</span>
+                </div>
+
+                <div class="progress-bg">
+
+                    <div class="progress-fill" id="progress">
+                    </div>
+
+                    <div class="progress-text" id="percent">
+                        0%
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-
-        <div class="progress-bg">
-            <div class="progress" id="progress"></div>
-        </div>
-
-        <p id="percent" style="text-align:center;">0%</p>
     </div>
 
+    <!-- STATYSTYKI -->
+
     <div class="card">
+
         <h2>📊 Statystyki</h2>
 
         <div class="stats">
@@ -192,140 +393,20 @@
 
             <div class="stat">
                 <div class="stat-number" id="remaining">6868 zł</div>
-                <div class="stat-name">💰 Brakuje</div>
+                <div class="stat-name">🎯 Brakuje</div>
             </div>
 
         </div>
+
     </div>
 
+    <!-- DODAWANIE PIENIĘDZY -->
+
     <div class="card">
-        <h2>➕ Dodaj zbieranie</h2>
+
+        <h2>💰 Dodaj pieniądze</h2>
 
         <p>
-            Jedna butelka = <strong>0,50 zł</strong>
-        </p>
-
-        <button onclick="addBottles(20)">
-            +20 butelek
-        </button>
-
-        <button onclick="addBottles(40)">
-            +40 butelek
-        </button>
-
-        <button onclick="addBottles(1)">
-            +1 butelka
-        </button>
-
-        <button class="danger" onclick="resetData()">
-            🗑️ Reset
-        </button>
-    </div>
-
-    <div class="card">
-        <h2>📜 Historia</h2>
-
-        <div class="history" id="history">
-            Brak wpisów.
-        </div>
-    </div>
-
-</div>
-
-<footer>
-    ZBieranie © 2026
-</footer>
-
-<script>
-
-    const TARGET = 6868;
-    const PRICE = 0.50;
-
-    let bottles = Number(localStorage.getItem("bottles")) || 0;
-    let days = Number(localStorage.getItem("days")) || 0;
-    let history = JSON.parse(localStorage.getItem("history")) || [];
-
-    function update() {
-
-        const money = bottles * PRICE;
-        const remaining = Math.max(TARGET - money, 0);
-        const percent = Math.min((money / TARGET) * 100, 100);
-
-        document.getElementById("money").textContent =
-            money.toFixed(2).replace(".", ",") + " zł";
-
-        document.getElementById("bottles").textContent = bottles;
-
-        document.getElementById("days").textContent = days;
-
-        document.getElementById("remaining").textContent =
-            remaining.toFixed(2).replace(".", ",") + " zł";
-
-        document.getElementById("percent").textContent =
-            percent.toFixed(2) + "%";
-
-        document.getElementById("progress").style.width =
-            percent + "%";
-
-        showHistory();
-    }
-
-    function addBottles(amount) {
-
-        bottles += amount;
-        days++;
-
-        const money = amount * PRICE;
-
-        const date = new Date().toLocaleDateString("pl-PL");
-
-        history.unshift(
-            date + " — +" + amount +
-            " butelek = +" +
-            money.toFixed(2).replace(".", ",") +
-            " zł"
-        );
-
-        localStorage.setItem("bottles", bottles);
-        localStorage.setItem("days", days);
-        localStorage.setItem("history", JSON.stringify(history));
-
-        update();
-    }
-
-    function showHistory() {
-
-        const box = document.getElementById("history");
-
-        if (history.length === 0) {
-            box.innerHTML = "Brak wpisów.";
-            return;
-        }
-
-        box.innerHTML = history
-            .map(item => `<div class="history-item">🧴 ${item}</div>`)
-            .join("");
-    }
-
-    function resetData() {
-
-        if (confirm("Na pewno chcesz wyzerować całą historię?")) {
-
-            bottles = 0;
-            days = 0;
-            history = [];
-
-            localStorage.removeItem("bottles");
-            localStorage.removeItem("days");
-            localStorage.removeItem("history");
-
-            update();
-        }
-    }
-
-    update();
-
-</script>
-
-</body>
-</html>
+            Nie musisz zbierać tylko butelek.
+            Możesz dodawać dowolne zarobione pieniądze.
+```
