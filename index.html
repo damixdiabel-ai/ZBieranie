@@ -10,6 +10,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
     min-height: 100vh;
@@ -18,29 +22,155 @@ body {
     background:
         radial-gradient(circle at 50% 0%, #063b25 0%, transparent 35%),
         linear-gradient(135deg, #020807, #07140f 50%, #020807);
+
+    transition:
+        background 0.8s ease,
+        filter 0.8s ease;
 }
+
+/* =========================
+   ANIMACJA PRZEJŚCIA
+========================= */
+
+body.goals-mode {
+    background:
+        radial-gradient(circle at 50% 0%, #5a2600 0%, transparent 35%),
+        linear-gradient(135deg, #0c0702, #211006 50%, #080401);
+}
+
+.page-transition {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,130,20,.55),
+            rgba(255,80,0,.15),
+            transparent 65%
+        );
+    transition: opacity .5s ease;
+}
+
+.page-transition.active {
+    opacity: 1;
+}
+
+/* =========================
+   HEADER
+========================= */
 
 header {
     text-align: center;
-    padding: 55px 20px 35px;
+    padding: 35px 20px 20px;
 }
 
 .logo {
     font-size: 60px;
     filter: drop-shadow(0 0 18px #22ff88);
+    transition: .6s ease;
+}
+
+body.goals-mode .logo {
+    filter: drop-shadow(0 0 20px #ff8a20);
 }
 
 header h1 {
     margin: 0;
     font-size: 48px;
     color: #7dffb2;
-    text-shadow: 0 0 8px #22ff88, 0 0 25px #22ff88;
+    text-shadow:
+        0 0 8px #22ff88,
+        0 0 25px #22ff88;
+
+    transition: .6s ease;
+}
+
+body.goals-mode header h1 {
+    color: #ffad5c;
+    text-shadow:
+        0 0 8px #ff7b00,
+        0 0 25px #ff7b00;
 }
 
 header p {
     color: #9fb8aa;
     font-size: 18px;
 }
+
+/* =========================
+   ZAKŁADKI
+========================= */
+
+.tabs {
+    width: min(950px, 92%);
+    margin: 10px auto 25px;
+
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.tab {
+    position: relative;
+    padding: 13px 30px;
+    border-radius: 15px;
+
+    background: rgba(7,22,15,.85);
+    border: 1px solid #174a30;
+
+    color: #9fb8aa;
+    font-weight: bold;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition:
+        color .3s ease,
+        border .3s ease,
+        background .3s ease,
+        box-shadow .3s ease,
+        transform .3s ease;
+}
+
+.tab:hover {
+    transform: translateY(-3px);
+}
+
+.tab.active {
+    color: white;
+    background: #0d6337;
+    border-color: #27ed7a;
+    box-shadow:
+        0 0 12px rgba(34,255,112,.35);
+}
+
+/* CELE - POMARAŃCZOWY HOVER */
+
+.tab.goals-tab:hover {
+    color: #fff;
+    background: rgba(120,48,5,.65);
+    border-color: #ff8a20;
+
+    box-shadow:
+        0 0 10px rgba(255,120,20,.7),
+        0 0 30px rgba(255,100,10,.35),
+        inset 0 0 15px rgba(255,130,20,.12);
+}
+
+body.goals-mode .tab.goals-tab {
+    color: white;
+    background: #9a4808;
+    border-color: #ff8a20;
+    box-shadow:
+        0 0 15px rgba(255,120,20,.5);
+}
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container {
     width: min(950px, 92%);
@@ -50,21 +180,46 @@ header p {
 .card {
     position: relative;
     overflow: hidden;
-    background: rgba(7, 22, 15, 0.88);
-    border: 1px solid rgba(45, 255, 135, 0.16);
+
+    background: rgba(7,22,15,.88);
+    border: 1px solid rgba(45,255,135,.16);
     border-radius: 28px;
+
     padding: 30px;
     margin-bottom: 25px;
+
     box-shadow:
         0 15px 50px rgba(0,0,0,.35),
         inset 0 0 30px rgba(30,255,130,.025);
+
+    transition:
+        border .6s ease,
+        box-shadow .6s ease,
+        background .6s ease;
+}
+
+body.goals-mode .card {
+    background: rgba(30,13,5,.9);
+
+    border-color:
+        rgba(255,130,30,.18);
+
+    box-shadow:
+        0 15px 50px rgba(0,0,0,.4),
+        inset 0 0 30px rgba(255,120,20,.025);
 }
 
 .card h2 {
     color: #a8ffc7;
 }
 
-/* SALDO */
+body.goals-mode .card h2 {
+    color: #ffb66e;
+}
+
+/* =========================
+   SALDO
+========================= */
 
 .balance-box {
     text-align: center;
@@ -88,23 +243,50 @@ header p {
 .dollar {
     font-size: 55px;
     color: #48ff91;
+
     text-shadow:
         0 0 8px #22ff70,
         0 0 25px #22ff70,
         0 0 45px rgba(34,255,112,.7);
+
+    transition: .6s ease;
+}
+
+body.goals-mode .dollar {
+    color: #ff962f;
+
+    text-shadow:
+        0 0 8px #ff7b00,
+        0 0 25px #ff7b00,
+        0 0 45px rgba(255,100,0,.6);
 }
 
 .money {
     font-size: 62px;
     font-weight: 900;
+
     color: #8dffb5;
+
     text-shadow:
         0 0 8px #22ff70,
         0 0 25px #22ff70,
         0 0 50px rgba(34,255,112,.6);
+
+    transition: .6s ease;
 }
 
-/* PASEK */
+body.goals-mode .money {
+    color: #ffc078;
+
+    text-shadow:
+        0 0 8px #ff7b00,
+        0 0 25px #ff7b00,
+        0 0 50px rgba(255,100,0,.45);
+}
+
+/* =========================
+   PASEK
+========================= */
 
 .progress-wrap {
     margin-top: 25px;
@@ -122,6 +304,7 @@ header p {
     height: 58px;
     border-radius: 30px;
     overflow: hidden;
+
     background: #07120d;
     border: 2px solid #153e2a;
 }
@@ -130,59 +313,49 @@ header p {
     position: absolute;
     left: 0;
     top: 0;
+
     height: 100%;
     width: 0%;
+
     border-radius: 30px;
     overflow: hidden;
-    background: linear-gradient(
-        90deg,
-        #087b3d,
-        #18bd62,
-        #35f47e
-    );
 
-    /* płynny wzrost samego paska */
+    background:
+        linear-gradient(
+            90deg,
+            #087b3d,
+            #18bd62,
+            #35f47e
+        );
+
     transition:
         width 1.5s cubic-bezier(.2,.8,.2,1);
 }
 
-/*
-   PASKI W ŚRODKU
-
-   Zamiast przesuwać wzór w lewo i prawo,
-   przesuwamy go cały czas w jedną stronę.
-   Dzięki temu nie wygląda jak cofanie.
-*/
-
 .progress-fill::before {
     content: "";
+
     position: absolute;
 
     top: 0;
     bottom: 0;
-
     left: -160px;
 
     width: calc(100% + 320px);
 
-    background: repeating-linear-gradient(
-        105deg,
-        transparent 0px,
-        transparent 28px,
-
-        rgba(2,80,38,.55) 29px,
-        rgba(2,80,38,.55) 46px,
-
-        transparent 47px,
-        transparent 78px
-    );
+    background:
+        repeating-linear-gradient(
+            105deg,
+            transparent 0px,
+            transparent 28px,
+            rgba(2,80,38,.55) 29px,
+            rgba(2,80,38,.55) 46px,
+            transparent 47px,
+            transparent 78px
+        );
 
     animation:
         moveStripes 2.8s linear infinite;
-
-    /* ważne: wzór nie zmienia rozmiaru */
-    transform: translate3d(0,0,0);
-    will-change: transform;
 
     pointer-events: none;
 }
@@ -191,40 +364,57 @@ header p {
 
     from {
         transform:
-            translate3d(-80px, 0, 0);
+            translate3d(-80px,0,0);
     }
 
     to {
         transform:
-            translate3d(80px, 0, 0);
+            translate3d(80px,0,0);
     }
 }
 
 .progress-text {
     position: absolute;
     inset: 0;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-weight: bold;
+
     z-index: 5;
-    text-shadow: 0 2px 5px #000;
+
+    text-shadow:
+        0 2px 5px #000;
 }
 
-/* STATYSTYKI */
+/* =========================
+   STATYSTYKI
+========================= */
 
 .stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3,1fr);
     gap: 15px;
 }
 
 .stat {
     padding: 22px;
+
     text-align: center;
+
     border-radius: 20px;
+
     background: rgba(2,12,8,.7);
     border: 1px solid #123d27;
+
+    transition: .5s ease;
+}
+
+body.goals-mode .stat {
+    background: rgba(25,10,3,.7);
+    border-color: #4d270f;
 }
 
 .stat-number {
@@ -233,18 +423,26 @@ header p {
     color: #6cff9e;
 }
 
+body.goals-mode .stat-number {
+    color: #ffae5c;
+}
+
 .stat-name {
     margin-top: 6px;
     color: #82998d;
 }
 
-/* NAGŁÓWEK WYKRESU */
+/* =========================
+   NAGŁÓWEK SEKCJI
+========================= */
 
 .section-title {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 10px;
+
     margin-top: 25px;
     margin-bottom: 15px;
 }
@@ -252,6 +450,10 @@ header p {
 .section-title h3 {
     margin: 0;
     color: #a8ffc7;
+}
+
+body.goals-mode .section-title h3 {
+    color: #ffb66e;
 }
 
 .clear-btn {
@@ -263,14 +465,20 @@ header p {
 
 .clear-btn:hover {
     background: #d52b3c;
-    box-shadow: 0 0 20px rgba(255,45,60,.45);
+
+    box-shadow:
+        0 0 20px rgba(255,45,60,.45);
 }
 
-/* WYKRES */
+/* =========================
+   WYKRES
+========================= */
 
 .chart-box {
     padding: 22px;
+
     border-radius: 22px;
+
     background: rgba(2,12,8,.65);
     border: 1px solid #123d27;
 }
@@ -281,16 +489,18 @@ header p {
     margin-top: 4px;
 }
 
-/* POZIOMY SUWAK */
-
 .chart-scroll {
     width: 100%;
+
     overflow-x: auto;
     overflow-y: hidden;
+
     margin-top: 12px;
     padding-bottom: 8px;
-    scrollbar-color: #20c968 #07140e;
-    scrollbar-width: auto;
+
+    scrollbar-color:
+        #20c968
+        #07140e;
 }
 
 .chart-scroll::-webkit-scrollbar {
@@ -318,45 +528,46 @@ canvas {
     display: block;
 }
 
-.chart-tooltip {
-    position: absolute;
-    display: none;
-    pointer-events: none;
-    padding: 10px 13px;
-    border-radius: 12px;
-    background: #07140e;
-    border: 1px solid #25d96c;
-    box-shadow: 0 0 20px rgba(34,255,112,.25);
-    font-size: 13px;
-    z-index: 10;
-}
-
-/* PRZYCISKI */
+/* =========================
+   PRZYCISKI
+========================= */
 
 button {
     border: none;
     border-radius: 14px;
+
     padding: 13px 20px;
     margin: 5px;
+
     color: white;
+
     font-size: 16px;
     font-weight: bold;
+
     cursor: pointer;
+
     background: #159447;
-    box-shadow: 0 0 15px rgba(21,148,71,.3);
+
+    box-shadow:
+        0 0 15px rgba(21,148,71,.3);
+
     transition: .2s;
 }
 
 button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 25px rgba(34,255,112,.5);
+
+    box-shadow:
+        0 0 25px rgba(34,255,112,.5);
 }
 
 .red {
     background: #b52d3b;
 }
 
-/* HISTORIA */
+/* =========================
+   HISTORIA
+========================= */
 
 .history-wrapper {
     margin-top: 10px;
@@ -364,9 +575,14 @@ button:hover {
 
 .history-list {
     max-height: 300px;
+
     overflow-y: auto;
+
     padding-right: 5px;
-    scrollbar-color: #20c968 #07140e;
+
+    scrollbar-color:
+        #20c968
+        #07140e;
 }
 
 .history-list::-webkit-scrollbar {
@@ -385,10 +601,15 @@ button:hover {
 
 .history-item {
     padding: 13px;
+
     margin: 7px 0;
+
     border-radius: 12px;
+
     background: #07140e;
-    border-left: 4px solid #24d66c;
+
+    border-left:
+        4px solid #24d66c;
 }
 
 .expense {
@@ -398,8 +619,259 @@ button:hover {
 
 .show-more {
     width: 100%;
+
     background: #0c5f34;
-    margin: 10px 0 0;
+
+    margin:
+        10px 0 0;
+}
+
+/* =========================
+   CELE
+========================= */
+
+.goals-page {
+    display: none;
+}
+
+body.goals-mode .balance-page {
+    display: none;
+}
+
+body.goals-mode .goals-page {
+    display: block;
+
+    animation:
+        goalsAppear .7s ease;
+}
+
+@keyframes goalsAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(30px)
+            scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.goals-hero {
+    text-align: center;
+    padding: 20px;
+}
+
+.goals-icon {
+    font-size: 65px;
+
+    filter:
+        drop-shadow(
+            0 0 20px
+            rgba(255,120,20,.7)
+        );
+}
+
+.goals-title {
+    font-size: 38px;
+    margin: 10px 0;
+
+    color: #ffad5c;
+
+    text-shadow:
+        0 0 10px #ff7b00,
+        0 0 30px rgba(255,100,0,.6);
+}
+
+.goals-description {
+    color: #b79b86;
+}
+
+/* GŁÓWNY CEL */
+
+.main-goal {
+    text-align: center;
+
+    padding: 30px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(75,31,5,.7),
+            rgba(35,13,3,.8)
+        );
+
+    border:
+        1px solid
+        rgba(255,130,30,.35);
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(255,120,20,.05);
+}
+
+.main-goal h3 {
+    margin-top: 0;
+
+    color: #ffbd7a;
+}
+
+.goal-money {
+    font-size: 46px;
+    font-weight: 900;
+
+    color: #ff9c3c;
+
+    text-shadow:
+        0 0 10px #ff7b00,
+        0 0 30px rgba(255,100,0,.55);
+}
+
+.goal-small {
+    color: #a78b75;
+    margin-top: 6px;
+}
+
+/* POMARAŃCZOWY PASEK CELU */
+
+.goal-progress-bg {
+    position: relative;
+
+    height: 35px;
+
+    margin-top: 22px;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background: #160b04;
+
+    border:
+        1px solid
+        #67310b;
+}
+
+.goal-progress-fill {
+    height: 100%;
+
+    width: 0%;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c84d00,
+            #ff7b00,
+            #ffb13b
+        );
+
+    transition:
+        width 1.3s
+        cubic-bezier(.2,.8,.2,1);
+}
+
+.goal-percent {
+    margin-top: 12px;
+
+    color: #ffbd7a;
+
+    font-weight: bold;
+}
+
+/* KAMIENIE MILOWE */
+
+.milestones {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.milestone {
+    padding: 17px 8px;
+
+    text-align: center;
+
+    border-radius: 16px;
+
+    background: #160b04;
+
+    border:
+        1px solid
+        #48230c;
+
+    color: #806b59;
+
+    transition: .4s ease;
+}
+
+.milestone-number {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.milestone.done {
+    background:
+        rgba(154,72,8,.35);
+
+    border-color:
+        #ff7b00;
+
+    color: #ffad5c;
+
+    box-shadow:
+        0 0 15px
+        rgba(255,120,20,.25);
+}
+
+.milestone.done .milestone-number {
+    color: #ff9d38;
+}
+
+/* DODATKOWE CELE */
+
+.extra-goals {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 15px;
+}
+
+.extra-goal {
+    padding: 20px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(20,9,3,.7);
+
+    border:
+        1px solid
+        #45220d;
+}
+
+.extra-goal h3 {
+    margin-top: 0;
+    color: #ffad5c;
+}
+
+.extra-goal p {
+    color: #9d8571;
 }
 
 /* STOPKA */
@@ -410,7 +882,9 @@ footer {
     color: #53665c;
 }
 
-/* TELEFON */
+/* =========================
+   TELEFON
+========================= */
 
 @media(max-width:650px) {
 
@@ -437,21 +911,85 @@ footer {
     .chart-inner {
         min-width: 700px;
     }
+
+    .tabs {
+        width: 92%;
+    }
+
+    .tab {
+        flex: 1;
+        padding: 12px 10px;
+    }
+
+    .milestones {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .extra-goals {
+        grid-template-columns: 1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">🧴</div>
+<div
+    class="page-transition"
+    id="pageTransition">
+</div>
 
-    <h1>ZBieranie</h1>
+<header>
+
+    <div class="logo">
+        🧴
+    </div>
+
+    <h1>
+        ZBieranie
+    </h1>
 
     <p>
         Każda złotówka przybliża nas do celu.
     </p>
+
 </header>
+
+
+<!-- =========================
+     ZAKŁADKI
+========================= -->
+
+<div class="tabs">
+
+    <button
+        class="tab active"
+        id="balanceTab"
+        onclick="showBalance()">
+
+        💰 1. Saldo
+
+    </button>
+
+
+    <button
+        class="tab goals-tab"
+        id="goalsTab"
+        onclick="showGoals()">
+
+        🎯 2. Cele
+
+    </button>
+
+</div>
+
+
+<!-- =========================
+     STRONA SALDA
+========================= -->
+
+<div class="balance-page">
 
 <div class="container">
 
@@ -471,11 +1009,27 @@ footer {
                 $
             </div>
 
-            <div class="money" id="money">
+            <div
+                class="money"
+                id="money">
+
                 0,00 zł
+
             </div>
 
         </div>
+
+
+        <!-- NOWY PRZYCISK WYCZYŚĆ SALDO -->
+
+        <button
+            class="clear-btn"
+            onclick="clearBalance()">
+
+            🗑 Wyczyść saldo
+
+        </button>
+
 
         <div class="progress-wrap">
 
@@ -491,6 +1045,7 @@ footer {
 
             </div>
 
+
             <div class="progress-bg">
 
                 <div
@@ -501,7 +1056,9 @@ footer {
                 <div
                     class="progress-text"
                     id="percent">
+
                     0%
+
                 </div>
 
             </div>
@@ -521,6 +1078,7 @@ footer {
         📊 Statystyki
     </h2>
 
+
     <div class="stats">
 
         <div class="stat">
@@ -528,7 +1086,9 @@ footer {
             <div
                 class="stat-number"
                 id="bottles">
+
                 0
+
             </div>
 
             <div class="stat-name">
@@ -543,7 +1103,9 @@ footer {
             <div
                 class="stat-number"
                 id="days">
+
                 0
+
             </div>
 
             <div class="stat-name">
@@ -558,7 +1120,9 @@ footer {
             <div
                 class="stat-number"
                 id="remaining">
+
                 6868 zł
+
             </div>
 
             <div class="stat-name">
@@ -601,8 +1165,7 @@ footer {
     <div class="chart-box">
 
         <div
-            class="chart-scroll"
-            id="chartScroll">
+            class="chart-scroll">
 
             <div class="chart-inner">
 
@@ -634,7 +1197,7 @@ footer {
 
 
     <button
-        onclick="addMoney(0.5, 'Kaucja')">
+        onclick="addMoney(0.5,'Kaucja')">
 
         +0,50 zł
 
@@ -642,7 +1205,7 @@ footer {
 
 
     <button
-        onclick="addMoney(10, '20 butelek')">
+        onclick="addMoney(10,'20 butelek')">
 
         +10 zł
 
@@ -650,7 +1213,7 @@ footer {
 
 
     <button
-        onclick="addMoney(20, '40 butelek')">
+        onclick="addMoney(20,'40 butelek')">
 
         +20 zł
 
@@ -721,6 +1284,247 @@ footer {
 
 </div>
 
+</div>
+
+
+<!-- =========================
+     STRONA CELÓW
+========================= -->
+
+<div class="goals-page">
+
+<div class="container">
+
+<div class="card">
+
+    <div class="goals-hero">
+
+        <div class="goals-icon">
+            🎯
+        </div>
+
+        <div class="goals-title">
+            Moje cele
+        </div>
+
+        <div class="goals-description">
+            Każdy zebrany grosz przybliża nas do kolejnego poziomu.
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GŁÓWNY CEL -->
+
+<div class="card">
+
+    <div class="main-goal">
+
+        <h3>
+            🏆 GŁÓWNY CEL
+        </h3>
+
+        <div class="goal-money">
+            6868 zł
+        </div>
+
+        <div class="goal-small">
+            Cel zbierania pieniędzy
+        </div>
+
+
+        <div class="goal-progress-bg">
+
+            <div
+                class="goal-progress-fill"
+                id="goalProgress">
+            </div>
+
+        </div>
+
+
+        <div
+            class="goal-percent"
+            id="goalPercent">
+
+            0% ukończone
+
+        </div>
+
+    </div>
+
+
+    <!-- KAMIENIE MILOWE -->
+
+    <div class="section-title">
+
+        <h3>
+            🏆 Kamienie milowe
+        </h3>
+
+    </div>
+
+
+    <div class="milestones">
+
+        <div
+            class="milestone"
+            data-value="500">
+
+            <div class="milestone-number">
+                500 zł
+            </div>
+
+            <div>
+                ⭐
+            </div>
+
+        </div>
+
+
+        <div
+            class="milestone"
+            data-value="1000">
+
+            <div class="milestone-number">
+                1000 zł
+            </div>
+
+            <div>
+                🔥
+            </div>
+
+        </div>
+
+
+        <div
+            class="milestone"
+            data-value="2500">
+
+            <div class="milestone-number">
+                2500 zł
+            </div>
+
+            <div>
+                🚀
+            </div>
+
+        </div>
+
+
+        <div
+            class="milestone"
+            data-value="5000">
+
+            <div class="milestone-number">
+                5000 zł
+            </div>
+
+            <div>
+                💎
+            </div>
+
+        </div>
+
+
+        <div
+            class="milestone"
+            data-value="6868">
+
+            <div class="milestone-number">
+                6868 zł
+            </div>
+
+            <div>
+                🏆
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- DODATKOWE CELE -->
+
+<div class="card">
+
+    <h2>
+        🗂 Dodatkowe cele
+    </h2>
+
+    <p style="color:#9d8571">
+        Tutaj możesz później wpisać konkretne rzeczy,
+        na które chcesz przeznaczyć zebrane pieniądze.
+    </p>
+
+
+    <div class="extra-goals">
+
+        <div class="extra-goal">
+
+            <h3>
+                🛴 Kukirin G4
+            </h3>
+
+            <p>
+                Cel związany z zakupem hulajnogi.
+            </p>
+
+        </div>
+
+
+        <div class="extra-goal">
+
+            <h3>
+                🖥️ Nowy komputer
+            </h3>
+
+            <p>
+                Sprzęt gamingowy i komputer.
+            </p>
+
+        </div>
+
+
+        <div class="extra-goal">
+
+            <h3>
+                🎮 PlayStation 5
+            </h3>
+
+            <p>
+                Konsola jako kolejny możliwy cel.
+            </p>
+
+        </div>
+
+
+        <div class="extra-goal">
+
+            <h3>
+                💡 Własny cel
+            </h3>
+
+            <p>
+                Możemy później zrobić tutaj
+                dodawanie własnych celów.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
 
 <footer>
     ZBieranie © 2026
@@ -729,10 +1533,15 @@ footer {
 
 <script>
 
+/* =========================
+   DANE
+========================= */
+
 const TARGET = 6868;
 
+const CLEAR_CODE =
+    "ButelKaucja";
 
-/* DANE */
 
 let balance =
     Number(
@@ -761,7 +1570,120 @@ let history =
 let historyExpanded = false;
 
 
-/* AKTUALIZACJA */
+/* =========================
+   ZAKŁADKI
+========================= */
+
+function showGoals() {
+
+    const transition =
+        document.getElementById(
+            "pageTransition"
+        );
+
+
+    transition.classList.add(
+        "active"
+    );
+
+
+    setTimeout(() => {
+
+        document.body.classList.add(
+            "goals-mode"
+        );
+
+
+        document.getElementById(
+            "balanceTab"
+        ).classList.remove(
+            "active"
+        );
+
+
+        document.getElementById(
+            "goalsTab"
+        ).classList.add(
+            "active"
+        );
+
+
+        updateGoals();
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+        setTimeout(() => {
+
+            transition.classList.remove(
+                "active"
+            );
+
+        }, 300);
+
+    }, 350);
+}
+
+
+function showBalance() {
+
+    const transition =
+        document.getElementById(
+            "pageTransition"
+        );
+
+
+    transition.classList.add(
+        "active"
+    );
+
+
+    setTimeout(() => {
+
+        document.body.classList.remove(
+            "goals-mode"
+        );
+
+
+        document.getElementById(
+            "goalsTab"
+        ).classList.remove(
+            "active"
+        );
+
+
+        document.getElementById(
+            "balanceTab"
+        ).classList.add(
+            "active"
+        );
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+
+        setTimeout(() => {
+
+            transition.classList.remove(
+                "active"
+            );
+
+        }, 300);
+
+    }, 350);
+}
+
+
+/* =========================
+   AKTUALIZACJA
+========================= */
 
 function update() {
 
@@ -825,10 +1747,75 @@ function update() {
     showHistory();
 
     drawChart();
+
+    updateGoals();
 }
 
 
-/* DODAWANIE */
+/* =========================
+   CELE
+========================= */
+
+function updateGoals() {
+
+    const percent =
+        Math.min(
+            (balance / TARGET) * 100,
+            100
+        );
+
+
+    document.getElementById(
+        "goalProgress"
+    ).style.width =
+        percent + "%";
+
+
+    document.getElementById(
+        "goalPercent"
+    ).textContent =
+        percent.toFixed(2)
+        + "% ukończone";
+
+
+    document
+        .querySelectorAll(
+            ".milestone"
+        )
+        .forEach(
+            milestone => {
+
+                const value =
+                    Number(
+                        milestone.dataset.value
+                    );
+
+
+                if (
+                    balance >= value
+                ) {
+
+                    milestone.classList.add(
+                        "done"
+                    );
+
+                }
+                else {
+
+                    milestone.classList.remove(
+                        "done"
+                    );
+
+                }
+
+            }
+        );
+}
+
+
+/* =========================
+   DODAWANIE
+========================= */
 
 function addMoney(
     amount,
@@ -893,7 +1880,8 @@ function customAdd() {
                 "Skąd są te pieniądze?",
                 "Inne"
             )
-            || "Inne pieniądze";
+            ||
+            "Inne pieniądze";
 
 
         balance += amount;
@@ -935,7 +1923,8 @@ function customExpense() {
                 "Na co wydajesz?",
                 "Wydatek"
             )
-            || "Wydatek";
+            ||
+            "Wydatek";
 
 
         balance -= amount;
@@ -965,7 +1954,9 @@ function customExpense() {
 }
 
 
-/* HISTORIA */
+/* =========================
+   HISTORIA
+========================= */
 
 function addHistory(
     amount,
@@ -996,8 +1987,6 @@ function addHistory(
     });
 }
 
-
-/* HISTORIA */
 
 function showHistory() {
 
@@ -1045,15 +2034,13 @@ function showHistory() {
                 item => {
 
                     const sign =
-                        item.type ===
-                        "plus"
+                        item.type === "plus"
                         ? "+"
                         : "−";
 
 
                     const className =
-                        item.type ===
-                        "plus"
+                        item.type === "plus"
                         ? ""
                         : "expense";
 
@@ -1140,18 +2127,13 @@ function toggleHistory() {
     historyExpanded =
         !historyExpanded;
 
-
     showHistory();
 }
 
 
-/* ==========================================
-   KOD DO WYCZYSZCZENIA
-========================================== */
-
-const CLEAR_CODE =
-    "ButelKaucja";
-
+/* =========================
+   KOD
+========================= */
 
 function checkClearCode() {
 
@@ -1180,9 +2162,54 @@ function checkClearCode() {
 }
 
 
-/* ==========================================
+/* =========================
+   WYCZYŚĆ SALDO
+========================= */
+
+function clearBalance() {
+
+    if (
+        !checkClearCode()
+    ) {
+
+        return;
+
+    }
+
+
+    const sure =
+        confirm(
+            "⚠️ UWAGA!\n\n"
+            + "To wyzeruje aktualne saldo.\n"
+            + "Ta operacja jest przeznaczona do resetowania pieniędzy.\n\n"
+            + "Czy na pewno chcesz wyzerować saldo?"
+        );
+
+
+    if (
+        !sure
+    ) {
+
+        return;
+
+    }
+
+
+    balance = 0;
+
+
+    save();
+
+
+    alert(
+        "Saldo zostało wyzerowane."
+    );
+}
+
+
+/* =========================
    WYCZYŚĆ WYKRES
-========================================== */
+========================= */
 
 function clearChart() {
 
@@ -1222,9 +2249,9 @@ function clearChart() {
 }
 
 
-/* ==========================================
+/* =========================
    WYCZYŚĆ HISTORIĘ
-========================================== */
+========================= */
 
 function clearHistory() {
 
@@ -1264,9 +2291,9 @@ function clearHistory() {
 }
 
 
-/* ==========================================
+/* =========================
    WYKRES
-========================================== */
+========================= */
 
 const canvas =
     document.getElementById(
@@ -1405,11 +2432,8 @@ function drawChart() {
 
 
     const left = 60;
-
     const right = 25;
-
     const top = 25;
-
     const bottom = 45;
 
 
@@ -1434,8 +2458,6 @@ function drawChart() {
             )
         );
 
-
-    /* SIATKA */
 
     ctx.font =
         "11px Arial";
@@ -1501,8 +2523,6 @@ function drawChart() {
     }
 
 
-    /* PUNKTY */
-
     const points = [];
 
 
@@ -1540,19 +2560,14 @@ function drawChart() {
             points.push({
 
                 x,
-
                 y,
-
-                data:
-                    point
+                data: point
 
             });
 
         }
     );
 
-
-    /* LINIE */
 
     for (
         let i = 0;
@@ -1568,25 +2583,14 @@ function drawChart() {
             points[i + 1];
 
 
-        if (
+        ctx.strokeStyle =
             b.data.balance >=
             a.data.balance
-        ) {
-
-            ctx.strokeStyle =
-                "#28f878";
-
-        }
-        else {
-
-            ctx.strokeStyle =
-                "#ff3d4d";
-
-        }
+            ? "#28f878"
+            : "#ff3d4d";
 
 
         ctx.lineWidth = 4;
-
 
         ctx.lineCap =
             "round";
@@ -1608,11 +2612,8 @@ function drawChart() {
 
 
         ctx.stroke();
-
     }
 
-
-    /* PUNKTY */
 
     points.forEach(
         (
@@ -1625,20 +2626,15 @@ function drawChart() {
 
 
             if (
-                index > 0
+                index > 0 &&
+                point.data.balance <
+                points[
+                    index - 1
+                ].data.balance
             ) {
 
-                if (
-                    point.data.balance <
-                    points[
-                        index - 1
-                    ].data.balance
-                ) {
-
-                    color =
-                        "#ff3d4d";
-
-                }
+                color =
+                    "#ff3d4d";
 
             }
 
@@ -1664,8 +2660,6 @@ function drawChart() {
         }
     );
 
-
-    /* DATY */
 
     ctx.fillStyle =
         "#60786b";
@@ -1693,7 +2687,9 @@ function drawChart() {
 }
 
 
-/* ZAPIS */
+/* =========================
+   ZAPIS
+========================= */
 
 function save() {
 
