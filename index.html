@@ -3,931 +3,732 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZBieranie 💰</title>
+<title>ZBieranie</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    color: white;
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
     background:
-        radial-gradient(circle at 50% 0%, #063b25 0%, transparent 35%),
-        linear-gradient(135deg, #020807, #07140f 50%, #020807);
-
-    transition:
-        background 0.8s ease,
-        filter 0.8s ease;
+        radial-gradient(circle at top,#123d28 0%,#06130d 45%,#020805 100%);
+    color:#eafff0;
+    min-height:100vh;
 }
 
-/* =========================
-   ANIMACJA PRZEJŚCIA
-========================= */
-
-body.goals-mode {
-    background:
-        radial-gradient(circle at 50% 0%, #5a2600 0%, transparent 35%),
-        linear-gradient(135deg, #0c0702, #211006 50%, #080401);
+header{
+    text-align:center;
+    padding:35px 20px 20px;
 }
 
-.page-transition {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    opacity: 0;
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255,130,20,.55),
-            rgba(255,80,0,.15),
-            transparent 65%
-        );
-    transition: opacity .5s ease;
+header h1{
+    margin:0;
+    font-size:42px;
+    color:#4dff88;
+    text-shadow:0 0 15px rgba(77,255,136,.6);
 }
 
-.page-transition.active {
-    opacity: 1;
+header p{
+    color:#82998d;
+    margin-top:8px;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-header {
-    text-align: center;
-    padding: 35px 20px 20px;
+.tabs{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin:10px auto 25px;
+    flex-wrap:wrap;
 }
 
-.logo {
-    font-size: 60px;
-    filter: drop-shadow(0 0 18px #22ff88);
-    transition: .6s ease;
+.tab{
+    border:1px solid #245c3b;
+    background:#0a1c12;
+    color:#b9d8c5;
+    padding:13px 22px;
+    border-radius:14px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.25s;
 }
 
-body.goals-mode .logo {
-    filter: drop-shadow(0 0 20px #ff8a20);
+.tab:hover{
+    transform:translateY(-2px);
 }
 
-header h1 {
-    margin: 0;
-    font-size: 48px;
-    color: #7dffb2;
-    text-shadow:
-        0 0 8px #22ff88,
-        0 0 25px #22ff88;
-
-    transition: .6s ease;
+.tab.active{
+    background:#123b24;
+    color:#5cff91;
+    box-shadow:0 0 18px rgba(64,255,126,.18);
 }
 
-body.goals-mode header h1 {
-    color: #ffad5c;
-    text-shadow:
-        0 0 8px #ff7b00,
-        0 0 25px #ff7b00;
+.container{
+    width:min(1050px,92%);
+    margin:auto;
+    padding-bottom:60px;
 }
 
-header p {
-    color: #9fb8aa;
-    font-size: 18px;
+.card{
+    background:rgba(8,27,17,.9);
+    border:1px solid #1b5635;
+    border-radius:22px;
+    padding:25px;
+    margin-bottom:22px;
+    box-shadow:0 10px 35px rgba(0,0,0,.3);
 }
 
-/* =========================
-   ZAKŁADKI
-========================= */
-
-.tabs {
-    width: min(950px, 92%);
-    margin: 10px auto 25px;
-
-    display: flex;
-    justify-content: center;
-    gap: 12px;
+.card h2{
+    margin-top:0;
+    color:#54ff8b;
 }
 
-.tab {
-    position: relative;
-    padding: 13px 30px;
-    border-radius: 15px;
-
-    background: rgba(7,22,15,.85);
-    border: 1px solid #174a30;
-
-    color: #9fb8aa;
-    font-weight: bold;
-    font-size: 16px;
-
-    cursor: pointer;
-
-    transition:
-        color .3s ease,
-        border .3s ease,
-        background .3s ease,
-        box-shadow .3s ease,
-        transform .3s ease;
+.balance{
+    text-align:center;
+    padding:30px 15px;
 }
 
-.tab:hover {
-    transform: translateY(-3px);
+.money-icon{
+    font-size:65px;
+    color:#4dff88;
+    text-shadow:0 0 25px rgba(77,255,136,.65);
 }
 
-.tab.active {
-    color: white;
-    background: #0d6337;
-    border-color: #27ed7a;
-    box-shadow:
-        0 0 12px rgba(34,255,112,.35);
+.balance-number{
+    font-size:64px;
+    font-weight:bold;
+    color:#ffffff;
+    text-shadow:0 0 20px rgba(77,255,136,.3);
+    margin:5px 0;
 }
 
-/* CELE - POMARAŃCZOWY HOVER */
-
-.tab.goals-tab:hover {
-    color: #fff;
-    background: rgba(120,48,5,.65);
-    border-color: #ff8a20;
-
-    box-shadow:
-        0 0 10px rgba(255,120,20,.7),
-        0 0 30px rgba(255,100,10,.35),
-        inset 0 0 15px rgba(255,130,20,.12);
+.goal-text{
+    color:#82998d;
+    font-size:17px;
 }
 
-body.goals-mode .tab.goals-tab {
-    color: white;
-    background: #9a4808;
-    border-color: #ff8a20;
-    box-shadow:
-        0 0 15px rgba(255,120,20,.5);
+.progress-wrap{
+    margin-top:20px;
 }
 
-/* =========================
-   CONTAINER
-========================= */
-
-.container {
-    width: min(950px, 92%);
-    margin: auto;
+.progress{
+    width:100%;
+    height:27px;
+    background:#07150d;
+    border-radius:30px;
+    overflow:hidden;
+    border:1px solid #17492e;
 }
 
-.card {
-    position: relative;
-    overflow: hidden;
-
-    background: rgba(7,22,15,.88);
-    border: 1px solid rgba(45,255,135,.16);
-    border-radius: 28px;
-
-    padding: 30px;
-    margin-bottom: 25px;
-
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.35),
-        inset 0 0 30px rgba(30,255,130,.025);
-
-    transition:
-        border .6s ease,
-        box-shadow .6s ease,
-        background .6s ease;
-}
-
-body.goals-mode .card {
-    background: rgba(30,13,5,.9);
-
-    border-color:
-        rgba(255,130,30,.18);
-
-    box-shadow:
-        0 15px 50px rgba(0,0,0,.4),
-        inset 0 0 30px rgba(255,120,20,.025);
-}
-
-.card h2 {
-    color: #a8ffc7;
-}
-
-body.goals-mode .card h2 {
-    color: #ffb66e;
-}
-
-/* =========================
-   SALDO
-========================= */
-
-.balance-box {
-    text-align: center;
-}
-
-.balance-label {
-    color: #8fa99c;
-    font-size: 16px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-.balance {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 13px;
-    margin: 8px 0 18px;
-}
-
-.dollar {
-    font-size: 55px;
-    color: #48ff91;
-
-    text-shadow:
-        0 0 8px #22ff70,
-        0 0 25px #22ff70,
-        0 0 45px rgba(34,255,112,.7);
-
-    transition: .6s ease;
-}
-
-body.goals-mode .dollar {
-    color: #ff962f;
-
-    text-shadow:
-        0 0 8px #ff7b00,
-        0 0 25px #ff7b00,
-        0 0 45px rgba(255,100,0,.6);
-}
-
-.money {
-    font-size: 62px;
-    font-weight: 900;
-
-    color: #8dffb5;
-
-    text-shadow:
-        0 0 8px #22ff70,
-        0 0 25px #22ff70,
-        0 0 50px rgba(34,255,112,.6);
-
-    transition: .6s ease;
-}
-
-body.goals-mode .money {
-    color: #ffc078;
-
-    text-shadow:
-        0 0 8px #ff7b00,
-        0 0 25px #ff7b00,
-        0 0 50px rgba(255,100,0,.45);
-}
-
-/* =========================
-   PASEK
-========================= */
-
-.progress-wrap {
-    margin-top: 25px;
-}
-
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-    color: #a5b8ae;
-    margin-bottom: 10px;
-}
-
-.progress-bg {
-    position: relative;
-    height: 58px;
-    border-radius: 30px;
-    overflow: hidden;
-
-    background: #07120d;
-    border: 2px solid #153e2a;
-}
-
-.progress-fill {
-    position: absolute;
-    left: 0;
-    top: 0;
-
-    height: 100%;
-    width: 0%;
-
-    border-radius: 30px;
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            90deg,
-            #087b3d,
-            #18bd62,
-            #35f47e
-        );
-
-    transition:
-        width 1.5s cubic-bezier(.2,.8,.2,1);
-}
-
-.progress-fill::before {
-    content: "";
-
-    position: absolute;
-
-    top: 0;
-    bottom: 0;
-    left: -160px;
-
-    width: calc(100% + 320px);
-
+.progress-bar{
+    height:100%;
+    width:0%;
+    border-radius:30px;
     background:
         repeating-linear-gradient(
-            105deg,
-            transparent 0px,
-            transparent 28px,
-            rgba(2,80,38,.55) 29px,
-            rgba(2,80,38,.55) 46px,
-            transparent 47px,
-            transparent 78px
-        );
-
-    animation:
-        moveStripes 2.8s linear infinite;
-
-    pointer-events: none;
-}
-
-@keyframes moveStripes {
-
-    from {
-        transform:
-            translate3d(-80px,0,0);
-    }
-
-    to {
-        transform:
-            translate3d(80px,0,0);
-    }
-}
-
-.progress-text {
-    position: absolute;
-    inset: 0;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-weight: bold;
-
-    z-index: 5;
-
-    text-shadow:
-        0 2px 5px #000;
-}
-
-/* =========================
-   STATYSTYKI
-========================= */
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 15px;
-}
-
-.stat {
-    padding: 22px;
-
-    text-align: center;
-
-    border-radius: 20px;
-
-    background: rgba(2,12,8,.7);
-    border: 1px solid #123d27;
-
-    transition: .5s ease;
-}
-
-body.goals-mode .stat {
-    background: rgba(25,10,3,.7);
-    border-color: #4d270f;
-}
-
-.stat-number {
-    font-size: 30px;
-    font-weight: bold;
-    color: #6cff9e;
-}
-
-body.goals-mode .stat-number {
-    color: #ffae5c;
-}
-
-.stat-name {
-    margin-top: 6px;
-    color: #82998d;
-}
-
-/* =========================
-   NAGŁÓWEK SEKCJI
-========================= */
-
-.section-title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    gap: 10px;
-
-    margin-top: 25px;
-    margin-bottom: 15px;
-}
-
-.section-title h3 {
-    margin: 0;
-    color: #a8ffc7;
-}
-
-body.goals-mode .section-title h3 {
-    color: #ffb66e;
-}
-
-.clear-btn {
-    background: #a91f2d;
-    padding: 8px 13px;
-    font-size: 13px;
-    margin: 0;
-}
-
-.clear-btn:hover {
-    background: #d52b3c;
-
-    box-shadow:
-        0 0 20px rgba(255,45,60,.45);
-}
-
-/* =========================
-   WYKRES
-========================= */
-
-.chart-box {
-    padding: 22px;
-
-    border-radius: 22px;
-
-    background: rgba(2,12,8,.65);
-    border: 1px solid #123d27;
-}
-
-.chart-subtitle {
-    color: #71877b;
-    font-size: 13px;
-    margin-top: 4px;
-}
-
-.chart-scroll {
-    width: 100%;
-
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    margin-top: 12px;
-    padding-bottom: 8px;
-
-    scrollbar-color:
-        #20c968
-        #07140e;
-}
-
-.chart-scroll::-webkit-scrollbar {
-    height: 12px;
-}
-
-.chart-scroll::-webkit-scrollbar-track {
-    background: #07140e;
-    border-radius: 20px;
-}
-
-.chart-scroll::-webkit-scrollbar-thumb {
-    background: #20c968;
-    border-radius: 20px;
-}
-
-.chart-inner {
-    min-width: 650px;
-    height: 320px;
-}
-
-canvas {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-/* =========================
-   PRZYCISKI
-========================= */
-
-button {
-    border: none;
-    border-radius: 14px;
-
-    padding: 13px 20px;
-    margin: 5px;
-
-    color: white;
-
-    font-size: 16px;
-    font-weight: bold;
-
-    cursor: pointer;
-
-    background: #159447;
-
-    box-shadow:
-        0 0 15px rgba(21,148,71,.3);
-
-    transition: .2s;
-}
-
-button:hover {
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 0 25px rgba(34,255,112,.5);
-}
-
-.red {
-    background: #b52d3b;
-}
-
-/* =========================
-   HISTORIA
-========================= */
-
-.history-wrapper {
-    margin-top: 10px;
-}
-
-.history-list {
-    max-height: 300px;
-
-    overflow-y: auto;
-
-    padding-right: 5px;
-
-    scrollbar-color:
-        #20c968
-        #07140e;
-}
-
-.history-list::-webkit-scrollbar {
-    width: 9px;
-}
-
-.history-list::-webkit-scrollbar-track {
-    background: #07140e;
-    border-radius: 20px;
-}
-
-.history-list::-webkit-scrollbar-thumb {
-    background: #20c968;
-    border-radius: 20px;
-}
-
-.history-item {
-    padding: 13px;
-
-    margin: 7px 0;
-
-    border-radius: 12px;
-
-    background: #07140e;
-
-    border-left:
-        4px solid #24d66c;
-}
-
-.expense {
-    border-left-color: #ff3d4d;
-    color: #ff9ba3;
-}
-
-.show-more {
-    width: 100%;
-
-    background: #0c5f34;
-
-    margin:
-        10px 0 0;
-}
-
-/* =========================
-   CELE
-========================= */
-
-.goals-page {
-    display: none;
-}
-
-body.goals-mode .balance-page {
-    display: none;
-}
-
-body.goals-mode .goals-page {
-    display: block;
-
-    animation:
-        goalsAppear .7s ease;
-}
-
-@keyframes goalsAppear {
-
-    from {
-        opacity: 0;
-        transform:
-            translateY(30px)
-            scale(.97);
-    }
-
-    to {
-        opacity: 1;
-        transform:
-            translateY(0)
-            scale(1);
-    }
-}
-
-.goals-hero {
-    text-align: center;
-    padding: 20px;
-}
-
-.goals-icon {
-    font-size: 65px;
-
-    filter:
-        drop-shadow(
-            0 0 20px
-            rgba(255,120,20,.7)
-        );
-}
-
-.goals-title {
-    font-size: 38px;
-    margin: 10px 0;
-
-    color: #ffad5c;
-
-    text-shadow:
-        0 0 10px #ff7b00,
-        0 0 30px rgba(255,100,0,.6);
-}
-
-.goals-description {
-    color: #b79b86;
-}
-
-/* GŁÓWNY CEL */
-
-.main-goal {
-    text-align: center;
-
-    padding: 30px;
-
-    border-radius: 24px;
-
-    background:
-        linear-gradient(
             135deg,
-            rgba(75,31,5,.7),
-            rgba(35,13,3,.8)
+            #0b542f 0px,
+            #0b542f 12px,
+            #0e6a3b 12px,
+            #0e6a3b 24px
         );
-
-    border:
-        1px solid
-        rgba(255,130,30,.35);
-
-    box-shadow:
-        inset 0 0 30px
-        rgba(255,120,20,.05);
+    background-size:48px 48px;
+    animation:moveStripes 1s linear infinite;
+    transition:width 1s ease;
 }
 
-.main-goal h3 {
-    margin-top: 0;
-
-    color: #ffbd7a;
+@keyframes moveStripes{
+    from{background-position:0 0;}
+    to{background-position:48px 0;}
 }
 
-.goal-money {
-    font-size: 46px;
-    font-weight: 900;
-
-    color: #ff9c3c;
-
-    text-shadow:
-        0 0 10px #ff7b00,
-        0 0 30px rgba(255,100,0,.55);
+.percent{
+    margin-top:9px;
+    color:#55ff8b;
+    font-weight:bold;
 }
 
-.goal-small {
-    color: #a78b75;
-    margin-top: 6px;
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
-/* POMARAŃCZOWY PASEK CELU */
-
-.goal-progress-bg {
-    position: relative;
-
-    height: 35px;
-
-    margin-top: 22px;
-
-    border-radius: 20px;
-
-    overflow: hidden;
-
-    background: #160b04;
-
-    border:
-        1px solid
-        #67310b;
+.stat{
+    background:#07160e;
+    border:1px solid #16472d;
+    border-radius:17px;
+    padding:20px;
+    text-align:center;
 }
 
-.goal-progress-fill {
-    height: 100%;
+.stat-number{
+    font-size:31px;
+    font-weight:bold;
+    color:#55ff8b;
+}
 
-    width: 0%;
+.stat-title{
+    color:#82998d;
+    margin-top:5px;
+}
 
-    border-radius: 20px;
+.buttons{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
 
+button{
+    border:0;
+    border-radius:13px;
+    padding:13px;
+    cursor:pointer;
+    font-weight:bold;
+    color:white;
+    background:#125c32;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.15);
+}
+
+button.income{
+    background:#167a40;
+}
+
+button.expense{
+    background:#8e2631;
+}
+
+button.clear{
+    background:#8d202a;
+    margin-top:15px;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    border-radius:12px;
+    border:1px solid #235c3a;
+    background:#06120b;
+    color:white;
+    outline:none;
+    margin-bottom:10px;
+}
+
+input:focus{
+    border-color:#48f781;
+}
+
+.custom-box{
+    margin-top:18px;
+    padding-top:18px;
+    border-top:1px solid #173c27;
+}
+
+.history-item{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:12px;
+    padding:14px 0;
+    border-bottom:1px solid #123522;
+}
+
+.history-date{
+    color:#718b7c;
+    font-size:13px;
+}
+
+.history-desc{
+    font-weight:bold;
+    margin-top:4px;
+}
+
+.history-balance{
+    color:#82998d;
+    font-size:13px;
+    margin-top:3px;
+}
+
+.income-text{
+    color:#4dff88;
+    font-weight:bold;
+}
+
+.expense-text{
+    color:#ff5865;
+    font-weight:bold;
+}
+
+.history-more{
+    text-align:center;
+    margin-top:15px;
+    color:#4dff88;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.chart-wrapper{
+    width:100%;
+    overflow-x:auto;
+    padding-bottom:10px;
+}
+
+#chart{
+    display:block;
+    min-width:700px;
+    background:#06130d;
+    border-radius:15px;
+}
+
+.goals-page{
+    display:none;
+}
+
+.goals-page .card{
+    border-color:#754b16;
+}
+
+.goals-title{
+    color:#ffad32 !important;
+    text-shadow:0 0 14px rgba(255,164,42,.35);
+}
+
+.goal-orange-progress{
+    background:#21170a;
+    border:1px solid #5d3d12;
+}
+
+.goal-orange-bar{
+    height:100%;
+    width:0%;
     background:
-        linear-gradient(
-            90deg,
-            #c84d00,
-            #ff7b00,
-            #ffb13b
+        repeating-linear-gradient(
+            135deg,
+            #b7650b 0px,
+            #b7650b 12px,
+            #e28a16 12px,
+            #e28a16 24px
         );
-
-    transition:
-        width 1.3s
-        cubic-bezier(.2,.8,.2,1);
+    background-size:48px 48px;
+    animation:moveStripes 1s linear infinite;
+    border-radius:30px;
+    transition:width 1s ease;
 }
 
-.goal-percent {
-    margin-top: 12px;
-
-    color: #ffbd7a;
-
-    font-weight: bold;
+.milestones{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+    margin-top:20px;
 }
 
-/* KAMIENIE MILOWE */
-
-.milestones {
-    display: grid;
-
-    grid-template-columns:
-        repeat(5,1fr);
-
-    gap: 10px;
-
-    margin-top: 25px;
+.milestone{
+    background:#1c1408;
+    border:1px solid #5c3a12;
+    padding:14px 8px;
+    border-radius:13px;
+    text-align:center;
+    color:#b98b50;
 }
 
-.milestone {
-    padding: 17px 8px;
-
-    text-align: center;
-
-    border-radius: 16px;
-
-    background: #160b04;
-
-    border:
-        1px solid
-        #48230c;
-
-    color: #806b59;
-
-    transition: .4s ease;
+.milestone.done{
+    border-color:#ff9d20;
+    color:#ffad32;
+    box-shadow:0 0 15px rgba(255,157,32,.15);
 }
 
-.milestone-number {
-    font-size: 20px;
-    font-weight: bold;
+.goal-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
 }
 
-.milestone.done {
-    background:
-        rgba(154,72,8,.35);
-
-    border-color:
-        #ff7b00;
-
-    color: #ffad5c;
-
-    box-shadow:
-        0 0 15px
-        rgba(255,120,20,.25);
+.goal-item{
+    background:#161108;
+    border:1px solid #4e3515;
+    border-radius:16px;
+    padding:18px;
 }
 
-.milestone.done .milestone-number {
-    color: #ff9d38;
+.goal-item h3{
+    margin:0 0 6px;
+    color:#ffad32;
 }
 
-/* DODATKOWE CELE */
-
-.extra-goals {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap: 15px;
-}
-
-.extra-goal {
-    padding: 20px;
-
-    border-radius: 20px;
-
-    background:
-        rgba(20,9,3,.7);
-
-    border:
-        1px solid
-        #45220d;
-}
-
-.extra-goal h3 {
-    margin-top: 0;
-    color: #ffad5c;
-}
-
-.extra-goal p {
-    color: #9d8571;
-}
-
-/* STOPKA */
-
-footer {
-    text-align: center;
-    padding: 40px;
-    color: #53665c;
+.goal-item p{
+    margin:0;
+    color:#9c805d;
 }
 
 /* =========================
-   TELEFON
-========================= */
+        SEJFY
+   ========================= */
 
-@media(max-width:650px) {
+.safes-section{
+    border-color:#1c633b;
+}
 
-    header h1 {
-        font-size: 38px;
+.safes-section h2{
+    text-shadow:0 0 12px rgba(77,255,136,.35);
+}
+
+.safes{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:28px;
+    margin-top:25px;
+}
+
+.safe{
+    width:min(420px,90%);
+    position:relative;
+    text-align:center;
+    transition:.25s;
+}
+
+.safe-box{
+    position:relative;
+    height:190px;
+    border-radius:18px;
+    background:
+        linear-gradient(145deg,#173d28,#0b2416 55%,#06150d);
+    border:3px solid #39744d;
+    box-shadow:
+        inset 0 0 25px rgba(0,0,0,.7),
+        0 10px 25px rgba(0,0,0,.35);
+    overflow:visible;
+    transform-origin:center;
+}
+
+.safe:hover .safe-box{
+    box-shadow:
+        0 0 25px rgba(77,255,136,.18),
+        inset 0 0 25px rgba(0,0,0,.7),
+        0 10px 25px rgba(0,0,0,.35);
+}
+
+.safe-door{
+    position:absolute;
+    inset:12px;
+    border-radius:12px;
+    background:
+        linear-gradient(145deg,#225e3b,#123722 60%,#092012);
+    border:2px solid #4a9663;
+    transform-origin:left center;
+    transition:transform .9s cubic-bezier(.2,.8,.2,1);
+    z-index:3;
+}
+
+.safe-door::before{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    border:7px solid #75c98e;
+    box-shadow:inset 0 0 10px #06150d;
+}
+
+.safe-door::after{
+    content:"";
+    position:absolute;
+    right:18px;
+    top:50%;
+    width:16px;
+    height:48px;
+    transform:translateY(-50%);
+    border-radius:8px;
+    background:#78d093;
+    box-shadow:0 0 8px rgba(120,208,147,.35);
+}
+
+.safe.locked .safe-door{
+    transform:rotateY(0deg);
+}
+
+.safe.opening .safe-door{
+    transform:rotateY(-105deg);
+}
+
+.safe.shaking .safe-box{
+    animation:safeShake .13s linear infinite;
+}
+
+@keyframes safeShake{
+    0%{transform:translateX(0) rotate(0);}
+    25%{transform:translateX(-5px) rotate(-1deg);}
+    50%{transform:translateX(5px) rotate(1deg);}
+    75%{transform:translateX(-4px) rotate(-1deg);}
+    100%{transform:translateX(0) rotate(0);}
+}
+
+.safe-inside{
+    position:absolute;
+    inset:20px;
+    border-radius:10px;
+    background:#020805;
+    box-shadow:inset 0 0 30px rgba(0,0,0,.9);
+    z-index:1;
+}
+
+.safe-label{
+    position:absolute;
+    top:-16px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#081c11;
+    border:1px solid #2f7047;
+    color:#5cff91;
+    padding:7px 18px;
+    border-radius:20px;
+    font-weight:bold;
+    z-index:8;
+    white-space:nowrap;
+    box-shadow:0 0 15px rgba(77,255,136,.15);
+}
+
+.safe-amount{
+    margin-top:12px;
+    color:#58ff8c;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.safe-progress{
+    height:13px;
+    width:100%;
+    background:#06130c;
+    border:1px solid #19482d;
+    border-radius:20px;
+    overflow:hidden;
+    margin-top:9px;
+}
+
+.safe-progress-bar{
+    width:0%;
+    height:100%;
+    background:#31e873;
+    border-radius:20px;
+    transition:width .5s ease;
+}
+
+.safe-actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:12px;
+    opacity:0;
+    transform:translateY(-8px);
+    pointer-events:none;
+    transition:.2s;
+}
+
+.safe:hover .safe-actions{
+    opacity:1;
+    transform:translateY(0);
+    pointer-events:auto;
+}
+
+.safe-actions button{
+    font-size:13px;
+    padding:10px 14px;
+}
+
+.safe-deposit{
+    background:#15763d;
+}
+
+.safe-clear{
+    background:#8d202a;
+}
+
+.safe-money{
+    position:absolute;
+    left:50%;
+    top:55%;
+    z-index:20;
+    pointer-events:none;
+    font-size:25px;
+    opacity:0;
+}
+
+.safe-money.fly{
+    animation:moneyFly 1.5s ease-out forwards;
+}
+
+@keyframes moneyFly{
+    0%{
+        opacity:1;
+        transform:translate(-50%,-50%) scale(.6) rotate(0);
+    }
+    35%{
+        opacity:1;
+    }
+    100%{
+        opacity:0;
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            scale(1.3)
+            rotate(var(--r));
+    }
+}
+
+.safe.clearing{
+    animation:safeFlyAway 1s ease-in forwards;
+}
+
+@keyframes safeFlyAway{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    60%{
+        opacity:1;
+        transform:translateY(-100px) scale(.9) rotate(-5deg);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-300px) scale(.45) rotate(8deg);
+    }
+}
+
+.safe.emerging{
+    animation:safeEmergence 1.8s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+@keyframes safeEmergence{
+    0%{
+        opacity:0;
+        transform:translateY(180px) scale(.75);
+        filter:brightness(.4);
+    }
+    35%{
+        opacity:1;
+    }
+    75%{
+        transform:translateY(-10px) scale(1.02);
+        filter:brightness(1.2);
+    }
+    88%{
+        transform:translateY(5px) scale(.98);
+    }
+    100%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+        filter:brightness(1);
+    }
+}
+
+.safe-ground{
+    position:absolute;
+    bottom:-15px;
+    left:50%;
+    transform:translateX(-50%);
+    width:220px;
+    height:25px;
+    border-radius:50%;
+    background:radial-gradient(
+        ellipse,
+        rgba(66,255,126,.35),
+        rgba(20,60,35,.2),
+        transparent 70%
+    );
+    opacity:0;
+    z-index:-1;
+}
+
+.safe.emerging .safe-ground{
+    animation:groundGlow 1.8s ease forwards;
+}
+
+@keyframes groundGlow{
+    0%{opacity:0;transform:translateX(-50%) scale(.5);}
+    45%{opacity:1;transform:translateX(-50%) scale(1.2);}
+    100%{opacity:.55;transform:translateX(-50%) scale(1);}
+}
+
+.crack{
+    position:absolute;
+    bottom:-8px;
+    left:50%;
+    width:120px;
+    height:35px;
+    transform:translateX(-50%);
+    opacity:0;
+    z-index:-2;
+}
+
+.crack::before,
+.crack::after{
+    content:"";
+    position:absolute;
+    width:80px;
+    height:3px;
+    background:#1d3d28;
+    left:50%;
+    top:50%;
+}
+
+.crack::before{
+    transform:translate(-50%,-50%) rotate(18deg);
+}
+
+.crack::after{
+    transform:translate(-50%,-50%) rotate(-18deg);
+}
+
+.safe.emerging .crack{
+    animation:crackShow 1.2s ease forwards;
+}
+
+@keyframes crackShow{
+    0%{opacity:0;transform:translateX(-50%) scale(.3);}
+    45%{opacity:1;transform:translateX(-50%) scale(1.2);}
+    100%{opacity:.6;transform:translateX(-50%) scale(1);}
+}
+
+@media(max-width:750px){
+    .stats{
+        grid-template-columns:1fr;
     }
 
-    .money {
-        font-size: 42px;
+    .buttons{
+        grid-template-columns:1fr 1fr;
     }
 
-    .dollar {
-        font-size: 40px;
+    .milestones{
+        grid-template-columns:1fr 1fr;
     }
 
-    .stats {
-        grid-template-columns: 1fr;
+    .goal-list{
+        grid-template-columns:1fr;
     }
 
-    .card {
-        padding: 20px;
+    .balance-number{
+        font-size:46px;
+    }
+}
+
+@media(max-width:450px){
+    .buttons{
+        grid-template-columns:1fr;
     }
 
-    .chart-inner {
-        min-width: 700px;
-    }
-
-    .tabs {
-        width: 92%;
-    }
-
-    .tab {
-        flex: 1;
-        padding: 12px 10px;
-    }
-
-    .milestones {
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .extra-goals {
-        grid-template-columns: 1fr;
+    header h1{
+        font-size:34px;
     }
 }
 </style>
@@ -935,510 +736,255 @@ footer {
 
 <body>
 
-<div
-    class="page-transition"
-    id="pageTransition">
-</div>
-
 <header>
-
-    <div class="logo">
-        🧴
-    </div>
-
-    <h1>
-        ZBieranie
-    </h1>
-
-    <p>
-        Każda złotówka przybliża nas do celu.
-    </p>
-
+    <h1>💚 ZBieranie</h1>
+    <p>Zbieraj pieniądze i realizuj swoje cele</p>
 </header>
 
-
-<!-- =========================
-     ZAKŁADKI
-========================= -->
-
 <div class="tabs">
-
-    <button
-        class="tab active"
-        id="balanceTab"
-        onclick="showBalance()">
-
-        💰 1. Saldo
-
-    </button>
-
-
-    <button
-        class="tab goals-tab"
-        id="goalsTab"
-        onclick="showGoals()">
-
-        🎯 2. Cele
-
-    </button>
-
+    <button class="tab active" onclick="showBalance()">💰 1. Saldo</button>
+    <button class="tab" onclick="showGoals()">🎯 2. Cele</button>
 </div>
-
-
-<!-- =========================
-     STRONA SALDA
-========================= -->
-
-<div class="balance-page">
 
 <div class="container">
 
-<!-- SALDO -->
+<!-- ================= SALDO ================= -->
 
-<div class="card">
+<div id="balancePage">
 
-    <div class="balance-box">
+    <div class="card balance">
 
-        <div class="balance-label">
-            Aktualne saldo
+        <div class="money-icon">$</div>
+
+        <div class="balance-number" id="balance">0,00 zł</div>
+
+        <div class="goal-text">
+            Cel: <b>6868,00 zł</b>
         </div>
-
-        <div class="balance">
-
-            <div class="dollar">
-                $
-            </div>
-
-            <div
-                class="money"
-                id="money">
-
-                0,00 zł
-
-            </div>
-
-        </div>
-
-
-        <!-- NOWY PRZYCISK WYCZYŚĆ SALDO -->
-
-        <button
-            class="clear-btn"
-            onclick="clearBalance()">
-
-            🗑 Wyczyść saldo
-
-        </button>
-
 
         <div class="progress-wrap">
-
-            <div class="progress-info">
-
-                <span>
-                    Postęp do celu
-                </span>
-
-                <span>
-                    6868 zł
-                </span>
-
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
             </div>
 
-
-            <div class="progress-bg">
-
-                <div
-                    class="progress-fill"
-                    id="progress">
-                </div>
-
-                <div
-                    class="progress-text"
-                    id="percent">
-
-                    0%
-
-                </div>
-
+            <div class="percent" id="percent">
+                0%
             </div>
-
         </div>
 
-    </div>
-
-</div>
-
-
-<!-- STATYSTYKI -->
-
-<div class="card">
-
-    <h2>
-        📊 Statystyki
-    </h2>
-
-
-    <div class="stats">
-
-        <div class="stat">
-
-            <div
-                class="stat-number"
-                id="bottles">
-
-                0
-
-            </div>
-
-            <div class="stat-name">
-                🧴 Butelek
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div
-                class="stat-number"
-                id="days">
-
-                0
-
-            </div>
-
-            <div class="stat-name">
-                📅 Dni
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div
-                class="stat-number"
-                id="remaining">
-
-                6868 zł
-
-            </div>
-
-            <div class="stat-name">
-                🎯 Brakuje
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- WYKRES -->
-
-    <div class="section-title">
-
-        <div>
-
-            <h3>
-                💰 Saldo w czasie
-            </h3>
-
-            <div class="chart-subtitle">
-                Zielony = wzrost • Czerwony = spadek
-            </div>
-
-        </div>
-
-
-        <button
-            class="clear-btn"
-            onclick="clearChart()">
-
-            🗑 Wyczyść
-
+        <button class="clear" onclick="clearBalance()">
+            🗑 Wyczyść saldo
         </button>
 
     </div>
 
 
-    <div class="chart-box">
+    <div class="card">
 
-        <div
-            class="chart-scroll">
+        <h2>📊 Statystyki</h2>
 
-            <div class="chart-inner">
+        <div class="stats">
 
-                <canvas
-                    id="moneyChart">
-                </canvas>
+            <div class="stat">
+                <div class="stat-number" id="bottles">0</div>
+                <div class="stat-title">🍾 Butelki</div>
+            </div>
 
+            <div class="stat">
+                <div class="stat-number" id="days">0</div>
+                <div class="stat-title">📅 Dni</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number" id="remaining">6868,00 zł</div>
+                <div class="stat-title">🎯 Pozostało</div>
             </div>
 
         </div>
+
+        <br>
+
+        <h2>📈 Historia zarobków</h2>
+
+        <div class="chart-wrapper">
+            <canvas id="chart" width="900" height="300"></canvas>
+        </div>
+
+        <button class="clear" onclick="clearChart()">
+            🗑 Wyczyść wykres
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>💰 Dodaj pieniądze</h2>
+
+        <div class="buttons">
+
+            <button class="income" onclick="addMoney(0.50,'Kaucja')">
+                +0,50 zł
+            </button>
+
+            <button class="income" onclick="addMoney(10,'20 butelek')">
+                +10 zł
+            </button>
+
+            <button class="income" onclick="addMoney(20,'40 butelek')">
+                +20 zł
+            </button>
+
+            <button class="income" onclick="customAdd()">
+                💵 Inna kwota
+            </button>
+
+        </div>
+
+        <div class="custom-box">
+
+            <button class="expense" onclick="customExpense()">
+                🔴 Wydatek
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>📜 Historia pieniędzy</h2>
+
+        <div id="history"></div>
+
+        <div
+            class="history-more"
+            id="historyMore"
+            onclick="toggleHistory()"
+        >
+            Pokaż więcej ▼
+        </div>
+
+        <button class="clear" onclick="clearHistory()">
+            🗑 Wyczyść
+        </button>
+
+    </div>
+
+
+    <!-- ================= SEJFY ================= -->
+
+    <div class="card safes-section">
+
+        <h2>🔐 Sejfy</h2>
+
+        <p style="color:#82998d;">
+            Każdy sejf mieści maksymalnie 500 zł.
+            Po zapełnieniu pieniądze trafiają na główne saldo.
+        </p>
+
+        <div class="safes" id="safes"></div>
 
     </div>
 
 </div>
 
 
-<!-- DODAWANIE -->
+<!-- ================= CELE ================= -->
 
-<div class="card">
+<div id="goalsPage" class="goals-page">
 
-    <h2>
-        💰 Dodaj pieniądze
-    </h2>
+    <div class="card">
 
-    <p>
-        Możesz dodawać pieniądze z butelek
-        oraz inne zarobione pieniądze.
-    </p>
-
-
-    <button
-        onclick="addMoney(0.5,'Kaucja')">
-
-        +0,50 zł
-
-    </button>
-
-
-    <button
-        onclick="addMoney(10,'20 butelek')">
-
-        +10 zł
-
-    </button>
-
-
-    <button
-        onclick="addMoney(20,'40 butelek')">
-
-        +20 zł
-
-    </button>
-
-
-    <button
-        onclick="customAdd()">
-
-        💵 Inna kwota
-
-    </button>
-
-
-    <button
-        class="red"
-        onclick="customExpense()">
-
-        🔴 Wydatek
-
-    </button>
-
-</div>
-
-
-<!-- HISTORIA -->
-
-<div class="card">
-
-    <div class="section-title">
-
-        <h2 style="margin:0">
-            📜 Historia pieniędzy
+        <h2 class="goals-title">
+            🎯 Główny cel
         </h2>
 
-
-        <button
-            class="clear-btn"
-            onclick="clearHistory()">
-
-            🗑 Wyczyść
-
-        </button>
-
-    </div>
-
-
-    <div class="history-wrapper">
-
-        <div
-            class="history-list"
-            id="history">
-        </div>
-
-
-        <button
-            class="show-more"
-            id="showMore"
-            onclick="toggleHistory()">
-
-            Pokaż więcej
-
-        </button>
-
-    </div>
-
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     STRONA CELÓW
-========================= -->
-
-<div class="goals-page">
-
-<div class="container">
-
-<div class="card">
-
-    <div class="goals-hero">
-
-        <div class="goals-icon">
-            🎯
-        </div>
-
-        <div class="goals-title">
-            Moje cele
-        </div>
-
-        <div class="goals-description">
-            Każdy zebrany grosz przybliża nas do kolejnego poziomu.
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- GŁÓWNY CEL -->
-
-<div class="card">
-
-    <div class="main-goal">
-
-        <h3>
-            🏆 GŁÓWNY CEL
-        </h3>
-
-        <div class="goal-money">
+        <h1 style="color:#ffad32;">
             6868 zł
-        </div>
+        </h1>
 
-        <div class="goal-small">
-            Cel zbierania pieniędzy
-        </div>
+        <p style="color:#9c805d;">
+            Odkładanie na 2× Kukirin G4
+        </p>
 
-
-        <div class="goal-progress-bg">
-
+        <div class="progress goal-orange-progress">
             <div
-                class="goal-progress-fill"
-                id="goalProgress">
-            </div>
-
+                class="goal-orange-bar"
+                id="goalOrangeBar"
+            ></div>
         </div>
 
-
-        <div
-            class="goal-percent"
-            id="goalPercent">
-
-            0% ukończone
-
-        </div>
+        <p
+            id="goalPercent"
+            style="color:#ffad32;font-weight:bold;"
+        >
+            0%
+        </p>
 
     </div>
 
 
-    <!-- KAMIENIE MILOWE -->
+    <div class="card">
 
-    <div class="section-title">
-
-        <h3>
+        <h2 class="goals-title">
             🏆 Kamienie milowe
-        </h3>
+        </h2>
 
-    </div>
+        <div class="milestones">
 
-
-    <div class="milestones">
-
-        <div
-            class="milestone"
-            data-value="500">
-
-            <div class="milestone-number">
+            <div class="milestone" id="m500">
                 500 zł
             </div>
 
-            <div>
-                ⭐
-            </div>
-
-        </div>
-
-
-        <div
-            class="milestone"
-            data-value="1000">
-
-            <div class="milestone-number">
+            <div class="milestone" id="m1000">
                 1000 zł
             </div>
 
-            <div>
-                🔥
-            </div>
-
-        </div>
-
-
-        <div
-            class="milestone"
-            data-value="2500">
-
-            <div class="milestone-number">
+            <div class="milestone" id="m2500">
                 2500 zł
             </div>
 
-            <div>
-                🚀
-            </div>
-
-        </div>
-
-
-        <div
-            class="milestone"
-            data-value="5000">
-
-            <div class="milestone-number">
+            <div class="milestone" id="m5000">
                 5000 zł
             </div>
 
-            <div>
-                💎
-            </div>
-
-        </div>
-
-
-        <div
-            class="milestone"
-            data-value="6868">
-
-            <div class="milestone-number">
+            <div class="milestone" id="m6868">
                 6868 zł
             </div>
 
-            <div>
-                🏆
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2 class="goals-title">
+            🛒 Dodatkowe cele
+        </h2>
+
+        <div class="goal-list">
+
+            <div class="goal-item">
+                <h3>🛴 Kukirin G4 ×2</h3>
+                <p>Główny cel</p>
+            </div>
+
+            <div class="goal-item">
+                <h3>🖥️ Nowy komputer</h3>
+                <p>Sprzęt do grania</p>
+            </div>
+
+            <div class="goal-item">
+                <h3>🎮 PlayStation 5</h3>
+                <p>Konsola</p>
+            </div>
+
+            <div class="goal-item">
+                <h3>⭐ Własny cel</h3>
+                <p>Dodaj później</p>
             </div>
 
         </div>
@@ -1447,1285 +993,961 @@ footer {
 
 </div>
 
-
-<!-- DODATKOWE CELE -->
-
-<div class="card">
-
-    <h2>
-        🗂 Dodatkowe cele
-    </h2>
-
-    <p style="color:#9d8571">
-        Tutaj możesz później wpisać konkretne rzeczy,
-        na które chcesz przeznaczyć zebrane pieniądze.
-    </p>
-
-
-    <div class="extra-goals">
-
-        <div class="extra-goal">
-
-            <h3>
-                🛴 Kukirin G4
-            </h3>
-
-            <p>
-                Cel związany z zakupem hulajnogi.
-            </p>
-
-        </div>
-
-
-        <div class="extra-goal">
-
-            <h3>
-                🖥️ Nowy komputer
-            </h3>
-
-            <p>
-                Sprzęt gamingowy i komputer.
-            </p>
-
-        </div>
-
-
-        <div class="extra-goal">
-
-            <h3>
-                🎮 PlayStation 5
-            </h3>
-
-            <p>
-                Konsola jako kolejny możliwy cel.
-            </p>
-
-        </div>
-
-
-        <div class="extra-goal">
-
-            <h3>
-                💡 Własny cel
-            </h3>
-
-            <p>
-                Możemy później zrobić tutaj
-                dodawanie własnych celów.
-            </p>
-
-        </div>
-
-    </div>
-
 </div>
-
-
-</div>
-
-</div>
-
-
-<footer>
-    ZBieranie © 2026
-</footer>
 
 
 <script>
 
-/* =========================
-   DANE
-========================= */
-
 const TARGET = 6868;
-
-const CLEAR_CODE =
-    "ButelKaucja";
-
+const CLEAR_CODE = "ButelKaucja";
 
 let balance =
-    Number(
-        localStorage.getItem("balance")
-    ) || 0;
-
+    Number(localStorage.getItem("balance")) || 0;
 
 let bottles =
-    Number(
-        localStorage.getItem("bottles")
-    ) || 0;
-
+    Number(localStorage.getItem("bottles")) || 0;
 
 let days =
-    Number(
-        localStorage.getItem("days")
-    ) || 0;
-
+    Number(localStorage.getItem("days")) || 0;
 
 let history =
-    JSON.parse(
-        localStorage.getItem("history")
-    ) || [];
-
+    JSON.parse(localStorage.getItem("history")) || [];
 
 let historyExpanded = false;
 
 
-/* =========================
-   ZAKŁADKI
-========================= */
+/* ================= TABS ================= */
 
-function showGoals() {
+function showGoals(){
 
-    const transition =
-        document.getElementById(
-            "pageTransition"
-        );
+    document.getElementById("balancePage").style.display = "none";
+    document.getElementById("goalsPage").style.display = "block";
 
-
-    transition.classList.add(
-        "active"
-    );
-
-
-    setTimeout(() => {
-
-        document.body.classList.add(
-            "goals-mode"
-        );
-
-
-        document.getElementById(
-            "balanceTab"
-        ).classList.remove(
-            "active"
-        );
-
-
-        document.getElementById(
-            "goalsTab"
-        ).classList.add(
-            "active"
-        );
-
-
-        updateGoals();
-
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-
-        setTimeout(() => {
-
-            transition.classList.remove(
-                "active"
-            );
-
-        }, 300);
-
-    }, 350);
-}
-
-
-function showBalance() {
-
-    const transition =
-        document.getElementById(
-            "pageTransition"
-        );
-
-
-    transition.classList.add(
-        "active"
-    );
-
-
-    setTimeout(() => {
-
-        document.body.classList.remove(
-            "goals-mode"
-        );
-
-
-        document.getElementById(
-            "goalsTab"
-        ).classList.remove(
-            "active"
-        );
-
-
-        document.getElementById(
-            "balanceTab"
-        ).classList.add(
-            "active"
-        );
-
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-
-        setTimeout(() => {
-
-            transition.classList.remove(
-                "active"
-            );
-
-        }, 300);
-
-    }, 350);
-}
-
-
-/* =========================
-   AKTUALIZACJA
-========================= */
-
-function update() {
-
-    const percent =
-        Math.min(
-            (balance / TARGET) * 100,
-            100
-        );
-
-
-    const remaining =
-        Math.max(
-            TARGET - balance,
-            0
-        );
-
-
-    document.getElementById(
-        "money"
-    ).textContent =
-        balance
-            .toFixed(2)
-            .replace(".", ",")
-        + " zł";
-
-
-    document.getElementById(
-        "bottles"
-    ).textContent =
-        bottles;
-
-
-    document.getElementById(
-        "days"
-    ).textContent =
-        days;
-
-
-    document.getElementById(
-        "remaining"
-    ).textContent =
-        remaining
-            .toFixed(2)
-            .replace(".", ",")
-        + " zł";
-
-
-    document.getElementById(
-        "percent"
-    ).textContent =
-        percent.toFixed(2)
-        + "%";
-
-
-    document.getElementById(
-        "progress"
-    ).style.width =
-        percent + "%";
-
-
-    showHistory();
-
-    drawChart();
+    document.querySelectorAll(".tab")[0].classList.remove("active");
+    document.querySelectorAll(".tab")[1].classList.add("active");
 
     updateGoals();
 }
 
 
-/* =========================
-   CELE
-========================= */
+function showBalance(){
 
-function updateGoals() {
+    document.getElementById("balancePage").style.display = "block";
+    document.getElementById("goalsPage").style.display = "none";
 
-    const percent =
-        Math.min(
-            (balance / TARGET) * 100,
-            100
-        );
+    document.querySelectorAll(".tab")[1].classList.remove("active");
+    document.querySelectorAll(".tab")[0].classList.add("active");
 
-
-    document.getElementById(
-        "goalProgress"
-    ).style.width =
-        percent + "%";
-
-
-    document.getElementById(
-        "goalPercent"
-    ).textContent =
-        percent.toFixed(2)
-        + "% ukończone";
-
-
-    document
-        .querySelectorAll(
-            ".milestone"
-        )
-        .forEach(
-            milestone => {
-
-                const value =
-                    Number(
-                        milestone.dataset.value
-                    );
-
-
-                if (
-                    balance >= value
-                ) {
-
-                    milestone.classList.add(
-                        "done"
-                    );
-
-                }
-                else {
-
-                    milestone.classList.remove(
-                        "done"
-                    );
-
-                }
-
-            }
-        );
+    update();
 }
 
 
-/* =========================
-   DODAWANIE
-========================= */
+/* ================= UPDATE ================= */
 
-function addMoney(
-    amount,
-    description
-) {
+function update(){
 
-    balance += amount;
+    document.getElementById("balance").textContent =
+        balance.toFixed(2).replace(".",",") + " zł";
 
-    days++;
+    document.getElementById("bottles").textContent =
+        bottles;
 
+    document.getElementById("days").textContent =
+        days;
 
-    if (
-        description ===
-        "20 butelek"
-    ) {
+    let remaining =
+        Math.max(TARGET - balance,0);
 
-        bottles += 20;
+    document.getElementById("remaining").textContent =
+        remaining.toFixed(2).replace(".",",") + " zł";
 
-    }
+    let percent =
+        Math.min((balance / TARGET) * 100,100);
 
+    document.getElementById("percent").textContent =
+        percent.toFixed(1).replace(".",",") + "%";
 
-    if (
-        description ===
-        "40 butelek"
-    ) {
+    document.getElementById("progressBar").style.width =
+        percent + "%";
 
-        bottles += 40;
+    addHistory();
 
-    }
+    drawChart();
 
-
-    addHistory(
-        amount,
-        description,
-        "plus"
-    );
-
+    renderSafes();
 
     save();
 }
 
 
-/* WŁASNA WPŁATA */
+function updateGoals(){
 
-function customAdd() {
+    let percent =
+        Math.min((balance / TARGET) * 100,100);
 
-    const amount =
-        parseFloat(
-            prompt(
-                "Ile pieniędzy dodajesz?"
-            )
-        );
+    document.getElementById("goalOrangeBar").style.width =
+        percent + "%";
 
+    document.getElementById("goalPercent").textContent =
+        percent.toFixed(1).replace(".",",") + "%";
 
-    if (
-        !isNaN(amount) &&
-        amount > 0
-    ) {
+    const milestones = [
+        [500,"m500"],
+        [1000,"m1000"],
+        [2500,"m2500"],
+        [5000,"m5000"],
+        [6868,"m6868"]
+    ];
 
-        const description =
-            prompt(
-                "Skąd są te pieniądze?",
-                "Inne"
-            )
-            ||
-            "Inne pieniądze";
+    milestones.forEach(item => {
 
-
-        balance += amount;
-
-        days++;
-
-
-        addHistory(
-            amount,
-            description,
-            "plus"
-        );
-
-
-        save();
-    }
-}
-
-
-/* WYDATEK */
-
-function customExpense() {
-
-    const amount =
-        parseFloat(
-            prompt(
-                "Ile wydajesz?"
-            )
-        );
-
-
-    if (
-        !isNaN(amount) &&
-        amount > 0
-    ) {
-
-        const description =
-            prompt(
-                "Na co wydajesz?",
-                "Wydatek"
-            )
-            ||
-            "Wydatek";
-
-
-        balance -= amount;
-
-
-        if (
-            balance < 0
-        ) {
-
-            balance = 0;
-
+        if(balance >= item[0]){
+            document
+                .getElementById(item[1])
+                .classList.add("done");
+        }else{
+            document
+                .getElementById(item[1])
+                .classList.remove("done");
         }
 
+    });
 
-        days++;
-
-
-        addHistory(
-            amount,
-            description,
-            "minus"
-        );
-
-
-        save();
-    }
 }
 
 
-/* =========================
-   HISTORIA
-========================= */
+/* ================= PIENIĄDZE ================= */
 
-function addHistory(
-    amount,
-    description,
-    type
-) {
+function addMoney(amount,description){
 
-    const date =
-        new Date()
-        .toLocaleDateString(
-            "pl-PL"
+    balance += amount;
+
+    if(description.includes("butelek")){
+        bottles +=
+            description.includes("40") ? 40 : 20;
+    }
+
+    if(description === "Kaucja"){
+        bottles++;
+    }
+
+    addHistoryEntry(
+        description,
+        amount
+    );
+
+    save();
+    update();
+
+}
+
+
+function customAdd(){
+
+    let amount =
+        parseFloat(
+            prompt("Ile pieniędzy dodać?")
         );
 
+    if(isNaN(amount) || amount <= 0)
+        return;
+
+    let description =
+        prompt("Skąd są te pieniądze?") ||
+        "Inna kwota";
+
+    addMoney(
+        amount,
+        description
+    );
+
+}
+
+
+function customExpense(){
+
+    let amount =
+        parseFloat(
+            prompt("Ile wydałeś?")
+        );
+
+    if(isNaN(amount) || amount <= 0)
+        return;
+
+    let description =
+        prompt("Na co wydałeś?") ||
+        "Wydatek";
+
+    balance -= amount;
+
+    addHistoryEntry(
+        description,
+        -amount
+    );
+
+    save();
+    update();
+
+}
+
+
+/* ================= HISTORIA ================= */
+
+function addHistoryEntry(
+    description,
+    amount
+){
+
+    const now = new Date();
 
     history.unshift({
 
-        date: date,
-
-        amount: amount,
+        date:
+            now.toLocaleDateString("pl-PL"),
 
         description:
             description,
 
-        type: type,
+        amount:
+            amount,
 
-        balance: balance
+        balance:
+            balance
 
     });
+
 }
 
 
-function showHistory() {
+function addHistory(){
 
     const box =
-        document.getElementById(
-            "history"
-        );
+        document.getElementById("history");
 
+    box.innerHTML = "";
 
-    const button =
-        document.getElementById(
-            "showMore"
-        );
-
-
-    if (
-        history.length === 0
-    ) {
-
-        box.innerHTML =
-            '<div class="history-item">Brak wpisów.</div>';
-
-
-        button.style.display =
-            "none";
-
-
-        return;
-    }
-
-
-    const visibleCount =
+    let items =
         historyExpanded
-        ? history.length
-        : 5;
+            ? history
+            : history.slice(0,5);
 
+    items.forEach(item => {
 
-    box.innerHTML =
-        history
-            .slice(
-                0,
-                visibleCount
-            )
-            .map(
-                item => {
+        const row =
+            document.createElement("div");
 
-                    const sign =
-                        item.type === "plus"
-                        ? "+"
-                        : "−";
+        row.className =
+            "history-item";
 
+        let amountText =
+            (item.amount >= 0 ? "+" : "") +
+            item.amount.toFixed(2).replace(".",",") +
+            " zł";
 
-                    const className =
-                        item.type === "plus"
-                        ? ""
-                        : "expense";
+        row.innerHTML = `
 
+            <div>
 
-                    return `
+                <div class="history-date">
+                    ${item.date}
+                </div>
 
-                        <div
-                            class="history-item ${className}">
+                <div class="history-desc">
+                    ${item.description}
+                </div>
 
-                            <strong>
-                                ${item.date}
-                            </strong>
+                <div class="history-balance">
+                    Saldo:
+                    ${item.balance.toFixed(2).replace(".",",")} zł
+                </div>
 
-                            — ${item.description}
+            </div>
 
-                            <br>
+            <div class="${
+                item.amount >= 0
+                    ? "income-text"
+                    : "expense-text"
+            }">
 
-                            <strong>
+                ${amountText}
 
-                                ${sign}
+            </div>
 
-                                ${item.amount
-                                    .toFixed(2)
-                                    .replace(
-                                        ".",
-                                        ","
-                                    )}
+        `;
 
-                                zł
+        box.appendChild(row);
 
-                            </strong>
+    });
 
+    document.getElementById("historyMore").style.display =
+        history.length > 5 ? "block" : "none";
 
-                            <span
-                                style="float:right">
-
-                                saldo:
-
-                                ${item.balance
-                                    .toFixed(2)
-                                    .replace(
-                                        ".",
-                                        ","
-                                    )}
-
-                                zł
-
-                            </span>
-
-                        </div>
-
-                    `;
-
-                }
-            )
-            .join("");
-
-
-    if (
-        history.length > 5
-    ) {
-
-        button.style.display =
-            "block";
-
-
-        button.textContent =
-            historyExpanded
+    document.getElementById("historyMore").textContent =
+        historyExpanded
             ? "Pokaż mniej ▲"
             : "Pokaż więcej ▼";
 
-    }
-    else {
-
-        button.style.display =
-            "none";
-
-    }
 }
 
 
-function toggleHistory() {
+function toggleHistory(){
 
     historyExpanded =
         !historyExpanded;
 
-    showHistory();
+    addHistory();
+
 }
 
 
-/* =========================
-   KOD
-========================= */
+/* ================= CZYSZCZENIE ================= */
 
-function checkClearCode() {
+function checkClearCode(){
 
-    const code =
-        prompt(
-            "Podaj kod, aby wyczyścić:\n\n"
-            + "Wpisz dokładnie: ButelKaucja"
-        );
+    let code =
+        prompt("Podaj kod:");
 
+    return code === CLEAR_CODE;
 
-    if (
-        code === CLEAR_CODE
-    ) {
-
-        return true;
-
-    }
-
-
-    alert(
-        "❌ Nieprawidłowy kod."
-    );
-
-
-    return false;
 }
 
 
-/* =========================
-   WYCZYŚĆ SALDO
-========================= */
+function clearBalance(){
 
-function clearBalance() {
-
-    if (
-        !checkClearCode()
-    ) {
-
+    if(!checkClearCode()){
+        alert("❌ Zły kod!");
         return;
-
     }
 
-
-    const sure =
-        confirm(
-            "⚠️ UWAGA!\n\n"
-            + "To wyzeruje aktualne saldo.\n"
-            + "Ta operacja jest przeznaczona do resetowania pieniędzy.\n\n"
-            + "Czy na pewno chcesz wyzerować saldo?"
-        );
-
-
-    if (
-        !sure
-    ) {
-
+    if(!confirm(
+        "Czy na pewno chcesz wyczyścić saldo?"
+    )){
         return;
-
     }
-
 
     balance = 0;
 
-
     save();
+    update();
 
-
-    alert(
-        "Saldo zostało wyzerowane."
-    );
 }
 
 
-/* =========================
-   WYCZYŚĆ WYKRES
-========================= */
+function clearChart(){
 
-function clearChart() {
-
-    if (
-        !checkClearCode()
-    ) {
-
+    if(!checkClearCode()){
+        alert("❌ Zły kod!");
         return;
-
     }
 
+    history = [];
+    days = 0;
+    bottles = 0;
 
-    if (
-        !confirm(
-            "Czy na pewno wyczyścić dane wykresu?"
-        )
-    ) {
+    save();
+    update();
 
+}
+
+
+function clearHistory(){
+
+    if(!checkClearCode()){
+        alert("❌ Zły kod!");
         return;
-
     }
-
 
     history = [];
 
-    days = 0;
-
-    bottles = 0;
-
-
     save();
+    update();
 
-
-    alert(
-        "Wykres został wyczyszczony."
-    );
 }
 
 
-/* =========================
-   WYCZYŚĆ HISTORIĘ
-========================= */
+/* ================= WYKRES ================= */
 
-function clearHistory() {
+function getChartData(){
 
-    if (
-        !checkClearCode()
-    ) {
-
-        return;
-
-    }
-
-
-    if (
-        !confirm(
-            "Czy na pewno wyczyścić historię?"
-        )
-    ) {
-
-        return;
-
-    }
-
-
-    history = [];
-
-    days = 0;
-
-    bottles = 0;
-
-
-    save();
-
-
-    alert(
-        "Historia została wyczyszczona."
-    );
-}
-
-
-/* =========================
-   WYKRES
-========================= */
-
-const canvas =
-    document.getElementById(
-        "moneyChart"
-    );
-
-
-const ctx =
-    canvas.getContext("2d");
-
-
-function getChartData() {
-
-    if (
-        history.length === 0
-    ) {
-
+    if(history.length === 0)
         return [];
-
-    }
-
 
     return [...history]
         .reverse()
-        .map(
-            item => ({
+        .map(item => ({
+            date:item.date,
+            balance:item.balance
+        }));
 
-                date:
-                    item.date,
-
-                balance:
-                    item.balance,
-
-                type:
-                    item.type
-
-            })
-        );
 }
 
 
-function drawChart() {
+function drawChart(){
 
-    const container =
-        document.querySelector(
-            ".chart-inner"
-        );
+    const canvas =
+        document.getElementById("chart");
 
+    if(!canvas)
+        return;
 
-    const data =
-        getChartData();
-
-
-    const minWidth =
-        Math.max(
-            650,
-            data.length * 90
-        );
-
-
-    container.style.width =
-        minWidth + "px";
-
-
-    const width =
-        minWidth;
-
-
-    const height =
-        320;
-
-
-    const ratio =
-        window.devicePixelRatio || 1;
-
-
-    canvas.width =
-        width * ratio;
-
-
-    canvas.height =
-        height * ratio;
-
-
-    canvas.style.width =
-        width + "px";
-
-
-    canvas.style.height =
-        height + "px";
-
-
-    ctx.setTransform(
-        ratio,
-        0,
-        0,
-        ratio,
-        0,
-        0
-    );
-
+    const ctx =
+        canvas.getContext("2d");
 
     ctx.clearRect(
         0,
         0,
-        width,
-        height
+        canvas.width,
+        canvas.height
     );
 
+    const data =
+        getChartData();
 
-    if (
-        data.length === 0
-    ) {
+    if(data.length === 0){
 
-        ctx.fillStyle =
-            "#53665c";
-
-
-        ctx.font =
-            "15px Arial";
-
-
-        ctx.textAlign =
-            "center";
-
-
+        ctx.fillStyle = "#82998d";
+        ctx.font = "16px Arial";
         ctx.fillText(
-            "Dodaj pieniądze, aby zobaczyć wykres.",
-            width / 2,
-            height / 2
+            "Brak danych do wykresu",
+            30,
+            50
         );
-
 
         return;
     }
 
-
-    const left = 60;
-    const right = 25;
+    const left = 55;
+    const right = 30;
     const top = 25;
-    const bottom = 45;
+    const bottom = 55;
 
+    const width =
+        canvas.width - left - right;
 
-    const graphWidth =
-        width -
-        left -
-        right;
+    const height =
+        canvas.height - top - bottom;
 
-
-    const graphHeight =
-        height -
-        top -
-        bottom;
-
-
-    const maxBalance =
+    let max =
         Math.max(
             TARGET,
-            ...data.map(
-                point =>
-                    point.balance
-            )
+            ...data.map(x => x.balance)
         );
 
+    max = Math.max(max,100);
 
-    ctx.font =
-        "11px Arial";
+    function x(i){
 
+        if(data.length === 1)
+            return left + width / 2;
 
-    ctx.textAlign =
-        "right";
+        return left +
+            (i/(data.length-1))*width;
+    }
 
+    function y(value){
 
-    for (
-        let i = 0;
-        i <= 4;
-        i++
-    ) {
+        return top +
+            height -
+            (value/max)*height;
 
-        const value =
-            maxBalance *
-            (i / 4);
+    }
 
+    /* linie pomocnicze */
 
-        const y =
+    ctx.strokeStyle = "#163a27";
+    ctx.lineWidth = 1;
+
+    for(let i=0;i<5;i++){
+
+        let gy =
             top +
-            graphHeight -
-            graphHeight *
-            (i / 4);
-
-
-        ctx.strokeStyle =
-            "rgba(80,130,105,.16)";
-
-
-        ctx.lineWidth = 1;
-
+            (height/4)*i;
 
         ctx.beginPath();
 
-
-        ctx.moveTo(
-            left,
-            y
-        );
-
-
-        ctx.lineTo(
-            width - right,
-            y
-        );
-
+        ctx.moveTo(left,gy);
+        ctx.lineTo(canvas.width-right,gy);
 
         ctx.stroke();
 
-
-        ctx.fillStyle =
-            "#60786b";
-
-
-        ctx.fillText(
-            value.toFixed(0)
-            + " zł",
-            left - 8,
-            y + 4
-        );
     }
 
+    /* linia wykresu */
 
-    const points = [];
+    for(let i=0;i<data.length-1;i++){
 
+        let x1 = x(i);
+        let y1 = y(data[i].balance);
 
-    data.forEach(
-        (
-            point,
-            index
-        ) => {
+        let x2 = x(i+1);
+        let y2 = y(data[i+1].balance);
 
-            const x =
-                data.length === 1
-                ? left +
-                  graphWidth / 2
-                : left +
-                  (
-                      index /
-                      (
-                          data.length -
-                          1
-                      )
-                  ) *
-                  graphWidth;
+        ctx.beginPath();
 
-
-            const y =
-                top +
-                graphHeight -
-                (
-                    point.balance /
-                    maxBalance
-                ) *
-                graphHeight;
-
-
-            points.push({
-
-                x,
-                y,
-                data: point
-
-            });
-
-        }
-    );
-
-
-    for (
-        let i = 0;
-        i < points.length - 1;
-        i++
-    ) {
-
-        const a =
-            points[i];
-
-
-        const b =
-            points[i + 1];
-
-
-        ctx.strokeStyle =
-            b.data.balance >=
-            a.data.balance
-            ? "#28f878"
-            : "#ff3d4d";
-
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x2,y2);
 
         ctx.lineWidth = 4;
 
-        ctx.lineCap =
-            "round";
+        ctx.strokeStyle =
+            data[i+1].balance >= data[i].balance
+                ? "#39ff78"
+                : "#ff3e4d";
 
+        ctx.stroke();
+
+    }
+
+    /* punkty */
+
+    data.forEach((item,i)=>{
 
         ctx.beginPath();
 
-
-        ctx.moveTo(
-            a.x,
-            a.y
+        ctx.arc(
+            x(i),
+            y(item.balance),
+            5,
+            0,
+            Math.PI*2
         );
 
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
 
-        ctx.lineTo(
-            b.x,
-            b.y
+        ctx.beginPath();
+
+        ctx.arc(
+            x(i),
+            y(item.balance),
+            3,
+            0,
+            Math.PI*2
         );
 
+        ctx.fillStyle = "#39ff78";
+        ctx.fill();
 
-        ctx.stroke();
-    }
+    });
 
+    /* daty */
 
-    points.forEach(
-        (
-            point,
-            index
-        ) => {
+    ctx.font = "12px Arial";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#82998d";
 
-            let color =
-                "#28f878";
+    data.forEach((item,i)=>{
 
+        ctx.fillText(
+            item.date,
+            x(i),
+            canvas.height - 20
+        );
 
-            if (
-                index > 0 &&
-                point.data.balance <
-                points[
-                    index - 1
-                ].data.balance
-            ) {
+    });
 
-                color =
-                    "#ff3d4d";
-
-            }
-
-
-            ctx.fillStyle =
-                color;
-
-
-            ctx.beginPath();
-
-
-            ctx.arc(
-                point.x,
-                point.y,
-                5,
-                0,
-                Math.PI * 2
-            );
-
-
-            ctx.fill();
-
-        }
-    );
-
-
-    ctx.fillStyle =
-        "#60786b";
-
-
-    ctx.textAlign =
-        "center";
-
-
-    ctx.font =
-        "11px Arial";
-
-
-    points.forEach(
-        point => {
-
-            ctx.fillText(
-                point.data.date,
-                point.x,
-                height - 14
-            );
-
-        }
-    );
 }
 
 
-/* =========================
-   ZAPIS
-========================= */
+/* ================= SEJFY ================= */
 
-function save() {
+const SAFE_MAX = 500;
+
+let safes =
+    JSON.parse(
+        localStorage.getItem("safes")
+    ) || [0,0,0,0];
+
+
+function saveSafes(){
+
+    localStorage.setItem(
+        "safes",
+        JSON.stringify(safes)
+    );
+
+}
+
+
+function renderSafes(){
+
+    const container =
+        document.getElementById("safes");
+
+    if(!container)
+        return;
+
+    container.innerHTML = "";
+
+    safes.forEach((amount,index)=>{
+
+        const safe =
+            document.createElement("div");
+
+        safe.className =
+            "safe";
+
+        const percent =
+            Math.min(
+                amount / SAFE_MAX * 100,
+                100
+            );
+
+        safe.innerHTML = `
+
+            <div class="safe-label">
+                🔐 Sejf ${index + 1}
+            </div>
+
+            <div class="safe-box">
+
+                <div class="safe-inside"></div>
+
+                <div class="safe-door"></div>
+
+                <div class="safe-ground"></div>
+
+                <div class="crack"></div>
+
+            </div>
+
+            <div class="safe-amount">
+                ${amount.toFixed(2).replace(".",",")}
+                / 500,00 zł
+            </div>
+
+            <div class="safe-progress">
+                <div
+                    class="safe-progress-bar"
+                    style="width:${percent}%"
+                ></div>
+            </div>
+
+            <div class="safe-actions">
+
+                <button
+                    class="safe-deposit"
+                    onclick="depositToSafe(${index})"
+                >
+                    💰 Wpłać
+                </button>
+
+                <button
+                    class="safe-clear"
+                    onclick="clearSafe(${index})"
+                >
+                    🗑 Wyczyść
+                </button>
+
+            </div>
+
+        `;
+
+        container.appendChild(safe);
+
+    });
+
+}
+
+
+/* ================= WPŁATA DO SEJFU ================= */
+
+function depositToSafe(index){
+
+    let free =
+        SAFE_MAX - safes[index];
+
+    if(free <= 0){
+
+        alert(
+            "🔒 Ten sejf jest już pełny!"
+        );
+
+        return;
+    }
+
+    let amount =
+        parseFloat(
+            prompt(
+                "Ile zł chcesz wpłacić do sejfu?\n" +
+                "Wolne miejsce: " +
+                free.toFixed(2) +
+                " zł"
+            )
+        );
+
+    if(isNaN(amount) || amount <= 0)
+        return;
+
+    if(amount > free){
+
+        alert(
+            "❌ Do tego sejfu możesz wpłacić maksymalnie " +
+            free.toFixed(2) +
+            " zł."
+        );
+
+        return;
+    }
+
+    safes[index] += amount;
+
+    saveSafes();
+    renderSafes();
+
+    if(safes[index] >= SAFE_MAX){
+
+        setTimeout(
+            ()=>openFullSafe(index),
+            250
+        );
+
+    }
+
+}
+
+
+/* ================= PEŁNY SEJF ================= */
+
+function openFullSafe(index){
+
+    const allSafes =
+        document.querySelectorAll(".safe");
+
+    const safe =
+        allSafes[index];
+
+    if(!safe)
+        return;
+
+    safe.classList.add("shaking");
+
+    setTimeout(()=>{
+
+        safe.classList.remove("shaking");
+        safe.classList.add("opening");
+
+        createFlyingMoney(safe);
+
+        setTimeout(()=>{
+
+            const amount =
+                safes[index];
+
+            balance += amount;
+
+            addHistoryEntry(
+                "💰 Opróżnienie sejfu " +
+                (index + 1),
+                amount
+            );
+
+            safes[index] = 0;
+
+            saveSafes();
+            save();
+
+            showSafeCelebration(
+                amount
+            );
+
+            setTimeout(()=>{
+
+                renderSafes();
+
+                update();
+
+            },500);
+
+        },1000);
+
+    },1500);
+
+}
+
+
+/* ================= BANKNOTY ================= */
+
+function createFlyingMoney(safe){
+
+    for(let i=0;i<20;i++){
+
+        const money =
+            document.createElement("div");
+
+        money.className =
+            "safe-money";
+
+        money.textContent =
+            "💵";
+
+        money.style.setProperty(
+            "--x",
+            (Math.random()*420-210) + "px"
+        );
+
+        money.style.setProperty(
+            "--y",
+            (Math.random()*-350-100) + "px"
+        );
+
+        money.style.setProperty(
+            "--r",
+            (Math.random()*700-350) + "deg"
+        );
+
+        safe.appendChild(money);
+
+        setTimeout(()=>{
+            money.classList.add("fly");
+        },i*35);
+
+        setTimeout(()=>{
+            money.remove();
+        },1900);
+
+    }
+
+}
+
+
+/* ================= GRATULACJE ================= */
+
+function showSafeCelebration(amount){
+
+    if(amount >= 1000){
+
+        alert(
+            "🎉 MEGA GRATULACJE! 🎉\n\n" +
+            "Sejf został opróżniony!\n" +
+            "+" +
+            amount.toFixed(2).replace(".",",") +
+            " zł trafiło na główne saldo! 💰🔥"
+        );
+
+    }else{
+
+        alert(
+            "🎉 Gratulacje!\n\n" +
+            "Sejf został zapełniony i opróżniony.\n" +
+            "+" +
+            amount.toFixed(2).replace(".",",") +
+            " zł trafiło na główne saldo! 💰"
+        );
+
+    }
+
+}
+
+
+/* ================= CZYSZCZENIE SEJFU ================= */
+
+function clearSafe(index){
+
+    if(!checkClearCode()){
+
+        alert("❌ Zły kod!");
+
+        return;
+    }
+
+    if(safes[index] > 0){
+
+        if(!confirm(
+            "Czy na pewno chcesz wyczyścić sejf " +
+            (index + 1) +
+            "?\n\n" +
+            "Znajduje się w nim " +
+            safes[index].toFixed(2).replace(".",",") +
+            " zł."
+        )){
+
+            return;
+
+        }
+
+    }
+
+    const allSafes =
+        document.querySelectorAll(".safe");
+
+    const safe =
+        allSafes[index];
+
+    if(!safe)
+        return;
+
+    safe.classList.add("clearing");
+
+    setTimeout(()=>{
+
+        safes[index] = 0;
+
+        saveSafes();
+
+        renderSafes();
+
+        const newSafes =
+            document.querySelectorAll(".safe");
+
+        const newSafe =
+            newSafes[index];
+
+        if(newSafe){
+
+            newSafe.classList.add(
+                "emerging"
+            );
+
+            setTimeout(()=>{
+
+                newSafe.classList.remove(
+                    "emerging"
+                );
+
+            },2000);
+
+        }
+
+    },1000);
+
+}
+
+
+/* ================= ZAPIS ================= */
+
+function save(){
 
     localStorage.setItem(
         "balance",
         balance
     );
 
-
     localStorage.setItem(
         "bottles",
         bottles
     );
-
 
     localStorage.setItem(
         "days",
         days
     );
 
-
     localStorage.setItem(
         "history",
-        JSON.stringify(
-            history
-        )
+        JSON.stringify(history)
     );
 
+    saveSafes();
 
-    update();
 }
 
 
-/* START */
+/* ================= START ================= */
 
 update();
+
+renderSafes();
 
 </script>
 
