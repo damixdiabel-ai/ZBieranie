@@ -6,142 +6,117 @@
 <title>ZBieranie 💰</title>
 
 <style>
-*{box-sizing:border-box}
-
-html{scroll-behavior:smooth}
-
-body{
-    margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    color:#eafff1;
-    min-height:100vh;
-    overflow-x:hidden;
-    background:
-        radial-gradient(circle at top,#123d2c 0%,#07150f 45%,#030906 100%);
+*{
+    box-sizing:border-box;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    background:linear-gradient(
-        115deg,
-        transparent,
-        rgba(0,255,130,.025),
-        transparent
-    );
+html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    font-family:Arial,Helvetica,sans-serif;
+    background:
+        radial-gradient(circle at 50% -10%,#123d25 0%,#06140c 45%,#020604 100%);
+    color:white;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+button{
+    font-family:inherit;
+}
+
+.app{
+    width:min(1050px,94%);
+    margin:auto;
+    padding:25px 0 60px;
 }
 
 /* =========================
-   GÓRA
+   HEADER
 ========================= */
 
-header{
+.header{
     text-align:center;
-    padding:35px 20px 25px;
+    padding:20px 15px 10px;
 }
 
-.money-logo{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:18px;
-}
-
-.bottle{
-    font-size:64px;
-    filter:drop-shadow(0 0 15px rgba(0,255,100,.35));
-    animation:bottleFloat 3s ease-in-out infinite;
-}
-
-.dollar{
-    font-size:72px;
+.logo{
+    font-size:48px;
     font-weight:900;
-    color:#41ff8b;
+    color:#39ff88;
     text-shadow:
-        0 0 10px #19ff68,
-        0 0 25px rgba(25,255,104,.5);
-    animation:dollarPulse 2.5s ease-in-out infinite;
-}
-
-@keyframes bottleFloat{
-    0%,100%{transform:rotate(-4deg) translateY(0)}
-    50%{transform:rotate(4deg) translateY(-6px)}
-}
-
-@keyframes dollarPulse{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.07)}
-}
-
-h1{
-    margin:5px 0;
-    font-size:42px;
+        0 0 10px #20ff73,
+        0 0 30px rgba(32,255,115,.45);
+    animation:logoPulse 2.5s ease-in-out infinite;
 }
 
 .subtitle{
-    color:#91ad9e;
+    color:#9ec9ae;
+    margin-top:5px;
+    font-size:15px;
+}
+
+@keyframes logoPulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.025)}
 }
 
 /* =========================
-   ZAKŁADKI
+   TABS
 ========================= */
 
 .tabs{
-    width:min(900px,92%);
-    margin:10px auto 25px;
     display:flex;
     gap:10px;
-    background:#071b12;
-    border:1px solid #174b32;
-    border-radius:16px;
-    padding:7px;
+    margin:20px 0;
 }
 
 .tab{
     flex:1;
-    padding:14px;
-    border-radius:11px;
-    border:none;
-    background:transparent;
-    color:#8ea999;
+    padding:16px;
+    border:1px solid #1d6539;
+    background:#081b10;
+    color:#a9cdb5;
+    border-radius:18px;
+    cursor:pointer;
     font-size:17px;
     font-weight:bold;
-    cursor:pointer;
-    transition:.3s;
+    transition:.25s;
 }
 
 .tab:hover{
-    color:white;
-    background:#0d2c1e;
+    box-shadow:0 0 20px rgba(255,157,36,.55);
+    border-color:#ff9d24;
+    color:#fff;
 }
 
 .tab.active{
-    background:#124b2d;
-    color:#4cff91;
-    box-shadow:0 0 15px rgba(0,255,100,.12);
+    color:#071109;
+    background:#39ff88;
+    border-color:#39ff88;
+    box-shadow:0 0 22px rgba(57,255,136,.35);
 }
 
-/* STARA ANIMACJA */
+/* =========================
+   PAGES
+========================= */
 
 .page{
-    width:min(900px,92%);
-    margin:auto;
+    display:none;
+    animation:pageIn .45s ease;
 }
 
-.page.enter-right{
-    animation:enterRight .45s ease both;
+.page.active{
+    display:block;
 }
 
-.page.leave-left{
-    animation:leaveLeft .25s ease both;
-}
-
-@keyframes enterRight{
+@keyframes pageIn{
     from{
         opacity:0;
-        transform:translateX(55px);
+        transform:translateX(35px);
         filter:blur(5px);
     }
     to{
@@ -151,116 +126,92 @@ h1{
     }
 }
 
-@keyframes leaveLeft{
-    from{
-        opacity:1;
-        transform:translateX(0);
-    }
-    to{
-        opacity:0;
-        transform:translateX(-45px);
-    }
-}
-
 /* =========================
-   KARTY
+   CARDS
 ========================= */
 
 .card{
-    background:rgba(6,25,16,.94);
-    border:1px solid #17472f;
-    border-radius:18px;
+    background:rgba(5,20,11,.88);
+    border:1px solid #164c2b;
+    border-radius:24px;
     padding:22px;
     margin-bottom:18px;
     box-shadow:
-        0 12px 35px rgba(0,0,0,.25),
-        inset 0 0 30px rgba(0,255,100,.018);
+        0 8px 30px rgba(0,0,0,.25),
+        inset 0 0 20px rgba(30,255,110,.025);
+}
+
+.card h2{
+    margin:0 0 18px;
+    font-size:21px;
+}
+
+.money{
+    text-align:center;
+    font-size:56px;
+    font-weight:900;
+    color:#48ff91;
+    text-shadow:0 0 20px rgba(72,255,145,.3);
 }
 
 /* =========================
-   SALDO
+   BIG BALANCE BAR
 ========================= */
 
-.balance{
-    text-align:center;
-    font-size:58px;
-    font-weight:900;
-    color:#42ff8c;
-    text-shadow:0 0 18px rgba(0,255,100,.3);
-    margin:18px 0;
-}
-
-/* WIĘKSZY PASEK */
-
-.progress{
+.balanceBar{
+    height:42px;
     width:100%;
-    height:34px;
-    background:#06140d;
-    border:2px solid #1c5035;
-    border-radius:30px;
+    margin-top:20px;
+    background:#020a05;
+    border:2px solid #164d2b;
+    border-radius:999px;
     overflow:hidden;
-    box-shadow:inset 0 0 10px rgba(0,0,0,.5);
+    position:relative;
+    box-shadow:inset 0 0 12px #000;
 }
 
-.progress-fill{
+.balanceFill{
     height:100%;
     width:0%;
-    background:linear-gradient(90deg,#0b8f45,#38ff88);
-    border-radius:30px;
-    transition:width 1s cubic-bezier(.2,.8,.2,1);
+    border-radius:999px;
     position:relative;
     overflow:hidden;
+    background:linear-gradient(90deg,#0c7d3d,#22e86d,#39ff88);
+    transition:width 1.1s cubic-bezier(.2,.8,.2,1);
+    will-change:width;
 }
 
-.progress-fill::after{
+.balanceFill::after{
     content:"";
     position:absolute;
     inset:0;
-    background:repeating-linear-gradient(
-        -45deg,
-        rgba(0,0,0,.18) 0 12px,
-        transparent 12px 24px
-    );
-    animation:stripes 1s linear infinite;
+    width:220%;
+    background:
+        repeating-linear-gradient(
+            135deg,
+            rgba(0,0,0,.28) 0px,
+            rgba(0,0,0,.28) 13px,
+            transparent 13px,
+            transparent 27px
+        );
+    animation:stripeMove 1.15s linear infinite;
+    will-change:transform;
 }
 
-@keyframes stripes{
-    from{transform:translateX(0)}
-    to{transform:translateX(24px)}
+@keyframes stripeMove{
+    from{transform:translate3d(0,0,0)}
+    to{transform:translate3d(-27px,0,0)}
 }
 
-.goal-line{
-    display:flex;
-    justify-content:space-between;
-    color:#91ad9e;
-    font-size:14px;
-    margin-bottom:8px;
-}
-
-.percent{
+.balanceInfo{
     text-align:center;
     margin-top:9px;
-    color:#62ff9c;
-    font-weight:bold;
-}
-
-.clear-btn{
-    display:block;
-    margin:15px auto 0;
-    border:none;
-    background:#5d1717;
-    color:#ffb0b0;
-    padding:9px 15px;
-    border-radius:9px;
-    cursor:pointer;
-}
-
-.clear-btn:hover{
-    background:#8b1e1e;
+    color:#8db99c;
+    font-size:14px;
 }
 
 /* =========================
-   STATYSTYKI
+   STATS
 ========================= */
 
 .stats{
@@ -270,1385 +221,1642 @@ h1{
 }
 
 .stat{
-    background:#081c12;
-    border:1px solid #17472f;
-    border-radius:14px;
-    padding:17px;
+    background:#07190e;
+    border:1px solid #174d2c;
+    border-radius:18px;
+    padding:18px 10px;
     text-align:center;
 }
 
-.stat .number{
-    font-size:30px;
-    font-weight:bold;
-    color:#4cff91;
+.statIcon{
+    font-size:28px;
 }
 
-.stat .label{
-    color:#81998b;
-    margin-top:4px;
+.statValue{
+    color:#42ff8c;
+    font-size:25px;
+    font-weight:900;
+    margin-top:5px;
+}
+
+.statName{
+    color:#85aa91;
+    font-size:13px;
 }
 
 /* =========================
-   PRZYCISKI
+   MONEY BUTTONS
 ========================= */
 
-.money-buttons{
+.moneyButtons{
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:10px;
+    gap:12px;
 }
 
-.money-btn{
-    border:1px solid #1d7145;
-    background:#0c3521;
-    color:#bfffd5;
-    padding:14px;
-    border-radius:12px;
+.moneyBtn{
+    border:1px solid #216f3d;
+    background:#092015;
+    color:#d9ffe5;
+    border-radius:17px;
+    padding:16px;
     font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.18s;
+}
+
+.moneyBtn:hover{
+    transform:translateY(-2px);
+    background:#0d2d1b;
+    box-shadow:0 0 18px rgba(57,255,136,.18);
+}
+
+.moneyBtn:active{
+    transform:scale(.97);
+}
+
+.moneyBtn.expense{
+    border-color:#7d2828;
+    color:#ff8e8e;
+}
+
+.moneyBtn.expense:hover{
+    background:#301010;
+}
+
+/* =========================
+   HISTORY
+========================= */
+
+.history{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+
+.historyItem{
+    display:grid;
+    grid-template-columns:110px 1fr auto auto;
+    gap:10px;
+    align-items:center;
+    background:#07180d;
+    border:1px solid #123c24;
+    padding:12px;
+    border-radius:14px;
+}
+
+.historyDate{
+    color:#6e9d7d;
+    font-size:12px;
+}
+
+.historyDesc{
+    color:#d9ffe3;
+}
+
+.historyAmount{
+    font-weight:900;
+}
+
+.historyBalance{
+    color:#82a98e;
+    font-size:12px;
+}
+
+.income{
+    color:#43ff8a;
+}
+
+.expense{
+    color:#ff5757;
+}
+
+.moreBtn{
+    margin-top:12px;
+    width:100%;
+    background:#0b2817;
+    color:#b6e8c5;
+    border:1px solid #1b5c32;
+    border-radius:14px;
+    padding:12px;
+    cursor:pointer;
+}
+
+/* =========================
+   CLEAR
+========================= */
+
+.clearBtn{
+    margin-top:14px;
+    width:100%;
+    background:#280d0d;
+    border:1px solid #8c2929;
+    color:#ff7070;
+    padding:13px;
+    border-radius:14px;
     font-weight:bold;
     cursor:pointer;
     transition:.2s;
 }
 
-.money-btn:hover{
-    background:#12562f;
-    transform:translateY(-2px);
+.clearBtn:hover{
+    background:#421010;
+    box-shadow:0 0 16px rgba(255,50,50,.15);
 }
 
-.expense{
-    border-color:#7b2929;
-    background:#341313;
-    color:#ffbaba;
-}
+/* =========================
+   CHART
+========================= */
 
-input{
+.chartScroll{
     width:100%;
-    padding:12px;
-    margin:7px 0;
-    background:#06150d;
-    border:1px solid #22573a;
-    border-radius:10px;
-    color:white;
-}
-
-/* =========================
-   HISTORIA
-========================= */
-
-.history-item{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    padding:13px 4px;
-    border-bottom:1px solid #173625;
-}
-
-.income{color:#48ff91}
-.outcome{color:#ff6565}
-
-.history-date{
-    color:#748c7d;
-    font-size:12px;
-}
-
-/* =========================
-   WYKRES
-========================= */
-
-.chart-scroll{
     overflow-x:auto;
     overflow-y:hidden;
-    border-radius:12px;
-    padding-bottom:10px;
-    scrollbar-color:#2b9d5b #08170f;
+    border-radius:15px;
+    background:#030b06;
+    border:1px solid #123a22;
 }
 
-.chart-scroll::-webkit-scrollbar{
-    height:12px;
-}
-
-.chart-scroll::-webkit-scrollbar-track{
-    background:#07140d;
-    border-radius:20px;
-}
-
-.chart-scroll::-webkit-scrollbar-thumb{
-    background:#2c9d5b;
-    border-radius:20px;
-}
-
-.chart-scroll::-webkit-scrollbar-thumb:hover{
-    background:#43d87a;
+.chartInner{
+    width:1450px;
+    min-width:1450px;
+    height:390px;
 }
 
 canvas{
     display:block;
+    width:1450px;
+    height:390px;
 }
 
 /* =========================
-   CELE
+   GOALS
 ========================= */
 
-.goals-card{
+.goalsPage{
     background:
-        radial-gradient(circle at top,#432b0a,#211608 65%,#120c05);
-    border:1px solid #8b5a18;
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.4),
-        inset 0 0 35px rgba(255,150,0,.035);
+        radial-gradient(circle at 50% 0%,rgba(255,153,35,.14),transparent 45%);
 }
 
-.goals-title{
-    color:#ffb13b;
-    text-shadow:0 0 14px rgba(255,145,0,.4);
+.goalMain{
+    border-color:#8a4b14;
 }
 
-.goal-big{
+.goalAmount{
     text-align:center;
-    font-size:44px;
+    color:#ffad3e;
+    font-size:55px;
     font-weight:900;
-    color:#ffae32;
+    text-shadow:0 0 20px rgba(255,157,45,.3);
 }
 
-.orange-progress{
-    background:#1b1005;
-    border-color:#724714;
+.orangeBar{
+    height:32px;
+    border-radius:999px;
+    background:#160d04;
+    border:2px solid #71400f;
+    overflow:hidden;
+    margin-top:18px;
 }
 
-.orange-fill{
-    background:linear-gradient(90deg,#b65d00,#ffae2e);
+.orangeFill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#bd5e08,#ff9d24,#ffc15a);
+    transition:width 1s ease;
+}
+
+.goalPercent{
+    text-align:center;
+    color:#ffb34e;
+    margin-top:8px;
+    font-weight:bold;
 }
 
 .milestones{
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:8px;
-    margin-top:18px;
+    margin-top:20px;
 }
 
 .milestone{
     text-align:center;
     padding:12px 5px;
-    border-radius:10px;
-    background:#241506;
-    border:1px solid #714511;
-    color:#b99361;
-    font-size:13px;
+    background:#180e05;
+    border:1px solid #75420f;
+    border-radius:14px;
+    color:#c99455;
+    font-size:12px;
 }
 
 .milestone.done{
-    color:#ffd18a;
-    border-color:#d98210;
-    box-shadow:0 0 12px rgba(255,150,0,.18);
-}
-
-.extra-goal{
-    padding:15px;
-    border:1px solid #67420f;
-    border-radius:12px;
-    margin-top:10px;
-    background:#1b1106;
+    color:#ffd18c;
+    border-color:#ff9d24;
+    box-shadow:0 0 15px rgba(255,157,36,.15);
 }
 
 /* =========================
-   SEJFY
+   SAFES
 ========================= */
 
-.safes-section{
-    margin-top:20px;
+.safesTitle{
+    color:#43ff8a;
 }
 
-.safes-title{
-    color:#55ff99;
-    text-shadow:0 0 14px rgba(40,255,120,.4);
+.safesGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:22px;
 }
 
-.safes{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:34px;
-    margin-top:28px;
-}
-
-.safe-wrap{
-    width:300px;
+.safeCard{
     position:relative;
-    text-align:center;
-}
-
-.safe{
-    position:relative;
-    width:250px;
-    height:330px;
-    margin:auto;
-    border-radius:18px;
     background:
-        linear-gradient(
-            145deg,
-            #5b6b63,
-            #26352e 35%,
-            #17221d 70%,
-            #0e1512
-        );
-    border:5px solid #65776d;
-    box-shadow:
-        inset 0 0 0 4px #1a2821,
-        inset 0 0 35px rgba(0,0,0,.75),
-        0 18px 35px rgba(0,0,0,.5);
-    transform-origin:center bottom;
-}
-
-.safe::before{
-    content:"";
-    position:absolute;
-    inset:13px;
-    border:2px solid #87978f;
-    border-radius:11px;
-    opacity:.35;
-}
-
-.safe-top{
-    position:absolute;
-    top:24px;
-    left:0;
-    right:0;
-    font-weight:bold;
-    color:#dce8e2;
-    font-size:19px;
-    z-index:4;
-}
-
-.safe-label{
-    position:absolute;
-    top:52px;
-    left:0;
-    right:0;
-    color:#71877b;
-    font-size:13px;
-    z-index:4;
-}
-
-.safe-door{
-    position:absolute;
-    inset:20px;
-    border-radius:12px;
-    border:2px solid #73847c;
-    pointer-events:none;
-    transition:
-        transform .65s cubic-bezier(.2,.8,.2,1),
-        opacity .5s ease;
-    transform-origin:left center;
-    z-index:2;
-    background:linear-gradient(145deg,#44534c,#1c2923);
-}
-
-/* KORBA */
-
-.crank{
-    position:absolute;
-    right:30px;
-    top:100px;
-    width:76px;
-    height:76px;
-    border-radius:50%;
-    border:7px solid #aab5af;
-    background:#26352e;
-    box-shadow:
-        inset 0 0 10px #000,
-        0 4px 8px rgba(0,0,0,.45);
-    z-index:8;
-    cursor:pointer;
-    transition:filter .2s;
-}
-
-.crank:hover{
-    filter:brightness(1.25);
-}
-
-.crank::before{
-    content:"";
-    position:absolute;
-    width:8px;
-    height:58px;
-    background:#aab5af;
-    left:27px;
-    top:2px;
-    border-radius:8px;
-    transform:rotate(45deg);
-}
-
-.crank::after{
-    content:"";
-    position:absolute;
-    width:24px;
-    height:12px;
-    border-radius:8px;
-    background:#c1cbc6;
-    right:-10px;
-    bottom:4px;
-    transform:rotate(45deg);
-}
-
-/* pasek sejfu */
-
-.safe-progress{
-    position:absolute;
-    left:30px;
-    right:30px;
-    bottom:45px;
-    height:17px;
-    background:#09120e;
-    border:1px solid #456055;
-    border-radius:20px;
+        linear-gradient(180deg,#102619,#07150c);
+    border:1px solid #285d3b;
+    border-radius:24px;
+    padding:18px;
+    text-align:center;
+    min-height:395px;
     overflow:hidden;
-    z-index:6;
-}
-
-.safe-progress-fill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#0b9c4b,#42ff8d);
-    transition:width .4s ease;
-}
-
-.safe-amount{
-    position:absolute;
-    bottom:17px;
-    left:0;
-    right:0;
-    color:#6dff9f;
-    font-weight:bold;
-    font-size:14px;
-    z-index:7;
-}
-
-/* ukryty kod */
-
-.safe-code{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:82px;
-    z-index:9;
-    color:#ffd45a;
-    font-size:15px;
-    font-weight:bold;
-    text-shadow:0 0 10px rgba(255,210,50,.5);
-    opacity:0;
-    transform:scale(.8);
-    transition:.35s;
-    pointer-events:none;
-}
-
-.safe-code.visible{
-    opacity:1;
-    transform:scale(1);
-}
-
-/* akcje */
-
-.safe-actions{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin-top:12px;
-    opacity:0;
-    transform:translateY(-5px);
-    pointer-events:none;
     transition:.25s;
 }
 
-.safe-wrap:hover .safe-actions{
+.safeCard:hover{
+    border-color:#42ff8c;
+    box-shadow:0 0 25px rgba(57,255,136,.14);
+}
+
+.safeTitle{
+    color:#a4cdb0;
+    font-weight:bold;
+    margin-bottom:4px;
+}
+
+.safeMax{
+    color:#49ff91;
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.safe{
+    width:175px;
+    height:235px;
+    margin:10px auto 12px;
+    position:relative;
+    transform:translateZ(0);
+}
+
+.safeBody{
+    position:absolute;
+    left:16px;
+    right:16px;
+    top:25px;
+    bottom:15px;
+    border-radius:14px;
+    border:6px solid #303936;
+    background:
+        linear-gradient(135deg,#515b57,#202825 45%,#424b47);
+    box-shadow:
+        inset 0 0 20px #101411,
+        0 12px 20px rgba(0,0,0,.45);
+}
+
+.safeDoor{
+    position:absolute;
+    inset:12px;
+    border-radius:9px;
+    border:3px solid #646e69;
+    background:linear-gradient(145deg,#4b5551,#242c29);
+    transform-origin:left center;
+    transition:
+        transform .8s cubic-bezier(.2,.8,.2,1),
+        opacity .5s ease;
+    z-index:3;
+}
+
+.safe.open .safeDoor{
+    transform:perspective(500px) rotateY(-82deg);
+    opacity:.25;
+}
+
+.safeWheel{
+    position:absolute;
+    width:76px;
+    height:76px;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    border:8px solid #a6afaa;
+    background:#242b28;
+    box-shadow:
+        inset 0 0 0 4px #39423e,
+        0 0 10px rgba(0,0,0,.5);
+    z-index:5;
+    transition:transform .8s ease;
+}
+
+.safe.spinning .safeWheel{
+    transform:translate(-50%,-50%) rotate(360deg);
+}
+
+.safeWheel::before{
+    content:"";
+    position:absolute;
+    width:10px;
+    height:30px;
+    background:#bbc3be;
+    border-radius:5px;
+    left:50%;
+    top:-16px;
+    transform:translateX(-50%);
+}
+
+.safeHandle{
+    position:absolute;
+    right:-12px;
+    top:50%;
+    width:42px;
+    height:12px;
+    border-radius:10px;
+    background:#aeb6b1;
+    z-index:6;
+}
+
+.safeHandle::after{
+    content:"";
+    position:absolute;
+    width:12px;
+    height:30px;
+    right:-4px;
+    top:-9px;
+    background:#8e9893;
+    border-radius:6px;
+}
+
+.safeCode{
+    position:absolute;
+    top:38px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:7;
+    background:#07110b;
+    color:#50ff96;
+    border:1px solid #42ff8c;
+    padding:5px 9px;
+    border-radius:7px;
+    font-size:13px;
+    font-weight:bold;
+    box-shadow:0 0 12px rgba(57,255,136,.25);
+}
+
+.safeCrankHint{
+    min-height:25px;
+    color:#ffbf60;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.safeBar{
+    height:12px;
+    background:#020704;
+    border-radius:999px;
+    overflow:hidden;
+    border:1px solid #214a30;
+}
+
+.safeBarFill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#14984b,#48ff91);
+    transition:width .45s ease;
+}
+
+.safeMoney{
+    margin-top:7px;
+    color:#c6e5cf;
+    font-weight:bold;
+}
+
+.safeActions{
+    margin-top:12px;
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    opacity:0;
+    transform:translateY(7px);
+    pointer-events:none;
+    transition:.2s;
+}
+
+.safeCard:hover .safeActions,
+.safeCard.selected .safeActions{
     opacity:1;
     transform:translateY(0);
     pointer-events:auto;
 }
 
-.safe-action{
-    border:0;
-    padding:9px 13px;
-    border-radius:9px;
+.safeAction{
+    border:1px solid #28633b;
+    background:#092116;
+    color:#baffca;
+    border-radius:10px;
+    padding:9px 11px;
     cursor:pointer;
-    color:white;
     font-weight:bold;
 }
 
-.safe-deposit{background:#126334}
-.safe-clear{background:#731c1c}
-
-/* mocne trzęsienie */
-
-.safe.full{
-    animation:safeShake 1.25s ease-in-out;
+.safeAction:hover{
+    background:#10351e;
 }
 
-@keyframes safeShake{
-    0%,100%{transform:translateX(0) rotate(0)}
-    10%{transform:translateX(-10px) rotate(-2deg)}
-    20%{transform:translateX(10px) rotate(2deg)}
-    30%{transform:translateX(-12px) rotate(-3deg)}
-    40%{transform:translateX(12px) rotate(3deg)}
-    50%{transform:translateX(-9px) rotate(-2deg)}
-    60%{transform:translateX(9px) rotate(2deg)}
-    70%{transform:translateX(-6px)}
-    80%{transform:translateX(6px)}
-}
-
-/* obrót korby */
-
-.crank.spinning{
-    animation:crankSpin .9s linear infinite;
-}
-
-@keyframes crankSpin{
-    from{transform:rotate(0)}
-    to{transform:rotate(360deg)}
-}
-
-/* otwarcie */
-
-.safe.open .safe-door{
-    transform:perspective(700px) rotateY(-110deg);
-    opacity:.1;
+.safeAction.clear{
+    border-color:#8a2b2b;
+    color:#ff7777;
+    background:#210b0b;
 }
 
 /* =========================
-   BANKNOTY
+   SAFE ANIMATION
 ========================= */
 
-.money-fly{
-    position:fixed;
-    z-index:9999;
-    pointer-events:none;
-    font-size:30px;
-    will-change:transform,opacity;
-    animation:moneyFly 1.6s cubic-bezier(.2,.8,.3,1) forwards;
+.safe.opening{
+    animation:safeShake .18s linear infinite;
 }
 
-@keyframes moneyFly{
+@keyframes safeShake{
+    0%{transform:translateX(0)}
+    25%{transform:translateX(-3px) rotate(-.5deg)}
+    50%{transform:translateX(3px) rotate(.5deg)}
+    75%{transform:translateX(-2px)}
+    100%{transform:translateX(0)}
+}
+
+.safe.replace{
+    animation:safeReplacement .9s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes safeReplacement{
     0%{
+        opacity:0;
+        transform:translateY(110px) scale(.8);
+    }
+    55%{
         opacity:1;
-        transform:translate(0,0) rotate(0) scale(1);
+        transform:translateY(-14px) scale(1.04);
+    }
+    75%{
+        transform:translateY(5px) scale(.98);
+    }
+    100%{
+        transform:translateY(0) scale(1);
+    }
+}
+
+.groundCrack{
+    position:absolute;
+    left:50%;
+    bottom:8px;
+    width:140px;
+    height:20px;
+    transform:translateX(-50%);
+    opacity:0;
+    pointer-events:none;
+}
+
+.groundCrack.show{
+    animation:crack .8s ease;
+}
+
+.groundCrack::before,
+.groundCrack::after{
+    content:"";
+    position:absolute;
+    top:8px;
+    width:60px;
+    height:3px;
+    background:#315e3e;
+}
+
+.groundCrack::before{
+    left:5px;
+    transform:rotate(22deg);
+}
+
+.groundCrack::after{
+    right:5px;
+    transform:rotate(-22deg);
+}
+
+@keyframes crack{
+    0%{opacity:0;transform:translateX(-50%) scale(.4)}
+    40%{opacity:1;transform:translateX(-50%) scale(1.2)}
+    100%{opacity:0;transform:translateX(-50%) scale(1)}
+}
+
+/* =========================
+   WALLET
+========================= */
+
+.walletGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+}
+
+.wallet{
+    position:relative;
+    min-height:125px;
+    border-radius:20px;
+    padding:18px;
+    background:linear-gradient(145deg,#182b20,#0b1810);
+    border:1px solid #315e40;
+    overflow:hidden;
+}
+
+.wallet::before{
+    content:"";
+    position:absolute;
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:rgba(56,255,137,.06);
+    right:-30px;
+    top:-30px;
+}
+
+.walletIcon{
+    font-size:32px;
+}
+
+.walletAmount{
+    color:#4dff93;
+    font-size:22px;
+    font-weight:900;
+}
+
+.walletText{
+    color:#89aa94;
+    font-size:12px;
+}
+
+.walletBtn{
+    margin-top:8px;
+    border:1px solid #2c7044;
+    background:#0a2515;
+    color:#c4ffd4;
+    padding:8px 11px;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* =========================
+   MODALS
+========================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modalBox{
+    width:min(460px,100%);
+    background:
+        linear-gradient(180deg,#102719,#061109);
+    border:1px solid #2c8a4b;
+    border-radius:25px;
+    padding:28px;
+    text-align:center;
+    box-shadow:0 0 50px rgba(57,255,136,.2);
+    animation:modalIn .25s ease;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:scale(.85);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+.modalTitle{
+    font-size:26px;
+    color:#4dff93;
+    font-weight:900;
+}
+
+.modalText{
+    color:#9fc5ab;
+    margin:10px 0 18px;
+}
+
+.codeInput{
+    width:100%;
+    padding:15px;
+    border-radius:13px;
+    border:1px solid #296b40;
+    background:#020804;
+    color:#52ff98;
+    text-align:center;
+    font-size:25px;
+    letter-spacing:8px;
+    outline:none;
+}
+
+.modalButtons{
+    display:flex;
+    gap:10px;
+    margin-top:14px;
+}
+
+.modalBtn{
+    flex:1;
+    border:1px solid #2b7a46;
+    background:#0c2817;
+    color:#c7ffd5;
+    padding:13px;
+    border-radius:13px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.modalBtn.close{
+    border-color:#713232;
+    color:#ff9090;
+    background:#260d0d;
+}
+
+.pullBtn{
+    width:100%;
+    padding:18px;
+    border:2px solid #42ff8c;
+    background:#0a2c18;
+    color:#54ff99;
+    border-radius:16px;
+    font-size:20px;
+    font-weight:900;
+    cursor:pointer;
+    margin-top:14px;
+    animation:pullPulse 1s ease-in-out infinite;
+}
+
+@keyframes pullPulse{
+    0%,100%{
+        box-shadow:0 0 0 rgba(57,255,136,0);
+        transform:translateY(0);
+    }
+    50%{
+        box-shadow:0 0 24px rgba(57,255,136,.28);
+        transform:translateY(-2px);
+    }
+}
+
+/* =========================
+   CELEBRATION
+========================= */
+
+#celebrationLayer{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:2000;
+    overflow:hidden;
+}
+
+.confetti{
+    position:absolute;
+    width:9px;
+    height:16px;
+    top:-30px;
+    animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:translate3d(var(--x),110vh,0) rotate(900deg);
+    }
+}
+
+.bill{
+    position:absolute;
+    font-size:27px;
+    top:50%;
+    left:50%;
+    animation:billFly 1.8s cubic-bezier(.1,.7,.2,1) forwards;
+}
+
+@keyframes billFly{
+    0%{
+        opacity:0;
+        transform:translate(-50%,-50%) scale(.3) rotate(0);
+    }
+    20%{
+        opacity:1;
     }
     100%{
         opacity:0;
         transform:
             translate(
-                calc((var(--x) - .5) * 100vw),
-                calc(-250px - var(--y) * 400px)
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
             )
-            rotate(720deg)
-            scale(.55);
+            scale(1.2)
+            rotate(var(--r));
     }
 }
 
-/* =========================
-   WYMIANA SEJFU
-========================= */
-
-.safe.replacing{
-    animation:safeFlyUp .7s ease-in forwards;
-}
-
-@keyframes safeFlyUp{
-    0%{
-        transform:translateY(0) rotate(0);
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-230px) rotate(-10deg);
-        opacity:0;
-    }
-}
-
-.ground-cracks{
-    position:absolute;
-    left:50%;
-    bottom:-15px;
-    width:210px;
-    height:70px;
-    transform:translateX(-50%) scale(.2);
-    opacity:0;
-    pointer-events:none;
-}
-
-.ground-cracks::before,
-.ground-cracks::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:25px;
-    width:150px;
-    height:4px;
-    background:#8c8c75;
-}
-
-.ground-cracks::before{
-    transform:rotate(15deg);
-}
-
-.ground-cracks::after{
-    transform:rotate(-18deg);
-}
-
-.safe-ground{
-    position:absolute;
-    left:50%;
-    bottom:-3px;
-    width:150px;
-    height:25px;
-    transform:translateX(-50%);
-    border-radius:50%;
-    background:rgba(60,255,130,.14);
-    filter:blur(8px);
-    opacity:0;
-}
-
-.safe-wrap.emerging .ground-cracks{
-    animation:cracks .8s .15s ease-out forwards;
-}
-
-.safe-wrap.emerging .safe-ground{
-    animation:groundGlow 1.3s ease-out forwards;
-}
-
-@keyframes cracks{
-    0%{
-        transform:translateX(-50%) scale(.2);
-        opacity:0;
-    }
-    60%{
-        transform:translateX(-50%) scale(1.15);
-        opacity:1;
-    }
-    100%{
-        transform:translateX(-50%) scale(1);
-        opacity:.8;
-    }
-}
-
-@keyframes groundGlow{
-    0%{opacity:0}
-    30%{opacity:1}
-    100%{opacity:0}
-}
-
-.safe.new-emerge{
-    animation:safeEmerge 1.05s cubic-bezier(.18,.9,.3,1) forwards;
-}
-
-@keyframes safeEmerge{
-    0%{
-        transform:translateY(340px) scale(.9);
-        opacity:0;
-    }
-    65%{
-        transform:translateY(-14px) scale(1.03);
-        opacity:1;
-    }
-    82%{
-        transform:translateY(5px) scale(.99);
-    }
-    100%{
-        transform:translateY(0) scale(1);
-        opacity:1;
-    }
-}
-
-/* =========================
-   KONFETTI
-========================= */
-
-.confetti{
-    position:fixed;
-    width:10px;
-    height:16px;
-    z-index:10000;
-    pointer-events:none;
-    will-change:transform,opacity;
-    animation:confettiFall var(--duration) linear forwards;
-}
-
-@keyframes confettiFall{
-    0%{
-        opacity:1;
-        transform:translate(0,0) rotate(0);
-    }
-    100%{
-        opacity:0;
-        transform:
-            translate(var(--x),var(--y))
-            rotate(var(--rotation));
-    }
-}
-
-.celebration{
+.celebrationText{
     position:fixed;
     left:50%;
-    top:50%;
-    transform:translate(-50%,-50%) scale(.5);
-    z-index:11000;
-    pointer-events:none;
-    opacity:0;
+    top:42%;
+    transform:translate(-50%,-50%) scale(.7);
+    z-index:2100;
     text-align:center;
-    font-size:38px;
+    pointer-events:none;
+    opacity:0;
+}
+
+.celebrationText.show{
+    animation:celebrateText 2.2s ease forwards;
+}
+
+.celebrationSmall{
+    color:#fff;
+    font-size:25px;
+    font-weight:bold;
+    text-shadow:0 0 15px #000;
+}
+
+.celebrationBig{
+    color:#4dff93;
+    font-size:58px;
     font-weight:900;
-    color:#8affb6;
     text-shadow:
-        0 0 10px #00ff66,
-        0 0 30px #00ff66,
-        0 0 60px #00ff66;
+        0 0 12px #00ff66,
+        0 0 35px rgba(0,255,102,.6);
 }
 
-.celebration.show{
-    animation:celebrate 2.4s ease forwards;
-}
-
-@keyframes celebrate{
+@keyframes celebrateText{
     0%{
         opacity:0;
-        transform:translate(-50%,-50%) scale(.3);
+        transform:translate(-50%,-50%) scale(.5);
     }
     15%{
         opacity:1;
-        transform:translate(-50%,-50%) scale(1.25);
+        transform:translate(-50%,-50%) scale(1.12);
     }
     30%{
         transform:translate(-50%,-50%) scale(1);
     }
-    75%{
+    80%{
         opacity:1;
-        transform:translate(-50%,-50%) scale(1.06);
     }
     100%{
         opacity:0;
-        transform:translate(-50%,-50%) scale(.9);
+        transform:translate(-50%,-70%) scale(.95);
     }
 }
 
-/* kod */
+/* =========================
+   RESPONSIVE
+========================= */
 
-.code-modal{
-    position:fixed;
-    inset:0;
-    z-index:12000;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    background:rgba(0,0,0,.7);
-    backdrop-filter:blur(5px);
-}
-
-.code-box{
-    width:min(360px,90%);
-    background:#071b12;
-    border:1px solid #38d875;
-    border-radius:18px;
-    padding:25px;
-    text-align:center;
-    box-shadow:0 0 40px rgba(0,255,100,.2);
-    animation:modalPop .25s ease;
-}
-
-@keyframes modalPop{
-    from{
-        transform:scale(.8);
-        opacity:0;
+@media(max-width:700px){
+    .logo{
+        font-size:37px;
     }
-    to{
-        transform:scale(1);
-        opacity:1;
+
+    .money{
+        font-size:42px;
     }
-}
 
-.code-input{
-    text-align:center;
-    font-size:28px;
-    letter-spacing:10px;
-    margin:15px 0;
-}
+    .stats{
+        grid-template-columns:1fr;
+    }
 
-.code-error{
-    color:#ff6262;
-    min-height:20px;
-}
+    .moneyButtons{
+        grid-template-columns:1fr;
+    }
 
-.modal-buttons{
-    display:flex;
-    gap:10px;
-}
+    .historyItem{
+        grid-template-columns:1fr 1fr;
+    }
 
-.modal-buttons button{
-    flex:1;
-    padding:11px;
-    border:0;
-    border-radius:9px;
-    cursor:pointer;
-    font-weight:bold;
-}
+    .milestones{
+        grid-template-columns:1fr 1fr;
+    }
 
-.confirm-code{
-    background:#168143;
-    color:white;
-}
+    .safesGrid{
+        grid-template-columns:1fr;
+    }
 
-.cancel-code{
-    background:#591919;
-    color:#ffb4b4;
-}
-
-@media(max-width:650px){
-    h1{font-size:31px}
-    .stats{grid-template-columns:1fr}
-    .money-buttons{grid-template-columns:1fr}
-    .milestones{grid-template-columns:1fr 1fr}
+    .walletGrid{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="money-logo">
-        <div class="bottle">🍾</div>
-        <div class="dollar">$</div>
-    </div>
+<div class="app">
 
-    <h1>ZBieranie</h1>
-    <div class="subtitle">Zbieramy aż do 6868 zł 💰</div>
+<header class="header">
+    <div class="logo">💰 ZBieranie</div>
+    <div class="subtitle">Zbieraj. Oszczędzaj. Osiągnij cel.</div>
 </header>
 
 <div class="tabs">
-    <button class="tab active" id="balanceTab" onclick="switchPage('balance')">
+    <button class="tab active" onclick="switchPage('balancePage',this)">
         💰 Saldo
     </button>
 
-    <button class="tab" id="goalsTab" onclick="switchPage('goals')">
+    <button class="tab" onclick="switchPage('goalsPage',this)">
         🎯 Cele
     </button>
 </div>
 
-<!-- =========================
+<!-- ======================================================
      SALDO
-========================= -->
+====================================================== -->
 
-<main class="page" id="balancePage">
+<main id="balancePage" class="page active">
 
-<div class="card">
+<section class="card">
 
-<h2>💰 Aktualne saldo</h2>
+    <h2>💵 Aktualne saldo</h2>
 
-<div class="balance" id="balance">0,00 zł</div>
+    <div id="balanceDisplay" class="money">0,00 zł</div>
 
-<div class="goal-line">
-<span>Cel: 6868 zł</span>
-<span id="remaining">6868 zł</span>
-</div>
+    <div class="balanceBar">
+        <div id="balanceFill" class="balanceFill"></div>
+    </div>
 
-<div class="progress">
-<div class="progress-fill" id="progressFill"></div>
-</div>
+    <div id="balanceInfo" class="balanceInfo">
+        0,00 zł / 6868,00 zł
+    </div>
 
-<div class="percent" id="percent">0%</div>
+    <button class="clearBtn" onclick="clearBalance()">
+        🗑 Wyczyść saldo
+    </button>
 
-<button class="clear-btn" onclick="clearBalance()">
-🗑 Wyczyść saldo
-</button>
-
-</div>
+</section>
 
 
-<div class="card">
+<section class="card">
 
-<h2>💰 Dodaj pieniądze</h2>
+    <h2>📊 Statystyki</h2>
 
-<div class="money-buttons">
+    <div class="stats">
 
-<button class="money-btn" onclick="addMoney(.5,'Kaucja')">
-+0,50 zł<br><small>Kaucja</small>
-</button>
+        <div class="stat">
+            <div class="statIcon">🍾</div>
+            <div id="bottlesValue" class="statValue">0</div>
+            <div class="statName">butelek</div>
+        </div>
 
-<button class="money-btn" onclick="addMoney(10,'20 butelek')">
-+10 zł<br><small>20 butelek</small>
-</button>
+        <div class="stat">
+            <div class="statIcon">📅</div>
+            <div id="daysValue" class="statValue">0</div>
+            <div class="statName">dni</div>
+        </div>
 
-<button class="money-btn" onclick="addMoney(20,'40 butelek')">
-+20 zł<br><small>40 butelek</small>
-</button>
+        <div class="stat">
+            <div class="statIcon">🎯</div>
+            <div id="remainingValue" class="statValue">6868,00 zł</div>
+            <div class="statName">pozostało</div>
+        </div>
 
-<button class="money-btn" onclick="customAdd()">
-💵 Inna kwota
-</button>
+    </div>
 
-<button class="money-btn expense" onclick="customExpense()">
-🔴 Wydatek
-</button>
-
-</div>
-</div>
-
-
-<div class="card">
-
-<h2>📊 Statystyki</h2>
-
-<div class="stats">
-
-<div class="stat">
-<div class="number" id="bottles">0</div>
-<div class="label">🍾 Butelki</div>
-</div>
-
-<div class="stat">
-<div class="number" id="days">0</div>
-<div class="label">📅 Dni</div>
-</div>
-
-<div class="stat">
-<div class="number" id="remainingStat">6868 zł</div>
-<div class="label">💰 Pozostało</div>
-</div>
-
-</div>
+</section>
 
 
-<div style="margin-top:25px">
+<section class="card">
 
-<h2>📈 Wykres</h2>
+    <h2>📈 Historia zarobków</h2>
 
-<div class="chart-scroll">
-<canvas id="chart" width="1400" height="330"></canvas>
-</div>
+    <div class="chartScroll">
+        <div class="chartInner">
+            <canvas id="chart" width="1450" height="390"></canvas>
+        </div>
+    </div>
 
-<button class="clear-btn" onclick="clearChart()">
-🗑 Wyczyść wykres
-</button>
+    <button class="clearBtn" onclick="clearChart()">
+        🗑 Wyczyść wykresy i saldo
+    </button>
 
-</div>
-
-</div>
+</section>
 
 
-<div class="card">
+<section class="card">
 
-<h2>📜 Historia pieniędzy</h2>
+    <h2>💰 Dodaj pieniądze</h2>
 
-<div id="history"></div>
+    <div class="moneyButtons">
 
-<button
-class="money-btn"
-id="historyToggle"
-style="width:100%;margin-top:12px"
-onclick="toggleHistory()"
->
-Pokaż więcej ▼
-</button>
+        <button class="moneyBtn" onclick="addMoney(0.5,'Kaucja')">
+            +0,50 zł<br>
+            <small>Kaucja</small>
+        </button>
 
-<button class="clear-btn" onclick="clearHistory()">
-🗑 Wyczyść historię
-</button>
+        <button class="moneyBtn" onclick="addMoney(10,'20 butelek')">
+            +10 zł<br>
+            <small>20 butelek</small>
+        </button>
 
-</div>
+        <button class="moneyBtn" onclick="addMoney(20,'40 butelek')">
+            +20 zł<br>
+            <small>40 butelek</small>
+        </button>
+
+        <button class="moneyBtn" onclick="customIncome()">
+            💵 Inna kwota
+        </button>
+
+        <button class="moneyBtn expense" onclick="customExpense()">
+            🔴 Wydatek
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="card">
+
+    <h2>📜 Historia pieniędzy</h2>
+
+    <div id="history" class="history"></div>
+
+    <button id="historyMore" class="moreBtn" onclick="toggleHistory()">
+        Pokaż więcej ▼
+    </button>
+
+    <button class="clearBtn" onclick="clearHistory()">
+        🗑 Wyczyść historię
+    </button>
+
+</section>
+
+
+<!-- PORTFELE -->
+
+<section class="card">
+
+    <h2>👛 Portfele</h2>
+
+    <div class="walletGrid">
+
+        <div class="wallet">
+            <div class="walletIcon">👛</div>
+            <div class="walletAmount">100 zł</div>
+            <div class="walletText">Szybka wpłata do portfela</div>
+            <button class="walletBtn" onclick="walletDeposit(100)">
+                + Wpłać
+            </button>
+        </div>
+
+        <div class="wallet">
+            <div class="walletIcon">👛</div>
+            <div class="walletAmount">250 zł</div>
+            <div class="walletText">Szybka wpłata do portfela</div>
+            <button class="walletBtn" onclick="walletDeposit(250)">
+                + Wpłać
+            </button>
+        </div>
+
+        <div class="wallet">
+            <div class="walletIcon">👛</div>
+            <div class="walletAmount">500 zł</div>
+            <div class="walletText">Szybka wpłata do portfela</div>
+            <button class="walletBtn" onclick="walletDeposit(500)">
+                + Wpłać
+            </button>
+        </div>
+
+        <div class="wallet">
+            <div class="walletIcon">👛</div>
+            <div class="walletAmount">1000 zł</div>
+            <div class="walletText">Szybka wpłata do portfela</div>
+            <button class="walletBtn" onclick="walletDeposit(1000)">
+                + Wpłać
+            </button>
+        </div>
+
+    </div>
+
+</section>
 
 
 <!-- SEJFY -->
 
-<div class="card safes-section">
+<section class="card">
 
-<h2 class="safes-title">🔐 Sejfy</h2>
+    <h2 class="safesTitle">🔐 Sejfy</h2>
 
-<p style="color:#82998d">
-Każdy sejf ma swój własny ukryty limit.
-</p>
+    <div class="safesGrid" id="safesGrid"></div>
 
-<div class="safes" id="safes"></div>
-
-</div>
+</section>
 
 </main>
 
 
-<!-- =========================
+<!-- ======================================================
      CELE
-========================= -->
+====================================================== -->
 
-<main class="page" id="goalsPage" style="display:none">
+<main id="goalsPage" class="page goalsPage">
 
-<div class="card goals-card">
+<section class="card goalMain">
 
-<h2 class="goals-title">🎯 Główny cel</h2>
+    <h2>🎯 Mój główny cel</h2>
 
-<div class="goal-big">6868 zł</div>
+    <div class="goalAmount">
+        6868 zł
+    </div>
 
-<div class="goal-line">
-<span>Postęp</span>
-<span id="goalPercent">0%</span>
-</div>
+    <div class="orangeBar">
+        <div id="goalFill" class="orangeFill"></div>
+    </div>
 
-<div class="progress orange-progress">
-<div class="progress-fill orange-fill" id="goalProgress"></div>
-</div>
+    <div id="goalPercent" class="goalPercent">
+        0%
+    </div>
 
-<div class="milestones">
+    <div class="milestones">
 
-<div class="milestone" id="m500">500 zł</div>
-<div class="milestone" id="m1000">1000 zł</div>
-<div class="milestone" id="m2500">2500 zł</div>
-<div class="milestone" id="m5000">5000 zł</div>
-<div class="milestone" id="m6868">6868 zł</div>
+        <div class="milestone" data-goal="500">
+            500 zł
+        </div>
 
-</div>
+        <div class="milestone" data-goal="1000">
+            1000 zł
+        </div>
 
-</div>
+        <div class="milestone" data-goal="2500">
+            2500 zł
+        </div>
+
+        <div class="milestone" data-goal="5000">
+            5000 zł
+        </div>
+
+        <div class="milestone" data-goal="6868">
+            6868 zł
+        </div>
+
+    </div>
+
+</section>
 
 
-<div class="card goals-card">
+<section class="card">
 
-<h2 class="goals-title">🏆 Moje cele</h2>
+    <h2>🛴 Moje cele</h2>
 
-<div class="extra-goal">
-🛴 <b>2× Kukirin G4</b>
-</div>
+    <div style="
+        background:#1a0e05;
+        border:1px solid #874b13;
+        border-radius:20px;
+        padding:25px;
+        text-align:center;
+    ">
 
-</div>
+        <div style="font-size:50px;">🛴</div>
+
+        <div style="
+            color:#ffad3e;
+            font-size:25px;
+            font-weight:900;
+            margin-top:8px;
+        ">
+            2× Kukirin G4
+        </div>
+
+    </div>
+
+</section>
 
 </main>
 
-
-<!-- GRATULACJE -->
-
-<div id="celebration" class="celebration"></div>
+</div>
 
 
-<!-- OKNO KODU -->
+<!-- ======================================================
+     CODE MODAL
+====================================================== -->
 
-<div class="code-modal" id="codeModal">
+<div id="codeModal" class="modal">
 
-<div class="code-box">
+    <div class="modalBox">
 
-<h2>🔐 Odblokuj sejf</h2>
+        <div class="modalTitle">
+            🔐 Odblokuj sejf
+        </div>
 
-<p id="codeInfo">
-Wpisz 4-cyfrowy kod.
-</p>
+        <div id="modalSafeText" class="modalText">
+            Wpisz 4-cyfrowy kod.
+        </div>
 
-<input
-id="safeCodeInput"
-class="code-input"
-type="text"
-inputmode="numeric"
-maxlength="4"
-autocomplete="off"
-placeholder="••••"
->
+        <input
+            id="codeInput"
+            class="codeInput"
+            maxlength="4"
+            inputmode="numeric"
+            placeholder="0000"
+        >
 
-<div class="code-error" id="codeError"></div>
+        <div id="pullArea"></div>
 
-<div class="modal-buttons">
+        <div class="modalButtons">
 
-<button class="confirm-code" onclick="confirmSafeCode()">
-🔓 Odblokuj
-</button>
+            <button class="modalBtn" onclick="unlockSafe()">
+                🔓 Odblokuj
+            </button>
 
-<button class="cancel-code" onclick="closeCodeModal()">
-Anuluj
-</button>
+            <button class="modalBtn close" onclick="closeCodeModal()">
+                Zamknij
+            </button>
+
+        </div>
+
+    </div>
 
 </div>
 
-</div>
+
+<!-- ======================================================
+     MESSAGE MODAL
+====================================================== -->
+
+<div id="messageModal" class="modal">
+
+    <div class="modalBox">
+
+        <div id="messageTitle" class="modalTitle">
+            🔐 Sejf
+        </div>
+
+        <div id="messageText" class="modalText">
+            Wiadomość
+        </div>
+
+        <button class="modalBtn" onclick="closeMessageModal()">
+            OK
+        </button>
+
+    </div>
 
 </div>
+
+
+<div id="celebrationLayer"></div>
+<div id="celebrationText" class="celebrationText"></div>
 
 
 <script>
 
-/* =========================
-   USTAWIENIA
-========================= */
+/* ======================================================
+   DANE
+====================================================== */
 
 const TARGET = 6868;
-const CLEAR_CODE = "ButelKaucja";
 
-/*
-   UKRYTE LIMITY SEJFÓW
+let balance = Number(localStorage.getItem("zb_balance") || 0);
+let bottles = Number(localStorage.getItem("zb_bottles") || 0);
+let days = Number(localStorage.getItem("zb_days") || 0);
 
-   1 = 500
-   2 = 1000
-   3 = 2000
-   4 = 250
+let history = JSON.parse(
+    localStorage.getItem("zb_history") || "[]"
+);
 
-   Nie są wyświetlane użytkownikowi.
-*/
+let historyExpanded = false;
 
-const SAFE_LIMITS = [
-    500,
-    1000,
-    2000,
-    250
-];
+let safes = JSON.parse(
+    localStorage.getItem("zb_safes") || "null"
+);
 
-let balance =
-Number(localStorage.getItem("balance")) || 0;
+if(!safes){
 
-let bottles =
-Number(localStorage.getItem("bottles")) || 0;
-
-let days =
-Number(localStorage.getItem("days")) || 0;
-
-let history =
-JSON.parse(localStorage.getItem("history")) || [];
-
-let historyExpanded=false;
-
-
-/* =========================
-   SEJFY
-========================= */
-
-let safes =
-JSON.parse(localStorage.getItem("safes")) || [0,0,0,0];
-
-let safeCodes =
-JSON.parse(localStorage.getItem("safeCodes")) || [null,null,null,null];
-
-let activeSafe=-1;
-
-if(!Array.isArray(safes) || safes.length!==4)
-    safes=[0,0,0,0];
-
-if(!Array.isArray(safeCodes) || safeCodes.length!==4)
-    safeCodes=[null,null,null,null];
+    safes = [
+        {
+            id:1,
+            max:500,
+            amount:0,
+            code:null,
+            unlocked:false
+        },
+        {
+            id:2,
+            max:1000,
+            amount:0,
+            code:null,
+            unlocked:false
+        },
+        {
+            id:3,
+            max:2000,
+            amount:0,
+            code:null,
+            unlocked:false
+        },
+        {
+            id:4,
+            max:250,
+            amount:0,
+            code:null,
+            unlocked:false
+        }
+    ];
+}
 
 
-/* =========================
-   DŹWIĘKI
-========================= */
+/* ======================================================
+   SAVE
+====================================================== */
 
-let audioContext=null;
+function save(){
+
+    localStorage.setItem("zb_balance",balance);
+    localStorage.setItem("zb_bottles",bottles);
+    localStorage.setItem("zb_days",days);
+    localStorage.setItem(
+        "zb_history",
+        JSON.stringify(history)
+    );
+    localStorage.setItem(
+        "zb_safes",
+        JSON.stringify(safes)
+    );
+}
+
+
+/* ======================================================
+   FORMAT
+====================================================== */
+
+function money(value){
+
+    return Number(value)
+        .toFixed(2)
+        .replace(".",",") + " zł";
+
+}
+
+
+/* ======================================================
+   SOUND
+====================================================== */
+
+let audioCtx=null;
 
 function getAudio(){
 
-    if(!audioContext){
+    if(!audioCtx){
 
-        audioContext =
-        new (window.AudioContext ||
-        window.webkitAudioContext)();
+        audioCtx = new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
 
     }
 
-    if(audioContext.state==="suspended")
-        audioContext.resume();
+    if(audioCtx.state==="suspended"){
+        audioCtx.resume();
+    }
 
-    return audioContext;
+    return audioCtx;
 }
 
-function tone(
-    frequency,
-    duration,
-    type="sine",
-    volume=.07,
-    endFrequency=null
-){
+
+function sound(type){
 
     try{
 
         const ctx=getAudio();
 
-        const oscillator =
-        ctx.createOscillator();
+        const osc=ctx.createOscillator();
+        const gain=ctx.createGain();
 
-        const gain =
-        ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
 
-        oscillator.type=type;
+        const now=ctx.currentTime;
 
-        oscillator.frequency.setValueAtTime(
-            frequency,
-            ctx.currentTime
-        );
+        if(type==="click"){
 
-        if(endFrequency){
-
-            oscillator.frequency.exponentialRampToValueAtTime(
-                endFrequency,
-                ctx.currentTime+duration
+            osc.frequency.setValueAtTime(650,now);
+            gain.gain.setValueAtTime(.07,now);
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
+                now+.08
             );
 
         }
 
-        gain.gain.setValueAtTime(
-            volume,
-            ctx.currentTime
-        );
+        else if(type==="pop"){
 
-        gain.gain.exponentialRampToValueAtTime(
-            .001,
-            ctx.currentTime+duration
-        );
+            osc.frequency.setValueAtTime(220,now);
+            osc.frequency.exponentialRampToValueAtTime(
+                800,
+                now+.18
+            );
 
-        oscillator.connect(gain);
-        gain.connect(ctx.destination);
+            gain.gain.setValueAtTime(.11,now);
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
+                now+.2
+            );
 
-        oscillator.start();
-        oscillator.stop(
-            ctx.currentTime+duration
-        );
+        }
+
+        else if(type==="whoosh"){
+
+            osc.type="sawtooth";
+
+            osc.frequency.setValueAtTime(
+                100,
+                now
+            );
+
+            osc.frequency.exponentialRampToValueAtTime(
+                800,
+                now+.55
+            );
+
+            gain.gain.setValueAtTime(.001,now);
+            gain.gain.linearRampToValueAtTime(
+                .08,
+                now+.1
+            );
+
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
+                now+.6
+            );
+
+        }
+
+        else if(type==="unlock"){
+
+            osc.frequency.setValueAtTime(
+                500,
+                now
+            );
+
+            osc.frequency.exponentialRampToValueAtTime(
+                1000,
+                now+.25
+            );
+
+            gain.gain.setValueAtTime(.08,now);
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
+                now+.3
+            );
+
+        }
+
+        else if(type==="open"){
+
+            osc.type="square";
+
+            osc.frequency.setValueAtTime(
+                160,
+                now
+            );
+
+            osc.frequency.exponentialRampToValueAtTime(
+                900,
+                now+.8
+            );
+
+            gain.gain.setValueAtTime(.08,now);
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
+                now+.9
+            );
+
+        }
+
+        else if(type==="error"){
+
+            osc.frequency.setValueAtTime(
+                180,
+                now
+            );
+
+            osc.frequency.setValueAtTime(
+                120,
+                now+.16
+            );
+
+            gain.gain.setValueAtTime(.09,now);
+            gain.gain.exponentialRampToValueAtTime(
+                .001,
+                now+.3
+            );
+
+        }
+
+        osc.start(now);
+        osc.stop(now+.95);
 
     }catch(e){}
 
 }
 
-function soundClick(){
-    tone(500,.07,"square",.035,700);
-}
 
-function soundPop(){
-    tone(180,.09,"sine",.09,520);
-}
+/* ======================================================
+   PAGE
+====================================================== */
 
-function soundWhoosh(){
+function switchPage(id,button){
 
-    tone(
-        700,
-        .35,
-        "sawtooth",
-        .035,
-        90
-    );
+    document.querySelectorAll(".page")
+        .forEach(p=>p.classList.remove("active"));
 
-}
+    document.querySelectorAll(".tab")
+        .forEach(t=>t.classList.remove("active"));
 
-function soundUnlock(){
+    document.getElementById(id)
+        .classList.add("active");
 
-    tone(420,.12,"square",.05,650);
+    button.classList.add("active");
 
-    setTimeout(()=>{
-        tone(650,.14,"square",.05,900);
-    },100);
+    sound("click");
 
-}
-
-function soundSafeOpen(){
-
-    tone(100,.7,"sawtooth",.09,50);
-
-    setTimeout(()=>{
-        tone(500,.15,"sine",.08,850);
-    },500);
-
-}
-
-function soundError(){
-
-    tone(180,.18,"square",.06,100);
-
-}
-
-function soundConfetti(){
-
-    tone(800,.08,"triangle",.045,1200);
-
-    setTimeout(()=>{
-        tone(1200,.1,"triangle",.04,1600);
-    },80);
+    if(id==="goalsPage"){
+        updateGoals();
+    }
 
 }
 
 
-/* =========================
-   ZAKŁADKI
-========================= */
-
-function switchPage(page){
-
-    soundWhoosh();
-
-    const oldPage =
-        page==="balance"
-        ? document.getElementById("goalsPage")
-        : document.getElementById("balancePage");
-
-    const newPage =
-        page==="balance"
-        ? document.getElementById("balancePage")
-        : document.getElementById("goalsPage");
-
-    oldPage.classList.remove("enter-right");
-    oldPage.classList.add("leave-left");
-
-    setTimeout(()=>{
-
-        oldPage.style.display="none";
-        oldPage.classList.remove("leave-left");
-
-        newPage.style.display="block";
-
-        void newPage.offsetWidth;
-
-        newPage.classList.add("enter-right");
-
-        document.getElementById("balanceTab")
-        .classList.toggle(
-            "active",
-            page==="balance"
-        );
-
-        document.getElementById("goalsTab")
-        .classList.toggle(
-            "active",
-            page==="goals"
-        );
-
-        update();
-
-    },250);
-}
-
-
-/* =========================
-   AKTUALIZACJA
-========================= */
+/* ======================================================
+   UPDATE
+====================================================== */
 
 function update(){
 
-    document.getElementById("balance").textContent =
-    balance.toFixed(2).replace(".",",")+" zł";
+    document.getElementById("balanceDisplay")
+        .textContent=money(balance);
 
-    const remaining =
-    Math.max(TARGET-balance,0);
+    const percent=Math.min(
+        100,
+        Math.max(0,(balance/TARGET)*100)
+    );
 
-    document.getElementById("remaining").textContent =
-    remaining.toFixed(2).replace(".",",")+" zł";
+    document.getElementById("balanceFill")
+        .style.width=percent+"%";
 
-    document.getElementById("remainingStat").textContent =
-    remaining.toFixed(2).replace(".",",")+" zł";
+    document.getElementById("balanceInfo")
+        .textContent=
+        money(balance)+" / "+money(TARGET);
 
-    const percent =
-    Math.min(balance/TARGET*100,100);
+    document.getElementById("bottlesValue")
+        .textContent=bottles;
 
-    document.getElementById("percent").textContent =
-    percent.toFixed(1)+"%";
+    document.getElementById("daysValue")
+        .textContent=days;
 
-    document.getElementById("progressFill").style.width =
-    percent+"%";
+    document.getElementById("remainingValue")
+        .textContent=money(
+            Math.max(0,TARGET-balance)
+        );
 
-    document.getElementById("bottles").textContent =
-    bottles;
-
-    document.getElementById("days").textContent =
-    days;
-
-    updateGoals();
     renderHistory();
+    renderChart();
     renderSafes();
-    drawChart();
+    updateGoals();
 
     save();
+
 }
 
 
-/* =========================
-   CELE
-========================= */
-
-function updateGoals(){
-
-    const percent =
-    Math.min(balance/TARGET*100,100);
-
-    document.getElementById("goalPercent").textContent =
-    percent.toFixed(1)+"%";
-
-    document.getElementById("goalProgress").style.width =
-    percent+"%";
-
-    [500,1000,2500,5000,6868].forEach(value=>{
-
-        const el =
-        document.getElementById("m"+value);
-
-        if(balance>=value)
-            el.classList.add("done");
-        else
-            el.classList.remove("done");
-
-    });
-}
-
-
-/* =========================
-   DODAWANIE
-========================= */
+/* ======================================================
+   ADD MONEY
+====================================================== */
 
 function addMoney(amount,description){
 
-    soundPop();
+    sound("pop");
 
     balance+=amount;
 
-    if(description.includes("butelek"))
-        bottles+=parseInt(description);
-    else if(description==="Kaucja")
-        bottles++;
+    if(
+        description==="20 butelek"
+    ){
+        bottles+=20;
+    }
 
-    addHistory(description,amount);
+    if(
+        description==="40 butelek"
+    ){
+        bottles+=40;
+    }
+
+    if(
+        description==="Kaucja"
+    ){
+        bottles+=1;
+    }
+
+    addHistory(
+        description,
+        amount
+    );
 
     update();
+
 }
 
 
-function customAdd(){
+/* ======================================================
+   CUSTOM
+====================================================== */
 
-    const amount =
-    parseFloat(
-        prompt("Ile pieniędzy dodać?") || ""
+function customIncome(){
+
+    const amount=parseFloat(
+        prompt("Ile pieniędzy chcesz dodać?")
     );
 
-    if(!isFinite(amount)||amount<=0)
+    if(!Number.isFinite(amount) || amount<=0){
         return;
+    }
 
-    const description =
-    prompt("Za co?") || "Inna kwota";
+    const desc=
+        prompt("Skąd są te pieniądze?") ||
+        "Inna wpłata";
 
-    addMoney(amount,description);
+    addMoney(amount,desc);
+
 }
 
 
 function customExpense(){
 
-    const amount =
-    parseFloat(
-        prompt("Ile wydałeś?") || ""
+    const amount=parseFloat(
+        prompt("Ile wydajesz?")
     );
 
-    if(!isFinite(amount)||amount<=0)
+    if(!Number.isFinite(amount) || amount<=0){
         return;
+    }
 
-    const description =
-    prompt("Na co?") || "Wydatek";
+    const desc=
+        prompt("Na co wydatek?") ||
+        "Wydatek";
 
-    balance-=amount;
+    balance=Math.max(0,balance-amount);
 
-    addHistory(description,-amount);
+    addHistory(
+        desc,
+        -amount
+    );
 
-    soundClick();
+    sound("error");
 
     update();
+
 }
 
 
-/* =========================
-   HISTORIA
-========================= */
+/* ======================================================
+   HISTORY
+====================================================== */
 
 function addHistory(description,amount){
 
-    history.unshift({
+    history.push({
 
-        date:new Date().toLocaleString("pl-PL"),
+        date:new Date().toLocaleDateString(
+            "pl-PL"
+        ),
+
+        timestamp:Date.now(),
 
         description,
 
@@ -1658,1069 +1866,370 @@ function addHistory(description,amount){
 
     });
 
-    if(history.length>100)
-        history.length=100;
 }
 
 
 function renderHistory(){
 
     const box=
-    document.getElementById("history");
+        document.getElementById("history");
 
     box.innerHTML="";
 
-    if(history.length===0){
+    const list=history
+        .slice()
+        .reverse();
 
-        box.innerHTML=
-        '<div style="color:#71887b">Brak historii.</div>';
+    const visible=
+        historyExpanded
+        ? list
+        : list.slice(0,6);
 
-        return;
-    }
+    visible.forEach(item=>{
 
-    const items=
-    historyExpanded
-    ? history
-    : history.slice(0,5);
+        const row=
+            document.createElement("div");
 
-    items.forEach(item=>{
+        row.className="historyItem";
 
-        const div=
-        document.createElement("div");
+        row.innerHTML=`
 
-        div.className="history-item";
-
-        const cls=
-        item.amount>=0
-        ?"income"
-        :"outcome";
-
-        const sign=
-        item.amount>=0?"+":"";
-
-        div.innerHTML=`
-
-        <div>
-            <b>${item.description}</b>
-            <div class="history-date">
+            <div class="historyDate">
                 ${item.date}
             </div>
-        </div>
 
-        <div style="text-align:right">
-
-            <div class="${cls}">
-                ${sign}${item.amount.toFixed(2).replace(".",",")} zł
+            <div class="historyDesc">
+                ${escapeHTML(item.description)}
             </div>
 
-            <div class="history-date">
-                saldo:
-                ${item.balance.toFixed(2).replace(".",",")} zł
+            <div class="historyAmount ${
+                item.amount>=0
+                ? "income"
+                : "expense"
+            }">
+                ${item.amount>=0?"+":""}${money(item.amount)}
             </div>
 
-        </div>
+            <div class="historyBalance">
+                ${money(item.balance)}
+            </div>
 
         `;
 
-        box.appendChild(div);
+        box.appendChild(row);
 
     });
 
-    document.getElementById("historyToggle").textContent=
-    historyExpanded
-    ?"Pokaż mniej ▲"
-    :"Pokaż więcej ▼";
+    const more=
+        document.getElementById("historyMore");
+
+    if(history.length<=6){
+
+        more.style.display="none";
+
+    }else{
+
+        more.style.display="block";
+
+        more.textContent=
+            historyExpanded
+            ? "Pokaż mniej ▲"
+            : "Pokaż więcej ▼";
+
+    }
+
 }
 
 
 function toggleHistory(){
 
-    soundClick();
-
     historyExpanded=!historyExpanded;
 
+    sound("click");
+
     renderHistory();
+
 }
 
 
-/* =========================
-   SEJFY
-========================= */
+function escapeHTML(text){
 
-function saveSafes(){
+    return String(text)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 
-    localStorage.setItem(
-        "safes",
-        JSON.stringify(safes)
+}
+
+
+/* ======================================================
+   CLEAR
+====================================================== */
+
+function askCode(){
+
+    const code=prompt(
+        "Podaj kod, aby wykonać tę operację:"
     );
 
-    localStorage.setItem(
-        "safeCodes",
-        JSON.stringify(safeCodes)
-    );
-}
-
-
-/*
-   Losowy kod 4 cyfry.
-*/
-
-function generateSafeCode(){
-
-    return String(
-        Math.floor(
-            1000+
-            Math.random()*9000
-        )
-    );
-}
-
-
-/* RYSOWANIE */
-
-function renderSafes(){
-
-    const container=
-    document.getElementById("safes");
-
-    if(!container)
-        return;
-
-    container.innerHTML="";
-
-    safes.forEach((amount,index)=>{
-
-        const limit=
-        SAFE_LIMITS[index];
-
-        const full=
-        amount>=limit;
-
-        const wrap=
-        document.createElement("div");
-
-        wrap.className="safe-wrap";
-
-        const code=
-        safeCodes[index];
-
-        wrap.innerHTML=`
-
-        <div class="safe ${full?"full":""}">
-
-            <div class="safe-top">
-                SEJF ${index+1}
-            </div>
-
-            <div class="safe-label">
-                ZBieranie Safe
-            </div>
-
-            <div
-                class="safe-code ${full?"visible":""}"
-            >
-                🔑 KOD: ${full?code:""}
-            </div>
-
-            <div
-                class="safe-door"
-                id="safeDoor${index}"
-            ></div>
-
-            <div
-                class="crank"
-                onclick="clickCrank(${index})"
-                title="Korba sejfu"
-            ></div>
-
-            <div class="safe-progress">
-
-                <div
-                    class="safe-progress-fill"
-                    style="
-                    width:${Math.min(
-                        amount/limit*100,
-                        100
-                    )}%
-                    "
-                ></div>
-
-            </div>
-
-            <div class="safe-amount">
-                ${amount.toFixed(2).replace(".",",")} zł
-            </div>
-
-        </div>
-
-        <div class="safe-actions">
-
-            <button
-                class="safe-action safe-deposit"
-                onclick="depositToSafe(${index})"
-            >
-                💰 Włóż pieniądze
-            </button>
-
-            <button
-                class="safe-action safe-clear"
-                onclick="clearSafe(${index})"
-            >
-                🗑 Wyczyść
-            </button>
-
-        </div>
-
-        <div class="ground-cracks"></div>
-        <div class="safe-ground"></div>
-
-        `;
-
-        container.appendChild(wrap);
-
-    });
-}
-
-
-/* =========================
-   WPŁATA
-========================= */
-
-function depositToSafe(index){
-
-    soundClick();
-
-    const limit=
-    SAFE_LIMITS[index];
-
-    const left=
-    limit-safes[index];
-
-    if(left<=0){
-
-        alert(
-            "🔐 Sejf jest już pełny. Wpisz kod i użyj korby."
-        );
-
-        return;
-    }
-
-    const input=
-    prompt(
-        `Ile zł chcesz włożyć do sejfu ${index+1}?`
-    );
-
-    if(input===null)
-        return;
-
-    const amount=
-    parseFloat(
-        input.replace(",",".")
-    );
-
-    if(!isFinite(amount)||amount<=0){
-
-        soundError();
-
-        alert("Podaj prawidłową kwotę.");
-
-        return;
-    }
-
-    if(amount>left){
-
-        soundError();
-
-        alert(
-            `Do tego sejfu można jeszcze włożyć ${left.toFixed(2)} zł.`
-        );
-
-        return;
-    }
-
-    safes[index]+=amount;
-
-    /*
-       Gdy osiągnięto ukryty limit
-       generujemy kod.
-    */
-
-    if(
-        safes[index]>=limit &&
-        !safeCodes[index]
-    ){
-
-        safeCodes[index]=
-        generateSafeCode();
-
-        soundUnlock();
-
-    }else{
-
-        soundPop();
-
-    }
-
-    saveSafes();
-
-    update();
-}
-
-
-/* =========================
-   KORBA
-========================= */
-
-function clickCrank(index){
-
-    soundClick();
-
-    const limit=
-    SAFE_LIMITS[index];
-
-    /*
-       Niepełny sejf
-    */
-
-    if(safes[index]<limit){
-
-        soundError();
-
-        showSmallMessage(
-            "⛔ Brak dostępu",
-            "Sejf nie jest jeszcze gotowy."
-        );
-
-        return;
-    }
-
-    /*
-       Pełny sejf -> kod
-    */
-
-    openCodeModal(index);
-}
-
-
-/* =========================
-   OKNO KODU
-========================= */
-
-function openCodeModal(index){
-
-    activeSafe=index;
-
-    const modal=
-    document.getElementById("codeModal");
-
-    const input=
-    document.getElementById("safeCodeInput");
-
-    const error=
-    document.getElementById("codeError");
-
-    error.textContent="";
-
-    input.value="";
-
-    document.getElementById("codeInfo").textContent=
-    `Wpisz kod sejfu ${index+1}.`;
-
-    modal.style.display="flex";
-
-    setTimeout(()=>{
-        input.focus();
-    },100);
-
-    soundPop();
-}
-
-
-function closeCodeModal(){
-
-    document.getElementById("codeModal").style.display=
-    "none";
-
-    activeSafe=-1;
-
-    soundClick();
-}
-
-
-function confirmSafeCode(){
-
-    if(activeSafe<0)
-        return;
-
-    const input=
-    document.getElementById("safeCodeInput");
-
-    const entered=
-    input.value.trim();
-
-    const correct=
-    safeCodes[activeSafe];
-
-    if(!/^\d{4}$/.test(entered)){
-
-        document.getElementById("codeError").textContent=
-        "Wpisz dokładnie 4 cyfry.";
-
-        soundError();
-
-        return;
-    }
-
-    if(entered!==correct){
-
-        document.getElementById("codeError").textContent=
-        "❌ Nieprawidłowy kod!";
-
-        soundError();
-
-        input.value="";
-
-        return;
-    }
-
-    soundUnlock();
-
-    closeCodeModal();
-
-    unlockSafe(activeSafe);
-}
-
-
-/* =========================
-   ODBLOKOWANIE
-========================= */
-
-function unlockSafe(index){
-
-    const wraps=
-    document.querySelectorAll(".safe-wrap");
-
-    const wrap=wraps[index];
-
-    if(!wrap)
-        return;
-
-    const safe=
-    wrap.querySelector(".safe");
-
-    const crank=
-    wrap.querySelector(".crank");
-
-    const amount=
-    safes[index];
-
-    /*
-       korba
-    */
-
-    crank.classList.add("spinning");
-
-    soundWhoosh();
-
-    /*
-       krótka animacja kręcenia
-    */
-
-    setTimeout(()=>{
-
-        safe.classList.add("full");
-
-        soundSafeOpen();
-
-    },850);
-
-    setTimeout(()=>{
-
-        safe.classList.add("open");
-
-        crank.classList.remove("spinning");
-
-        /*
-           DUŻO więcej banknotów
-        */
-
-        createFlyingMoney(
-            safe,
-            90
-        );
-
-        /*
-           bardzo mocne konfetti
-        */
-
-        createMassiveConfetti(260);
-
-        soundConfetti();
-
-        showCelebration(
-            "🎉 SEJF ODBLOKOWANY! 🎉",
-            `💵 +${amount.toFixed(2).replace(".",",")} zł`
-        );
-
-        /*
-           pieniądze przechodzą
-           na główne saldo
-        */
-
-        balance+=amount;
-
-        addHistory(
-            `🔐 Sejf ${index+1} otwarty`,
-            amount
-        );
-
-        /*
-           zerowanie sejfu
-        */
-
-        safes[index]=0;
-        safeCodes[index]=null;
-
-        saveSafes();
-
-        setTimeout(()=>{
-
-            update();
-
-        },1700);
-
-    },1800);
-}
-
-
-/* =========================
-   WIADOMOŚĆ
-========================= */
-
-function showSmallMessage(title,text){
-
-    const box=
-    document.getElementById("celebration");
-
-    box.innerHTML=
-    `${title}<br>
-    <span style="
-    font-size:21px;
-    color:#ff7777;
-    text-shadow:0 0 15px rgba(255,50,50,.7)
-    ">
-    ${text}
-    </span>`;
-
-    box.classList.remove("show");
-
-    void box.offsetWidth;
-
-    box.classList.add("show");
-
-    setTimeout(()=>{
-        box.classList.remove("show");
-    },1800);
+    return code==="ButelKaucja";
 
 }
 
-
-/* =========================
-   BANKNOTY
-========================= */
-
-function createFlyingMoney(source,count){
-
-    const rect=
-    source.getBoundingClientRect();
-
-    for(let i=0;i<count;i++){
-
-        const money=
-        document.createElement("div");
-
-        money.className="money-fly";
-
-        money.textContent=
-        Math.random()>.45
-        ?"💵"
-        :"💸";
-
-        money.style.left=
-        (
-            rect.left+
-            rect.width/2+
-            (Math.random()-.5)*50
-        )+"px";
-
-        money.style.top=
-        (
-            rect.top+
-            rect.height/2
-        )+"px";
-
-        money.style.setProperty(
-            "--x",
-            Math.random()
-        );
-
-        money.style.setProperty(
-            "--y",
-            Math.random()
-        );
-
-        document.body.appendChild(money);
-
-        setTimeout(()=>{
-            money.remove();
-        },1900);
-
-    }
-}
-
-
-/* =========================
-   KONFETTI
-========================= */
-
-function createMassiveConfetti(count){
-
-    for(let i=0;i<count;i++){
-
-        const piece=
-        document.createElement("div");
-
-        piece.className="confetti";
-
-        const colors=[
-            "#39ff88",
-            "#00d95f",
-            "#8affb6",
-            "#ffcf40",
-            "#ffffff",
-            "#36a9ff",
-            "#ff4f81",
-            "#ff8a32"
-        ];
-
-        piece.style.background=
-        colors[
-            Math.floor(
-                Math.random()*colors.length
-            )
-        ];
-
-        piece.style.left=
-        (15+Math.random()*70)+"vw";
-
-        piece.style.top=
-        (10+Math.random()*25)+"vh";
-
-        piece.style.setProperty(
-            "--x",
-            ((Math.random()-.5)*1100)+"px"
-        );
-
-        piece.style.setProperty(
-            "--y",
-            (350+Math.random()*800)+"px"
-        );
-
-        piece.style.setProperty(
-            "--rotation",
-            ((Math.random()-.5)*1800)+"deg"
-        );
-
-        piece.style.setProperty(
-            "--duration",
-            (1.5+Math.random()*2.5)+"s"
-        );
-
-        document.body.appendChild(piece);
-
-        setTimeout(()=>{
-            piece.remove();
-        },4500);
-
-    }
-}
-
-
-/* =========================
-   GRATULACJE
-========================= */
-
-function showCelebration(title,subtitle){
-
-    const box=
-    document.getElementById("celebration");
-
-    box.innerHTML=
-    `${title}<br>
-    <span style="font-size:27px">
-    ${subtitle}
-    </span>`;
-
-    box.classList.remove("show");
-
-    void box.offsetWidth;
-
-    box.classList.add("show");
-
-    setTimeout(()=>{
-        box.classList.remove("show");
-    },2600);
-}
-
-
-/* =========================
-   CZYSZCZENIE SEJFU
-========================= */
-
-function clearSafe(index){
-
-    const code=
-    prompt(
-        `Podaj kod główny, aby wyczyścić sejf ${index+1}:`
-    );
-
-    if(code!==CLEAR_CODE){
-
-        soundError();
-
-        alert("❌ Zły kod.");
-
-        return;
-    }
-
-    const wraps=
-    document.querySelectorAll(".safe-wrap");
-
-    const wrap=wraps[index];
-
-    if(!wrap)
-        return;
-
-    const safe=
-    wrap.querySelector(".safe");
-
-    soundWhoosh();
-
-    safe.classList.add("replacing");
-
-    createMassiveConfetti(45);
-
-    setTimeout(()=>{
-
-        safes[index]=0;
-        safeCodes[index]=null;
-
-        saveSafes();
-
-        const newWrap=
-        document.createElement("div");
-
-        newWrap.className=
-        "safe-wrap emerging";
-
-        newWrap.innerHTML=`
-
-        <div class="safe new-emerge">
-
-            <div class="safe-top">
-                SEJF ${index+1}
-            </div>
-
-            <div class="safe-label">
-                ZBieranie Safe
-            </div>
-
-            <div class="safe-code"></div>
-
-            <div class="safe-door"></div>
-
-            <div
-                class="crank"
-                onclick="clickCrank(${index})"
-            ></div>
-
-            <div class="safe-progress">
-
-                <div
-                    class="safe-progress-fill"
-                    style="width:0%"
-                ></div>
-
-            </div>
-
-            <div class="safe-amount">
-                0,00 zł
-            </div>
-
-        </div>
-
-        <div class="safe-actions">
-
-            <button
-                class="safe-action safe-deposit"
-                onclick="depositToSafe(${index})"
-            >
-                💰 Włóż pieniądze
-            </button>
-
-            <button
-                class="safe-action safe-clear"
-                onclick="clearSafe(${index})"
-            >
-                🗑 Wyczyść
-            </button>
-
-        </div>
-
-        <div class="ground-cracks"></div>
-        <div class="safe-ground"></div>
-
-        `;
-
-        wrap.replaceWith(newWrap);
-
-        soundPop();
-
-        setTimeout(()=>{
-            newWrap.classList.remove("emerging");
-        },1700);
-
-        update();
-
-    },750);
-}
-
-
-/* =========================
-   KOD GŁÓWNY
-========================= */
-
-function checkClearCode(){
-
-    const code=
-    prompt("Podaj kod:");
-
-    if(code!==CLEAR_CODE){
-
-        soundError();
-
-        alert("❌ Zły kod.");
-
-        return false;
-    }
-
-    return true;
-}
-
-
-/* =========================
-   SALDO
-========================= */
 
 function clearBalance(){
 
-    if(!checkClearCode())
+    if(!askCode()){
+
+        sound("error");
+        alert("❌ Nieprawidłowy kod!");
         return;
 
-    if(!confirm("Na pewno wyczyścić saldo?"))
+    }
+
+    if(!confirm(
+        "Czy na pewno wyczyścić główne saldo?"
+    )){
         return;
+    }
 
     balance=0;
 
-    save();
+    sound("whoosh");
 
     update();
 
-    soundWhoosh();
 }
 
 
-/* =========================
-   WYKRES + SALDO
-========================= */
+function clearHistory(){
+
+    if(!askCode()){
+
+        sound("error");
+        alert("❌ Nieprawidłowy kod!");
+        return;
+
+    }
+
+    if(!confirm(
+        "Czy na pewno wyczyścić historię?"
+    )){
+        return;
+    }
+
+    history=[];
+
+    sound("whoosh");
+
+    update();
+
+}
+
 
 function clearChart(){
 
-    if(!checkClearCode())
+    if(!askCode()){
+
+        sound("error");
+        alert("❌ Nieprawidłowy kod!");
         return;
 
-    /*
-       Tak jak chciałeś:
-       wyczyszczenie wykresu
-       czyści też główne saldo.
-    */
+    }
+
+    if(!confirm(
+        "Wyczyszczenie wykresów wyczyści także główne saldo, historię, dni i butelki. Kontynuować?"
+    )){
+        return;
+    }
 
     balance=0;
     history=[];
     days=0;
     bottles=0;
 
-    save();
+    sound("whoosh");
 
     update();
 
-    soundWhoosh();
 }
 
 
-/* =========================
-   HISTORIA
-========================= */
+/* ======================================================
+   CHART
+====================================================== */
 
-function clearHistory(){
-
-    if(!checkClearCode())
-        return;
-
-    history=[];
-
-    save();
-
-    update();
-
-    soundPop();
-}
-
-
-/* =========================
-   WYKRES
-========================= */
-
-function getChartData(){
-
-    if(history.length===0)
-        return [0];
-
-    return [...history]
-    .reverse()
-    .map(item=>item.balance);
-}
-
-
-function drawChart(){
+function renderChart(){
 
     const canvas=
-    document.getElementById("chart");
+        document.getElementById("chart");
 
-    if(!canvas)
-        return;
+    const ctx=canvas.getContext("2d");
 
-    const ctx=
-    canvas.getContext("2d");
+    const W=1450;
+    const H=390;
 
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+    ctx.clearRect(0,0,W,H);
 
-    const data=
-    getChartData();
+    ctx.fillStyle="#030b06";
+    ctx.fillRect(0,0,W,H);
 
-    const width=
-    canvas.width;
+    const left=75;
+    const right=25;
+    const top=25;
+    const bottom=65;
 
-    const height=
-    canvas.height;
-
-    const paddingLeft=75;
-    const paddingRight=35;
-    const paddingTop=25;
-    const paddingBottom=45;
+    const chartW=W-left-right;
+    const chartH=H-top-bottom;
 
     /*
-       stare liczby osi
+       STARE LICZBY NA OSI
     */
 
-    const max=
-    Math.max(
-        TARGET,
-        ...data,
-        100
-    );
-
-    const values=[
-        0,
-        Math.round(max*.25),
-        Math.round(max*.5),
-        Math.round(max*.75),
-        Math.round(max)
-    ];
-
-    /* tło */
-
-    ctx.fillStyle="#07170f";
-
-    ctx.fillRect(
-        0,
-        0,
-        width,
-        height
-    );
-
-    /* siatka */
-
-    ctx.strokeStyle="#173b28";
-    ctx.lineWidth=1;
+    const maxY=7000;
 
     ctx.font="13px Arial";
-    ctx.fillStyle="#718b7c";
+    ctx.textAlign="right";
 
-    for(let i=0;i<5;i++){
+    for(let i=0;i<=7;i++){
 
-        const ratio=i/4;
+        const value=i*1000;
 
         const y=
-        height-paddingBottom-
-        ratio*(height-paddingTop-paddingBottom);
+            top+
+            chartH-
+            (value/maxY)*chartH;
+
+        ctx.strokeStyle="#12361f";
+        ctx.lineWidth=1;
 
         ctx.beginPath();
-
-        ctx.moveTo(
-            paddingLeft,
-            y
-        );
-
-        ctx.lineTo(
-            width-paddingRight,
-            y
-        );
-
+        ctx.moveTo(left,y);
+        ctx.lineTo(W-right,y);
         ctx.stroke();
 
-        const value=
-        values[4-i];
-
+        ctx.fillStyle="#6c9478";
         ctx.fillText(
-            value.toFixed(0)+" zł",
-            8,
+            value+" zł",
+            left-12,
             y+4
         );
 
     }
 
-    if(data.length===1){
+    /*
+       BRAK DANYCH
+    */
+
+    if(history.length===0){
+
+        ctx.fillStyle="#557260";
+        ctx.textAlign="center";
+        ctx.font="17px Arial";
+
+        ctx.fillText(
+            "Brak danych — zacznij zbierać pieniądze!",
+            W/2,
+            H/2
+        );
+
+        return;
+
+    }
+
+    /*
+       HISTORIA
+    */
+
+    const data=history;
+
+    const points=[];
+
+    data.forEach((item,index)=>{
 
         const x=
-        width/2;
+            data.length===1
+            ? left+chartW/2
+            : left+
+              (index/(data.length-1))*chartW;
+
+        const val=
+            Math.max(
+                0,
+                Math.min(maxY,item.balance)
+            );
 
         const y=
-        height-paddingBottom-
-        (data[0]/max)*
-        (height-paddingTop-paddingBottom);
+            top+
+            chartH-
+            (val/maxY)*chartH;
+
+        points.push({
+            x,
+            y,
+            item
+        });
+
+    });
+
+    /*
+       LINIE:
+       WZROST = ZIELONY
+       SPADEK = CZERWONY
+    */
+
+    for(let i=1;i<points.length;i++){
+
+        const a=points[i-1];
+        const b=points[i];
+
+        ctx.beginPath();
+        ctx.moveTo(a.x,a.y);
+        ctx.lineTo(b.x,b.y);
+
+        ctx.lineWidth=4;
+
+        if(b.item.balance>=a.item.balance){
+
+            ctx.strokeStyle="#3cff86";
+
+        }else{
+
+            ctx.strokeStyle="#ff4c4c";
+
+        }
+
+        ctx.stroke();
+
+    }
+
+    /*
+       PUNKTY
+    */
+
+    points.forEach(point=>{
 
         ctx.beginPath();
 
         ctx.arc(
-            x,
-            y,
-            6,
+            point.x,
+            point.y,
+            5,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle="#ffffff";
+        ctx.fill();
+
+        ctx.beginPath();
+
+        ctx.arc(
+            point.x,
+            point.y,
+            3,
             0,
             Math.PI*2
         );
@@ -2728,129 +2237,846 @@ function drawChart(){
         ctx.fillStyle="#42ff8c";
         ctx.fill();
 
-        return;
-    }
-
-    const step=
-    (width-paddingLeft-paddingRight)/
-    Math.max(data.length-1,1);
+    });
 
     /*
-       segmenty osobno:
-       wzrost zielony
-       spadek czerwony
+       DATY
     */
 
-    for(let i=1;i<data.length;i++){
-
-        const x1=
-        paddingLeft+
-        (i-1)*step;
-
-        const x2=
-        paddingLeft+
-        i*step;
-
-        const y1=
-        height-paddingBottom-
-        (data[i-1]/max)*
-        (height-paddingTop-paddingBottom);
-
-        const y2=
-        height-paddingBottom-
-        (data[i]/max)*
-        (height-paddingTop-paddingBottom);
-
-        ctx.beginPath();
-
-        ctx.moveTo(x1,y1);
-        ctx.lineTo(x2,y2);
-
-        ctx.lineWidth=4;
-        ctx.lineCap="round";
-
-        ctx.strokeStyle=
-        data[i]>=data[i-1]
-        ?" #35ff83"
-        :"#ff4e4e";
-
-        /*
-           usuń spację z zielonego koloru
-        */
-
-        ctx.strokeStyle=
-        data[i]>=data[i-1]
-        ?"#35ff83"
-        :"#ff4e4e";
-
-        ctx.stroke();
-
-    }
-
-    /*
-       daty na dole
-    */
-
+    ctx.textAlign="center";
     ctx.font="12px Arial";
-    ctx.fillStyle="#718b7c";
+    ctx.fillStyle="#789b82";
 
-    const reversed=
-    [...history].reverse();
-
-    reversed.forEach((item,i)=>{
-
-        if(!item.date)
-            return;
-
-        const x=
-        paddingLeft+i*step;
+    points.forEach(point=>{
 
         ctx.fillText(
-            item.date.split(",")[0],
-            x-18,
-            height-13
+            point.item.date,
+            point.x,
+            H-25
         );
 
     });
+
 }
 
 
-/* =========================
-   ZAPIS
-========================= */
+/* ======================================================
+   GOALS
+====================================================== */
 
-function save(){
+function updateGoals(){
 
-    localStorage.setItem(
-        "balance",
-        balance
+    const percent=Math.min(
+        100,
+        (balance/TARGET)*100
     );
 
-    localStorage.setItem(
-        "bottles",
-        bottles
-    );
+    const fill=
+        document.getElementById("goalFill");
 
-    localStorage.setItem(
-        "days",
-        days
-    );
+    if(fill){
+        fill.style.width=percent+"%";
+    }
 
-    localStorage.setItem(
-        "history",
-        JSON.stringify(history)
-    );
+    const p=
+        document.getElementById("goalPercent");
 
-    saveSafes();
+    if(p){
+        p.textContent=
+            percent.toFixed(1)+"%";
+    }
+
+    document.querySelectorAll(
+        ".milestone"
+    ).forEach(el=>{
+
+        const goal=
+            Number(el.dataset.goal);
+
+        if(balance>=goal){
+            el.classList.add("done");
+        }else{
+            el.classList.remove("done");
+        }
+
+    });
+
 }
 
 
-/* =========================
+/* ======================================================
+   WALLETS
+====================================================== */
+
+function walletDeposit(amount){
+
+    if(!confirm(
+        `Wpłacić ${money(amount)}?`
+    )){
+        return;
+    }
+
+    addMoney(
+        amount,
+        `Portfel ${money(amount)}`
+    );
+
+}
+
+
+/* ======================================================
+   SAFE RENDER
+====================================================== */
+
+function renderSafes(){
+
+    const grid=
+        document.getElementById("safesGrid");
+
+    if(!grid)return;
+
+    grid.innerHTML="";
+
+    safes.forEach((safe,index)=>{
+
+        const percent=
+            Math.min(
+                100,
+                (safe.amount/safe.max)*100
+            );
+
+        const full=
+            safe.amount>=safe.max;
+
+        const unlocked=
+            safe.unlocked;
+
+        const card=
+            document.createElement("div");
+
+        card.className="safeCard";
+
+        card.innerHTML=`
+
+            <div class="safeTitle">
+                🔐 Sejf ${safe.id}
+            </div>
+
+            <div class="safeMax">
+                MAX: ${money(safe.max)}
+            </div>
+
+            <div class="safe">
+
+                <div class="safeBody">
+
+                    ${
+                        full && safe.code
+                        ?
+                        `<div class="safeCode">
+                            ${safe.code}
+                        </div>`
+                        :
+                        ""
+                    }
+
+                    <div class="safeDoor"></div>
+
+                    <div class="safeWheel"></div>
+
+                    <div class="safeHandle"></div>
+
+                </div>
+
+            </div>
+
+            <div class="groundCrack"></div>
+
+            <div class="safeCrankHint">
+
+                ${
+                    unlocked
+                    ?
+                    "⬆️ POCIĄGNIJ W GÓRĘ"
+                    :
+                    full
+                    ?
+                    "🔐 Wpisz kod, aby odblokować"
+                    :
+                    "🔒 Sejf jeszcze niegotowy"
+                }
+
+            </div>
+
+            <div class="safeBar">
+
+                <div
+                    class="safeBarFill"
+                    style="width:${percent}%"
+                ></div>
+
+            </div>
+
+            <div class="safeMoney">
+                ${money(safe.amount)}
+            </div>
+
+            <div class="safeActions">
+
+                <button
+                    class="safeAction"
+                    onclick="depositSafe(${index})"
+                >
+                    💰 Wpłać
+                </button>
+
+                <button
+                    class="safeAction clear"
+                    onclick="clearSafe(${index})"
+                >
+                    🗑 Wyczyść
+                </button>
+
+                <button
+                    class="safeAction"
+                    onclick="safeCrank(${index})"
+                >
+                    🔄 Korbka
+                </button>
+
+            </div>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ======================================================
+   SAFE DEPOSIT
+====================================================== */
+
+function depositSafe(index){
+
+    const safe=safes[index];
+
+    const left=
+        safe.max-safe.amount;
+
+    if(left<=0){
+
+        showMessage(
+            "🔐 Sejf pełny!",
+            "Ten sejf jest już pełny. Najpierw go odblokuj i otwórz."
+        );
+
+        return;
+
+    }
+
+    const amount=parseFloat(
+        prompt(
+            `Ile wpłacić?\nPozostało miejsca: ${money(left)}`
+        )
+    );
+
+    if(
+        !Number.isFinite(amount) ||
+        amount<=0
+    ){
+        return;
+    }
+
+    const realAmount=
+        Math.min(amount,left);
+
+    safe.amount+=realAmount;
+
+    sound("pop");
+
+    if(
+        safe.amount>=safe.max &&
+        !safe.code
+    ){
+
+        safe.code=
+            String(
+                Math.floor(
+                    1000+
+                    Math.random()*9000
+                )
+            );
+
+        safe.unlocked=false;
+
+        sound("unlock");
+
+        showMessage(
+            "🔐 SEJF GOTOWY!",
+            `Sejf ${safe.id} osiągnął limit ${money(safe.max)}.<br><br>
+            Na sejfie pojawił się nowy 4-cyfrowy kod.`
+        );
+
+    }
+
+    update();
+
+}
+
+
+/* ======================================================
+   SAFE CRANK
+====================================================== */
+
+let activeSafeIndex=null;
+
+function safeCrank(index){
+
+    const safe=safes[index];
+
+    sound("click");
+
+    if(safe.amount<safe.max){
+
+        showMessage(
+            "⛔ Brak dostępu",
+            "Sejf nie jest jeszcze gotowy."
+        );
+
+        sound("error");
+
+        return;
+
+    }
+
+    if(!safe.unlocked){
+
+        openCodeModal(index);
+
+        return;
+
+    }
+
+    /*
+       ODKLIKNIĘCIE KORBKI
+       = JEDEN OBRÓT
+    */
+
+    openSafe(index);
+
+}
+
+
+/* ======================================================
+   CODE MODAL
+====================================================== */
+
+function openCodeModal(index){
+
+    activeSafeIndex=index;
+
+    const safe=safes[index];
+
+    document.getElementById(
+        "modalSafeText"
+    ).innerHTML=
+        `Sejf ${safe.id}<br>
+         Wpisz kod z sejfu.`;
+
+    document.getElementById(
+        "codeInput"
+    ).value="";
+
+    document.getElementById(
+        "pullArea"
+    ).innerHTML="";
+
+    document.getElementById(
+        "codeModal"
+    ).classList.add("show");
+
+    setTimeout(()=>{
+        document.getElementById(
+            "codeInput"
+        ).focus();
+    },100);
+
+}
+
+
+function closeCodeModal(){
+
+    document.getElementById(
+        "codeModal"
+    ).classList.remove("show");
+
+    activeSafeIndex=null;
+
+}
+
+
+function unlockSafe(){
+
+    if(activeSafeIndex===null){
+        return;
+    }
+
+    const input=
+        document.getElementById(
+            "codeInput"
+        ).value.trim();
+
+    const safe=
+        safes[activeSafeIndex];
+
+    if(input!==String(safe.code)){
+
+        sound("error");
+
+        document.getElementById(
+            "codeInput"
+        ).animate(
+            [
+                {transform:"translateX(-6px)"},
+                {transform:"translateX(6px)"},
+                {transform:"translateX(-4px)"},
+                {transform:"translateX(0)"}
+            ],
+            {
+                duration:250
+            }
+        );
+
+        showMessage(
+            "❌ Nieprawidłowy kod!",
+            "Spróbuj ponownie."
+        );
+
+        return;
+
+    }
+
+    safe.unlocked=true;
+
+    sound("unlock");
+
+    document.getElementById(
+        "modalSafeText"
+    ).innerHTML=
+        `<b style="color:#4dff93">
+        🔓 SEJF ODBLOKOWANY!
+        </b><br><br>
+        Teraz pociągnij w górę i przekręć korbkę.`;
+
+    document.getElementById(
+        "pullArea"
+    ).innerHTML=`
+
+        <button
+            class="pullBtn"
+            onclick="pullAndClose()"
+        >
+            ⬆️ POCIĄGNIJ W GÓRĘ
+        </button>
+
+    `;
+
+}
+
+
+function pullAndClose(){
+
+    if(activeSafeIndex===null){
+        return;
+    }
+
+    sound("whoosh");
+
+    const index=activeSafeIndex;
+
+    closeCodeModal();
+
+    setTimeout(()=>{
+        openSafe(index);
+    },350);
+
+}
+
+
+/* ======================================================
+   OPEN SAFE
+====================================================== */
+
+function openSafe(index){
+
+    const card=
+        document.querySelectorAll(
+            ".safeCard"
+        )[index];
+
+    const visual=
+        card?.querySelector(".safe");
+
+    const safe=safes[index];
+
+    if(!visual){
+        return;
+    }
+
+    sound("open");
+
+    visual.classList.add("spinning");
+
+    setTimeout(()=>{
+
+        visual.classList.add("opening");
+
+    },300);
+
+    setTimeout(()=>{
+
+        visual.classList.add("open");
+
+    },650);
+
+    const strength=
+        safe.max===250 ? 0.65 :
+        safe.max===500 ? 1 :
+        safe.max===1000 ? 1.5 :
+        2;
+
+    setTimeout(()=>{
+
+        celebrate(
+            safe.max,
+            strength
+        );
+
+    },700);
+
+    setTimeout(()=>{
+
+        /*
+           PIENIĄDZE Z SEJFU
+           TRAFIAJĄ DO GŁÓWNEGO SALDA
+        */
+
+        balance+=safe.amount;
+
+        addHistory(
+            `Otwarcie sejfu ${safe.id}`,
+            safe.amount
+        );
+
+        /*
+           RESET SEJFU
+        */
+
+        safe.amount=0;
+        safe.code=null;
+        safe.unlocked=false;
+
+        save();
+
+    },1200);
+
+    setTimeout(()=>{
+
+        update();
+
+        const newCard=
+            document.querySelectorAll(
+                ".safeCard"
+            )[index];
+
+        if(newCard){
+
+            newCard.classList.add(
+                "selected"
+            );
+
+            const newSafe=
+                newCard.querySelector(
+                    ".safe"
+                );
+
+            if(newSafe){
+
+                newSafe.classList.add(
+                    "replace"
+                );
+
+            }
+
+            const crack=
+                newCard.querySelector(
+                    ".groundCrack"
+                );
+
+            if(crack){
+
+                crack.classList.add("show");
+
+            }
+
+            setTimeout(()=>{
+
+                newCard.classList.remove(
+                    "selected"
+                );
+
+            },1000);
+
+        }
+
+    },1750);
+
+}
+
+
+/* ======================================================
+   CLEAR SAFE
+====================================================== */
+
+function clearSafe(index){
+
+    if(!askCode()){
+
+        sound("error");
+
+        alert(
+            "❌ Nieprawidłowy kod!"
+        );
+
+        return;
+
+    }
+
+    if(!confirm(
+        `Wyczyścić sejf ${safes[index].id}?`
+    )){
+        return;
+    }
+
+    safes[index].amount=0;
+    safes[index].code=null;
+    safes[index].unlocked=false;
+
+    sound("whoosh");
+
+    update();
+
+}
+
+
+/* ======================================================
+   MESSAGE
+====================================================== */
+
+function showMessage(title,text){
+
+    document.getElementById(
+        "messageTitle"
+    ).innerHTML=title;
+
+    document.getElementById(
+        "messageText"
+    ).innerHTML=text;
+
+    document.getElementById(
+        "messageModal"
+    ).classList.add("show");
+
+}
+
+
+function closeMessageModal(){
+
+    document.getElementById(
+        "messageModal"
+    ).classList.remove("show");
+
+}
+
+
+/* ======================================================
+   CELEBRATION
+====================================================== */
+
+function celebrate(amount,strength){
+
+    const layer=
+        document.getElementById(
+            "celebrationLayer"
+        );
+
+    const text=
+        document.getElementById(
+            "celebrationText"
+        );
+
+    /*
+       250 = najmniej
+       500 = średnio
+       1000 = mocno
+       2000 = najmocniej
+    */
+
+    let confettiCount=
+        amount===250 ? 35 :
+        amount===500 ? 70 :
+        amount===1000 ? 130 :
+        220;
+
+    let billCount=
+        amount===250 ? 8 :
+        amount===500 ? 18 :
+        amount===1000 ? 35 :
+        65;
+
+    for(let i=0;i<confettiCount;i++){
+
+        const c=
+            document.createElement("div");
+
+        c.className="confetti";
+
+        c.style.left=
+            Math.random()*100+"%";
+
+        c.style.setProperty(
+            "--x",
+            (Math.random()*500-250)+"px"
+        );
+
+        c.style.animationDuration=
+            (2+Math.random()*2.5)+"s";
+
+        c.style.animationDelay=
+            (Math.random()*.5)+"s";
+
+        c.style.transform=
+            `rotate(${Math.random()*360}deg)`;
+
+        /*
+           Nie ustawiamy konkretnego koloru
+           z CSS - przeglądarka dostaje
+           różne kolory przez HSL.
+        */
+
+        c.style.backgroundColor=
+            `hsl(${Math.random()*360},90%,60%)`;
+
+        layer.appendChild(c);
+
+        setTimeout(()=>{
+            c.remove();
+        },5500);
+
+    }
+
+
+    for(let i=0;i<billCount;i++){
+
+        const bill=
+            document.createElement("div");
+
+        bill.className="bill";
+        bill.textContent="💵";
+
+        bill.style.setProperty(
+            "--x",
+            (Math.random()*900-450)+"px"
+        );
+
+        bill.style.setProperty(
+            "--y",
+            (Math.random()*650-500)+"px"
+        );
+
+        bill.style.setProperty(
+            "--r",
+            (Math.random()*1000-500)+"deg"
+        );
+
+        bill.style.animationDelay=
+            (Math.random()*.35)+"s";
+
+        layer.appendChild(bill);
+
+        setTimeout(()=>{
+            bill.remove();
+        },2300);
+
+    }
+
+
+    text.innerHTML=`
+
+        <div class="celebrationSmall">
+            🎉 SEJF OTWARTY! 🎉
+        </div>
+
+        <div class="celebrationBig">
+            +${money(amount)}
+        </div>
+
+    `;
+
+    text.classList.remove("show");
+
+    void text.offsetWidth;
+
+    text.classList.add("show");
+
+
+    /*
+       Dodatkowe dźwięki
+    */
+
+    sound("pop");
+
+    setTimeout(()=>{
+        sound("whoosh");
+    },250);
+
+    setTimeout(()=>{
+        sound("pop");
+    },500);
+
+    setTimeout(()=>{
+        sound("pop");
+    },800);
+
+}
+
+
+/* ======================================================
+   ENTER CODE
+====================================================== */
+
+document.getElementById(
+    "codeInput"
+).addEventListener(
+    "keydown",
+    e=>{
+
+        if(e.key==="Enter"){
+            unlockSafe();
+        }
+
+    }
+);
+
+
+/* ======================================================
    START
-========================= */
+====================================================== */
 
 update();
-renderSafes();
 
 </script>
 
