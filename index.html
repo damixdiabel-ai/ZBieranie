@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -20,8 +19,6 @@ body {
         radial-gradient(circle at 50% 0%, #063b25 0%, transparent 35%),
         linear-gradient(135deg, #020807, #07140f 50%, #020807);
 }
-
-/* NAGŁÓWEK */
 
 header {
     text-align: center;
@@ -48,14 +45,10 @@ header p {
     font-size: 18px;
 }
 
-/* GŁÓWNY KONTENER */
-
 .container {
     width: min(950px, 92%);
     margin: auto;
 }
-
-/* KARTY */
 
 .card {
     position: relative;
@@ -135,8 +128,7 @@ header p {
     overflow: hidden;
     background: #07120d;
     border: 2px solid #153e2a;
-    box-shadow:
-        inset 0 0 15px rgba(0,0,0,.8);
+    box-shadow: inset 0 0 15px rgba(0,0,0,.8);
 }
 
 .progress-fill {
@@ -155,8 +147,6 @@ header p {
     );
     transition: width 1.5s cubic-bezier(.2,.8,.2,1);
 }
-
-/* RUCHOME ZAKRZYWIONE PASKI */
 
 .progress-fill::before {
     content: "";
@@ -194,6 +184,7 @@ header p {
     from {
         transform: translateX(0) skewX(-8deg);
     }
+
     to {
         transform: translateX(-90px) skewX(-8deg);
     }
@@ -203,6 +194,7 @@ header p {
     from {
         transform: translateX(-100%);
     }
+
     to {
         transform: translateX(100%);
     }
@@ -244,6 +236,70 @@ header p {
 .stat-name {
     margin-top: 6px;
     color: #82998d;
+}
+
+/* WYKRES */
+
+.chart-box {
+    margin-top: 25px;
+    padding: 22px;
+    border-radius: 22px;
+    background: rgba(2,12,8,.65);
+    border: 1px solid #123d27;
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.chart-title {
+    font-size: 19px;
+    font-weight: bold;
+    color: #a8ffc7;
+}
+
+.chart-subtitle {
+    color: #71877b;
+    font-size: 13px;
+}
+
+.chart-container {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.chart-tooltip {
+    position: absolute;
+    display: none;
+    pointer-events: none;
+    padding: 10px 13px;
+    border-radius: 12px;
+    background: #07140e;
+    border: 1px solid #25d96c;
+    box-shadow: 0 0 20px rgba(34,255,112,.25);
+    font-size: 13px;
+    z-index: 10;
+}
+
+.tooltip-date {
+    color: #82998d;
+    margin-bottom: 3px;
+}
+
+.tooltip-money {
+    font-size: 17px;
+    font-weight: bold;
+    color: #75ffab;
 }
 
 /* PRZYCISKI */
@@ -322,6 +378,10 @@ footer {
     .card {
         padding: 20px;
     }
+
+    .chart-container {
+        height: 240px;
+    }
 }
 </style>
 </head>
@@ -339,6 +399,7 @@ footer {
     <!-- SALDO -->
 
     <div class="card">
+
         <div class="balance-box">
 
             <div class="balance-label">
@@ -346,8 +407,13 @@ footer {
             </div>
 
             <div class="balance">
+
                 <div class="dollar">$</div>
-                <div class="money" id="money">0,00 zł</div>
+
+                <div class="money" id="money">
+                    0,00 zł
+                </div>
+
             </div>
 
             <div class="progress-wrap">
@@ -359,10 +425,14 @@ footer {
 
                 <div class="progress-bg">
 
-                    <div class="progress-fill" id="progress">
+                    <div
+                        class="progress-fill"
+                        id="progress">
                     </div>
 
-                    <div class="progress-text" id="percent">
+                    <div
+                        class="progress-text"
+                        id="percent">
                         0%
                     </div>
 
@@ -371,7 +441,9 @@ footer {
             </div>
 
         </div>
+
     </div>
+
 
     <!-- STATYSTYKI -->
 
@@ -379,26 +451,104 @@ footer {
 
         <h2>📊 Statystyki</h2>
 
+        <!-- 3 PANELE -->
+
         <div class="stats">
 
             <div class="stat">
-                <div class="stat-number" id="bottles">0</div>
-                <div class="stat-name">🧴 Butelek</div>
+
+                <div
+                    class="stat-number"
+                    id="bottles">
+                    0
+                </div>
+
+                <div class="stat-name">
+                    🧴 Butelek
+                </div>
+
             </div>
 
-            <div class="stat">
-                <div class="stat-number" id="days">0</div>
-                <div class="stat-name">📅 Dni</div>
-            </div>
 
             <div class="stat">
-                <div class="stat-number" id="remaining">6868 zł</div>
-                <div class="stat-name">🎯 Brakuje</div>
+
+                <div
+                    class="stat-number"
+                    id="days">
+                    0
+                </div>
+
+                <div class="stat-name">
+                    📅 Dni
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div
+                    class="stat-number"
+                    id="remaining">
+                    6868 zł
+                </div>
+
+                <div class="stat-name">
+                    🎯 Brakuje
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- WYKRES -->
+
+        <div class="chart-box">
+
+            <div class="chart-header">
+
+                <div>
+
+                    <div class="chart-title">
+                        💰 Saldo w czasie
+                    </div>
+
+                    <div class="chart-subtitle">
+                        Historia zbierania pieniędzy
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-container">
+
+                <canvas id="moneyChart"></canvas>
+
+                <div
+                    class="chart-tooltip"
+                    id="chartTooltip">
+
+                    <div
+                        class="tooltip-date"
+                        id="tooltipDate">
+                    </div>
+
+                    <div
+                        class="tooltip-money"
+                        id="tooltipMoney">
+                    </div>
+
+                </div>
+
             </div>
 
         </div>
 
     </div>
+
 
     <!-- DODAWANIE PIENIĘDZY -->
 
@@ -409,4 +559,925 @@ footer {
         <p>
             Nie musisz zbierać tylko butelek.
             Możesz dodawać dowolne zarobione pieniądze.
-```
+        </p>
+
+        <button onclick="addMoney(0.5, 'Kaucja')">
+            +0,50 zł
+        </button>
+
+        <button onclick="addMoney(10, '20 butelek')">
+            +10 zł
+        </button>
+
+        <button onclick="addMoney(20, '40 butelek')">
+            +20 zł
+        </button>
+
+        <button onclick="customAdd()">
+            💵 Inna kwota
+        </button>
+
+        <button
+            class="red"
+            onclick="customExpense()">
+            🔴 Wydatek
+        </button>
+
+    </div>
+
+
+    <!-- HISTORIA -->
+
+    <div class="card">
+
+        <h2>📜 Historia pieniędzy</h2>
+
+        <div id="history">
+            Brak wpisów.
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+    ZBieranie © 2026
+</footer>
+
+
+<script>
+
+const TARGET = 6868;
+
+let balance =
+    Number(localStorage.getItem("balance")) || 0;
+
+let bottles =
+    Number(localStorage.getItem("bottles")) || 0;
+
+let days =
+    Number(localStorage.getItem("days")) || 0;
+
+let history =
+    JSON.parse(localStorage.getItem("history")) || [];
+
+
+/* AKTUALIZACJA */
+
+function update() {
+
+    const percent =
+        Math.min((balance / TARGET) * 100, 100);
+
+    const remaining =
+        Math.max(TARGET - balance, 0);
+
+
+    document.getElementById("money").textContent =
+        balance.toFixed(2).replace(".", ",") +
+        " zł";
+
+
+    document.getElementById("bottles").textContent =
+        bottles;
+
+
+    document.getElementById("days").textContent =
+        days;
+
+
+    document.getElementById("remaining").textContent =
+        remaining.toFixed(2).replace(".", ",") +
+        " zł";
+
+
+    document.getElementById("percent").textContent =
+        percent.toFixed(2) + "%";
+
+
+    document.getElementById("progress").style.width =
+        percent + "%";
+
+
+    showHistory();
+
+    drawChart();
+}
+
+
+/* DODAWANIE */
+
+function addMoney(amount, description) {
+
+    balance += amount;
+
+    days++;
+
+
+    if (description.includes("butelek")) {
+
+        if (description === "20 butelek")
+            bottles += 20;
+
+        if (description === "40 butelek")
+            bottles += 40;
+    }
+
+
+    addHistory(
+        amount,
+        description,
+        "plus"
+    );
+
+
+    save();
+}
+
+
+/* WŁASNA WPŁATA */
+
+function customAdd() {
+
+    const amount =
+        parseFloat(
+            prompt("Ile pieniędzy dodajesz?")
+        );
+
+
+    if (!isNaN(amount) && amount > 0) {
+
+        const description =
+            prompt(
+                "Skąd są te pieniądze?",
+                "Inne"
+            ) || "Inne pieniądze";
+
+
+        balance += amount;
+
+        days++;
+
+
+        addHistory(
+            amount,
+            description,
+            "plus"
+        );
+
+
+        save();
+    }
+}
+
+
+/* WYDATEK */
+
+function customExpense() {
+
+    const amount =
+        parseFloat(
+            prompt("Ile wydajesz?")
+        );
+
+
+    if (!isNaN(amount) && amount > 0) {
+
+        const description =
+            prompt(
+                "Na co wydajesz?",
+                "Wydatek"
+            ) || "Wydatek";
+
+
+        balance -= amount;
+
+
+        if (balance < 0)
+            balance = 0;
+
+
+        days++;
+
+
+        addHistory(
+            amount,
+            description,
+            "minus"
+        );
+
+
+        save();
+    }
+}
+
+
+/* HISTORIA */
+
+function addHistory(
+    amount,
+    description,
+    type
+) {
+
+    const date =
+        new Date().toLocaleDateString("pl-PL");
+
+
+    history.unshift({
+
+        date: date,
+
+        amount: amount,
+
+        description: description,
+
+        type: type,
+
+        balance: balance
+
+    });
+}
+
+
+/* WYŚWIETLANIE HISTORII */
+
+function showHistory() {
+
+    const box =
+        document.getElementById("history");
+
+
+    if (history.length === 0) {
+
+        box.innerHTML =
+            "Brak wpisów.";
+
+        return;
+    }
+
+
+    box.innerHTML =
+        history.map(item => {
+
+            const sign =
+                item.type === "plus"
+                ? "+"
+                : "−";
+
+
+            const className =
+                item.type === "plus"
+                ? ""
+                : "expense";
+
+
+            return `
+
+                <div
+                    class="history-item ${className}">
+
+                    <strong>
+                        ${item.date}
+                    </strong>
+
+                    — ${item.description}
+
+                    <br>
+
+                    <strong>
+
+                        ${sign}
+                        ${item.amount
+                            .toFixed(2)
+                            .replace(".", ",")} zł
+
+                    </strong>
+
+                    <span style="float:right">
+
+                        saldo:
+                        ${item.balance
+                            .toFixed(2)
+                            .replace(".", ",")} zł
+
+                    </span>
+
+                </div>
+
+            `;
+
+        }).join("");
+}
+
+
+/* ==========================================
+   WYKRES
+========================================== */
+
+const canvas =
+    document.getElementById("moneyChart");
+
+const ctx =
+    canvas.getContext("2d");
+
+const tooltip =
+    document.getElementById("chartTooltip");
+
+const tooltipDate =
+    document.getElementById("tooltipDate");
+
+const tooltipMoney =
+    document.getElementById("tooltipMoney");
+
+
+let chartPoints = [];
+
+
+/* DANE DO WYKRESU */
+
+function getChartData() {
+
+    if (history.length === 0)
+        return [];
+
+
+    const reversed =
+        [...history].reverse();
+
+
+    return reversed.map(item => ({
+
+        date: item.date,
+
+        balance: item.balance,
+
+        type: item.type
+
+    }));
+}
+
+
+/* RYSOWANIE */
+
+function drawChart() {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    const width =
+        rect.width;
+
+    const height =
+        rect.height;
+
+
+    const ratio =
+        window.devicePixelRatio || 1;
+
+
+    canvas.width =
+        width * ratio;
+
+    canvas.height =
+        height * ratio;
+
+
+    ctx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+    );
+
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+    );
+
+
+    const data =
+        getChartData();
+
+
+    chartPoints = [];
+
+
+    /*
+       BRAK DANYCH
+    */
+
+    if (data.length === 0) {
+
+        ctx.fillStyle =
+            "#53665c";
+
+        ctx.font =
+            "15px Arial";
+
+        ctx.textAlign =
+            "center";
+
+        ctx.fillText(
+            "Dodaj pierwsze pieniądze, aby zobaczyć wykres.",
+            width / 2,
+            height / 2
+        );
+
+        return;
+    }
+
+
+    /*
+       MARGINESY
+    */
+
+    const left = 50;
+    const right = 15;
+    const top = 20;
+    const bottom = 38;
+
+
+    const graphWidth =
+        width - left - right;
+
+    const graphHeight =
+        height - top - bottom;
+
+
+    /*
+       MAKSYMALNA WARTOŚĆ
+    */
+
+    const maxBalance =
+        Math.max(
+            TARGET,
+            ...data.map(point => point.balance)
+        );
+
+
+    /*
+       LINIE SIATKI
+    */
+
+    ctx.font =
+        "11px Arial";
+
+    ctx.textAlign =
+        "right";
+
+
+    for (let i = 0; i <= 4; i++) {
+
+        const value =
+            maxBalance * (i / 4);
+
+
+        const y =
+            top +
+            graphHeight -
+            graphHeight * (i / 4);
+
+
+        ctx.strokeStyle =
+            "rgba(80,130,105,.16)";
+
+        ctx.lineWidth = 1;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            left,
+            y
+        );
+
+        ctx.lineTo(
+            width - right,
+            y
+        );
+
+        ctx.stroke();
+
+
+        ctx.fillStyle =
+            "#60786b";
+
+        ctx.fillText(
+            value.toFixed(0) + " zł",
+            left - 8,
+            y + 4
+        );
+    }
+
+
+    /*
+       CEL 6868 ZŁ
+    */
+
+    if (TARGET <= maxBalance) {
+
+        const targetY =
+            top +
+            graphHeight -
+            (TARGET / maxBalance) *
+            graphHeight;
+
+
+        ctx.strokeStyle =
+            "rgba(80,255,145,.28)";
+
+        ctx.setLineDash([5, 5]);
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            left,
+            targetY
+        );
+
+        ctx.lineTo(
+            width - right,
+            targetY
+        );
+
+        ctx.stroke();
+
+        ctx.setLineDash([]);
+
+
+        ctx.fillStyle =
+            "#54e990";
+
+        ctx.textAlign =
+            "left";
+
+        ctx.fillText(
+            "Cel: 6868 zł",
+            left + 5,
+            targetY - 7
+        );
+    }
+
+
+    /*
+       PUNKTY
+    */
+
+    data.forEach((point, index) => {
+
+        const x =
+            data.length === 1
+            ? left + graphWidth / 2
+            : left +
+              (index / (data.length - 1)) *
+              graphWidth;
+
+
+        const y =
+            top +
+            graphHeight -
+            (point.balance / maxBalance) *
+            graphHeight;
+
+
+        chartPoints.push({
+
+            x: x,
+
+            y: y,
+
+            data: point
+
+        });
+
+    });
+
+
+    /*
+       LINIE WYKRESU
+    */
+
+    for (
+        let i = 0;
+        i < chartPoints.length - 1;
+        i++
+    ) {
+
+        const a =
+            chartPoints[i];
+
+        const b =
+            chartPoints[i + 1];
+
+
+        /*
+           ZIELONY = WZROST
+           CZERWONY = SPADek
+        */
+
+        if (
+            b.data.balance >=
+            a.data.balance
+        ) {
+
+            ctx.strokeStyle =
+                "#28f878";
+
+            ctx.shadowColor =
+                "rgba(40,248,120,.35)";
+
+        } else {
+
+            ctx.strokeStyle =
+                "#ff3d4d";
+
+            ctx.shadowColor =
+                "rgba(255,61,77,.35)";
+        }
+
+
+        ctx.shadowBlur = 8;
+
+        ctx.lineWidth = 3;
+
+        ctx.lineCap = "round";
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            a.x,
+            a.y
+        );
+
+        ctx.lineTo(
+            b.x,
+            b.y
+        );
+
+        ctx.stroke();
+
+        ctx.shadowBlur = 0;
+    }
+
+
+    /*
+       PUNKTY NA WYKRESIE
+    */
+
+    chartPoints.forEach((point, index) => {
+
+        let color =
+            "#28f878";
+
+
+        if (index > 0) {
+
+            if (
+                point.data.balance <
+                chartPoints[index - 1].data.balance
+            ) {
+
+                color =
+                    "#ff3d4d";
+            }
+        }
+
+
+        ctx.fillStyle =
+            color;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            point.x,
+            point.y,
+            4,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+    });
+
+
+    /*
+       DATY
+    */
+
+    ctx.font =
+        "11px Arial";
+
+    ctx.fillStyle =
+        "#60786b";
+
+    ctx.textAlign =
+        "center";
+
+
+    chartPoints.forEach(
+        (point, index) => {
+
+            if (
+                index === 0 ||
+                index === chartPoints.length - 1 ||
+                chartPoints.length <= 6
+            ) {
+
+                ctx.fillText(
+                    point.data.date,
+                    point.x,
+                    height - 12
+                );
+            }
+
+        }
+    );
+}
+
+
+/* ==========================================
+   HOVER NA WYKRESIE
+========================================== */
+
+canvas.addEventListener(
+    "mousemove",
+    function(event) {
+
+        if (chartPoints.length === 0)
+            return;
+
+
+        const rect =
+            canvas.getBoundingClientRect();
+
+
+        const mouseX =
+            event.clientX - rect.left;
+
+        const mouseY =
+            event.clientY - rect.top;
+
+
+        let closest = null;
+
+        let closestDistance =
+            Infinity;
+
+
+        chartPoints.forEach(point => {
+
+            const distance =
+                Math.sqrt(
+                    Math.pow(
+                        mouseX - point.x,
+                        2
+                    ) +
+                    Math.pow(
+                        mouseY - point.y,
+                        2
+                    )
+                );
+
+
+            if (
+                distance <
+                closestDistance
+            ) {
+
+                closestDistance =
+                    distance;
+
+                closest =
+                    point;
+            }
+
+        });
+
+
+        if (
+            closest &&
+            closestDistance < 35
+        ) {
+
+            tooltip.style.display =
+                "block";
+
+
+            tooltipDate.textContent =
+                closest.data.date;
+
+
+            tooltipMoney.textContent =
+                closest.data.balance
+                    .toFixed(2)
+                    .replace(".", ",") +
+                " zł";
+
+
+            let tooltipX =
+                closest.x + 12;
+
+            let tooltipY =
+                closest.y - 65;
+
+
+            if (
+                tooltipX + 130 >
+                rect.width
+            ) {
+
+                tooltipX =
+                    closest.x - 140;
+            }
+
+
+            if (tooltipY < 0) {
+
+                tooltipY =
+                    closest.y + 15;
+            }
+
+
+            tooltip.style.left =
+                tooltipX + "px";
+
+
+            tooltip.style.top =
+                tooltipY + "px";
+
+        } else {
+
+            tooltip.style.display =
+                "none";
+        }
+
+    }
+);
+
+
+canvas.addEventListener(
+    "mouseleave",
+    function() {
+
+        tooltip.style.display =
+            "none";
+
+    }
+);
+
+
+/* ZMIANA ROZMIARU OKNA */
+
+window.addEventListener(
+    "resize",
+    drawChart
+);
+
+
+/* ZAPIS */
+
+function save() {
+
+    localStorage.setItem(
+        "balance",
+        balance
+    );
+
+
+    localStorage.setItem(
+        "bottles",
+        bottles
+    );
+
+
+    localStorage.setItem(
+        "days",
+        days
+    );
+
+
+    localStorage.setItem(
+        "history",
+        JSON.stringify(history)
+    );
+
+
+    update();
+}
+
+
+/* START */
+
+update();
+
+</script>
+
+</body>
+</html>
