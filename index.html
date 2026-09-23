@@ -3,934 +3,768 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZBieranie</title>
+<title>ZBieranie 💰</title>
 
 <style>
-*{box-sizing:border-box}
-
-:root{
-    --bg:#06110b;
-    --panel:#0b1c12;
-    --panel2:#102719;
-    --green:#20ff78;
-    --green2:#0bd45b;
-    --red:#ff3b3b;
-    --orange:#ff9f1c;
+* {
+    box-sizing: border-box;
 }
 
-body{
-    margin:0;
-    min-height:100vh;
-    font-family:Arial,sans-serif;
-    color:white;
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
     background:
-        radial-gradient(circle at 50% -10%,#164d2c,#06110b 60%);
-    overflow-x:hidden;
+        radial-gradient(circle at top, #123d25 0%, #07150d 45%, #030805 100%);
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
-button,input{
-    font:inherit;
+button,
+input {
+    font: inherit;
 }
 
-button{
-    cursor:pointer;
+button {
+    cursor: pointer;
 }
 
-/* =====================================================
-   NOWA AKTUALIZACJA
-===================================================== */
-
-.update-badge{
-    position:fixed;
-    left:18px;
-    top:18px;
-    z-index:9999;
-    padding:10px 16px;
-    border-radius:14px;
-    background:#d71919;
-    color:white;
-    font-weight:1000;
-    box-shadow:0 0 22px #ff222277;
-    animation:updatePulse 1.4s infinite alternate;
+.container {
+    width: min(1100px, 94%);
+    margin: auto;
+    padding: 30px 0 60px;
 }
 
-@keyframes updatePulse{
-    from{
-        transform:scale(1);
-    }
-    to{
-        transform:scale(1.04);
-        box-shadow:0 0 32px #ff2222aa;
-    }
+/* ===== NAGŁÓWEK ===== */
+
+header {
+    text-align: center;
+    margin-bottom: 25px;
 }
 
-/* =====================================================
-   ZAKŁADKI
-===================================================== */
-
-.tabs{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-    padding:80px 15px 15px;
-}
-
-.tab{
-    padding:14px 27px;
-    border-radius:18px;
-    border:1px solid #21643a;
-    background:#0a1c11;
-    color:white;
-    font-weight:1000;
-    transition:.25s;
-}
-
-.tab:hover{
-    border-color:#ff9f1c;
-    color:#ffd28a;
-    box-shadow:0 0 25px #ff9f1c99;
-}
-
-.tab.active{
-    border-color:var(--green);
-    box-shadow:0 0 22px #20ff7844;
-}
-
-/* =====================================================
-   STRONY
-===================================================== */
-
-.page{
-    max-width:1100px;
-    margin:auto;
-    padding:10px 18px 70px;
-}
-
-.hidden{
-    display:none!important;
-}
-
-.card{
-    background:linear-gradient(145deg,#0d2115,#07140c);
-    border:1px solid #174d2c;
-    border-radius:24px;
-    padding:22px;
-    margin:16px 0;
-    box-shadow:0 12px 35px #0009;
-}
-
-h1,h2,h3{
-    margin-top:0;
-}
-
-.glow{
-    color:var(--green);
+.money-symbol {
+    font-size: 65px;
+    color: #42ff75;
     text-shadow:
-        0 0 8px var(--green),
-        0 0 22px #20ff7866;
+        0 0 10px #20ff58,
+        0 0 25px #20ff58,
+        0 0 45px #20ff58;
+    animation: moneyFloat 2.5s ease-in-out infinite;
 }
 
-/* =====================================================
-   SALDO
-===================================================== */
-
-.balance-card{
-    text-align:center;
-}
-
-.dollar{
-    font-size:70px;
-    color:var(--green);
-    text-shadow:0 0 30px #20ff78;
-    animation:floatDollar 2s infinite ease-in-out;
-}
-
-@keyframes floatDollar{
-    50%{
-        transform:translateY(-6px);
+@keyframes moneyFloat {
+    0%,100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-7px);
     }
 }
 
-.balance{
-    font-size:58px;
-    font-weight:1000;
-    text-shadow:0 0 20px #20ff7833;
+h1 {
+    margin: 5px 0;
+    font-size: clamp(35px, 7vw, 60px);
+    color: #54ff7c;
+    text-shadow: 0 0 20px rgba(54,255,111,.6);
 }
 
-.goal-text{
-    color:#9ccaaa;
+.subtitle {
+    color: #a9cdb4;
+    font-size: 17px;
 }
 
-/* =====================================================
-   GŁÓWNY PASEK
-===================================================== */
+/* ===== ZAKŁADKI ===== */
 
-.main-progress{
-    height:25px;
-    background:#061008;
-    border-radius:99px;
-    overflow:hidden;
-    border:1px solid #18502e;
-    margin:14px 0;
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 25px 0;
+    flex-wrap: wrap;
 }
 
-.main-progress div{
-    height:100%;
-    width:0;
+.tab {
+    border: 2px solid #218f42;
+    background: #0a2113;
+    color: white;
+    padding: 13px 28px;
+    border-radius: 14px;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.tab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(42,255,93,.35);
+}
+
+.tab.active {
+    background: #145c2b;
+    border-color: #43ff72;
+    box-shadow: 0 0 20px rgba(45,255,100,.25);
+}
+
+/* ===== SEKCJE ===== */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+.section {
+    background: rgba(5, 22, 12, .92);
+    border: 1px solid #18572d;
+    border-radius: 22px;
+    padding: 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 0 25px rgba(0,0,0,.25);
+}
+
+.section h2 {
+    margin-top: 0;
+    color: #54ff7c;
+    text-shadow: 0 0 12px rgba(45,255,100,.3);
+}
+
+/* ===== SALDO ===== */
+
+.balance-box {
+    text-align: center;
+    padding: 20px;
+}
+
+.balance {
+    font-size: clamp(50px, 11vw, 90px);
+    font-weight: bold;
+    color: #42ff70;
+    text-shadow:
+        0 0 12px #20ff58,
+        0 0 35px rgba(32,255,88,.5);
+    margin: 10px 0;
+}
+
+.target {
+    color: #a7cbb0;
+    font-size: 17px;
+}
+
+/* ===== POSTĘP ===== */
+
+.progress-wrapper {
+    margin-top: 20px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #b9d8c0;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 25px;
+    background: #061009;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid #1b5b31;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 50px;
+
     background:
         repeating-linear-gradient(
-            135deg,
-            #0a8e40 0 14px,
-            #20ff78 14px 28px
+            -45deg,
+            #116b2d 0px,
+            #116b2d 12px,
+            #19983e 12px,
+            #19983e 24px
         );
-    animation:moveStripes 1s linear infinite;
-    transition:width 1s ease;
+
+    background-size: 34px 34px;
+    animation: stripes 1s linear infinite;
+
+    transition: width 1s ease;
 }
 
-@keyframes moveStripes{
-    to{
-        background-position:28px 0;
+@keyframes stripes {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 34px 0;
     }
 }
 
-/* =====================================================
-   OTWARTY PORTFEL
-===================================================== */
-
-.wallet-big{
-    display:flex;
-    justify-content:center;
-    margin:55px 0 18px;
-}
-
-.wallet{
-    width:230px;
-    height:135px;
-    position:relative;
-    background:linear-gradient(145deg,#704523,#321d10);
-    border:6px solid #a86b3c;
-    border-radius:20px;
-    transform:rotate(-2deg);
-    box-shadow:0 18px 35px #0009;
-}
-
-.wallet:before{
-    content:"";
-    position:absolute;
-    left:18px;
-    right:18px;
-    bottom:15px;
-    height:82px;
-    background:#26160c;
-    border-radius:12px;
-}
-
-.bill{
-    position:absolute;
-    width:78px;
-    height:108px;
-    left:78px;
-    top:-72px;
-    z-index:2;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    background:#8df7a9;
-    color:#075321;
-    border:3px solid #3b9d5a;
-    border-radius:6px;
-    font-weight:1000;
-    font-size:24px;
-    transform:rotate(9deg);
-    box-shadow:0 8px 20px #0008;
-}
-
-/* =====================================================
-   CZTERY PORTFELE
-===================================================== */
-
-.wallet-options{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-}
-
-.wallet-option{
-    min-height:110px;
-    background:#0d2817;
-    color:white;
-    border:1px solid #216b3a;
-    border-radius:18px;
-    font-weight:1000;
-    transition:.25s;
-}
-
-.wallet-option:hover{
-    transform:translateY(-5px);
-    border-color:var(--green);
-    box-shadow:0 0 25px #20ff7855;
-}
-
-.wallet-icon{
-    display:block;
-    font-size:35px;
-    margin-bottom:7px;
-}
-
-.wallet-option small{
-    display:block;
-    color:#91c8a4;
-    margin-top:5px;
-}
-
-/* =====================================================
-   STATYSTYKI
-===================================================== */
-
-.stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-}
-
-.stat{
-    padding:18px;
-    text-align:center;
-    background:#09190f;
-    border:1px solid #194d2c;
-    border-radius:18px;
-}
-
-.stat b{
-    display:block;
-    color:var(--green);
-    font-size:30px;
-    margin-bottom:5px;
-}
-
-/* =====================================================
-   PRZYCISKI
-===================================================== */
-
-.actions{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.action{
-    padding:13px 16px;
-    border-radius:14px;
-    background:#0d2817;
-    color:white;
-    border:1px solid #216b3a;
-    font-weight:900;
-}
-
-.action:hover{
-    border-color:var(--green);
-    box-shadow:0 0 18px #20ff7844;
-}
-
-.expense{
-    background:#2b1010;
-    border-color:#a51e1e;
-}
-
-.clear{
-    padding:10px 15px;
-    border:0;
-    border-radius:12px;
-    background:#a91515;
-    color:white;
-    font-weight:900;
-}
-
-.clear:hover{
-    background:#e02121;
-    box-shadow:0 0 18px #ff252555;
-}
-
-/* =====================================================
-   WYKRES
-===================================================== */
-
-.chart-box{
-    overflow-x:auto;
-    border:1px solid #174d2c;
-    border-radius:18px;
-    background:#061009;
-    padding:12px;
-}
-
-canvas{
-    display:block;
-    min-width:760px;
-    width:100%;
-    height:280px;
-}
-
-/* =====================================================
-   HISTORIA
-===================================================== */
-
-.history{
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-}
-
-.history-item{
-    display:grid;
-    grid-template-columns:1fr auto auto;
-    gap:12px;
-    align-items:center;
-    padding:12px 14px;
-    background:#09190f;
-    border-radius:14px;
-}
-
-.income{
-    color:#20ff78;
-}
-
-.outcome{
-    color:#ff5555;
-}
-
-.more{
-    margin-top:12px;
-    padding:11px 15px;
-    border-radius:12px;
-    background:#10281a;
-    color:white;
-    border:1px solid #205d35;
-    font-weight:900;
-}
-
-/* =====================================================
-   SEJFY
-===================================================== */
-
-.safes-title{
-    color:var(--green);
-    text-shadow:
-        0 0 8px var(--green),
-        0 0 25px #20ff7855;
-}
-
-.safes-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:35px;
-    max-width:760px;
-    margin:30px auto 0;
-}
-
-.safe-wrap{
-    position:relative;
-    text-align:center;
-    min-height:335px;
-}
-
-/* MGŁA */
-
-.safe-mist{
-    position:absolute;
-    left:8%;
-    right:8%;
-    bottom:12px;
-    height:65px;
-    background:radial-gradient(
-        ellipse,
-        #5effaa66,
-        transparent 70%
-    );
-    filter:blur(8px);
-    z-index:0;
-}
-
-/* SEJF */
-
-.safe{
-    position:relative;
-    height:190px;
-    z-index:2;
-    background:linear-gradient(145deg,#657279,#20292d);
-    border:7px solid #8e9ba0;
-    border-radius:21px;
-    box-shadow:
-        inset 0 0 30px #0009,
-        0 15px 30px #0009;
-}
-
-.safe-frame{
-    position:absolute;
-    inset:18px;
-    border:3px solid #b0b9bc;
-    border-radius:12px;
-}
-
-.safe-door{
-    position:absolute;
-    inset:28px 30px;
-    background:linear-gradient(145deg,#3b464b,#151b1e);
-    border:4px solid #7e8b90;
-    border-radius:10px;
-    transform-origin:left center;
-    transition:.35s;
-    z-index:3;
-}
+/* ===== PRZYCISKI WPŁAT ===== */
 
-/* lekko uchylony */
-
-.safe:not(.full) .safe-door{
-    transform:perspective(600px) rotateY(-5deg);
-}
-
-.safe-lock{
-    position:absolute;
-    left:50%;
-    top:55px;
-    transform:translateX(-50%);
-    width:42px;
-    height:42px;
-    border:5px solid #bac3c6;
-    border-radius:50%;
-    z-index:5;
-}
-
-.safe-handle{
-    position:absolute;
-    right:15px;
-    top:58px;
-    width:26px;
-    height:26px;
-    border:5px solid #bac3c6;
-    border-radius:50%;
-    z-index:5;
-}
-
-/* =====================================================
-   SEJF PEŁNY
-===================================================== */
-
-.safe.full{
-    animation:safeShake .12s linear 14;
-}
-
-@keyframes safeShake{
-    25%{
-        transform:translateX(-7px);
-    }
-
-    75%{
-        transform:translateX(7px);
-    }
-}
-
-.safe.full .safe-door{
-    animation:doorExplosion .8s 1.7s forwards;
-}
-
-@keyframes doorExplosion{
-    to{
-        transform:perspective(600px) rotateY(-75deg);
-    }
+.deposit-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
 }
 
-/* =====================================================
-   BANKNOTY Z SEJFU
-===================================================== */
-
-.money-burst{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    z-index:20;
+.deposit-btn {
+    min-height: 70px;
+    border: 1px solid #239944;
+    background: #0c2b17;
+    color: white;
+    border-radius: 15px;
+    padding: 12px;
+    font-weight: bold;
+    transition: .2s;
 }
 
-.money{
-    position:absolute;
-    left:50%;
-    top:45%;
-    font-size:30px;
-    animation:moneyFly 1.7s ease-out forwards;
+.deposit-btn:hover {
+    background: #124b25;
+    border-color: #4aff79;
+    transform: translateY(-3px);
+    box-shadow: 0 0 15px rgba(45,255,100,.3);
 }
 
-@keyframes moneyFly{
-    to{
-        transform:
-            translate(var(--x),var(--y))
-            rotate(var(--r));
-        opacity:0;
-    }
+.deposit-btn.green {
+    color: #57ff7d;
 }
 
-/* =====================================================
-   PASEK SEJFU
-===================================================== */
-
-.safe-amount{
-    margin-top:12px;
-    color:var(--green);
-    font-weight:1000;
-    text-shadow:0 0 12px #20ff78;
+.deposit-btn.red {
+    color: #ff6060;
+    border-color: #a52c2c;
+    background: #2b0c0c;
 }
 
-.safe-progress{
-    height:13px;
-    margin:8px 20px;
-    overflow:hidden;
-    background:#061009;
-    border:1px solid #164b2b;
-    border-radius:99px;
+.deposit-btn.red:hover {
+    background: #481010;
+    box-shadow: 0 0 15px rgba(255,50,50,.25);
 }
 
-.safe-progress div{
-    height:100%;
-    background:#20ff78;
-    box-shadow:0 0 13px #20ff78;
-    transition:width .5s;
-}
+/* ===== STATYSTYKI ===== */
 
-/* =====================================================
-   PRZYCISKI SEJFU
-===================================================== */
-
-.safe-actions{
-    display:none;
-    justify-content:center;
-    gap:8px;
-    margin-top:10px;
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
 }
 
-.safe-wrap:hover .safe-actions{
-    display:flex;
+.stat {
+    background: #081b0e;
+    border: 1px solid #18572d;
+    border-radius: 16px;
+    padding: 18px;
+    text-align: center;
 }
 
-.safe-actions button{
-    padding:8px 11px;
-    border-radius:10px;
-    background:#0d2415;
-    color:white;
-    border:1px solid #28683e;
-    font-weight:900;
+.stat-title {
+    color: #91b79a;
+    font-size: 14px;
 }
 
-.safe-actions .danger{
-    background:#8e1515;
-    border-color:#d72b2b;
+.stat-value {
+    margin-top: 7px;
+    color: #58ff7d;
+    font-size: 28px;
+    font-weight: bold;
 }
-
-/* =====================================================
-   SEJF ODLECIAŁ
-===================================================== */
 
-.safe.fly-away{
-    animation:safeFly .8s ease-in forwards;
-}
+/* ===== WYKRES ===== */
 
-@keyframes safeFly{
-    to{
-        transform:
-            translateY(-230px)
-            rotate(-10deg);
-        opacity:0;
-    }
+.chart-container {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
 }
 
-/* =====================================================
-   NOWY SEJF WYCHODZI Z ZIEMI
-===================================================== */
-
-.safe.new-safe{
-    animation:safeEmerge 1.15s cubic-bezier(.2,1.4,.4,1) forwards;
+.chart-inner {
+    min-width: 700px;
 }
 
-@keyframes safeEmerge{
-    0%{
-        transform:translateY(230px) scale(.7);
-        opacity:0;
-    }
-
-    70%{
-        transform:translateY(-12px) scale(1.03);
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(0) scale(1);
-        opacity:1;
-    }
+canvas {
+    display: block;
+    width: 100%;
+    height: 300px;
+    background: #061009;
+    border: 1px solid #154d28;
+    border-radius: 14px;
 }
 
-/* PĘKNIĘCIA ZIEMI */
-
-.ground-cracks{
-    position:absolute;
-    left:50%;
-    bottom:42px;
-    transform:translateX(-50%);
-    width:210px;
-    height:55px;
-    z-index:1;
-    opacity:0;
-}
+/* ===== HISTORIA ===== */
 
-.ground-cracks.show{
-    animation:cracksShow .9s forwards;
+.history {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-.ground-cracks:before,
-.ground-cracks:after{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:5px;
-    top:22px;
-    background:#31553c;
+.history-item {
+    display: grid;
+    grid-template-columns: 100px 1fr auto auto;
+    gap: 12px;
+    align-items: center;
+    padding: 13px;
+    background: #081b0e;
+    border-radius: 12px;
+    border-left: 4px solid #29d953;
 }
 
-.ground-cracks:before{
-    right:50%;
-    transform:rotate(20deg);
+.history-item.expense {
+    border-left-color: #ff4242;
 }
 
-.ground-cracks:after{
-    left:50%;
-    transform:rotate(-20deg);
+.history-date {
+    color: #87a98f;
+    font-size: 13px;
 }
 
-.crack1,
-.crack2{
-    position:absolute;
-    width:65px;
-    height:4px;
-    top:10px;
-    background:#31553c;
+.history-description {
+    font-weight: bold;
 }
 
-.crack1{
-    left:15px;
-    transform:rotate(30deg);
+.history-amount.income {
+    color: #45ff70;
+    font-weight: bold;
 }
 
-.crack2{
-    right:15px;
-    transform:rotate(-30deg);
+.history-amount.expense {
+    color: #ff5050;
+    font-weight: bold;
 }
 
-@keyframes cracksShow{
-    from{
-        opacity:0;
-        transform:translateX(-50%) scale(.3);
-    }
-
-    to{
-        opacity:1;
-        transform:translateX(-50%) scale(1);
-    }
+.history-balance {
+    color: #9bb8a1;
+    font-size: 13px;
 }
 
-/* =====================================================
-   KONFETTI
-===================================================== */
-
-.celebration{
-    position:fixed;
-    inset:0;
-    z-index:10000;
-    pointer-events:none;
-    overflow:hidden;
+.more-btn {
+    margin: 15px auto 0;
+    display: block;
+    border: none;
+    background: transparent;
+    color: #52ff78;
+    font-weight: bold;
 }
 
-.confetti{
-    position:absolute;
-    top:-30px;
-    animation:confettiFall 2.6s linear forwards;
-}
+/* ===== CZERWONE PRZYCISKI ===== */
 
-@keyframes confettiFall{
-    to{
-        top:110vh;
-        transform:rotate(1000deg);
-    }
+.danger {
+    background: #4a1010;
+    color: #ff6565;
+    border: 1px solid #a92d2d;
+    border-radius: 10px;
+    padding: 10px 16px;
+    font-weight: bold;
 }
 
-.congratulations{
-    position:fixed;
-    z-index:10001;
-    left:50%;
-    top:45%;
-    transform:translate(-50%,-50%) scale(.5);
-    opacity:0;
-    padding:28px 38px;
-    border-radius:25px;
-    background:#0b2515;
-    border:2px solid var(--green);
-    box-shadow:0 0 60px #20ff78aa;
-    text-align:center;
-    font-size:30px;
-    font-weight:1000;
-    pointer-events:none;
+.danger:hover {
+    background: #681414;
 }
 
-.congratulations.show{
-    animation:congrats 2.8s ease forwards;
+.section-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 15px;
 }
 
-@keyframes congrats{
-    15%,75%{
-        opacity:1;
-        transform:translate(-50%,-50%) scale(1);
-    }
-
-    100%{
-        opacity:0;
-        transform:translate(-50%,-50%) scale(1.08);
-    }
-}
+/* ===== SEJFY ===== */
 
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal{
-    position:fixed;
-    inset:0;
-    z-index:9000;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    background:#000b;
+.safes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+    margin-top: 25px;
 }
 
-.modal.show{
-    display:flex;
+.safe {
+    position: relative;
+    width: min(420px, 90%);
+    background: linear-gradient(145deg, #153b20, #08180d);
+    border: 2px solid #277b3d;
+    border-radius: 18px;
+    padding: 20px;
+    transition: .3s;
+    box-shadow: 0 0 20px rgba(0,0,0,.4);
 }
 
-.modal-box{
-    width:min(420px,90%);
-    padding:25px;
-    border-radius:22px;
-    background:#0c1d12;
-    border:1px solid var(--green);
-    box-shadow:0 0 40px #20ff7844;
+.safe:hover {
+    border-color: #4aff77;
+    box-shadow: 0 0 25px rgba(42,255,95,.2);
 }
 
-.modal-box input{
-    width:100%;
-    margin-top:9px;
-    padding:11px;
-    border-radius:11px;
-    background:#06110b;
-    color:white;
-    border:1px solid #24633a;
+.safe-title {
+    text-align: center;
+    color: #54ff7a;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 14px;
+    text-shadow: 0 0 10px rgba(55,255,100,.35);
 }
-
-/* =====================================================
-   CELE
-===================================================== */
 
-.goals-page{
-    min-height:100vh;
+.safe-door {
+    height: 130px;
+    position: relative;
+    border-radius: 12px;
     background:
-        radial-gradient(circle at 50% -10%,#513007,#120b02 60%);
+        linear-gradient(135deg, #2d6939, #102c18);
+    border: 2px solid #489653;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: transform .4s;
 }
 
-.goals-page .card{
-    background:linear-gradient(145deg,#251605,#160d03);
-    border-color:#70420d;
+.safe-door::before {
+    content: "🔒";
+    font-size: 48px;
+    filter: drop-shadow(0 0 8px rgba(255,255,255,.15));
 }
 
-.orange{
-    color:#ffad2f;
-    text-shadow:0 0 13px #ff9f1c99;
+.safe-progress {
+    margin-top: 15px;
+    height: 15px;
+    background: #061009;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #205d30;
 }
 
-.orange-progress{
-    height:25px;
-    background:#160c02;
-    border:1px solid #74450b;
-    border-radius:99px;
-    overflow:hidden;
+.safe-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: #35e85f;
+    border-radius: 20px;
+    transition: width .5s;
 }
 
-.orange-progress div{
-    height:100%;
-    width:0;
-    background:linear-gradient(90deg,#ff7a00,#ffc04a);
-    box-shadow:0 0 15px #ff9f1c;
-    transition:width 1s;
+.safe-amount {
+    text-align: center;
+    margin-top: 9px;
+    color: #c6e7cc;
+    font-weight: bold;
 }
 
-.milestones{
-    display:flex;
-    justify-content:space-between;
-    gap:8px;
-    flex-wrap:wrap;
+.safe-actions {
+    display: none;
+    gap: 8px;
+    margin-top: 12px;
 }
 
-.milestone{
-    padding:12px 15px;
-    border-radius:14px;
-    background:#261505;
-    border:1px solid #70420d;
-    color:#ffcb79;
+.safe:hover .safe-actions {
+    display: flex;
 }
 
-.extra-goals{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+.safe-actions button {
+    flex: 1;
+    border: 1px solid #26783a;
+    background: #0c2a16;
+    color: white;
+    border-radius: 9px;
+    padding: 9px;
 }
 
-.extra-goal{
-    padding:18px;
-    border:1px solid #70420d;
-    border-radius:17px;
-    background:#1a0e03;
-    color:#ffd38e;
-    font-weight:900;
+.safe-actions button:hover {
+    background: #144e26;
 }
 
-/* =====================================================
-   TELEFON
-===================================================== */
+.safe-actions .clear-safe {
+    border-color: #9d3030;
+    color: #ff6c6c;
+    background: #321010;
+}
 
-@media(max-width:700px){
+/* ===== ANIMACJE SEJFÓW ===== */
 
-    .wallet-options{
-        grid-template-columns:1fr 1fr;
+.safe.shake .safe-door {
+    animation: shake .12s linear infinite;
+}
+
+@keyframes shake {
+    0% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    100% { transform: translateX(-5px); }
+}
+
+.safe.open .safe-door {
+    animation: safeOpen .8s ease forwards;
+}
+
+@keyframes safeOpen {
+    0% {
+        transform: rotateY(0deg);
+    }
+    100% {
+        transform: rotateY(-55deg);
+    }
+}
+
+.money-burst {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.flying-money {
+    position: absolute;
+    font-size: 25px;
+    animation: flyMoney 2.3s ease-out forwards;
+}
+
+@keyframes flyMoney {
+    0% {
+        transform: translate(-50%, -50%) scale(.4) rotate(0deg);
+        opacity: 0;
     }
 
-    .stats{
-        grid-template-columns:1fr;
+    15% {
+        opacity: 1;
     }
 
-    .safes-grid{
-        grid-template-columns:1fr;
-    }
-
-    .extra-goals{
-        grid-template-columns:1fr;
-    }
-
-    .history-item{
-        grid-template-columns:1fr auto;
+    100% {
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            scale(1.2)
+            rotate(var(--r));
+        opacity: 0;
     }
 }
 
-@media(max-width:480px){
+.safe.fly-away {
+    animation: flyAway .8s ease forwards;
+}
 
-    .balance{
-        font-size:43px;
+@keyframes flyAway {
+    to {
+        transform: translateY(-500px) rotate(15deg);
+        opacity: 0;
+    }
+}
+
+.safe.new-safe {
+    opacity: 0;
+    transform: translateY(180px) scale(.7);
+}
+
+.safe.new-safe.show {
+    animation: emergeSafe .9s ease forwards;
+}
+
+@keyframes emergeSafe {
+    0% {
+        opacity: 0;
+        transform: translateY(180px) scale(.7);
+    }
+    60% {
+        opacity: 1;
+        transform: translateY(-8px) scale(1.03);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ===== CELE ===== */
+
+.goals-title {
+    text-align: center;
+    color: #54ff7a;
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+
+.goal-main {
+    text-align: center;
+}
+
+.goal-main-amount {
+    font-size: 48px;
+    font-weight: bold;
+    color: #54ff7a;
+}
+
+.goal-main-target {
+    color: #9dbda5;
+    margin-bottom: 18px;
+}
+
+.goal-progress {
+    height: 22px;
+    background: #071009;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid #235e32;
+}
+
+.goal-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #1a9b3e, #54ff7a);
+    border-radius: 30px;
+    transition: width 1s ease;
+}
+
+.goal-percent {
+    margin-top: 10px;
+    color: #59ff7c;
+    font-weight: bold;
+}
+
+/* STARY STYL CELÓW */
+
+.goals-list {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.goal-card {
+    background: #081b0e;
+    border: 1px solid #195a2e;
+    border-radius: 14px;
+    padding: 18px;
+}
+
+.goal-card h3 {
+    margin: 0 0 7px;
+    color: #54ff7a;
+}
+
+.goal-card p {
+    margin: 0;
+    color: #a8c6ae;
+}
+
+.milestones {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.milestone {
+    background: #081b0e;
+    border: 1px solid #195a2e;
+    border-radius: 12px;
+    text-align: center;
+    padding: 12px 5px;
+    color: #9fbea7;
+}
+
+.milestone.done {
+    border-color: #40ef68;
+    color: #52ff78;
+    box-shadow: 0 0 12px rgba(50,255,100,.15);
+}
+
+/* ===== CONFETTI ===== */
+
+.confetti {
+    position: fixed;
+    top: -30px;
+    font-size: 25px;
+    z-index: 9999;
+    pointer-events: none;
+    animation: confettiFall 2.8s linear forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform:
+            translateY(110vh)
+            translateX(var(--drift))
+            rotate(720deg);
+        opacity: 0;
+    }
+}
+
+.celebration {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(.5);
+    background: rgba(5,25,12,.96);
+    border: 2px solid #45ff73;
+    box-shadow: 0 0 40px rgba(40,255,90,.45);
+    border-radius: 20px;
+    padding: 25px 35px;
+    text-align: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.celebration.show {
+    animation: celebrationShow 2.4s ease forwards;
+}
+
+.celebration h2 {
+    color: #55ff7a;
+    margin: 0 0 8px;
+}
+
+.celebration p {
+    margin: 0;
+    color: white;
+}
+
+@keyframes celebrationShow {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.5);
+    }
+    15%,75% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.9);
+    }
+}
+
+/* ===== RESPONSYWNOŚĆ ===== */
+
+@media (max-width: 750px) {
+    .deposit-buttons {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .top-update{
-        font-size:12px;
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .history-item {
+        grid-template-columns: 1fr;
+        gap: 5px;
+    }
+
+    .milestones {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 450px) {
+    .deposit-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 16px;
     }
 }
 </style>
@@ -938,701 +772,422 @@ canvas{
 
 <body>
 
-<!-- =====================================================
-     AKTUALIZACJA
-===================================================== -->
+<div class="container">
 
-<div class="update-badge">
-    🔴 NOWA AKTUALIZACJA!
-</div>
-
-<!-- =====================================================
-     ZAKŁADKI
-===================================================== -->
+<header>
+    <div class="money-symbol">$</div>
+    <h1>ZBieranie</h1>
+    <div class="subtitle">Zbieramy aż do 6868 zł 💰</div>
+</header>
 
 <div class="tabs">
-
-    <button
-        id="tabSaldo"
-        class="tab active"
-        onclick="showTab('saldo')"
-    >
-        💰 Saldo
-    </button>
-
-    <button
-        id="tabCele"
-        class="tab"
-        onclick="showTab('cele')"
-    >
-        🎯 Cele
-    </button>
-
+    <button class="tab active" onclick="showPage('saldo', this)">💰 Saldo</button>
+    <button class="tab" onclick="showPage('cele', this)">🎯 Cele</button>
 </div>
 
 <!-- =====================================================
      SALDO
 ===================================================== -->
 
-<main id="saldoPage" class="page">
+<div id="saldo" class="page active">
 
-<section class="card balance-card">
+    <section class="section balance-box">
+        <h2>💰 Aktualne saldo</h2>
 
-    <h1 class="glow">
-        ZBieranie
-    </h1>
+        <div class="balance" id="balance">0,00 zł</div>
 
-    <!-- OTWARTY PORTFEL -->
+        <div class="target">
+            Cel główny: 6868,00 zł
+        </div>
 
-    <div class="wallet-big">
+        <div class="progress-wrapper">
+            <div class="progress-info">
+                <span>Postęp</span>
+                <span id="percent">0%</span>
+            </div>
 
-        <div class="wallet">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+        </div>
 
-            <div class="bill">
-                50<br>zł
+        <div class="section-actions">
+            <button class="danger" onclick="clearBalance()">
+                🗑 Wyczyść saldo
+            </button>
+        </div>
+    </section>
+
+
+    <!-- DODAWANIE PIENIĘDZY -->
+
+    <section class="section">
+        <h2>💰 Dodaj pieniądze</h2>
+
+        <div class="deposit-buttons">
+
+            <button class="deposit-btn green"
+                    onclick="addMoney(0.50, '🍾 Kaucja')">
+                +0,50 zł<br>
+                <small>Kaucja</small>
+            </button>
+
+            <button class="deposit-btn green"
+                    onclick="addMoney(10, '🍾 20 butelek')">
+                +10 zł<br>
+                <small>20 butelek</small>
+            </button>
+
+            <button class="deposit-btn green"
+                    onclick="addMoney(20, '🍾 40 butelek')">
+                +20 zł<br>
+                <small>40 butelek</small>
+            </button>
+
+            <button class="deposit-btn green"
+                    onclick="customIncome()">
+                💵 Inna kwota
+            </button>
+
+            <button class="deposit-btn red"
+                    onclick="customExpense()">
+                🔴 Wydatek
+            </button>
+
+        </div>
+    </section>
+
+
+    <!-- STATYSTYKI -->
+
+    <section class="section">
+        <h2>📊 Statystyki</h2>
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-title">🍾 Butelki</div>
+                <div class="stat-value" id="bottles">0</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-title">📅 Dni</div>
+                <div class="stat-value" id="days">0</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-title">🎯 Pozostało</div>
+                <div class="stat-value" id="remaining">6868 zł</div>
             </div>
 
         </div>
 
-    </div>
+        <h2 style="margin-top:28px;">📈 Historia zarabiania</h2>
 
-    <div class="dollar">
-        $
-    </div>
-
-    <div
-        id="balance"
-        class="balance"
-    >
-        0,00 zł
-    </div>
-
-    <div class="goal-text">
-        Cel główny: 6868,00 zł
-    </div>
-
-    <div class="main-progress">
-        <div id="mainProgress"></div>
-    </div>
-
-    <div id="mainPercent">
-        0%
-    </div>
-
-    <br>
-
-    <button
-        class="clear"
-        onclick="clearBalance()"
-    >
-        🗑 Wyczyść saldo
-    </button>
-
-</section>
-
-<!-- =====================================================
-     STATYSTYKI
-===================================================== -->
-
-<section class="card">
-
-    <h2>
-        📊 Statystyki
-    </h2>
-
-    <div class="stats">
-
-        <div class="stat">
-            <b id="bottles">0</b>
-            🍾 Butelki
+        <div class="chart-container">
+            <div class="chart-inner">
+                <canvas id="chart" width="900" height="300"></canvas>
+            </div>
         </div>
 
-        <div class="stat">
-            <b id="days">0</b>
-            📅 Dni
+        <div class="section-actions">
+            <button class="danger" onclick="clearChartHistory()">
+                🗑 Wyczyść
+            </button>
         </div>
+    </section>
 
-        <div class="stat">
-            <b id="remaining">6868,00 zł</b>
-            💰 Pozostało
+
+    <!-- HISTORIA -->
+
+    <section class="section">
+        <h2>📜 Historia pieniędzy</h2>
+
+        <div id="history" class="history"></div>
+
+        <button id="moreButton"
+                class="more-btn"
+                onclick="toggleHistory()"
+                style="display:none;">
+            Pokaż więcej ▼
+        </button>
+
+        <div class="section-actions">
+            <button class="danger" onclick="clearHistory()">
+                🗑 Wyczyść
+            </button>
         </div>
+    </section>
 
-    </div>
 
-    <h3 class="glow">
-        📈 Historia zarobku
-    </h3>
+    <!-- SEJFY -->
 
-    <div class="chart-box">
+    <section class="section">
+        <h2>🔐 Sejfy</h2>
 
-        <canvas
-            id="chart"
-            width="900"
-            height="280"
-        ></canvas>
+        <p style="color:#9ebda5;">
+            Każdy sejf może przechować maksymalnie 500 zł.
+            Po zapełnieniu pieniądze automatycznie trafiają do głównego salda.
+        </p>
 
-    </div>
+        <div class="safes" id="safes"></div>
+    </section>
 
-    <br>
+</div>
 
-    <button
-        class="clear"
-        onclick="clearChart()"
-    >
-        🗑 Wyczyść wykres
-    </button>
-
-</section>
-
-<!-- =====================================================
-     DODAWANIE PIENIĘDZY
-===================================================== -->
-
-<section class="card">
-
-    <h2>
-        💰 Dodaj pieniądze
-    </h2>
-
-    <div class="actions">
-
-        <button
-            class="action"
-            onclick="deposit(0.5,'Kaucja',1,false)"
-        >
-            +0,50 zł — Kaucja
-        </button>
-
-        <button
-            class="action"
-            onclick="deposit(10,'20 butelek',20,false)"
-        >
-            +10 zł — 20 butelek
-        </button>
-
-        <button
-            class="action"
-            onclick="deposit(20,'40 butelek',40,false)"
-        >
-            +20 zł — 40 butelek
-        </button>
-
-        <button
-            class="action"
-            onclick="openCustom(false,false)"
-        >
-            💵 Inna kwota
-        </button>
-
-        <button
-            class="action expense"
-            onclick="openCustom(true,false)"
-        >
-            🔴 Wydatek
-        </button>
-
-    </div>
-
-    <h3
-        class="glow"
-        style="margin-top:28px"
-    >
-        👛 Portfele szybkiego wpłacania
-    </h3>
-
-    <div class="wallet-options">
-
-        <button
-            class="wallet-option"
-            onclick="deposit(250,'👛 Portfel 250 zł',0,true)"
-        >
-            <span class="wallet-icon">
-                👛
-            </span>
-
-            250 zł
-
-        </button>
-
-        <button
-            class="wallet-option"
-            onclick="deposit(500,'👛 Portfel 500 zł',0,true)"
-        >
-            <span class="wallet-icon">
-                👛
-            </span>
-
-            500 zł
-
-        </button>
-
-        <button
-            class="wallet-option"
-            onclick="deposit(1000,'👛 Portfel 1000 zł',0,true)"
-        >
-            <span class="wallet-icon">
-                👛
-            </span>
-
-            1000 zł
-
-        </button>
-
-        <button
-            class="wallet-option"
-            onclick="openCustom(false,true)"
-        >
-            <span class="wallet-icon">
-                💵
-            </span>
-
-            Własna kwota
-
-            <small>
-                czwarty portfel
-            </small>
-
-        </button>
-
-    </div>
-
-</section>
-
-<!-- =====================================================
-     HISTORIA
-===================================================== -->
-
-<section class="card">
-
-    <h2>
-        📜 Historia pieniędzy
-    </h2>
-
-    <div
-        id="history"
-        class="history"
-    ></div>
-
-    <button
-        id="moreBtn"
-        class="more"
-        onclick="toggleHistory()"
-    >
-        Pokaż więcej ▼
-    </button>
-
-    <br><br>
-
-    <button
-        class="clear"
-        onclick="clearHistory()"
-    >
-        🗑 Wyczyść
-    </button>
-
-</section>
-
-<!-- =====================================================
-     SEJFY
-===================================================== -->
-
-<section class="card">
-
-    <h2 class="safes-title">
-        🔐 Sejfy
-    </h2>
-
-    <p style="color:#91bba0">
-        Każdy sejf może pomieścić maksymalnie 500 zł.
-        Najedź na sejf, aby zobaczyć jego przyciski.
-    </p>
-
-    <div
-        id="safes"
-        class="safes-grid"
-    ></div>
-
-</section>
-
-</main>
 
 <!-- =====================================================
      CELE
 ===================================================== -->
 
-<main
-    id="celePage"
-    class="page goals-page hidden"
->
+<div id="cele" class="page">
 
-<section class="card">
+    <section class="section">
 
-    <h1 class="orange">
-        🎯 Cele
-    </h1>
-
-    <h2>
-        Główny cel:
-        <span id="goalAmount">
-            6868,00 zł
-        </span>
-    </h2>
-
-    <div class="orange-progress">
-        <div id="goalProgress"></div>
-    </div>
-
-    <h2
-        id="goalPercent"
-        class="orange"
-    >
-        0%
-    </h2>
-
-</section>
-
-<section class="card">
-
-    <h2 class="orange">
-        🏆 Kamienie milowe
-    </h2>
-
-    <div class="milestones">
-
-        <div class="milestone">
-            500 zł
+        <div class="goals-title">
+            🎯 Cele
         </div>
 
-        <div class="milestone">
-            1000 zł
+        <div class="goal-main">
+
+            <div class="goal-main-amount" id="goalBalance">
+                0,00 zł
+            </div>
+
+            <div class="goal-main-target">
+                Cel główny: 6868 zł
+            </div>
+
+            <div class="goal-progress">
+                <div class="goal-progress-fill"
+                     id="goalProgress"></div>
+            </div>
+
+            <div class="goal-percent" id="goalPercent">
+                0%
+            </div>
+
         </div>
 
-        <div class="milestone">
-            2500 zł
+        <div class="milestones">
+
+            <div class="milestone" data-value="500">
+                500 zł
+            </div>
+
+            <div class="milestone" data-value="1000">
+                1000 zł
+            </div>
+
+            <div class="milestone" data-value="2500">
+                2500 zł
+            </div>
+
+            <div class="milestone" data-value="5000">
+                5000 zł
+            </div>
+
+            <div class="milestone" data-value="6868">
+                6868 zł
+            </div>
+
         </div>
 
-        <div class="milestone">
-            5000 zł
+    </section>
+
+
+    <section class="section">
+
+        <h2>🎯 Moje cele</h2>
+
+        <div class="goals-list">
+
+            <div class="goal-card">
+                <h3>🛴 2× Kukirin G4</h3>
+                <p>Dwie hulajnogi Kukirin G4.</p>
+            </div>
+
+            <div class="goal-card">
+                <h3>🖥️ Nowy komputer</h3>
+                <p>Gamingowy komputer do Minecrafta, Robloxa i innych gier.</p>
+            </div>
+
+            <div class="goal-card">
+                <h3>🎮 PlayStation 5 Slim</h3>
+                <p>Konsola do grania.</p>
+            </div>
+
+            <div class="goal-card">
+                <h3>✨ Własny cel</h3>
+                <p>Cel do ustawienia w przyszłości.</p>
+            </div>
+
         </div>
 
-        <div class="milestone">
-            6868 zł
-        </div>
-
-    </div>
-
-</section>
-
-<section class="card">
-
-    <h2 class="orange">
-        🛴 Główny cel
-    </h2>
-
-    <div class="extra-goals">
-
-        <div class="extra-goal">
-            🛴 2× Kukirin G4
-        </div>
-
-        <div class="extra-goal">
-            🖥️ Nowy komputer
-        </div>
-
-        <div class="extra-goal">
-            🎮 PlayStation 5
-        </div>
-
-        <div class="extra-goal">
-            ⭐ Własny cel
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-
-<!-- =====================================================
-     MODAL
-===================================================== -->
-
-<div
-    id="modal"
-    class="modal"
->
-
-    <div class="modal-box">
-
-        <h3 id="modalTitle">
-            Dodaj kwotę
-        </h3>
-
-        <input
-            id="amountInput"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="Kwota"
-        >
-
-        <input
-            id="descInput"
-            type="text"
-            placeholder="Opis"
-        >
-
-        <br><br>
-
-        <button
-            class="action"
-            onclick="submitCustom()"
-        >
-            Zapisz
-        </button>
-
-        <button
-            class="clear"
-            onclick="closeModal()"
-        >
-            Anuluj
-        </button>
-
-    </div>
+    </section>
 
 </div>
 
-<!-- =====================================================
-     KONFETTI
-===================================================== -->
+</div>
 
-<div
-    id="celebration"
-    class="celebration"
-></div>
 
-<div
-    id="congratulations"
-    class="congratulations"
-></div>
+<!-- CELEBRACJA -->
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
+<div id="celebration" class="celebration">
+    <h2 id="celebrationTitle">🎉 Brawo!</h2>
+    <p id="celebrationText">Dodano pieniądze!</p>
+</div>
+
 
 <script>
 
+/* =====================================================
+   DANE
+===================================================== */
+
 const GOAL = 6868;
+const SAFE_MAX = 500;
 
-const CODE = "ButelKaucja";
-
-/*
-    Dane zapisują się w przeglądarce.
-*/
-
-let data = JSON.parse(
-    localStorage.getItem("zbieranieData") ||
-    JSON.stringify({
-        balance:0,
-        history:[],
-        bottles:0,
-        days:[],
-        safes:[0,0,0,0]
-    })
-);
-
-let showAll = false;
-
-let customExpense = false;
-
-let customWallet = false;
+let data = JSON.parse(localStorage.getItem("zbieranieData")) || {
+    balance: 0,
+    bottles: 0,
+    days: [],
+    history: [],
+    safes: [0, 0, 0, 0]
+};
 
 
 /* =====================================================
-   PODSTAWOWE FUNKCJE
+   ZAPIS
 ===================================================== */
 
-function save(){
-
+function save() {
     localStorage.setItem(
         "zbieranieData",
         JSON.stringify(data)
     );
-
-}
-
-
-function money(number){
-
-    return number.toLocaleString(
-        "pl-PL",
-        {
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }
-    ) + " zł";
-
-}
-
-
-function today(){
-
-    return new Date().toLocaleDateString(
-        "pl-PL"
-    );
-
-}
-
-
-function addDay(){
-
-    const d = today();
-
-    if(!data.days.includes(d)){
-
-        data.days.push(d);
-
-    }
-
 }
 
 
 /* =====================================================
-   AKTUALIZACJA STRONY
+   FORMATOWANIE
 ===================================================== */
 
-function update(){
-
-    document.getElementById("balance").textContent =
-        money(data.balance);
-
-
-    const percent =
-        Math.min(
-            100,
-            data.balance / GOAL * 100
-        );
-
-
-    document.getElementById(
-        "mainProgress"
-    ).style.width =
-        percent + "%";
-
-
-    document.getElementById(
-        "mainPercent"
-    ).textContent =
-        percent.toFixed(1) + "%";
-
-
-    document.getElementById(
-        "remaining"
-    ).textContent =
-        money(
-            Math.max(
-                0,
-                GOAL - data.balance
-            )
-        );
-
-
-    document.getElementById(
-        "bottles"
-    ).textContent =
-        data.bottles;
-
-
-    document.getElementById(
-        "days"
-    ).textContent =
-        data.days.length;
-
-
-    document.getElementById(
-        "goalProgress"
-    ).style.width =
-        percent + "%";
-
-
-    document.getElementById(
-        "goalPercent"
-    ).textContent =
-        percent.toFixed(1) + "%";
-
-
-    renderHistory();
-
-    renderSafes();
-
-    drawChart();
-
-    save();
-
+function money(value) {
+    return value.toFixed(2).replace(".", ",") + " zł";
 }
 
 
 /* =====================================================
-   WPŁATA
+   DATA
 ===================================================== */
 
-function deposit(
-    amount,
-    description,
-    bottles = 0,
-    celebrate = false
-){
+function today() {
+    const d = new Date();
 
-    if(amount <= 0){
+    return d.toLocaleDateString("pl-PL");
+}
+
+
+/* =====================================================
+   ZMIANA STRONY
+===================================================== */
+
+function showPage(page, button) {
+
+    document.querySelectorAll(".page").forEach(p => {
+        p.classList.remove("active");
+    });
+
+    document.getElementById(page).classList.add("active");
+
+    document.querySelectorAll(".tab").forEach(t => {
+        t.classList.remove("active");
+    });
+
+    button.classList.add("active");
+
+    updateAll();
+}
+
+
+/* =====================================================
+   DODAWANIE PIENIĘDZY
+===================================================== */
+
+function addMoney(amount, description, bottleCount = 0, celebrate = false) {
+
+    amount = Number(amount);
+
+    if (!Number.isFinite(amount) || amount <= 0) {
         return;
     }
 
-
     data.balance += amount;
 
-    data.bottles += bottles;
+    data.bottles += bottleCount;
 
-    addDay();
+    const date = today();
 
-
-    data.history.push({
-
-        date:today(),
-
-        desc:description,
-
-        amount:amount,
-
-        balance:data.balance,
-
-        income:true
-
-    });
-
-
-    /*
-       Portfele:
-       250 / 500 / 1000 = konfetti
-       ponad 1000 = MEGA konfetti
-    */
-
-    if(celebrate){
-
-        if(amount > 1000){
-
-            megaCelebrate();
-
-        }else{
-
-            celebrateMoney();
-
-        }
-
+    if (!data.days.includes(date)) {
+        data.days.push(date);
     }
 
+    data.history.push({
+        date: date,
+        description: description,
+        amount: amount,
+        type: "income",
+        balance: data.balance
+    });
 
-    update();
+    save();
+    updateAll();
 
+    if (celebrate) {
+        celebration(
+            amount > 1000 ? "🚀 MEGA! 🚀" : "🎉 Brawo!",
+            amount > 1000
+                ? "Wpłaciłeś ponad 1000 zł!"
+                : "Dodano pieniądze!"
+        );
+    }
+}
+
+
+/* =====================================================
+   WŁASNA KWOTA
+===================================================== */
+
+function customIncome() {
+
+    const amount = prompt("Ile pieniędzy chcesz dodać?");
+
+    if (amount === null) {
+        return;
+    }
+
+    const value = Number(
+        amount.replace(",", ".")
+    );
+
+    if (!Number.isFinite(value) || value <= 0) {
+        alert("Podaj poprawną kwotę.");
+        return;
+    }
+
+    const description =
+        prompt(
+            "Skąd są te pieniądze?",
+            "💵 Inna wpłata"
+        ) || "💵 Inna wpłata";
+
+    addMoney(
+        value,
+        description,
+        0,
+        value >= 250
+    );
 }
 
 
@@ -1640,194 +1195,82 @@ function deposit(
    WYDATEK
 ===================================================== */
 
-function spend(
-    amount,
-    description
-){
+function customExpense() {
 
-    if(amount <= 0){
+    const amount = prompt("Ile wydałeś?");
+
+    if (amount === null) {
         return;
     }
 
+    const value = Number(
+        amount.replace(",", ".")
+    );
 
-    data.balance =
-        Math.max(
-            0,
-            data.balance - amount
-        );
+    if (!Number.isFinite(value) || value <= 0) {
+        alert("Podaj poprawną kwotę.");
+        return;
+    }
 
-
-    addDay();
-
-
-    data.history.push({
-
-        date:today(),
-
-        desc:description,
-
-        amount:-amount,
-
-        balance:data.balance,
-
-        income:false
-
-    });
-
-
-    update();
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-function openCustom(
-    expense = false,
-    wallet = false
-){
-
-    customExpense = expense;
-
-    customWallet = wallet;
-
-
-    document.getElementById(
-        "modalTitle"
-    ).textContent =
-        expense
-        ? "🔴 Wydatek"
-        : wallet
-        ? "💵 Własna kwota"
-        : "💵 Inna kwota";
-
-
-    document.getElementById(
-        "amountInput"
-    ).value = "";
-
-
-    document.getElementById(
-        "descInput"
-    ).value = "";
-
-
-    document.getElementById(
-        "modal"
-    ).classList.add("show");
-
-}
-
-
-function closeModal(){
-
-    document.getElementById(
-        "modal"
-    ).classList.remove("show");
-
-}
-
-
-function submitCustom(){
-
-    const amount =
-        parseFloat(
-            document.getElementById(
-                "amountInput"
-            ).value
-        );
-
+    if (value > data.balance) {
+        alert("Nie masz tylu pieniędzy na saldzie.");
+        return;
+    }
 
     const description =
-        document.getElementById(
-            "descInput"
-        ).value.trim()
-        ||
-        "Własna kwota";
+        prompt(
+            "Na co wydałeś pieniądze?",
+            "🔴 Wydatek"
+        ) || "🔴 Wydatek";
 
+    data.balance -= value;
 
-    if(!amount || amount <= 0){
+    const date = today();
 
-        return;
-
+    if (!data.days.includes(date)) {
+        data.days.push(date);
     }
 
+    data.history.push({
+        date: date,
+        description: description,
+        amount: -value,
+        type: "expense",
+        balance: data.balance
+    });
 
-    closeModal();
-
-
-    if(customExpense){
-
-        spend(
-            amount,
-            description
-        );
-
-    }else{
-
-        /*
-           Jeżeli własny czwarty portfel
-           ma ponad 1000 zł → MEGA konfetti.
-        */
-
-        deposit(
-            amount,
-            description,
-            0,
-            customWallet
-        );
-
-    }
-
+    save();
+    updateAll();
 }
 
 
 /* =====================================================
-   KOD
+   SALDO
 ===================================================== */
 
-function askCode(){
+function clearBalance() {
 
-    const entered =
-        prompt("Podaj kod:");
+    const code = prompt(
+        "Podaj kod, aby wyczyścić saldo:"
+    );
 
-    return entered === CODE;
-
-}
-
-
-/* =====================================================
-   WYCZYŚĆ SALDO
-===================================================== */
-
-function clearBalance(){
-
-    if(!askCode()){
-
-        alert("Zły kod.");
-
+    if (code !== "ButelKaucja") {
+        alert("❌ Zły kod.");
         return;
-
     }
 
-
-    if(
+    if (
         !confirm(
-            "Na pewno wyczyścić całe saldo?"
+            "Na pewno chcesz wyczyścić całe saldo?"
         )
-    ){
-
+    ) {
         return;
-
     }
-
 
     data.balance = 0;
 
-    update();
-
+    save();
+    updateAll();
 }
 
 
@@ -1835,229 +1278,389 @@ function clearBalance(){
    HISTORIA
 ===================================================== */
 
-function clearHistory(){
+let showAllHistory = false;
 
-    if(!askCode()){
+function renderHistory() {
 
-        alert("Zły kod.");
+    const box = document.getElementById("history");
+    const more = document.getElementById("moreButton");
 
-        return;
+    box.innerHTML = "";
 
-    }
+    const reversed = [...data.history].reverse();
 
+    const visible =
+        showAllHistory
+            ? reversed
+            : reversed.slice(0, 8);
 
-    if(
-        !confirm(
-            "Wyczyścić historię, dni i liczbę butelek?"
-        )
-    ){
+    visible.forEach(item => {
 
-        return;
-
-    }
-
-
-    data.history = [];
-
-    data.days = [];
-
-    data.bottles = 0;
-
-
-    update();
-
-}
-
-
-function clearChart(){
-
-    if(!askCode()){
-
-        alert("Zły kod.");
-
-        return;
-
-    }
-
-
-    if(
-        !confirm(
-            "Wyczyścić dane wykresu?"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    data.history = [];
-
-    data.days = [];
-
-    data.bottles = 0;
-
-
-    update();
-
-}
-
-
-/* =====================================================
-   HISTORIA
-===================================================== */
-
-function renderHistory(){
-
-    const element =
-        document.getElementById(
-            "history"
-        );
-
-
-    element.innerHTML = "";
-
-
-    if(data.history.length === 0){
-
-        element.innerHTML =
-            '<div style="color:#91bba0">Brak wpisów.</div>';
-
-        document.getElementById(
-            "moreBtn"
-        ).style.display =
-            "none";
-
-        return;
-
-    }
-
-
-    document.getElementById(
-        "moreBtn"
-    ).style.display =
-        data.history.length > 6
-        ? "inline-block"
-        : "none";
-
-
-    document.getElementById(
-        "moreBtn"
-    ).textContent =
-        showAll
-        ? "Pokaż mniej ▲"
-        : "Pokaż więcej ▼";
-
-
-    let list =
-        showAll
-        ? [...data.history].reverse()
-        : [...data.history]
-            .slice(-6)
-            .reverse();
-
-
-    list.forEach(item => {
-
-        const row =
-            document.createElement(
-                "div"
-            );
-
+        const row = document.createElement("div");
 
         row.className =
-            "history-item";
-
+            "history-item " +
+            (item.type === "expense"
+                ? "expense"
+                : "");
 
         row.innerHTML = `
-
-            <div>
-
-                <b>
-                    ${item.date}
-                </b>
-
-                <br>
-
-                <span
-                    class="${item.income ? "income" : "outcome"}"
-                >
-                    ${item.desc}
-                </span>
-
+            <div class="history-date">
+                ${item.date}
             </div>
 
-            <strong
-                class="${item.income ? "income" : "outcome"}"
-            >
+            <div class="history-description">
+                ${escapeHtml(item.description)}
+            </div>
 
-                ${item.income ? "+" : "-"}
-                ${money(Math.abs(item.amount))}
+            <div class="history-amount ${
+                item.type === "expense"
+                    ? "expense"
+                    : "income"
+            }">
+                ${
+                    item.amount > 0
+                        ? "+"
+                        : ""
+                }${money(item.amount)}
+            </div>
 
-            </strong>
-
-            <span>
-
+            <div class="history-balance">
                 ${money(item.balance)}
-
-            </span>
-
+            </div>
         `;
 
-
-        element.appendChild(row);
-
+        box.appendChild(row);
     });
 
+    if (data.history.length > 8) {
+
+        more.style.display = "block";
+
+        more.textContent =
+            showAllHistory
+                ? "Pokaż mniej ▲"
+                : "Pokaż więcej ▼";
+
+    } else {
+
+        more.style.display = "none";
+
+    }
 }
 
 
-function toggleHistory(){
+function toggleHistory() {
 
-    showAll = !showAll;
+    showAllHistory = !showAllHistory;
 
     renderHistory();
+}
 
+
+function clearHistory() {
+
+    const code = prompt(
+        "Podaj kod, aby wyczyścić historię:"
+    );
+
+    if (code !== "ButelKaucja") {
+        alert("❌ Zły kod.");
+        return;
+    }
+
+    if (
+        !confirm(
+            "Na pewno chcesz wyczyścić historię?"
+        )
+    ) {
+        return;
+    }
+
+    data.history = [];
+    data.days = [];
+    data.bottles = 0;
+
+    save();
+    updateAll();
+}
+
+
+function clearChartHistory() {
+
+    const code = prompt(
+        "Podaj kod, aby wyczyścić historię wykresu:"
+    );
+
+    if (code !== "ButelKaucja") {
+        alert("❌ Zły kod.");
+        return;
+    }
+
+    if (
+        !confirm(
+            "Na pewno chcesz wyczyścić historię wykresu?"
+        )
+    ) {
+        return;
+    }
+
+    data.history = [];
+    data.days = [];
+    data.bottles = 0;
+
+    save();
+    updateAll();
 }
 
 
 /* =====================================================
-   ZAKŁADKI
+   SEJFY
 ===================================================== */
 
-function showTab(tab){
+function renderSafes() {
 
-    document
-        .getElementById("saldoPage")
-        .classList.toggle(
-            "hidden",
-            tab !== "saldo"
+    const box = document.getElementById("safes");
+
+    box.innerHTML = "";
+
+    data.safes.forEach((amount, index) => {
+
+        const safe = document.createElement("div");
+
+        safe.className = "safe";
+
+        safe.innerHTML = `
+            <div class="safe-title">
+                🔐 Sejf ${index + 1}
+            </div>
+
+            <div class="safe-door">
+                <div class="money-burst"></div>
+            </div>
+
+            <div class="safe-progress">
+                <div
+                    class="safe-progress-fill"
+                    style="width:${(amount / SAFE_MAX) * 100}%">
+                </div>
+            </div>
+
+            <div class="safe-amount">
+                ${money(amount)} / 500,00 zł
+            </div>
+
+            <div class="safe-actions">
+
+                <button
+                    onclick="safeDeposit(${index})">
+                    💰 Wpłać
+                </button>
+
+                <button
+                    class="clear-safe"
+                    onclick="clearSafe(${index})">
+                    🗑 Wyczyść
+                </button>
+
+            </div>
+        `;
+
+        box.appendChild(safe);
+    });
+}
+
+
+/* =====================================================
+   WPŁATA DO SEJFU
+===================================================== */
+
+function safeDeposit(index) {
+
+    const free =
+        SAFE_MAX - data.safes[index];
+
+    if (free <= 0) {
+        alert("Ten sejf jest już pełny!");
+        return;
+    }
+
+    const amountText = prompt(
+        `Ile chcesz wpłacić do sejfu ${index + 1}?\n\nPozostało miejsca: ${money(free)}`
+    );
+
+    if (amountText === null) {
+        return;
+    }
+
+    const amount = Number(
+        amountText.replace(",", ".")
+    );
+
+    if (!Number.isFinite(amount) || amount <= 0) {
+        alert("Podaj poprawną kwotę.");
+        return;
+    }
+
+    if (amount > free) {
+        alert(
+            `Za dużo. Do sejfu możesz jeszcze wpłacić ${money(free)}.`
         );
+        return;
+    }
+
+    data.safes[index] += amount;
+
+    save();
+    updateAll();
+
+    if (data.safes[index] >= SAFE_MAX) {
+        setTimeout(() => {
+            fillSafe(index);
+        }, 400);
+    }
+}
 
 
-    document
-        .getElementById("celePage")
-        .classList.toggle(
-            "hidden",
-            tab !== "cele"
-        );
+/* =====================================================
+   PEŁNY SEJF
+===================================================== */
+
+function fillSafe(index) {
+
+    const safeElement =
+        document.querySelectorAll(".safe")[index];
+
+    if (!safeElement) {
+        return;
+    }
+
+    const amount = data.safes[index];
+
+    safeElement.classList.add("shake");
+
+    setTimeout(() => {
+
+        safeElement.classList.remove("shake");
+        safeElement.classList.add("open");
+
+        const burst =
+            safeElement.querySelector(".money-burst");
+
+        for (let i = 0; i < 28; i++) {
+
+            const moneyEl =
+                document.createElement("span");
+
+            moneyEl.className = "flying-money";
+            moneyEl.textContent = "💵";
+
+            moneyEl.style.setProperty(
+                "--x",
+                `${Math.random() * 500 - 250}px`
+            );
+
+            moneyEl.style.setProperty(
+                "--y",
+                `${Math.random() * -400 - 80}px`
+            );
+
+            moneyEl.style.setProperty(
+                "--r",
+                `${Math.random() * 720 - 360}deg`
+            );
+
+            burst.appendChild(moneyEl);
+        }
+
+        setTimeout(() => {
+
+            data.balance += amount;
+
+            const date = today();
+
+            if (!data.days.includes(date)) {
+                data.days.push(date);
+            }
+
+            data.history.push({
+                date: date,
+                description:
+                    `💵 Banknoty z sejfu ${index + 1}`,
+                amount: amount,
+                type: "income",
+                balance: data.balance
+            });
+
+            data.safes[index] = 0;
+
+            save();
+            updateAll();
+
+            celebration(
+                "🎉 Sejf pełny!",
+                `${money(amount)} trafiło na główne saldo.`
+            );
+
+        }, 2300);
+
+    }, 1500);
+}
 
 
-    document
-        .getElementById("tabSaldo")
-        .classList.toggle(
-            "active",
-            tab === "saldo"
-        );
+/* =====================================================
+   CZYSZCZENIE SEJFU
+===================================================== */
 
+function clearSafe(index) {
 
-    document
-        .getElementById("tabCele")
-        .classList.toggle(
-            "active",
-            tab === "cele"
-        );
+    const code = prompt(
+        `Podaj kod, aby wyczyścić sejf ${index + 1}:`
+    );
 
+    if (code !== "ButelKaucja") {
+        alert("❌ Zły kod.");
+        return;
+    }
+
+    if (
+        !confirm(
+            `Na pewno chcesz wyczyścić sejf ${index + 1}?`
+        )
+    ) {
+        return;
+    }
+
+    const safeElement =
+        document.querySelectorAll(".safe")[index];
+
+    if (!safeElement) {
+        return;
+    }
+
+    safeElement.classList.add("fly-away");
+
+    setTimeout(() => {
+
+        data.safes[index] = 0;
+
+        save();
+        updateAll();
+
+        const newSafe =
+            document.querySelectorAll(".safe")[index];
+
+        if (newSafe) {
+
+            newSafe.classList.add("new-safe");
+
+            setTimeout(() => {
+                newSafe.classList.add("show");
+            }, 50);
+
+        }
+
+    }, 800);
 }
 
 
@@ -2065,32 +1668,16 @@ function showTab(tab){
    WYKRES
 ===================================================== */
 
-function drawChart(){
+function drawChart() {
 
     const canvas =
-        document.getElementById(
-            "chart"
-        );
-
+        document.getElementById("chart");
 
     const ctx =
         canvas.getContext("2d");
 
-
-    const width =
-        Math.max(
-            900,
-            canvas.clientWidth
-        );
-
-
-    const height = 280;
-
-
-    canvas.width = width;
-
-    canvas.height = height;
-
+    const width = canvas.width;
+    const height = canvas.height;
 
     ctx.clearRect(
         0,
@@ -2099,869 +1686,375 @@ function drawChart(){
         height
     );
 
+    const history =
+        data.history;
 
-    ctx.strokeStyle =
-        "#173c25";
+    if (history.length === 0) {
 
-    ctx.lineWidth = 1;
-
-
-    for(
-        let y = 35;
-        y < height - 30;
-        y += 45
-    ){
-
-        ctx.beginPath();
-
-        ctx.moveTo(45,y);
-
-        ctx.lineTo(
-            width - 20,
-            y
-        );
-
-        ctx.stroke();
-
-    }
-
-
-    if(data.history.length < 2){
-
-        ctx.fillStyle =
-            "#83a98f";
-
-        ctx.font =
-            "16px Arial";
+        ctx.fillStyle = "#7f9d86";
+        ctx.font = "18px Arial";
+        ctx.textAlign = "center";
 
         ctx.fillText(
-            "Dodaj kilka wpisów, aby zobaczyć wykres.",
-            50,
-            140
+            "Brak danych do wykresu",
+            width / 2,
+            height / 2
         );
 
         return;
-
     }
 
-
-    const values =
-        data.history.map(
-            x => x.balance
-        );
-
+    const points = history.map(
+        item => item.balance
+    );
 
     const max =
         Math.max(
             GOAL,
-            ...values
+            ...points,
+            1
         );
 
+    const min =
+        Math.min(
+            0,
+            ...points
+        );
 
-    const left = 55;
-
+    const left = 50;
     const right = 25;
-
     const top = 20;
-
     const bottom = 45;
 
-
-    const graphWidth =
+    const chartWidth =
         width - left - right;
 
-    const graphHeight =
+    const chartHeight =
         height - top - bottom;
 
 
-    const points =
-        values.map(
-            (value,index) => {
+    /* siatka */
 
-                return {
+    ctx.strokeStyle = "#12351d";
+    ctx.lineWidth = 1;
 
-                    x:
-                        left +
-                        (
-                            index /
-                            (values.length - 1)
-                        ) *
-                        graphWidth,
+    for (let i = 0; i <= 5; i++) {
 
-                    y:
-                        top +
-                        graphHeight -
-                        (
-                            value /
-                            max
-                        ) *
-                        graphHeight,
-
-                    value:value
-
-                };
-
-            }
-        );
-
-
-    ctx.font =
-        "12px Arial";
-
-    ctx.fillStyle =
-        "#9fc5aa";
-
-
-    data.history.forEach(
-        (item,index) => {
-
-            if(
-                index %
-                Math.max(
-                    1,
-                    Math.ceil(
-                        data.history.length /
-                        10
-                    )
-                )
-                === 0
-            ){
-
-                ctx.fillText(
-                    item.date,
-                    points[index].x - 18,
-                    height - 15
-                );
-
-            }
-
-        }
-    );
-
-
-    /*
-       Każdy odcinek ma własny kolor:
-
-       wzrost = zielony
-       spadek = czerwony
-    */
-
-    for(
-        let i = 1;
-        i < points.length;
-        i++
-    ){
+        const y =
+            top +
+            chartHeight * i / 5;
 
         ctx.beginPath();
-
-        ctx.moveTo(
-            points[i-1].x,
-            points[i-1].y
-        );
-
-        ctx.lineTo(
-            points[i].x,
-            points[i].y
-        );
-
-
-        ctx.strokeStyle =
-            points[i].value >=
-            points[i-1].value
-            ? "#20ff78"
-            : "#ff4b4b";
-
-
-        ctx.lineWidth = 4;
-
+        ctx.moveTo(left, y);
+        ctx.lineTo(width - right, y);
         ctx.stroke();
 
     }
 
 
-    points.forEach(point => {
+    /* linia */
+
+    if (points.length === 1) {
+
+        const x = left + chartWidth / 2;
+
+        const y =
+            top +
+            chartHeight -
+            (
+                (points[0] - min) /
+                (max - min || 1)
+            ) *
+            chartHeight;
+
+        ctx.fillStyle = "#43ff72";
 
         ctx.beginPath();
-
-        ctx.arc(
-            point.x,
-            point.y,
-            4,
-            0,
-            Math.PI * 2
-        );
-
-        ctx.fillStyle =
-            "#20ff78";
-
+        ctx.arc(x, y, 5, 0, Math.PI * 2);
         ctx.fill();
 
-    });
+    } else {
 
-}
+        for (let i = 1; i < points.length; i++) {
 
+            const x1 =
+                left +
+                ((i - 1) /
+                    (points.length - 1))
+                * chartWidth;
 
-/* =====================================================
-   SEJFY
-===================================================== */
+            const x2 =
+                left +
+                (i /
+                    (points.length - 1))
+                * chartWidth;
 
-function renderSafes(){
+            const y1 =
+                top +
+                chartHeight -
+                (
+                    (points[i - 1] - min) /
+                    (max - min || 1)
+                ) *
+                chartHeight;
 
-    const container =
-        document.getElementById(
-            "safes"
-        );
+            const y2 =
+                top +
+                chartHeight -
+                (
+                    (points[i] - min) /
+                    (max - min || 1)
+                ) *
+                chartHeight;
 
+            ctx.strokeStyle =
+                points[i] >= points[i - 1]
+                    ? "#35f56b"
+                    : "#ff4545";
 
-    container.innerHTML = "";
+            ctx.lineWidth = 4;
 
-
-    data.safes.forEach(
-        (amount,index) => {
-
-            const wrapper =
-                document.createElement(
-                    "div"
-                );
-
-
-            wrapper.className =
-                "safe-wrap";
-
-
-            wrapper.innerHTML = `
-
-                <div
-                    class="safe ${amount >= 500 ? "full" : ""}"
-                    id="safe${index}"
-                >
-
-                    <div class="safe-frame"></div>
-
-                    <div class="safe-door"></div>
-
-                    <div class="safe-lock"></div>
-
-                    <div class="safe-handle"></div>
-
-                    <div
-                        class="money-burst"
-                        id="burst${index}"
-                    ></div>
-
-                </div>
-
-
-                <div class="safe-amount">
-
-                    ${money(amount)}
-                    / 500,00 zł
-
-                </div>
-
-
-                <div class="safe-progress">
-
-                    <div
-                        style="width:${Math.min(
-                            100,
-                            amount / 5
-                        )}%"
-                    ></div>
-
-                </div>
-
-
-                <div class="safe-actions">
-
-                    <button
-                        onclick="safeDeposit(${index})"
-                    >
-                        💵 Wpłać
-                    </button>
-
-                    <button
-                        class="danger"
-                        onclick="safeClear(${index})"
-                    >
-                        🗑 Wyczyść
-                    </button>
-
-                </div>
-
-
-                <div class="safe-mist"></div>
-
-
-                <div
-                    class="ground-cracks"
-                    id="cracks${index}"
-                >
-                    <div class="crack1"></div>
-                    <div class="crack2"></div>
-                </div>
-
-            `;
-
-
-            container.appendChild(wrapper);
-
-
-            /*
-               Jeżeli sejf jest pełny,
-               uruchamiamy jego animację.
-            */
-
-            if(amount >= 500){
-
-                makeMoneyBurst(index);
-
-            }
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
 
         }
-    );
 
+
+        /* punkty */
+
+        points.forEach((value, i) => {
+
+            const x =
+                left +
+                (i /
+                    (points.length - 1))
+                * chartWidth;
+
+            const y =
+                top +
+                chartHeight -
+                (
+                    (value - min) /
+                    (max - min || 1)
+                ) *
+                chartHeight;
+
+            ctx.fillStyle = "#ffffff";
+
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, Math.PI * 2);
+            ctx.fill();
+
+        });
+
+    }
+
+
+    /* daty */
+
+    ctx.fillStyle = "#8ba993";
+    ctx.font = "12px Arial";
+    ctx.textAlign = "center";
+
+    const step =
+        Math.max(
+            1,
+            Math.ceil(history.length / 8)
+        );
+
+    history.forEach((item, i) => {
+
+        if (
+            i % step !== 0 &&
+            i !== history.length - 1
+        ) {
+            return;
+        }
+
+        const x =
+            history.length === 1
+                ? left + chartWidth / 2
+                : left +
+                  (i /
+                    (history.length - 1))
+                  * chartWidth;
+
+        ctx.fillText(
+            item.date,
+            x,
+            height - 15
+        );
+
+    });
 }
 
 
 /* =====================================================
-   WPŁATA DO SEJFU
+   AKTUALIZACJA
 ===================================================== */
 
-function safeDeposit(index){
+function updateAll() {
 
-    const available =
-        500 - data.safes[index];
+    const balance =
+        Math.max(0, data.balance);
 
-
-    if(available <= 0){
-
-        alert(
-            "Ten sejf jest już pełny!"
-        );
-
-        return;
-
-    }
-
-
-    const value =
-        parseFloat(
-            prompt(
-                "Ile wpłacić do sejfu?\nMaksymalnie: " +
-                money(available)
-            )
-        );
-
-
-    if(!value || value <= 0){
-
-        return;
-
-    }
-
-
-    const amount =
+    const percent =
         Math.min(
-            value,
-            available
+            100,
+            (balance / GOAL) * 100
+        );
+
+    document.getElementById(
+        "balance"
+    ).textContent = money(balance);
+
+    document.getElementById(
+        "percent"
+    ).textContent =
+        percent.toFixed(1) + "%";
+
+    document.getElementById(
+        "progress"
+    ).style.width =
+        percent + "%";
+
+    document.getElementById(
+        "bottles"
+    ).textContent =
+        data.bottles;
+
+    document.getElementById(
+        "days"
+    ).textContent =
+        data.days.length;
+
+    document.getElementById(
+        "remaining"
+    ).textContent =
+        money(
+            Math.max(0, GOAL - balance)
         );
 
 
-    if(data.balance < amount){
+    /* cele */
 
-        alert(
-            "Nie masz tyle pieniędzy w głównym saldzie."
-        );
+    document.getElementById(
+        "goalBalance"
+    ).textContent =
+        money(balance);
 
-        return;
+    document.getElementById(
+        "goalProgress"
+    ).style.width =
+        percent + "%";
 
-    }
-
-
-    /*
-       Pieniądze przechodzą
-       z głównego salda do sejfu.
-    */
-
-    data.balance -= amount;
-
-    data.safes[index] += amount;
+    document.getElementById(
+        "goalPercent"
+    ).textContent =
+        percent.toFixed(1) + "%";
 
 
-    addDay();
+    document.querySelectorAll(
+        ".milestone"
+    ).forEach(el => {
 
+        const value =
+            Number(
+                el.dataset.value
+            );
 
-    data.history.push({
-
-        date:today(),
-
-        desc:
-            "🔐 Wpłata do sejfu " +
-            (index + 1),
-
-        amount:-amount,
-
-        balance:data.balance,
-
-        income:false
+        if (balance >= value) {
+            el.classList.add("done");
+        } else {
+            el.classList.remove("done");
+        }
 
     });
 
 
-    update();
-
+    renderHistory();
+    renderSafes();
+    drawChart();
 }
 
 
 /* =====================================================
-   WYCZYSZCZENIE JEDNEGO SEJFU
+   CELEBRACJA
 ===================================================== */
 
-function safeClear(index){
-
-    if(!askCode()){
-
-        alert("Zły kod.");
-
-        return;
-
-    }
-
-
-    if(
-        !confirm(
-            "Wyczyścić sejf " +
-            (index + 1) +
-            "?"
-        )
-    ){
-
-        return;
-
-    }
-
-
-    const safe =
-        document.getElementById(
-            "safe" + index
-        );
-
-
-    /*
-       Stary sejf odlatuje do góry.
-    */
-
-    if(safe){
-
-        safe.classList.add(
-            "fly-away"
-        );
-
-    }
-
-
-    /*
-       Po zniknięciu tworzymy
-       nowy pusty sejf.
-    */
-
-    setTimeout(() => {
-
-        data.safes[index] = 0;
-
-        save();
-
-        update();
-
-
-        /*
-           Nowy sejf wychodzi
-           z ziemi.
-        */
-
-        setTimeout(() => {
-
-            const newSafe =
-                document.getElementById(
-                    "safe" + index
-                );
-
-
-            const cracks =
-                document.getElementById(
-                    "cracks" + index
-                );
-
-
-            if(newSafe){
-
-                newSafe.classList.add(
-                    "new-safe"
-                );
-
-            }
-
-
-            if(cracks){
-
-                cracks.classList.add(
-                    "show"
-                );
-
-            }
-
-        },50);
-
-    },800);
-
-}
-
-
-/* =====================================================
-   BANKNOTY Z PEŁNEGO SEJFU
-===================================================== */
-
-function makeMoneyBurst(index){
-
-    setTimeout(() => {
-
-        const burst =
-            document.getElementById(
-                "burst" + index
-            );
-
-
-        if(!burst){
-
-            return;
-
-        }
-
-
-        if(burst.children.length){
-
-            return;
-
-        }
-
-
-        /*
-           Zapamiętujemy kwotę
-           ZANIM wyzerujemy sejf.
-        */
-
-        const amount =
-            data.safes[index];
-
-
-        if(amount <= 0){
-
-            return;
-
-        }
-
-
-        /*
-           Dużo banknotów.
-        */
-
-        for(
-            let i = 0;
-            i < 45;
-            i++
-        ){
-
-            const money =
-                document.createElement(
-                    "span"
-                );
-
-
-            money.className =
-                "money";
-
-
-            money.textContent =
-                "💵";
-
-
-            money.style.setProperty(
-                "--x",
-                (
-                    Math.random() * 460
-                    - 230
-                ) + "px"
-            );
-
-
-            money.style.setProperty(
-                "--y",
-                (
-                    -Math.random() * 340
-                    - 40
-                ) + "px"
-            );
-
-
-            money.style.setProperty(
-                "--r",
-                (
-                    Math.random() * 1000
-                    - 500
-                ) + "deg"
-            );
-
-
-            money.style.animationDelay =
-                (
-                    Math.random() * .7
-                ) + "s";
-
-
-            burst.appendChild(
-                money
-            );
-
-        }
-
-
-        /*
-           Po wylocie banknotów
-           WSZYSTKIE pieniądze z sejfu
-           trafiają do głównego salda.
-        */
-
-        setTimeout(() => {
-
-            /*
-               Dodajemy kwotę do głównego salda.
-            */
-
-            data.balance += amount;
-
-
-            addDay();
-
-
-            data.history.push({
-
-                date:today(),
-
-                desc:
-                    "💵 Banknoty z sejfu " +
-                    (index + 1),
-
-                amount:amount,
-
-                balance:data.balance,
-
-                income:true
-
-            });
-
-
-            /*
-               Sejf jest teraz pusty.
-            */
-
-            data.safes[index] = 0;
-
-
-            save();
-
-            update();
-
-
-            /*
-               Jeżeli z sejfu wyleciało
-               ponad 1000 zł → MEGA konfetti.
-            */
-
-            if(amount > 1000){
-
-                megaCelebrate();
-
-            }
-
-            /*
-               250 zł lub więcej →
-               zwykłe duże konfetti.
-            */
-
-            else if(amount >= 250){
-
-                celebrateMoney();
-
-            }
-
-        },2400);
-
-    },1800);
-
-}
-
-
-/* =====================================================
-   ZWYKŁE KONFETTI
-===================================================== */
-
-function celebrateMoney(){
-
-    showCongratulations(
-        "🎉 BRAWO! 🎉",
-        "Duża wpłata!"
-    );
-
-
-    createConfetti(120);
-
-}
-
-
-/* =====================================================
-   MEGA KONFETTI
-===================================================== */
-
-function megaCelebrate(){
-
-    showCongratulations(
-        "🚀💰 MEGA WPŁATA! 💰🚀",
-        "WOW! Dodałeś ponad 1000 zł!"
-    );
-
-
-    createConfetti(300);
-
-}
-
-
-/* =====================================================
-   NAPIS GRATULACJE
-===================================================== */
-
-function showCongratulations(
-    title,
-    subtitle
-){
+function celebration(title, text) {
 
     const box =
-        document.getElementById(
-            "congratulations"
-        );
-
-
-    box.innerHTML = `
-        <div>
-            ${title}
-        </div>
-
-        <div
-            style="
-                margin-top:10px;
-                font-size:18px;
-                color:#a8dcb7;
-            "
-        >
-            ${subtitle}
-        </div>
-    `;
-
-
-    box.classList.remove(
-        "show"
-    );
-
-
-    void box.offsetWidth;
-
-
-    box.classList.add(
-        "show"
-    );
-
-}
-
-
-/* =====================================================
-   KONFETTI
-===================================================== */
-
-function createConfetti(count){
-
-    const container =
         document.getElementById(
             "celebration"
         );
 
+    document.getElementById(
+        "celebrationTitle"
+    ).textContent = title;
 
-    container.innerHTML = "";
+    document.getElementById(
+        "celebrationText"
+    ).textContent = text;
 
+    box.classList.remove("show");
 
-    const symbols = [
-        "💵",
-        "💰",
-        "💚",
-        "🟢",
-        "⭐",
-        "✨",
-        "🎉"
-    ];
+    void box.offsetWidth;
 
-
-    for(
-        let i = 0;
-        i < count;
-        i++
-    ){
-
-        const piece =
-            document.createElement(
-                "span"
-            );
+    box.classList.add("show");
 
 
-        piece.className =
-            "confetti";
+    const amount =
+        title.includes("MEGA")
+            ? 90
+            : 45;
 
+    for (let i = 0; i < amount; i++) {
 
-        piece.textContent =
-            symbols[
-                Math.floor(
-                    Math.random() *
-                    symbols.length
-                )
-            ];
+        const conf =
+            document.createElement("div");
 
+        conf.className = "confetti";
 
-        piece.style.left =
-            Math.random() * 100 + "%";
+        conf.textContent =
+            Math.random() > .5
+                ? "💵"
+                : "💚";
 
+        conf.style.left =
+            Math.random() * 100 + "vw";
 
-        piece.style.fontSize =
-            14 +
-            Math.random() * 22 +
-            "px";
-
-
-        piece.style.animationDelay =
-            Math.random() * 1.5 +
-            "s";
-
-
-        container.appendChild(
-            piece
+        conf.style.setProperty(
+            "--drift",
+            `${Math.random() * 300 - 150}px`
         );
 
+        conf.style.animationDuration =
+            `${1.5 + Math.random() * 2.5}s`;
+
+        document.body.appendChild(conf);
+
+        setTimeout(() => {
+            conf.remove();
+        }, 4500);
     }
+}
 
 
-    setTimeout(() => {
+/* =====================================================
+   BEZPIECZNY HTML
+===================================================== */
 
-        container.innerHTML = "";
+function escapeHtml(text) {
 
-    },4500);
-
+    return String(text)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 }
 
 
@@ -2969,12 +2062,7 @@ function createConfetti(count){
    START
 ===================================================== */
 
-window.addEventListener(
-    "resize",
-    drawChart
-);
-
-update();
+updateAll();
 
 </script>
 
