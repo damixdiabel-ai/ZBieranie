@@ -134,30 +134,70 @@ header p {
     width: 0%;
     border-radius: 30px;
     overflow: hidden;
-    background: linear-gradient(90deg,#087b3d,#18bd62,#35f47e);
-    transition: width 1.5s cubic-bezier(.2,.8,.2,1);
+    background: linear-gradient(
+        90deg,
+        #087b3d,
+        #18bd62,
+        #35f47e
+    );
+
+    /* płynny wzrost samego paska */
+    transition:
+        width 1.5s cubic-bezier(.2,.8,.2,1);
 }
+
+/*
+   PASKI W ŚRODKU
+
+   Zamiast przesuwać wzór w lewo i prawo,
+   przesuwamy go cały czas w jedną stronę.
+   Dzięki temu nie wygląda jak cofanie.
+*/
 
 .progress-fill::before {
     content: "";
     position: absolute;
-    inset: -30px;
-    width: 220%;
+
+    top: 0;
+    bottom: 0;
+
+    left: -160px;
+
+    width: calc(100% + 320px);
+
     background: repeating-linear-gradient(
         105deg,
         transparent 0px,
-        transparent 25px,
-        rgba(2,80,38,.55) 26px,
-        rgba(2,80,38,.55) 42px,
-        transparent 43px,
-        transparent 70px
+        transparent 28px,
+
+        rgba(2,80,38,.55) 29px,
+        rgba(2,80,38,.55) 46px,
+
+        transparent 47px,
+        transparent 78px
     );
-    animation: moveStripes 2.4s linear infinite;
+
+    animation:
+        moveStripes 2.8s linear infinite;
+
+    /* ważne: wzór nie zmienia rozmiaru */
+    transform: translate3d(0,0,0);
+    will-change: transform;
+
+    pointer-events: none;
 }
 
 @keyframes moveStripes {
-    from { transform: translateX(0) skewX(-8deg); }
-    to { transform: translateX(-90px) skewX(-8deg); }
+
+    from {
+        transform:
+            translate3d(-80px, 0, 0);
+    }
+
+    to {
+        transform:
+            translate3d(80px, 0, 0);
+    }
 }
 
 .progress-text {
@@ -405,8 +445,12 @@ footer {
 
 <header>
     <div class="logo">🧴</div>
+
     <h1>ZBieranie</h1>
-    <p>Każda złotówka przybliża nas do celu.</p>
+
+    <p>
+        Każda złotówka przybliża nas do celu.
+    </p>
 </header>
 
 <div class="container">
@@ -423,7 +467,9 @@ footer {
 
         <div class="balance">
 
-            <div class="dollar">$</div>
+            <div class="dollar">
+                $
+            </div>
 
             <div class="money" id="money">
                 0,00 zł
@@ -434,8 +480,15 @@ footer {
         <div class="progress-wrap">
 
             <div class="progress-info">
-                <span>Postęp do celu</span>
-                <span>6868 zł</span>
+
+                <span>
+                    Postęp do celu
+                </span>
+
+                <span>
+                    6868 zł
+                </span>
+
             </div>
 
             <div class="progress-bg">
@@ -464,23 +517,54 @@ footer {
 
 <div class="card">
 
-    <h2>📊 Statystyki</h2>
+    <h2>
+        📊 Statystyki
+    </h2>
 
     <div class="stats">
 
         <div class="stat">
-            <div class="stat-number" id="bottles">0</div>
-            <div class="stat-name">🧴 Butelek</div>
+
+            <div
+                class="stat-number"
+                id="bottles">
+                0
+            </div>
+
+            <div class="stat-name">
+                🧴 Butelek
+            </div>
+
         </div>
 
-        <div class="stat">
-            <div class="stat-number" id="days">0</div>
-            <div class="stat-name">📅 Dni</div>
-        </div>
 
         <div class="stat">
-            <div class="stat-number" id="remaining">6868 zł</div>
-            <div class="stat-name">🎯 Brakuje</div>
+
+            <div
+                class="stat-number"
+                id="days">
+                0
+            </div>
+
+            <div class="stat-name">
+                📅 Dni
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div
+                class="stat-number"
+                id="remaining">
+                6868 zł
+            </div>
+
+            <div class="stat-name">
+                🎯 Brakuje
+            </div>
+
         </div>
 
     </div>
@@ -491,17 +575,24 @@ footer {
     <div class="section-title">
 
         <div>
-            <h3>💰 Saldo w czasie</h3>
+
+            <h3>
+                💰 Saldo w czasie
+            </h3>
 
             <div class="chart-subtitle">
                 Zielony = wzrost • Czerwony = spadek
             </div>
+
         </div>
+
 
         <button
             class="clear-btn"
             onclick="clearChart()">
+
             🗑 Wyczyść
+
         </button>
 
     </div>
@@ -509,11 +600,15 @@ footer {
 
     <div class="chart-box">
 
-        <div class="chart-scroll" id="chartScroll">
+        <div
+            class="chart-scroll"
+            id="chartScroll">
 
             <div class="chart-inner">
 
-                <canvas id="moneyChart"></canvas>
+                <canvas
+                    id="moneyChart">
+                </canvas>
 
             </div>
 
@@ -528,33 +623,54 @@ footer {
 
 <div class="card">
 
-    <h2>💰 Dodaj pieniądze</h2>
+    <h2>
+        💰 Dodaj pieniądze
+    </h2>
 
     <p>
         Możesz dodawać pieniądze z butelek
         oraz inne zarobione pieniądze.
     </p>
 
-    <button onclick="addMoney(0.5, 'Kaucja')">
+
+    <button
+        onclick="addMoney(0.5, 'Kaucja')">
+
         +0,50 zł
+
     </button>
 
-    <button onclick="addMoney(10, '20 butelek')">
+
+    <button
+        onclick="addMoney(10, '20 butelek')">
+
         +10 zł
+
     </button>
 
-    <button onclick="addMoney(20, '40 butelek')">
+
+    <button
+        onclick="addMoney(20, '40 butelek')">
+
         +20 zł
+
     </button>
 
-    <button onclick="customAdd()">
+
+    <button
+        onclick="customAdd()">
+
         💵 Inna kwota
+
     </button>
+
 
     <button
         class="red"
         onclick="customExpense()">
+
         🔴 Wydatek
+
     </button>
 
 </div>
@@ -570,13 +686,17 @@ footer {
             📜 Historia pieniędzy
         </h2>
 
+
         <button
             class="clear-btn"
             onclick="clearHistory()">
+
             🗑 Wyczyść
+
         </button>
 
     </div>
+
 
     <div class="history-wrapper">
 
@@ -585,11 +705,14 @@ footer {
             id="history">
         </div>
 
+
         <button
             class="show-more"
             id="showMore"
             onclick="toggleHistory()">
+
             Pokaż więcej
+
         </button>
 
     </div>
@@ -608,17 +731,32 @@ footer {
 
 const TARGET = 6868;
 
+
+/* DANE */
+
 let balance =
-    Number(localStorage.getItem("balance")) || 0;
+    Number(
+        localStorage.getItem("balance")
+    ) || 0;
+
 
 let bottles =
-    Number(localStorage.getItem("bottles")) || 0;
+    Number(
+        localStorage.getItem("bottles")
+    ) || 0;
+
 
 let days =
-    Number(localStorage.getItem("days")) || 0;
+    Number(
+        localStorage.getItem("days")
+    ) || 0;
+
 
 let history =
-    JSON.parse(localStorage.getItem("history")) || [];
+    JSON.parse(
+        localStorage.getItem("history")
+    ) || [];
+
 
 let historyExpanded = false;
 
@@ -628,54 +766,106 @@ let historyExpanded = false;
 function update() {
 
     const percent =
-        Math.min((balance / TARGET) * 100, 100);
+        Math.min(
+            (balance / TARGET) * 100,
+            100
+        );
+
 
     const remaining =
-        Math.max(TARGET - balance, 0);
+        Math.max(
+            TARGET - balance,
+            0
+        );
 
-    document.getElementById("money").textContent =
-        balance.toFixed(2).replace(".", ",") +
-        " zł";
 
-    document.getElementById("bottles").textContent =
+    document.getElementById(
+        "money"
+    ).textContent =
+        balance
+            .toFixed(2)
+            .replace(".", ",")
+        + " zł";
+
+
+    document.getElementById(
+        "bottles"
+    ).textContent =
         bottles;
 
-    document.getElementById("days").textContent =
+
+    document.getElementById(
+        "days"
+    ).textContent =
         days;
 
-    document.getElementById("remaining").textContent =
-        remaining.toFixed(2).replace(".", ",") +
-        " zł";
 
-    document.getElementById("percent").textContent =
-        percent.toFixed(2) + "%";
+    document.getElementById(
+        "remaining"
+    ).textContent =
+        remaining
+            .toFixed(2)
+            .replace(".", ",")
+        + " zł";
 
-    document.getElementById("progress").style.width =
+
+    document.getElementById(
+        "percent"
+    ).textContent =
+        percent.toFixed(2)
+        + "%";
+
+
+    document.getElementById(
+        "progress"
+    ).style.width =
         percent + "%";
 
+
     showHistory();
+
     drawChart();
 }
 
 
 /* DODAWANIE */
 
-function addMoney(amount, description) {
+function addMoney(
+    amount,
+    description
+) {
 
     balance += amount;
+
     days++;
 
-    if (description === "20 butelek")
+
+    if (
+        description ===
+        "20 butelek"
+    ) {
+
         bottles += 20;
 
-    if (description === "40 butelek")
+    }
+
+
+    if (
+        description ===
+        "40 butelek"
+    ) {
+
         bottles += 40;
+
+    }
+
 
     addHistory(
         amount,
         description,
         "plus"
     );
+
 
     save();
 }
@@ -687,25 +877,36 @@ function customAdd() {
 
     const amount =
         parseFloat(
-            prompt("Ile pieniędzy dodajesz?")
+            prompt(
+                "Ile pieniędzy dodajesz?"
+            )
         );
 
-    if (!isNaN(amount) && amount > 0) {
+
+    if (
+        !isNaN(amount) &&
+        amount > 0
+    ) {
 
         const description =
             prompt(
                 "Skąd są te pieniądze?",
                 "Inne"
-            ) || "Inne pieniądze";
+            )
+            || "Inne pieniądze";
+
 
         balance += amount;
+
         days++;
+
 
         addHistory(
             amount,
             description,
             "plus"
         );
+
 
         save();
     }
@@ -718,29 +919,46 @@ function customExpense() {
 
     const amount =
         parseFloat(
-            prompt("Ile wydajesz?")
+            prompt(
+                "Ile wydajesz?"
+            )
         );
 
-    if (!isNaN(amount) && amount > 0) {
+
+    if (
+        !isNaN(amount) &&
+        amount > 0
+    ) {
 
         const description =
             prompt(
                 "Na co wydajesz?",
                 "Wydatek"
-            ) || "Wydatek";
+            )
+            || "Wydatek";
+
 
         balance -= amount;
 
-        if (balance < 0)
+
+        if (
+            balance < 0
+        ) {
+
             balance = 0;
 
+        }
+
+
         days++;
+
 
         addHistory(
             amount,
             description,
             "minus"
         );
+
 
         save();
     }
@@ -756,108 +974,163 @@ function addHistory(
 ) {
 
     const date =
-        new Date().toLocaleDateString("pl-PL");
+        new Date()
+        .toLocaleDateString(
+            "pl-PL"
+        );
+
 
     history.unshift({
 
         date: date,
+
         amount: amount,
-        description: description,
+
+        description:
+            description,
+
         type: type,
+
         balance: balance
 
     });
 }
 
 
-/* HISTORIA — ROZWIJANIE */
+/* HISTORIA */
 
 function showHistory() {
 
     const box =
-        document.getElementById("history");
+        document.getElementById(
+            "history"
+        );
+
 
     const button =
-        document.getElementById("showMore");
+        document.getElementById(
+            "showMore"
+        );
 
-    if (history.length === 0) {
+
+    if (
+        history.length === 0
+    ) {
 
         box.innerHTML =
             '<div class="history-item">Brak wpisów.</div>';
 
+
         button.style.display =
             "none";
 
+
         return;
     }
+
 
     const visibleCount =
         historyExpanded
         ? history.length
         : 5;
 
+
     box.innerHTML =
         history
-            .slice(0, visibleCount)
-            .map(item => {
+            .slice(
+                0,
+                visibleCount
+            )
+            .map(
+                item => {
 
-                const sign =
-                    item.type === "plus"
-                    ? "+"
-                    : "−";
+                    const sign =
+                        item.type ===
+                        "plus"
+                        ? "+"
+                        : "−";
 
-                const className =
-                    item.type === "plus"
-                    ? ""
-                    : "expense";
 
-                return `
-                    <div class="history-item ${className}">
+                    const className =
+                        item.type ===
+                        "plus"
+                        ? ""
+                        : "expense";
 
-                        <strong>
-                            ${item.date}
-                        </strong>
 
-                        — ${item.description}
+                    return `
 
-                        <br>
+                        <div
+                            class="history-item ${className}">
 
-                        <strong>
-                            ${sign}
-                            ${item.amount
-                                .toFixed(2)
-                                .replace(".", ",")}
-                            zł
-                        </strong>
+                            <strong>
+                                ${item.date}
+                            </strong>
 
-                        <span style="float:right">
-                            saldo:
-                            ${item.balance
-                                .toFixed(2)
-                                .replace(".", ",")}
-                            zł
-                        </span>
+                            — ${item.description}
 
-                    </div>
-                `;
+                            <br>
 
-            })
+                            <strong>
+
+                                ${sign}
+
+                                ${item.amount
+                                    .toFixed(2)
+                                    .replace(
+                                        ".",
+                                        ","
+                                    )}
+
+                                zł
+
+                            </strong>
+
+
+                            <span
+                                style="float:right">
+
+                                saldo:
+
+                                ${item.balance
+                                    .toFixed(2)
+                                    .replace(
+                                        ".",
+                                        ","
+                                    )}
+
+                                zł
+
+                            </span>
+
+                        </div>
+
+                    `;
+
+                }
+            )
             .join("");
 
-    if (history.length > 5) {
+
+    if (
+        history.length > 5
+    ) {
 
         button.style.display =
             "block";
+
 
         button.textContent =
             historyExpanded
             ? "Pokaż mniej ▲"
             : "Pokaż więcej ▼";
 
-    } else {
+    }
+    else {
 
         button.style.display =
             "none";
+
     }
 }
 
@@ -867,33 +1140,43 @@ function toggleHistory() {
     historyExpanded =
         !historyExpanded;
 
+
     showHistory();
 }
 
 
 /* ==========================================
-   KODY
+   KOD DO WYCZYSZCZENIA
 ========================================== */
 
-function getCodeName() {
+const CLEAR_CODE =
+    "ButelKaucja";
+
+
+function checkClearCode() {
 
     const code =
         prompt(
-            "Podaj kod:\n\n1 = Oliwier\n2 = Damian\n3 = BUTELKA"
+            "Podaj kod, aby wyczyścić:\n\n"
+            + "Wpisz dokładnie: ButelKaucja"
         );
 
-    if (code === "1")
-        return "Oliwier";
 
-    if (code === "2")
-        return "Damian";
+    if (
+        code === CLEAR_CODE
+    ) {
 
-    if (code === "3")
-        return "BUTELKA";
+        return true;
 
-    alert("❌ Nieprawidłowy kod.");
+    }
 
-    return null;
+
+    alert(
+        "❌ Nieprawidłowy kod."
+    );
+
+
+    return false;
 }
 
 
@@ -903,37 +1186,38 @@ function getCodeName() {
 
 function clearChart() {
 
-    const person =
-        getCodeName();
+    if (
+        !checkClearCode()
+    ) {
 
-    if (!person)
         return;
+
+    }
+
 
     if (
         !confirm(
-            "Czy na pewno wyczyścić dane wykresu?\n\n"
-            + "Potwierdza: "
-            + person
+            "Czy na pewno wyczyścić dane wykresu?"
         )
-    )
+    ) {
+
         return;
 
-    /*
-       Czyścimy historię wykresu,
-       ale zostawiamy saldo.
-    */
+    }
+
 
     history = [];
 
     days = 0;
+
     bottles = 0;
+
 
     save();
 
+
     alert(
-        "Wykres został wyczyszczony.\n"
-        + "Kod: "
-        + person
+        "Wykres został wyczyszczony."
     );
 }
 
@@ -944,32 +1228,38 @@ function clearChart() {
 
 function clearHistory() {
 
-    const person =
-        getCodeName();
+    if (
+        !checkClearCode()
+    ) {
 
-    if (!person)
         return;
+
+    }
+
 
     if (
         !confirm(
-            "Czy na pewno wyczyścić historię?\n\n"
-            + "Potwierdza: "
-            + person
+            "Czy na pewno wyczyścić historię?"
         )
-    )
+    ) {
+
         return;
+
+    }
+
 
     history = [];
 
     days = 0;
+
     bottles = 0;
+
 
     save();
 
+
     alert(
-        "Historia została wyczyszczona.\n"
-        + "Kod: "
-        + person
+        "Historia została wyczyszczona."
     );
 }
 
@@ -979,7 +1269,10 @@ function clearHistory() {
 ========================================== */
 
 const canvas =
-    document.getElementById("moneyChart");
+    document.getElementById(
+        "moneyChart"
+    );
+
 
 const ctx =
     canvas.getContext("2d");
@@ -987,27 +1280,41 @@ const ctx =
 
 function getChartData() {
 
-    if (history.length === 0)
+    if (
+        history.length === 0
+    ) {
+
         return [];
+
+    }
+
 
     return [...history]
         .reverse()
-        .map(item => ({
+        .map(
+            item => ({
 
-            date: item.date,
+                date:
+                    item.date,
 
-            balance: item.balance,
+                balance:
+                    item.balance,
 
-            type: item.type
+                type:
+                    item.type
 
-        }));
+            })
+        );
 }
 
 
 function drawChart() {
 
     const container =
-        document.querySelector(".chart-inner");
+        document.querySelector(
+            ".chart-inner"
+        );
+
 
     const data =
         getChartData();
@@ -1027,6 +1334,7 @@ function drawChart() {
     const width =
         minWidth;
 
+
     const height =
         320;
 
@@ -1038,12 +1346,14 @@ function drawChart() {
     canvas.width =
         width * ratio;
 
+
     canvas.height =
         height * ratio;
 
 
     canvas.style.width =
         width + "px";
+
 
     canvas.style.height =
         height + "px";
@@ -1067,16 +1377,21 @@ function drawChart() {
     );
 
 
-    if (data.length === 0) {
+    if (
+        data.length === 0
+    ) {
 
         ctx.fillStyle =
             "#53665c";
 
+
         ctx.font =
             "15px Arial";
 
+
         ctx.textAlign =
             "center";
+
 
         ctx.fillText(
             "Dodaj pieniądze, aby zobaczyć wykres.",
@@ -1084,28 +1399,38 @@ function drawChart() {
             height / 2
         );
 
+
         return;
     }
 
 
     const left = 60;
+
     const right = 25;
+
     const top = 25;
+
     const bottom = 45;
 
 
     const graphWidth =
-        width - left - right;
+        width -
+        left -
+        right;
+
 
     const graphHeight =
-        height - top - bottom;
+        height -
+        top -
+        bottom;
 
 
     const maxBalance =
         Math.max(
             TARGET,
             ...data.map(
-                point => point.balance
+                point =>
+                    point.balance
             )
         );
 
@@ -1115,37 +1440,50 @@ function drawChart() {
     ctx.font =
         "11px Arial";
 
+
     ctx.textAlign =
         "right";
 
 
-    for (let i = 0; i <= 4; i++) {
+    for (
+        let i = 0;
+        i <= 4;
+        i++
+    ) {
 
         const value =
-            maxBalance * (i / 4);
+            maxBalance *
+            (i / 4);
+
 
         const y =
             top +
             graphHeight -
-            graphHeight * (i / 4);
+            graphHeight *
+            (i / 4);
 
 
         ctx.strokeStyle =
             "rgba(80,130,105,.16)";
 
+
         ctx.lineWidth = 1;
 
+
         ctx.beginPath();
+
 
         ctx.moveTo(
             left,
             y
         );
 
+
         ctx.lineTo(
             width - right,
             y
         );
+
 
         ctx.stroke();
 
@@ -1153,8 +1491,10 @@ function drawChart() {
         ctx.fillStyle =
             "#60786b";
 
+
         ctx.fillText(
-            value.toFixed(0) + " zł",
+            value.toFixed(0)
+            + " zł",
             left - 8,
             y + 4
         );
@@ -1166,32 +1506,50 @@ function drawChart() {
     const points = [];
 
 
-    data.forEach((point, index) => {
+    data.forEach(
+        (
+            point,
+            index
+        ) => {
 
-        const x =
-            data.length === 1
-            ? left + graphWidth / 2
-            : left +
-              (index /
-              (data.length - 1)) *
-              graphWidth;
+            const x =
+                data.length === 1
+                ? left +
+                  graphWidth / 2
+                : left +
+                  (
+                      index /
+                      (
+                          data.length -
+                          1
+                      )
+                  ) *
+                  graphWidth;
 
 
-        const y =
-            top +
-            graphHeight -
-            (point.balance /
-            maxBalance) *
-            graphHeight;
+            const y =
+                top +
+                graphHeight -
+                (
+                    point.balance /
+                    maxBalance
+                ) *
+                graphHeight;
 
 
-        points.push({
-            x,
-            y,
-            data: point
-        });
+            points.push({
 
-    });
+                x,
+
+                y,
+
+                data:
+                    point
+
+            });
+
+        }
+    );
 
 
     /* LINIE */
@@ -1202,8 +1560,12 @@ function drawChart() {
         i++
     ) {
 
-        const a = points[i];
-        const b = points[i + 1];
+        const a =
+            points[i];
+
+
+        const b =
+            points[i + 1];
 
 
         if (
@@ -1214,14 +1576,17 @@ function drawChart() {
             ctx.strokeStyle =
                 "#28f878";
 
-        } else {
+        }
+        else {
 
             ctx.strokeStyle =
                 "#ff3d4d";
+
         }
 
 
         ctx.lineWidth = 4;
+
 
         ctx.lineCap =
             "round";
@@ -1229,46 +1594,61 @@ function drawChart() {
 
         ctx.beginPath();
 
+
         ctx.moveTo(
             a.x,
             a.y
         );
+
 
         ctx.lineTo(
             b.x,
             b.y
         );
 
+
         ctx.stroke();
+
     }
 
 
     /* PUNKTY */
 
     points.forEach(
-        (point, index) => {
+        (
+            point,
+            index
+        ) => {
 
             let color =
                 "#28f878";
 
 
-            if (index > 0) {
+            if (
+                index > 0
+            ) {
 
                 if (
                     point.data.balance <
-                    points[index - 1].data.balance
+                    points[
+                        index - 1
+                    ].data.balance
                 ) {
 
                     color =
                         "#ff3d4d";
+
                 }
+
             }
 
 
             ctx.fillStyle =
                 color;
 
+
             ctx.beginPath();
+
 
             ctx.arc(
                 point.x,
@@ -1278,7 +1658,9 @@ function drawChart() {
                 Math.PI * 2
             );
 
+
             ctx.fill();
+
         }
     );
 
@@ -1288,22 +1670,26 @@ function drawChart() {
     ctx.fillStyle =
         "#60786b";
 
+
     ctx.textAlign =
         "center";
+
 
     ctx.font =
         "11px Arial";
 
 
-    points.forEach(point => {
+    points.forEach(
+        point => {
 
-        ctx.fillText(
-            point.data.date,
-            point.x,
-            height - 14
-        );
+            ctx.fillText(
+                point.data.date,
+                point.x,
+                height - 14
+            );
 
-    });
+        }
+    );
 }
 
 
@@ -1316,20 +1702,26 @@ function save() {
         balance
     );
 
+
     localStorage.setItem(
         "bottles",
         bottles
     );
+
 
     localStorage.setItem(
         "days",
         days
     );
 
+
     localStorage.setItem(
         "history",
-        JSON.stringify(history)
+        JSON.stringify(
+            history
+        )
     );
+
 
     update();
 }
