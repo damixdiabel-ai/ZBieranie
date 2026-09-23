@@ -3,16 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZBieranie</title>
+    <title>ZBieranie 💰</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111827;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #1f2937;
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin: 0 0 10px;
+        }
+
+        header p {
+            color: #cbd5e1;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: #1f2937;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .money {
+            text-align: center;
+            font-size: 48px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .target {
+            text-align: center;
+            color: #cbd5e1;
+        }
+
+        .progress-bg {
+            width: 100%;
+            height: 25px;
+            background: #374151;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress {
+            height: 100%;
+            width: 0%;
+            background: #22c55e;
+            border-radius: 20px;
+            transition: 0.5s;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .stat {
+            background: #111827;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-name {
+            color: #94a3b8;
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 18px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #22c55e;
+            color: white;
+        }
+
+        button:hover {
+            opacity: 0.85;
+        }
+
+        .danger {
+            background: #ef4444;
+        }
+
+        .history {
+            margin-top: 20px;
+        }
+
+        .history-item {
+            padding: 12px;
+            border-bottom: 1px solid #374151;
+        }
+
+        footer {
+            text-align: center;
+            color: #64748b;
+            padding: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 32px;
+            }
+
+            .money {
+                font-size: 38px;
+            }
+        }
+    </style>
 </head>
+
 <body>
+
+<header>
     <h1>🧴 ZBieranie</h1>
-    <p>Witaj na mojej stronie!</p>
+    <p>Moja droga do celu 💰</p>
+</header>
 
-    <h2>Mój cel</h2>
-    <p>6868 zł</p>
+<div class="container">
 
-    <h2>Moje zbieranie</h2>
-    <p>20 butelek × 0,50 zł = 10 zł</p>
+    <div class="card">
+        <h2>🎯 Mój cel</h2>
+
+        <div class="money" id="money">0,00 zł</div>
+
+        <div class="target">
+            Cel: <strong>6868 zł</strong>
+        </div>
+
+        <div class="progress-bg">
+            <div class="progress" id="progress"></div>
+        </div>
+
+        <p id="percent" style="text-align:center;">0%</p>
+    </div>
+
+    <div class="card">
+        <h2>📊 Statystyki</h2>
+
+        <div class="stats">
+
+            <div class="stat">
+                <div class="stat-number" id="bottles">0</div>
+                <div class="stat-name">🧴 Butelek</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number" id="days">0</div>
+                <div class="stat-name">📅 Dni</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-number" id="remaining">6868 zł</div>
+                <div class="stat-name">💰 Brakuje</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>➕ Dodaj zbieranie</h2>
+
+        <p>
+            Jedna butelka = <strong>0,50 zł</strong>
+        </p>
+
+        <button onclick="addBottles(20)">
+            +20 butelek
+        </button>
+
+        <button onclick="addBottles(40)">
+            +40 butelek
+        </button>
+
+        <button onclick="addBottles(1)">
+            +1 butelka
+        </button>
+
+        <button class="danger" onclick="resetData()">
+            🗑️ Reset
+        </button>
+    </div>
+
+    <div class="card">
+        <h2>📜 Historia</h2>
+
+        <div class="history" id="history">
+            Brak wpisów.
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    ZBieranie © 2026
+</footer>
+
+<script>
+
+    const TARGET = 6868;
+    const PRICE = 0.50;
+
+    let bottles = Number(localStorage.getItem("bottles")) || 0;
+    let days = Number(localStorage.getItem("days")) || 0;
+    let history = JSON.parse(localStorage.getItem("history")) || [];
+
+    function update() {
+
+        const money = bottles * PRICE;
+        const remaining = Math.max(TARGET - money, 0);
+        const percent = Math.min((money / TARGET) * 100, 100);
+
+        document.getElementById("money").textContent =
+            money.toFixed(2).replace(".", ",") + " zł";
+
+        document.getElementById("bottles").textContent = bottles;
+
+        document.getElementById("days").textContent = days;
+
+        document.getElementById("remaining").textContent =
+            remaining.toFixed(2).replace(".", ",") + " zł";
+
+        document.getElementById("percent").textContent =
+            percent.toFixed(2) + "%";
+
+        document.getElementById("progress").style.width =
+            percent + "%";
+
+        showHistory();
+    }
+
+    function addBottles(amount) {
+
+        bottles += amount;
+        days++;
+
+        const money = amount * PRICE;
+
+        const date = new Date().toLocaleDateString("pl-PL");
+
+        history.unshift(
+            date + " — +" + amount +
+            " butelek = +" +
+            money.toFixed(2).replace(".", ",") +
+            " zł"
+        );
+
+        localStorage.setItem("bottles", bottles);
+        localStorage.setItem("days", days);
+        localStorage.setItem("history", JSON.stringify(history));
+
+        update();
+    }
+
+    function showHistory() {
+
+        const box = document.getElementById("history");
+
+        if (history.length === 0) {
+            box.innerHTML = "Brak wpisów.";
+            return;
+        }
+
+        box.innerHTML = history
+            .map(item => `<div class="history-item">🧴 ${item}</div>`)
+            .join("");
+    }
+
+    function resetData() {
+
+        if (confirm("Na pewno chcesz wyzerować całą historię?")) {
+
+            bottles = 0;
+            days = 0;
+            history = [];
+
+            localStorage.removeItem("bottles");
+            localStorage.removeItem("days");
+            localStorage.removeItem("history");
+
+            update();
+        }
+    }
+
+    update();
+
+</script>
+
 </body>
 </html>
