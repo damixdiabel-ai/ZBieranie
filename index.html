@@ -6,22 +6,18 @@
 <title>ZBieranie 💰</title>
 
 <style>
-*{
-    box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-    scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
     margin:0;
     font-family:Arial,Helvetica,sans-serif;
-    background:
-        radial-gradient(circle at top,#123d2c 0%,#07150f 45%,#030906 100%);
     color:#eafff1;
     min-height:100vh;
     overflow-x:hidden;
+    background:
+        radial-gradient(circle at top,#123d2c 0%,#07150f 45%,#030906 100%);
 }
 
 body::before{
@@ -29,8 +25,12 @@ body::before{
     position:fixed;
     inset:0;
     pointer-events:none;
-    background:
-        linear-gradient(115deg,transparent 0%,rgba(0,255,130,.025) 50%,transparent 100%);
+    background:linear-gradient(
+        115deg,
+        transparent,
+        rgba(0,255,130,.025),
+        transparent
+    );
 }
 
 /* =========================
@@ -43,7 +43,6 @@ header{
 }
 
 .money-logo{
-    position:relative;
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -79,12 +78,10 @@ header{
 h1{
     margin:5px 0;
     font-size:42px;
-    letter-spacing:1px;
 }
 
 .subtitle{
     color:#91ad9e;
-    font-size:16px;
 }
 
 /* =========================
@@ -100,7 +97,6 @@ h1{
     border:1px solid #174b32;
     border-radius:16px;
     padding:7px;
-    box-shadow:0 0 25px rgba(0,255,100,.07);
 }
 
 .tab{
@@ -127,23 +123,26 @@ h1{
     box-shadow:0 0 15px rgba(0,255,100,.12);
 }
 
-/* stara animacja przejścia */
+/* STARA ANIMACJA */
 
 .page{
     width:min(900px,92%);
     margin:auto;
-    animation:pageIn .45s ease;
 }
 
-.page.page-out{
-    animation:pageOut .25s ease forwards;
+.page.enter-right{
+    animation:enterRight .45s ease both;
 }
 
-@keyframes pageIn{
+.page.leave-left{
+    animation:leaveLeft .25s ease both;
+}
+
+@keyframes enterRight{
     from{
         opacity:0;
         transform:translateX(55px);
-        filter:blur(4px);
+        filter:blur(5px);
     }
     to{
         opacity:1;
@@ -152,7 +151,7 @@ h1{
     }
 }
 
-@keyframes pageOut{
+@keyframes leaveLeft{
     from{
         opacity:1;
         transform:translateX(0);
@@ -168,7 +167,7 @@ h1{
 ========================= */
 
 .card{
-    background:rgba(6,25,16,.92);
+    background:rgba(6,25,16,.94);
     border:1px solid #17472f;
     border-radius:18px;
     padding:22px;
@@ -178,38 +177,29 @@ h1{
         inset 0 0 30px rgba(0,255,100,.018);
 }
 
-.card h2{
-    margin-top:0;
-}
-
 /* =========================
    SALDO
 ========================= */
 
 .balance{
     text-align:center;
-    font-size:55px;
+    font-size:58px;
     font-weight:900;
     color:#42ff8c;
     text-shadow:0 0 18px rgba(0,255,100,.3);
-    margin:15px 0;
+    margin:18px 0;
 }
 
-.goal-line{
-    display:flex;
-    justify-content:space-between;
-    color:#91ad9e;
-    font-size:14px;
-    margin-bottom:8px;
-}
+/* WIĘKSZY PASEK */
 
 .progress{
     width:100%;
-    height:22px;
+    height:34px;
     background:#06140d;
-    border:1px solid #1c5035;
+    border:2px solid #1c5035;
     border-radius:30px;
     overflow:hidden;
+    box-shadow:inset 0 0 10px rgba(0,0,0,.5);
 }
 
 .progress-fill{
@@ -217,7 +207,7 @@ h1{
     width:0%;
     background:linear-gradient(90deg,#0b8f45,#38ff88);
     border-radius:30px;
-    transition:width 1s ease;
+    transition:width 1s cubic-bezier(.2,.8,.2,1);
     position:relative;
     overflow:hidden;
 }
@@ -228,10 +218,8 @@ h1{
     inset:0;
     background:repeating-linear-gradient(
         -45deg,
-        rgba(0,0,0,.18) 0px,
-        rgba(0,0,0,.18) 12px,
-        transparent 12px,
-        transparent 24px
+        rgba(0,0,0,.18) 0 12px,
+        transparent 12px 24px
     );
     animation:stripes 1s linear infinite;
 }
@@ -241,9 +229,17 @@ h1{
     to{transform:translateX(24px)}
 }
 
+.goal-line{
+    display:flex;
+    justify-content:space-between;
+    color:#91ad9e;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
 .percent{
     text-align:center;
-    margin-top:8px;
+    margin-top:9px;
     color:#62ff9c;
     font-weight:bold;
 }
@@ -317,7 +313,6 @@ h1{
 .money-btn:hover{
     background:#12562f;
     transform:translateY(-2px);
-    box-shadow:0 0 15px rgba(0,255,100,.13);
 }
 
 .expense{
@@ -334,11 +329,6 @@ input{
     border:1px solid #22573a;
     border-radius:10px;
     color:white;
-    outline:none;
-}
-
-input:focus{
-    border-color:#42ff8c;
 }
 
 /* =========================
@@ -353,17 +343,8 @@ input:focus{
     border-bottom:1px solid #173625;
 }
 
-.history-item:last-child{
-    border-bottom:0;
-}
-
-.income{
-    color:#48ff91;
-}
-
-.outcome{
-    color:#ff6565;
-}
+.income{color:#48ff91}
+.outcome{color:#ff6565}
 
 .history-date{
     color:#748c7d;
@@ -374,23 +355,39 @@ input:focus{
    WYKRES
 ========================= */
 
-.chart-wrap{
+.chart-scroll{
     overflow-x:auto;
-    padding-bottom:5px;
+    overflow-y:hidden;
+    border-radius:12px;
+    padding-bottom:10px;
+    scrollbar-color:#2b9d5b #08170f;
+}
+
+.chart-scroll::-webkit-scrollbar{
+    height:12px;
+}
+
+.chart-scroll::-webkit-scrollbar-track{
+    background:#07140d;
+    border-radius:20px;
+}
+
+.chart-scroll::-webkit-scrollbar-thumb{
+    background:#2c9d5b;
+    border-radius:20px;
+}
+
+.chart-scroll::-webkit-scrollbar-thumb:hover{
+    background:#43d87a;
 }
 
 canvas{
     display:block;
-    min-width:650px;
 }
 
 /* =========================
-   CELE - STARY POMARAŃCZOWY
+   CELE
 ========================= */
-
-.goals-page{
-    animation:pageIn .45s ease;
-}
 
 .goals-card{
     background:
@@ -406,21 +403,20 @@ canvas{
     text-shadow:0 0 14px rgba(255,145,0,.4);
 }
 
-.orange-progress{
-    background:#1b1005;
-    border:1px solid #724714;
-}
-
-.orange-fill{
-    background:linear-gradient(90deg,#b65d00,#ffae2e);
-    box-shadow:0 0 12px rgba(255,145,0,.25);
-}
-
 .goal-big{
     text-align:center;
     font-size:44px;
     font-weight:900;
     color:#ffae32;
+}
+
+.orange-progress{
+    background:#1b1005;
+    border-color:#724714;
+}
+
+.orange-fill{
+    background:linear-gradient(90deg,#b65d00,#ffae2e);
 }
 
 .milestones{
@@ -471,12 +467,12 @@ canvas{
     display:flex;
     flex-direction:column;
     align-items:center;
-    gap:28px;
-    margin-top:25px;
+    gap:34px;
+    margin-top:28px;
 }
 
 .safe-wrap{
-    width:290px;
+    width:300px;
     position:relative;
     text-align:center;
 }
@@ -484,27 +480,23 @@ canvas{
 .safe{
     position:relative;
     width:250px;
-    height:310px;
+    height:330px;
     margin:auto;
     border-radius:18px;
     background:
-        linear-gradient(145deg,#5b6b63,#26352e 35%,#17221d 70%,#0e1512);
+        linear-gradient(
+            145deg,
+            #5b6b63,
+            #26352e 35%,
+            #17221d 70%,
+            #0e1512
+        );
     border:5px solid #65776d;
     box-shadow:
         inset 0 0 0 4px #1a2821,
         inset 0 0 35px rgba(0,0,0,.75),
         0 18px 35px rgba(0,0,0,.5);
-    transition:.3s;
     transform-origin:center bottom;
-}
-
-.safe:hover{
-    transform:translateY(-5px);
-    box-shadow:
-        inset 0 0 0 4px #1a2821,
-        inset 0 0 35px rgba(0,0,0,.75),
-        0 22px 45px rgba(0,0,0,.6),
-        0 0 25px rgba(50,255,130,.12);
 }
 
 .safe::before{
@@ -518,66 +510,23 @@ canvas{
 
 .safe-top{
     position:absolute;
-    top:25px;
+    top:24px;
     left:0;
     right:0;
     font-weight:bold;
     color:#dce8e2;
     font-size:19px;
-    z-index:3;
+    z-index:4;
 }
 
 .safe-label{
     position:absolute;
-    top:53px;
+    top:52px;
     left:0;
     right:0;
     color:#71877b;
     font-size:13px;
-    z-index:3;
-}
-
-/* pokrętło */
-
-.crank{
-    position:absolute;
-    right:30px;
-    top:98px;
-    width:72px;
-    height:72px;
-    border-radius:50%;
-    border:7px solid #aab5af;
-    background:#26352e;
-    box-shadow:
-        inset 0 0 10px #000,
-        0 4px 8px rgba(0,0,0,.45);
-    z-index:5;
-    transition:.3s;
-}
-
-.crank::before{
-    content:"";
-    position:absolute;
-    width:8px;
-    height:58px;
-    background:#aab5af;
-    left:25px;
-    top:0;
-    border-radius:8px;
-    transform:rotate(45deg);
-}
-
-.crank::after{
-    content:"";
-    position:absolute;
-    width:23px;
-    height:12px;
-    border-radius:8px;
-    background:#c1cbc6;
-    right:-10px;
-    bottom:4px;
-    transform:rotate(45deg);
-    box-shadow:0 2px 4px rgba(0,0,0,.5);
+    z-index:4;
 }
 
 .safe-door{
@@ -586,10 +535,59 @@ canvas{
     border-radius:12px;
     border:2px solid #73847c;
     pointer-events:none;
-    transition:1s;
+    transition:
+        transform .65s cubic-bezier(.2,.8,.2,1),
+        opacity .5s ease;
     transform-origin:left center;
     z-index:2;
     background:linear-gradient(145deg,#44534c,#1c2923);
+}
+
+/* KORBA */
+
+.crank{
+    position:absolute;
+    right:30px;
+    top:100px;
+    width:76px;
+    height:76px;
+    border-radius:50%;
+    border:7px solid #aab5af;
+    background:#26352e;
+    box-shadow:
+        inset 0 0 10px #000,
+        0 4px 8px rgba(0,0,0,.45);
+    z-index:8;
+    cursor:pointer;
+    transition:filter .2s;
+}
+
+.crank:hover{
+    filter:brightness(1.25);
+}
+
+.crank::before{
+    content:"";
+    position:absolute;
+    width:8px;
+    height:58px;
+    background:#aab5af;
+    left:27px;
+    top:2px;
+    border-radius:8px;
+    transform:rotate(45deg);
+}
+
+.crank::after{
+    content:"";
+    position:absolute;
+    width:24px;
+    height:12px;
+    border-radius:8px;
+    background:#c1cbc6;
+    right:-10px;
+    bottom:4px;
+    transform:rotate(45deg);
 }
 
 /* pasek sejfu */
@@ -604,14 +602,14 @@ canvas{
     border:1px solid #456055;
     border-radius:20px;
     overflow:hidden;
-    z-index:4;
+    z-index:6;
 }
 
 .safe-progress-fill{
     height:100%;
     width:0%;
     background:linear-gradient(90deg,#0b9c4b,#42ff8d);
-    transition:width .5s ease;
+    transition:width .4s ease;
 }
 
 .safe-amount{
@@ -622,8 +620,33 @@ canvas{
     color:#6dff9f;
     font-weight:bold;
     font-size:14px;
-    z-index:5;
+    z-index:7;
 }
+
+/* ukryty kod */
+
+.safe-code{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:82px;
+    z-index:9;
+    color:#ffd45a;
+    font-size:15px;
+    font-weight:bold;
+    text-shadow:0 0 10px rgba(255,210,50,.5);
+    opacity:0;
+    transform:scale(.8);
+    transition:.35s;
+    pointer-events:none;
+}
+
+.safe-code.visible{
+    opacity:1;
+    transform:scale(1);
+}
+
+/* akcje */
 
 .safe-actions{
     display:flex;
@@ -651,51 +674,56 @@ canvas{
     font-weight:bold;
 }
 
-.safe-deposit{
-    background:#126334;
-}
+.safe-deposit{background:#126334}
+.safe-clear{background:#731c1c}
 
-.safe-clear{
-    background:#731c1c;
-}
-
-/* pełny sejf */
+/* mocne trzęsienie */
 
 .safe.full{
-    animation:safeShake 1.45s ease-in-out;
-    box-shadow:
-        inset 0 0 0 4px #1a2821,
-        0 0 30px rgba(50,255,120,.4),
-        0 20px 55px rgba(0,0,0,.7);
+    animation:safeShake 1.25s ease-in-out;
 }
 
 @keyframes safeShake{
     0%,100%{transform:translateX(0) rotate(0)}
-    10%{transform:translateX(-9px) rotate(-2deg)}
-    20%{transform:translateX(9px) rotate(2deg)}
-    30%{transform:translateX(-11px) rotate(-3deg)}
-    40%{transform:translateX(11px) rotate(3deg)}
-    50%{transform:translateX(-8px) rotate(-2deg)}
-    60%{transform:translateX(8px) rotate(2deg)}
-    70%{transform:translateX(-5px)}
-    80%{transform:translateX(5px)}
+    10%{transform:translateX(-10px) rotate(-2deg)}
+    20%{transform:translateX(10px) rotate(2deg)}
+    30%{transform:translateX(-12px) rotate(-3deg)}
+    40%{transform:translateX(12px) rotate(3deg)}
+    50%{transform:translateX(-9px) rotate(-2deg)}
+    60%{transform:translateX(9px) rotate(2deg)}
+    70%{transform:translateX(-6px)}
+    80%{transform:translateX(6px)}
 }
 
-/* otwarcie drzwi */
+/* obrót korby */
+
+.crank.spinning{
+    animation:crankSpin .9s linear infinite;
+}
+
+@keyframes crankSpin{
+    from{transform:rotate(0)}
+    to{transform:rotate(360deg)}
+}
+
+/* otwarcie */
 
 .safe.open .safe-door{
-    transform:perspective(600px) rotateY(-115deg);
-    opacity:.15;
+    transform:perspective(700px) rotateY(-110deg);
+    opacity:.1;
 }
 
-/* pieniądze */
+/* =========================
+   BANKNOTY
+========================= */
 
 .money-fly{
     position:fixed;
     z-index:9999;
     pointer-events:none;
-    font-size:27px;
-    animation:moneyFly 1.8s cubic-bezier(.2,.8,.3,1) forwards;
+    font-size:30px;
+    will-change:transform,opacity;
+    animation:moneyFly 1.6s cubic-bezier(.2,.8,.3,1) forwards;
 }
 
 @keyframes moneyFly{
@@ -708,24 +736,30 @@ canvas{
         transform:
             translate(
                 calc((var(--x) - .5) * 100vw),
-                calc(-1 * (300px + var(--y) * 300px))
+                calc(-250px - var(--y) * 400px)
             )
             rotate(720deg)
-            scale(.6);
+            scale(.55);
     }
 }
 
 /* =========================
-   WYSKAKIWANIE NOWEGO SEJFU
+   WYMIANA SEJFU
 ========================= */
 
 .safe.replacing{
-    animation:safeFlyUp .8s ease-in forwards;
+    animation:safeFlyUp .7s ease-in forwards;
 }
 
 @keyframes safeFlyUp{
-    0%{transform:translateY(0) rotate(0);opacity:1}
-    100%{transform:translateY(-180px) rotate(-8deg);opacity:0}
+    0%{
+        transform:translateY(0) rotate(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-230px) rotate(-10deg);
+        opacity:0;
+    }
 }
 
 .ground-cracks{
@@ -748,7 +782,6 @@ canvas{
     width:150px;
     height:4px;
     background:#8c8c75;
-    transform-origin:left center;
 }
 
 .ground-cracks::before{
@@ -773,7 +806,7 @@ canvas{
 }
 
 .safe-wrap.emerging .ground-cracks{
-    animation:cracks .8s .2s ease-out forwards;
+    animation:cracks .8s .15s ease-out forwards;
 }
 
 .safe-wrap.emerging .safe-ground{
@@ -781,9 +814,18 @@ canvas{
 }
 
 @keyframes cracks{
-    0%{transform:translateX(-50%) scale(.2);opacity:0}
-    60%{transform:translateX(-50%) scale(1.15);opacity:1}
-    100%{transform:translateX(-50%) scale(1);opacity:.8}
+    0%{
+        transform:translateX(-50%) scale(.2);
+        opacity:0;
+    }
+    60%{
+        transform:translateX(-50%) scale(1.15);
+        opacity:1;
+    }
+    100%{
+        transform:translateX(-50%) scale(1);
+        opacity:.8;
+    }
 }
 
 @keyframes groundGlow{
@@ -793,7 +835,7 @@ canvas{
 }
 
 .safe.new-emerge{
-    animation:safeEmerge 1.2s cubic-bezier(.18,.9,.3,1) forwards;
+    animation:safeEmerge 1.05s cubic-bezier(.18,.9,.3,1) forwards;
 }
 
 @keyframes safeEmerge{
@@ -824,13 +866,14 @@ canvas{
     height:16px;
     z-index:10000;
     pointer-events:none;
+    will-change:transform,opacity;
     animation:confettiFall var(--duration) linear forwards;
 }
 
 @keyframes confettiFall{
     0%{
         opacity:1;
-        transform:translate(0,0) rotate(0deg);
+        transform:translate(0,0) rotate(0);
     }
     100%{
         opacity:0;
@@ -849,7 +892,7 @@ canvas{
     pointer-events:none;
     opacity:0;
     text-align:center;
-    font-size:36px;
+    font-size:38px;
     font-weight:900;
     color:#8affb6;
     text-shadow:
@@ -859,29 +902,100 @@ canvas{
 }
 
 .celebration.show{
-    animation:celebrate 2.5s ease forwards;
+    animation:celebrate 2.4s ease forwards;
 }
 
 @keyframes celebrate{
     0%{
         opacity:0;
-        transform:translate(-50%,-50%) scale(.3) rotate(-5deg);
+        transform:translate(-50%,-50%) scale(.3);
     }
     15%{
         opacity:1;
-        transform:translate(-50%,-50%) scale(1.25) rotate(2deg);
+        transform:translate(-50%,-50%) scale(1.25);
     }
     30%{
-        transform:translate(-50%,-50%) scale(1) rotate(-1deg);
+        transform:translate(-50%,-50%) scale(1);
     }
     75%{
         opacity:1;
-        transform:translate(-50%,-50%) scale(1.05);
+        transform:translate(-50%,-50%) scale(1.06);
     }
     100%{
         opacity:0;
         transform:translate(-50%,-50%) scale(.9);
     }
+}
+
+/* kod */
+
+.code-modal{
+    position:fixed;
+    inset:0;
+    z-index:12000;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(5px);
+}
+
+.code-box{
+    width:min(360px,90%);
+    background:#071b12;
+    border:1px solid #38d875;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 0 40px rgba(0,255,100,.2);
+    animation:modalPop .25s ease;
+}
+
+@keyframes modalPop{
+    from{
+        transform:scale(.8);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+.code-input{
+    text-align:center;
+    font-size:28px;
+    letter-spacing:10px;
+    margin:15px 0;
+}
+
+.code-error{
+    color:#ff6262;
+    min-height:20px;
+}
+
+.modal-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.modal-buttons button{
+    flex:1;
+    padding:11px;
+    border:0;
+    border-radius:9px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.confirm-code{
+    background:#168143;
+    color:white;
+}
+
+.cancel-code{
+    background:#591919;
+    color:#ffb4b4;
 }
 
 @media(max-width:650px){
@@ -921,225 +1035,232 @@ canvas{
 
 <main class="page" id="balancePage">
 
-    <div class="card">
+<div class="card">
 
-        <h2>💰 Aktualne saldo</h2>
+<h2>💰 Aktualne saldo</h2>
 
-        <div class="balance" id="balance">0,00 zł</div>
+<div class="balance" id="balance">0,00 zł</div>
 
-        <div class="goal-line">
-            <span>Cel: 6868 zł</span>
-            <span id="remaining">6868 zł</span>
-        </div>
+<div class="goal-line">
+<span>Cel: 6868 zł</span>
+<span id="remaining">6868 zł</span>
+</div>
 
-        <div class="progress">
-            <div class="progress-fill" id="progressFill"></div>
-        </div>
+<div class="progress">
+<div class="progress-fill" id="progressFill"></div>
+</div>
 
-        <div class="percent" id="percent">0%</div>
+<div class="percent" id="percent">0%</div>
 
-        <button class="clear-btn" onclick="clearBalance()">
-            🗑 Wyczyść saldo
-        </button>
+<button class="clear-btn" onclick="clearBalance()">
+🗑 Wyczyść saldo
+</button>
 
-    </div>
+</div>
 
-    <!-- DODAWANIE -->
 
-    <div class="card">
+<div class="card">
 
-        <h2>💰 Dodaj pieniądze</h2>
+<h2>💰 Dodaj pieniądze</h2>
 
-        <div class="money-buttons">
+<div class="money-buttons">
 
-            <button class="money-btn" onclick="addMoney(0.50,'Kaucja')">
-                +0,50 zł<br>
-                <small>Kaucja</small>
-            </button>
+<button class="money-btn" onclick="addMoney(.5,'Kaucja')">
++0,50 zł<br><small>Kaucja</small>
+</button>
 
-            <button class="money-btn" onclick="addMoney(10,'20 butelek')">
-                +10 zł<br>
-                <small>20 butelek</small>
-            </button>
+<button class="money-btn" onclick="addMoney(10,'20 butelek')">
++10 zł<br><small>20 butelek</small>
+</button>
 
-            <button class="money-btn" onclick="addMoney(20,'40 butelek')">
-                +20 zł<br>
-                <small>40 butelek</small>
-            </button>
+<button class="money-btn" onclick="addMoney(20,'40 butelek')">
++20 zł<br><small>40 butelek</small>
+</button>
 
-            <button class="money-btn" onclick="customAdd()">
-                💵 Inna kwota
-            </button>
+<button class="money-btn" onclick="customAdd()">
+💵 Inna kwota
+</button>
 
-            <button class="money-btn expense" onclick="customExpense()">
-                🔴 Wydatek
-            </button>
+<button class="money-btn expense" onclick="customExpense()">
+🔴 Wydatek
+</button>
 
-        </div>
+</div>
+</div>
 
-    </div>
 
-    <!-- STATYSTYKI -->
+<div class="card">
 
-    <div class="card">
+<h2>📊 Statystyki</h2>
 
-        <h2>📊 Statystyki</h2>
+<div class="stats">
 
-        <div class="stats">
+<div class="stat">
+<div class="number" id="bottles">0</div>
+<div class="label">🍾 Butelki</div>
+</div>
 
-            <div class="stat">
-                <div class="number" id="bottles">0</div>
-                <div class="label">🍾 Butelki</div>
-            </div>
+<div class="stat">
+<div class="number" id="days">0</div>
+<div class="label">📅 Dni</div>
+</div>
 
-            <div class="stat">
-                <div class="number" id="days">0</div>
-                <div class="label">📅 Dni</div>
-            </div>
+<div class="stat">
+<div class="number" id="remainingStat">6868 zł</div>
+<div class="label">💰 Pozostało</div>
+</div>
 
-            <div class="stat">
-                <div class="number" id="remainingStat">6868 zł</div>
-                <div class="label">💰 Pozostało</div>
-            </div>
+</div>
 
-        </div>
 
-        <div style="margin-top:25px">
+<div style="margin-top:25px">
 
-            <h2>📈 Wykres</h2>
+<h2>📈 Wykres</h2>
 
-            <div class="chart-wrap">
-                <canvas id="chart" width="850" height="300"></canvas>
-            </div>
+<div class="chart-scroll">
+<canvas id="chart" width="1400" height="330"></canvas>
+</div>
 
-            <button class="clear-btn" onclick="clearChart()">
-                🗑 Wyczyść wykres
-            </button>
+<button class="clear-btn" onclick="clearChart()">
+🗑 Wyczyść wykres
+</button>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <!-- HISTORIA -->
 
-    <div class="card">
+<div class="card">
 
-        <h2>📜 Historia pieniędzy</h2>
+<h2>📜 Historia pieniędzy</h2>
 
-        <div id="history"></div>
+<div id="history"></div>
 
-        <button
-            class="money-btn"
-            id="historyToggle"
-            style="width:100%;margin-top:12px"
-            onclick="toggleHistory()"
-        >
-            Pokaż więcej ▼
-        </button>
+<button
+class="money-btn"
+id="historyToggle"
+style="width:100%;margin-top:12px"
+onclick="toggleHistory()"
+>
+Pokaż więcej ▼
+</button>
 
-        <button class="clear-btn" onclick="clearHistory()">
-            🗑 Wyczyść historię
-        </button>
+<button class="clear-btn" onclick="clearHistory()">
+🗑 Wyczyść historię
+</button>
 
-    </div>
+</div>
 
-    <!-- =========================
-         SEJFY
-    ========================= -->
 
-    <div class="card safes-section">
+<!-- SEJFY -->
 
-        <h2 class="safes-title">🔐 Sejfy</h2>
+<div class="card safes-section">
 
-        <p style="color:#82998d">
-            Każdy sejf mieści maksymalnie 500 zł.
-            Po zapełnieniu pieniądze trafiają na główne saldo.
-        </p>
+<h2 class="safes-title">🔐 Sejfy</h2>
 
-        <div class="safes" id="safes"></div>
+<p style="color:#82998d">
+Każdy sejf ma swój własny ukryty limit.
+</p>
 
-    </div>
+<div class="safes" id="safes"></div>
+
+</div>
 
 </main>
+
 
 <!-- =========================
      CELE
 ========================= -->
 
-<main class="page goals-page" id="goalsPage" style="display:none">
+<main class="page" id="goalsPage" style="display:none">
 
-    <div class="card goals-card">
+<div class="card goals-card">
 
-        <h2 class="goals-title">🎯 Główny cel</h2>
+<h2 class="goals-title">🎯 Główny cel</h2>
 
-        <div class="goal-big">6868 zł</div>
+<div class="goal-big">6868 zł</div>
 
-        <div class="goal-line">
-            <span>Postęp</span>
-            <span id="goalPercent">0%</span>
-        </div>
+<div class="goal-line">
+<span>Postęp</span>
+<span id="goalPercent">0%</span>
+</div>
 
-        <div class="progress orange-progress">
-            <div
-                class="progress-fill orange-fill"
-                id="goalProgress"
-            ></div>
-        </div>
+<div class="progress orange-progress">
+<div class="progress-fill orange-fill" id="goalProgress"></div>
+</div>
 
-        <div class="milestones">
+<div class="milestones">
 
-            <div class="milestone" id="m500">
-                500 zł
-            </div>
+<div class="milestone" id="m500">500 zł</div>
+<div class="milestone" id="m1000">1000 zł</div>
+<div class="milestone" id="m2500">2500 zł</div>
+<div class="milestone" id="m5000">5000 zł</div>
+<div class="milestone" id="m6868">6868 zł</div>
 
-            <div class="milestone" id="m1000">
-                1000 zł
-            </div>
+</div>
 
-            <div class="milestone" id="m2500">
-                2500 zł
-            </div>
+</div>
 
-            <div class="milestone" id="m5000">
-                5000 zł
-            </div>
 
-            <div class="milestone" id="m6868">
-                6868 zł
-            </div>
+<div class="card goals-card">
 
-        </div>
+<h2 class="goals-title">🏆 Moje cele</h2>
 
-    </div>
+<div class="extra-goal">
+🛴 <b>2× Kukirin G4</b>
+</div>
 
-    <div class="card goals-card">
-
-        <h2 class="goals-title">🏆 Moje cele</h2>
-
-        <div class="extra-goal">
-            🛴 <b>2× Kukirin G4</b>
-        </div>
-
-        <div class="extra-goal">
-            🖥️ <b>Nowy komputer</b>
-        </div>
-
-        <div class="extra-goal">
-            🎮 <b>PlayStation 5 Slim</b>
-        </div>
-
-        <div class="extra-goal">
-            ⭐ <b>Własny cel</b>
-        </div>
-
-    </div>
+</div>
 
 </main>
 
-<div id="celebration" class="celebration">
-    🎉 SEJF OTWARTY! 🎉<br>
-    💰 PIENIĄDZE TRAFIŁY NA SALDO! 💰
+
+<!-- GRATULACJE -->
+
+<div id="celebration" class="celebration"></div>
+
+
+<!-- OKNO KODU -->
+
+<div class="code-modal" id="codeModal">
+
+<div class="code-box">
+
+<h2>🔐 Odblokuj sejf</h2>
+
+<p id="codeInfo">
+Wpisz 4-cyfrowy kod.
+</p>
+
+<input
+id="safeCodeInput"
+class="code-input"
+type="text"
+inputmode="numeric"
+maxlength="4"
+autocomplete="off"
+placeholder="••••"
+>
+
+<div class="code-error" id="codeError"></div>
+
+<div class="modal-buttons">
+
+<button class="confirm-code" onclick="confirmSafeCode()">
+🔓 Odblokuj
+</button>
+
+<button class="cancel-code" onclick="closeCodeModal()">
+Anuluj
+</button>
+
 </div>
+
+</div>
+
+</div>
+
 
 <script>
 
@@ -1150,33 +1271,190 @@ canvas{
 const TARGET = 6868;
 const CLEAR_CODE = "ButelKaucja";
 
+/*
+   UKRYTE LIMITY SEJFÓW
+
+   1 = 500
+   2 = 1000
+   3 = 2000
+   4 = 250
+
+   Nie są wyświetlane użytkownikowi.
+*/
+
+const SAFE_LIMITS = [
+    500,
+    1000,
+    2000,
+    250
+];
+
 let balance =
-    Number(localStorage.getItem("balance")) || 0;
+Number(localStorage.getItem("balance")) || 0;
 
 let bottles =
-    Number(localStorage.getItem("bottles")) || 0;
+Number(localStorage.getItem("bottles")) || 0;
 
 let days =
-    Number(localStorage.getItem("days")) || 0;
+Number(localStorage.getItem("days")) || 0;
 
 let history =
-    JSON.parse(localStorage.getItem("history")) || [];
+JSON.parse(localStorage.getItem("history")) || [];
 
-let historyExpanded = false;
+let historyExpanded=false;
 
 
 /* =========================
    SEJFY
 ========================= */
 
-const SAFE_MAX = 500;
-
 let safes =
-    JSON.parse(localStorage.getItem("safes")) ||
-    [0,0,0,0];
+JSON.parse(localStorage.getItem("safes")) || [0,0,0,0];
 
-if(!Array.isArray(safes) || safes.length !== 4){
-    safes = [0,0,0,0];
+let safeCodes =
+JSON.parse(localStorage.getItem("safeCodes")) || [null,null,null,null];
+
+let activeSafe=-1;
+
+if(!Array.isArray(safes) || safes.length!==4)
+    safes=[0,0,0,0];
+
+if(!Array.isArray(safeCodes) || safeCodes.length!==4)
+    safeCodes=[null,null,null,null];
+
+
+/* =========================
+   DŹWIĘKI
+========================= */
+
+let audioContext=null;
+
+function getAudio(){
+
+    if(!audioContext){
+
+        audioContext =
+        new (window.AudioContext ||
+        window.webkitAudioContext)();
+
+    }
+
+    if(audioContext.state==="suspended")
+        audioContext.resume();
+
+    return audioContext;
+}
+
+function tone(
+    frequency,
+    duration,
+    type="sine",
+    volume=.07,
+    endFrequency=null
+){
+
+    try{
+
+        const ctx=getAudio();
+
+        const oscillator =
+        ctx.createOscillator();
+
+        const gain =
+        ctx.createGain();
+
+        oscillator.type=type;
+
+        oscillator.frequency.setValueAtTime(
+            frequency,
+            ctx.currentTime
+        );
+
+        if(endFrequency){
+
+            oscillator.frequency.exponentialRampToValueAtTime(
+                endFrequency,
+                ctx.currentTime+duration
+            );
+
+        }
+
+        gain.gain.setValueAtTime(
+            volume,
+            ctx.currentTime
+        );
+
+        gain.gain.exponentialRampToValueAtTime(
+            .001,
+            ctx.currentTime+duration
+        );
+
+        oscillator.connect(gain);
+        gain.connect(ctx.destination);
+
+        oscillator.start();
+        oscillator.stop(
+            ctx.currentTime+duration
+        );
+
+    }catch(e){}
+
+}
+
+function soundClick(){
+    tone(500,.07,"square",.035,700);
+}
+
+function soundPop(){
+    tone(180,.09,"sine",.09,520);
+}
+
+function soundWhoosh(){
+
+    tone(
+        700,
+        .35,
+        "sawtooth",
+        .035,
+        90
+    );
+
+}
+
+function soundUnlock(){
+
+    tone(420,.12,"square",.05,650);
+
+    setTimeout(()=>{
+        tone(650,.14,"square",.05,900);
+    },100);
+
+}
+
+function soundSafeOpen(){
+
+    tone(100,.7,"sawtooth",.09,50);
+
+    setTimeout(()=>{
+        tone(500,.15,"sine",.08,850);
+    },500);
+
+}
+
+function soundError(){
+
+    tone(180,.18,"square",.06,100);
+
+}
+
+function soundConfetti(){
+
+    tone(800,.08,"triangle",.045,1200);
+
+    setTimeout(()=>{
+        tone(1200,.1,"triangle",.04,1600);
+    },80);
+
 }
 
 
@@ -1186,36 +1464,43 @@ if(!Array.isArray(safes) || safes.length !== 4){
 
 function switchPage(page){
 
+    soundWhoosh();
+
     const oldPage =
-        page === "balance"
+        page==="balance"
         ? document.getElementById("goalsPage")
         : document.getElementById("balancePage");
 
     const newPage =
-        page === "balance"
+        page==="balance"
         ? document.getElementById("balancePage")
         : document.getElementById("goalsPage");
 
-    oldPage.classList.add("page-out");
+    oldPage.classList.remove("enter-right");
+    oldPage.classList.add("leave-left");
 
     setTimeout(()=>{
 
         oldPage.style.display="none";
-        oldPage.classList.remove("page-out");
+        oldPage.classList.remove("leave-left");
 
         newPage.style.display="block";
 
-        newPage.classList.remove("page-out");
-
         void newPage.offsetWidth;
 
-        newPage.style.animation="pageIn .45s ease";
+        newPage.classList.add("enter-right");
 
         document.getElementById("balanceTab")
-            .classList.toggle("active",page==="balance");
+        .classList.toggle(
+            "active",
+            page==="balance"
+        );
 
         document.getElementById("goalsTab")
-            .classList.toggle("active",page==="goals");
+        .classList.toggle(
+            "active",
+            page==="goals"
+        );
 
         update();
 
@@ -1230,36 +1515,35 @@ function switchPage(page){
 function update(){
 
     document.getElementById("balance").textContent =
-        balance.toFixed(2).replace(".",",") + " zł";
+    balance.toFixed(2).replace(".",",")+" zł";
 
     const remaining =
-        Math.max(TARGET - balance,0);
+    Math.max(TARGET-balance,0);
 
     document.getElementById("remaining").textContent =
-        remaining.toFixed(2).replace(".",",") + " zł";
+    remaining.toFixed(2).replace(".",",")+" zł";
 
     document.getElementById("remainingStat").textContent =
-        remaining.toFixed(2).replace(".",",") + " zł";
+    remaining.toFixed(2).replace(".",",")+" zł";
 
     const percent =
-        Math.min(balance / TARGET * 100,100);
+    Math.min(balance/TARGET*100,100);
 
     document.getElementById("percent").textContent =
-        percent.toFixed(1) + "%";
+    percent.toFixed(1)+"%";
 
     document.getElementById("progressFill").style.width =
-        percent + "%";
+    percent+"%";
 
     document.getElementById("bottles").textContent =
-        bottles;
+    bottles;
 
     document.getElementById("days").textContent =
-        days;
+    days;
 
     updateGoals();
     renderHistory();
     renderSafes();
-
     drawChart();
 
     save();
@@ -1273,24 +1557,23 @@ function update(){
 function updateGoals(){
 
     const percent =
-        Math.min(balance / TARGET * 100,100);
+    Math.min(balance/TARGET*100,100);
 
     document.getElementById("goalPercent").textContent =
-        percent.toFixed(1) + "%";
+    percent.toFixed(1)+"%";
 
     document.getElementById("goalProgress").style.width =
-        percent + "%";
+    percent+"%";
 
     [500,1000,2500,5000,6868].forEach(value=>{
 
         const el =
-            document.getElementById("m"+value);
+        document.getElementById("m"+value);
 
-        if(balance >= value){
+        if(balance>=value)
             el.classList.add("done");
-        }else{
+        else
             el.classList.remove("done");
-        }
 
     });
 }
@@ -1302,24 +1585,16 @@ function updateGoals(){
 
 function addMoney(amount,description){
 
-    balance += amount;
+    soundPop();
 
-    if(description.includes("butelek")){
+    balance+=amount;
 
-        const count =
-            parseInt(description);
+    if(description.includes("butelek"))
+        bottles+=parseInt(description);
+    else if(description==="Kaucja")
+        bottles++;
 
-        bottles += count;
-
-    }else if(description === "Kaucja"){
-
-        bottles += 1;
-    }
-
-    addHistory(
-        description,
-        amount
-    );
+    addHistory(description,amount);
 
     update();
 }
@@ -1328,13 +1603,15 @@ function addMoney(amount,description){
 function customAdd(){
 
     const amount =
-        parseFloat(prompt("Ile pieniędzy dodać?"));
+    parseFloat(
+        prompt("Ile pieniędzy dodać?") || ""
+    );
 
-    if(!isFinite(amount) || amount <= 0)
+    if(!isFinite(amount)||amount<=0)
         return;
 
     const description =
-        prompt("Za co?") || "Inna kwota";
+    prompt("Za co?") || "Inna kwota";
 
     addMoney(amount,description);
 }
@@ -1343,20 +1620,21 @@ function customAdd(){
 function customExpense(){
 
     const amount =
-        parseFloat(prompt("Ile wydałeś?"));
+    parseFloat(
+        prompt("Ile wydałeś?") || ""
+    );
 
-    if(!isFinite(amount) || amount <= 0)
+    if(!isFinite(amount)||amount<=0)
         return;
 
     const description =
-        prompt("Na co?") || "Wydatek";
+    prompt("Na co?") || "Wydatek";
 
-    balance -= amount;
+    balance-=amount;
 
-    addHistory(
-        description,
-        -amount
-    );
+    addHistory(description,-amount);
+
+    soundClick();
 
     update();
 }
@@ -1380,66 +1658,67 @@ function addHistory(description,amount){
 
     });
 
-    if(history.length > 100)
-        history.length = 100;
+    if(history.length>100)
+        history.length=100;
 }
 
 
 function renderHistory(){
 
-    const box =
-        document.getElementById("history");
+    const box=
+    document.getElementById("history");
 
     box.innerHTML="";
 
     if(history.length===0){
 
-        box.innerHTML =
-            '<div style="color:#71887b">Brak historii.</div>';
+        box.innerHTML=
+        '<div style="color:#71887b">Brak historii.</div>';
 
         return;
     }
 
-    const items =
-        historyExpanded
-        ? history
-        : history.slice(0,5);
+    const items=
+    historyExpanded
+    ? history
+    : history.slice(0,5);
 
     items.forEach(item=>{
 
-        const div =
-            document.createElement("div");
+        const div=
+        document.createElement("div");
 
         div.className="history-item";
 
-        const amountClass =
-            item.amount >= 0
-            ? "income"
-            : "outcome";
+        const cls=
+        item.amount>=0
+        ?"income"
+        :"outcome";
 
-        const sign =
-            item.amount >= 0 ? "+" : "";
+        const sign=
+        item.amount>=0?"+":"";
 
         div.innerHTML=`
 
-            <div>
-                <b>${item.description}</b>
-                <div class="history-date">
-                    ${item.date}
-                </div>
+        <div>
+            <b>${item.description}</b>
+            <div class="history-date">
+                ${item.date}
+            </div>
+        </div>
+
+        <div style="text-align:right">
+
+            <div class="${cls}">
+                ${sign}${item.amount.toFixed(2).replace(".",",")} zł
             </div>
 
-            <div style="text-align:right">
-
-                <div class="${amountClass}">
-                    ${sign}${item.amount.toFixed(2).replace(".",",")} zł
-                </div>
-
-                <div class="history-date">
-                    saldo: ${item.balance.toFixed(2).replace(".",",")} zł
-                </div>
-
+            <div class="history-date">
+                saldo:
+                ${item.balance.toFixed(2).replace(".",",")} zł
             </div>
+
+        </div>
 
         `;
 
@@ -1447,24 +1726,25 @@ function renderHistory(){
 
     });
 
-    document.getElementById("historyToggle").textContent =
-        historyExpanded
-        ? "Pokaż mniej ▲"
-        : "Pokaż więcej ▼";
+    document.getElementById("historyToggle").textContent=
+    historyExpanded
+    ?"Pokaż mniej ▲"
+    :"Pokaż więcej ▼";
 }
 
 
 function toggleHistory(){
 
-    historyExpanded =
-        !historyExpanded;
+    soundClick();
+
+    historyExpanded=!historyExpanded;
 
     renderHistory();
 }
 
 
 /* =========================
-   SEJFY - ZAPIS
+   SEJFY
 ========================= */
 
 function saveSafes(){
@@ -1473,17 +1753,35 @@ function saveSafes(){
         "safes",
         JSON.stringify(safes)
     );
+
+    localStorage.setItem(
+        "safeCodes",
+        JSON.stringify(safeCodes)
+    );
 }
 
 
-/* =========================
-   RYSOWANIE SEJFÓW
-========================= */
+/*
+   Losowy kod 4 cyfry.
+*/
+
+function generateSafeCode(){
+
+    return String(
+        Math.floor(
+            1000+
+            Math.random()*9000
+        )
+    );
+}
+
+
+/* RYSOWANIE */
 
 function renderSafes(){
 
-    const container =
-        document.getElementById("safes");
+    const container=
+    document.getElementById("safes");
 
     if(!container)
         return;
@@ -1492,60 +1790,89 @@ function renderSafes(){
 
     safes.forEach((amount,index)=>{
 
-        const wrap =
-            document.createElement("div");
+        const limit=
+        SAFE_LIMITS[index];
+
+        const full=
+        amount>=limit;
+
+        const wrap=
+        document.createElement("div");
 
         wrap.className="safe-wrap";
 
+        const code=
+        safeCodes[index];
+
         wrap.innerHTML=`
 
-            <div class="safe">
+        <div class="safe ${full?"full":""}">
 
-                <div class="safe-top">
-                    SEJF ${index+1}
-                </div>
+            <div class="safe-top">
+                SEJF ${index+1}
+            </div>
 
-                <div class="safe-label">
-                    ZBieranie Safe
-                </div>
+            <div class="safe-label">
+                ZBieranie Safe
+            </div>
 
-                <div class="safe-door"></div>
+            <div
+                class="safe-code ${full?"visible":""}"
+            >
+                🔑 KOD: ${full?code:""}
+            </div>
 
-                <div class="crank"></div>
+            <div
+                class="safe-door"
+                id="safeDoor${index}"
+            ></div>
 
-                <div class="safe-progress">
-                    <div
-                        class="safe-progress-fill"
-                        style="width:${amount/SAFE_MAX*100}%"
-                    ></div>
-                </div>
+            <div
+                class="crank"
+                onclick="clickCrank(${index})"
+                title="Korba sejfu"
+            ></div>
 
-                <div class="safe-amount">
-                    ${amount.toFixed(2).replace(".",",")} / 500 zł
-                </div>
+            <div class="safe-progress">
+
+                <div
+                    class="safe-progress-fill"
+                    style="
+                    width:${Math.min(
+                        amount/limit*100,
+                        100
+                    )}%
+                    "
+                ></div>
 
             </div>
 
-            <div class="safe-actions">
-
-                <button
-                    class="safe-action safe-deposit"
-                    onclick="depositToSafe(${index})"
-                >
-                    💰 Włóż pieniądze
-                </button>
-
-                <button
-                    class="safe-action safe-clear"
-                    onclick="clearSafe(${index})"
-                >
-                    🗑 Wyczyść
-                </button>
-
+            <div class="safe-amount">
+                ${amount.toFixed(2).replace(".",",")} zł
             </div>
 
-            <div class="ground-cracks"></div>
-            <div class="safe-ground"></div>
+        </div>
+
+        <div class="safe-actions">
+
+            <button
+                class="safe-action safe-deposit"
+                onclick="depositToSafe(${index})"
+            >
+                💰 Włóż pieniądze
+            </button>
+
+            <button
+                class="safe-action safe-clear"
+                onclick="clearSafe(${index})"
+            >
+                🗑 Wyczyść
+            </button>
+
+        </div>
+
+        <div class="ground-cracks"></div>
+        <div class="safe-ground"></div>
 
         `;
 
@@ -1556,42 +1883,53 @@ function renderSafes(){
 
 
 /* =========================
-   WPŁATA DO SEJFU
+   WPŁATA
 ========================= */
 
 function depositToSafe(index){
 
-    const left =
-        SAFE_MAX - safes[index];
+    soundClick();
 
-    if(left <= 0){
+    const limit=
+    SAFE_LIMITS[index];
 
-        alert("Ten sejf jest już pełny!");
+    const left=
+    limit-safes[index];
+
+    if(left<=0){
+
+        alert(
+            "🔐 Sejf jest już pełny. Wpisz kod i użyj korby."
+        );
 
         return;
     }
 
-    const input =
-        prompt(
-            `Ile zł chcesz włożyć do sejfu ${index+1}? Maksymalnie ${left.toFixed(2)} zł.`
-        );
+    const input=
+    prompt(
+        `Ile zł chcesz włożyć do sejfu ${index+1}?`
+    );
 
-    if(input === null)
+    if(input===null)
         return;
 
-    const amount =
-        parseFloat(
-            input.replace(",",".")
-        );
+    const amount=
+    parseFloat(
+        input.replace(",",".")
+    );
 
-    if(!isFinite(amount) || amount <= 0){
+    if(!isFinite(amount)||amount<=0){
+
+        soundError();
 
         alert("Podaj prawidłową kwotę.");
 
         return;
     }
 
-    if(amount > left){
+    if(amount>left){
+
+        soundError();
 
         alert(
             `Do tego sejfu można jeszcze włożyć ${left.toFixed(2)} zł.`
@@ -1600,74 +1938,248 @@ function depositToSafe(index){
         return;
     }
 
-    safes[index] += amount;
+    safes[index]+=amount;
+
+    /*
+       Gdy osiągnięto ukryty limit
+       generujemy kod.
+    */
+
+    if(
+        safes[index]>=limit &&
+        !safeCodes[index]
+    ){
+
+        safeCodes[index]=
+        generateSafeCode();
+
+        soundUnlock();
+
+    }else{
+
+        soundPop();
+
+    }
 
     saveSafes();
 
     update();
-
-    if(safes[index] >= SAFE_MAX){
-
-        setTimeout(()=>{
-            openFullSafe(index);
-        },300);
-
-    }
 }
 
 
 /* =========================
-   PEŁNY SEJF
+   KORBA
 ========================= */
 
-function openFullSafe(index){
+function clickCrank(index){
 
-    const wraps =
-        document.querySelectorAll(".safe-wrap");
+    soundClick();
 
-    const wrap =
-        wraps[index];
+    const limit=
+    SAFE_LIMITS[index];
+
+    /*
+       Niepełny sejf
+    */
+
+    if(safes[index]<limit){
+
+        soundError();
+
+        showSmallMessage(
+            "⛔ Brak dostępu",
+            "Sejf nie jest jeszcze gotowy."
+        );
+
+        return;
+    }
+
+    /*
+       Pełny sejf -> kod
+    */
+
+    openCodeModal(index);
+}
+
+
+/* =========================
+   OKNO KODU
+========================= */
+
+function openCodeModal(index){
+
+    activeSafe=index;
+
+    const modal=
+    document.getElementById("codeModal");
+
+    const input=
+    document.getElementById("safeCodeInput");
+
+    const error=
+    document.getElementById("codeError");
+
+    error.textContent="";
+
+    input.value="";
+
+    document.getElementById("codeInfo").textContent=
+    `Wpisz kod sejfu ${index+1}.`;
+
+    modal.style.display="flex";
+
+    setTimeout(()=>{
+        input.focus();
+    },100);
+
+    soundPop();
+}
+
+
+function closeCodeModal(){
+
+    document.getElementById("codeModal").style.display=
+    "none";
+
+    activeSafe=-1;
+
+    soundClick();
+}
+
+
+function confirmSafeCode(){
+
+    if(activeSafe<0)
+        return;
+
+    const input=
+    document.getElementById("safeCodeInput");
+
+    const entered=
+    input.value.trim();
+
+    const correct=
+    safeCodes[activeSafe];
+
+    if(!/^\d{4}$/.test(entered)){
+
+        document.getElementById("codeError").textContent=
+        "Wpisz dokładnie 4 cyfry.";
+
+        soundError();
+
+        return;
+    }
+
+    if(entered!==correct){
+
+        document.getElementById("codeError").textContent=
+        "❌ Nieprawidłowy kod!";
+
+        soundError();
+
+        input.value="";
+
+        return;
+    }
+
+    soundUnlock();
+
+    closeCodeModal();
+
+    unlockSafe(activeSafe);
+}
+
+
+/* =========================
+   ODBLOKOWANIE
+========================= */
+
+function unlockSafe(index){
+
+    const wraps=
+    document.querySelectorAll(".safe-wrap");
+
+    const wrap=wraps[index];
 
     if(!wrap)
         return;
 
-    const safe =
-        wrap.querySelector(".safe");
+    const safe=
+    wrap.querySelector(".safe");
 
-    const savedAmount =
-        safes[index];
+    const crank=
+    wrap.querySelector(".crank");
 
-    safe.classList.add("full");
+    const amount=
+    safes[index];
+
+    /*
+       korba
+    */
+
+    crank.classList.add("spinning");
+
+    soundWhoosh();
+
+    /*
+       krótka animacja kręcenia
+    */
+
+    setTimeout(()=>{
+
+        safe.classList.add("full");
+
+        soundSafeOpen();
+
+    },850);
 
     setTimeout(()=>{
 
         safe.classList.add("open");
 
+        crank.classList.remove("spinning");
+
+        /*
+           DUŻO więcej banknotów
+        */
+
         createFlyingMoney(
             safe,
-            35
-        );
-
-        createMassiveConfetti(180);
-
-        showCelebration(
-            "🎉 SEJF PEŁNY! 🎉",
-            `💰 +${savedAmount.toFixed(2).replace(".",",")} zł`
+            90
         );
 
         /*
-           Pieniądze z sejfu trafiają
-           na główne saldo.
+           bardzo mocne konfetti
         */
 
-        balance += savedAmount;
+        createMassiveConfetti(260);
+
+        soundConfetti();
+
+        showCelebration(
+            "🎉 SEJF ODBLOKOWANY! 🎉",
+            `💵 +${amount.toFixed(2).replace(".",",")} zł`
+        );
+
+        /*
+           pieniądze przechodzą
+           na główne saldo
+        */
+
+        balance+=amount;
 
         addHistory(
             `🔐 Sejf ${index+1} otwarty`,
-            savedAmount
+            amount
         );
 
-        safes[index] = 0;
+        /*
+           zerowanie sejfu
+        */
+
+        safes[index]=0;
+        safeCodes[index]=null;
 
         saveSafes();
 
@@ -1675,9 +2187,41 @@ function openFullSafe(index){
 
             update();
 
-        },1600);
+        },1700);
 
-    },1450);
+    },1800);
+}
+
+
+/* =========================
+   WIADOMOŚĆ
+========================= */
+
+function showSmallMessage(title,text){
+
+    const box=
+    document.getElementById("celebration");
+
+    box.innerHTML=
+    `${title}<br>
+    <span style="
+    font-size:21px;
+    color:#ff7777;
+    text-shadow:0 0 15px rgba(255,50,50,.7)
+    ">
+    ${text}
+    </span>`;
+
+    box.classList.remove("show");
+
+    void box.offsetWidth;
+
+    box.classList.add("show");
+
+    setTimeout(()=>{
+        box.classList.remove("show");
+    },1800);
+
 }
 
 
@@ -1687,26 +2231,33 @@ function openFullSafe(index){
 
 function createFlyingMoney(source,count){
 
-    const rect =
-        source.getBoundingClientRect();
+    const rect=
+    source.getBoundingClientRect();
 
     for(let i=0;i<count;i++){
 
-        const money =
-            document.createElement("div");
+        const money=
+        document.createElement("div");
 
         money.className="money-fly";
 
-        money.textContent =
-            Math.random() > .5
-            ? "💵"
-            : "💸";
+        money.textContent=
+        Math.random()>.45
+        ?"💵"
+        :"💸";
 
-        money.style.left =
-            (rect.left + rect.width/2) + "px";
+        money.style.left=
+        (
+            rect.left+
+            rect.width/2+
+            (Math.random()-.5)*50
+        )+"px";
 
-        money.style.top =
-            (rect.top + rect.height/2) + "px";
+        money.style.top=
+        (
+            rect.top+
+            rect.height/2
+        )+"px";
 
         money.style.setProperty(
             "--x",
@@ -1722,25 +2273,22 @@ function createFlyingMoney(source,count){
 
         setTimeout(()=>{
             money.remove();
-        },2000);
+        },1900);
 
     }
 }
 
 
 /* =========================
-   MOCNE KONFETTI
+   KONFETTI
 ========================= */
 
 function createMassiveConfetti(count){
 
-    const pieces =
-        count || 100;
+    for(let i=0;i<count;i++){
 
-    for(let i=0;i<pieces;i++){
-
-        const piece =
-            document.createElement("div");
+        const piece=
+        document.createElement("div");
 
         piece.className="confetti";
 
@@ -1751,63 +2299,67 @@ function createMassiveConfetti(count){
             "#ffcf40",
             "#ffffff",
             "#36a9ff",
-            "#ff4f81"
+            "#ff4f81",
+            "#ff8a32"
         ];
 
-        piece.style.background =
-            colors[
-                Math.floor(
-                    Math.random()*colors.length
-                )
-            ];
+        piece.style.background=
+        colors[
+            Math.floor(
+                Math.random()*colors.length
+            )
+        ];
 
-        piece.style.left =
-            (20 + Math.random()*60) + "vw";
+        piece.style.left=
+        (15+Math.random()*70)+"vw";
 
-        piece.style.top =
-            (20 + Math.random()*20) + "vh";
+        piece.style.top=
+        (10+Math.random()*25)+"vh";
 
         piece.style.setProperty(
             "--x",
-            ((Math.random()-.5)*1000)+"px"
+            ((Math.random()-.5)*1100)+"px"
         );
 
         piece.style.setProperty(
             "--y",
-            (300+Math.random()*700)+"px"
+            (350+Math.random()*800)+"px"
         );
 
         piece.style.setProperty(
             "--rotation",
-            ((Math.random()-.5)*1500)+"deg"
+            ((Math.random()-.5)*1800)+"deg"
         );
 
         piece.style.setProperty(
             "--duration",
-            (1.5+Math.random()*2)+"s"
+            (1.5+Math.random()*2.5)+"s"
         );
 
         document.body.appendChild(piece);
 
         setTimeout(()=>{
             piece.remove();
-        },4000);
+        },4500);
 
     }
 }
 
 
 /* =========================
-   NAPIS GRATULACYJNY
+   GRATULACJE
 ========================= */
 
 function showCelebration(title,subtitle){
 
-    const box =
-        document.getElementById("celebration");
+    const box=
+    document.getElementById("celebration");
 
-    box.innerHTML =
-        `${title}<br><span style="font-size:26px">${subtitle}</span>`;
+    box.innerHTML=
+    `${title}<br>
+    <span style="font-size:27px">
+    ${subtitle}
+    </span>`;
 
     box.classList.remove("show");
 
@@ -1817,7 +2369,7 @@ function showCelebration(title,subtitle){
 
     setTimeout(()=>{
         box.classList.remove("show");
-    },2700);
+    },2600);
 }
 
 
@@ -1827,131 +2379,135 @@ function showCelebration(title,subtitle){
 
 function clearSafe(index){
 
-    const code =
-        prompt(
-            `Podaj kod, aby wyczyścić sejf ${index+1}:`
-        );
+    const code=
+    prompt(
+        `Podaj kod główny, aby wyczyścić sejf ${index+1}:`
+    );
 
-    if(code !== CLEAR_CODE){
+    if(code!==CLEAR_CODE){
+
+        soundError();
 
         alert("❌ Zły kod.");
 
         return;
     }
 
-    const wraps =
-        document.querySelectorAll(".safe-wrap");
+    const wraps=
+    document.querySelectorAll(".safe-wrap");
 
-    const wrap =
-        wraps[index];
+    const wrap=wraps[index];
 
     if(!wrap)
         return;
 
-    const safe =
-        wrap.querySelector(".safe");
+    const safe=
+    wrap.querySelector(".safe");
 
-    /*
-       stary sejf leci do góry
-    */
+    soundWhoosh();
 
     safe.classList.add("replacing");
 
-    createMassiveConfetti(35);
+    createMassiveConfetti(45);
 
     setTimeout(()=>{
 
         safes[index]=0;
+        safeCodes[index]=null;
 
         saveSafes();
 
-        /*
-           Nowy sejf pojawia się
-           z ziemi.
-        */
+        const newWrap=
+        document.createElement("div");
 
-        const newWrap =
-            document.createElement("div");
-
-        newWrap.className =
-            "safe-wrap emerging";
+        newWrap.className=
+        "safe-wrap emerging";
 
         newWrap.innerHTML=`
 
-            <div class="safe new-emerge">
+        <div class="safe new-emerge">
 
-                <div class="safe-top">
-                    SEJF ${index+1}
-                </div>
+            <div class="safe-top">
+                SEJF ${index+1}
+            </div>
 
-                <div class="safe-label">
-                    ZBieranie Safe
-                </div>
+            <div class="safe-label">
+                ZBieranie Safe
+            </div>
 
-                <div class="safe-door"></div>
+            <div class="safe-code"></div>
 
-                <div class="crank"></div>
+            <div class="safe-door"></div>
 
-                <div class="safe-progress">
-                    <div
-                        class="safe-progress-fill"
-                        style="width:0%"
-                    ></div>
-                </div>
+            <div
+                class="crank"
+                onclick="clickCrank(${index})"
+            ></div>
 
-                <div class="safe-amount">
-                    0,00 / 500 zł
-                </div>
+            <div class="safe-progress">
+
+                <div
+                    class="safe-progress-fill"
+                    style="width:0%"
+                ></div>
 
             </div>
 
-            <div class="safe-actions">
-
-                <button
-                    class="safe-action safe-deposit"
-                    onclick="depositToSafe(${index})"
-                >
-                    💰 Włóż pieniądze
-                </button>
-
-                <button
-                    class="safe-action safe-clear"
-                    onclick="clearSafe(${index})"
-                >
-                    🗑 Wyczyść
-                </button>
-
+            <div class="safe-amount">
+                0,00 zł
             </div>
 
-            <div class="ground-cracks"></div>
-            <div class="safe-ground"></div>
+        </div>
+
+        <div class="safe-actions">
+
+            <button
+                class="safe-action safe-deposit"
+                onclick="depositToSafe(${index})"
+            >
+                💰 Włóż pieniądze
+            </button>
+
+            <button
+                class="safe-action safe-clear"
+                onclick="clearSafe(${index})"
+            >
+                🗑 Wyczyść
+            </button>
+
+        </div>
+
+        <div class="ground-cracks"></div>
+        <div class="safe-ground"></div>
 
         `;
 
         wrap.replaceWith(newWrap);
 
-        setTimeout(()=>{
-            update();
-        },100);
+        soundPop();
 
         setTimeout(()=>{
             newWrap.classList.remove("emerging");
-        },1800);
+        },1700);
 
-    },850);
+        update();
+
+    },750);
 }
 
 
 /* =========================
-   CZYSZCZENIE SALDA
+   KOD GŁÓWNY
 ========================= */
 
 function checkClearCode(){
 
-    const code =
-        prompt("Podaj kod:");
+    const code=
+    prompt("Podaj kod:");
 
-    if(code !== CLEAR_CODE){
+    if(code!==CLEAR_CODE){
+
+        soundError();
 
         alert("❌ Zły kod.");
 
@@ -1961,6 +2517,10 @@ function checkClearCode(){
     return true;
 }
 
+
+/* =========================
+   SALDO
+========================= */
 
 function clearBalance(){
 
@@ -1975,11 +2535,13 @@ function clearBalance(){
     save();
 
     update();
+
+    soundWhoosh();
 }
 
 
 /* =========================
-   CZYSZCZENIE WYKRESU
+   WYKRES + SALDO
 ========================= */
 
 function clearChart(){
@@ -1987,6 +2549,13 @@ function clearChart(){
     if(!checkClearCode())
         return;
 
+    /*
+       Tak jak chciałeś:
+       wyczyszczenie wykresu
+       czyści też główne saldo.
+    */
+
+    balance=0;
     history=[];
     days=0;
     bottles=0;
@@ -1994,11 +2563,13 @@ function clearChart(){
     save();
 
     update();
+
+    soundWhoosh();
 }
 
 
 /* =========================
-   CZYSZCZENIE HISTORII
+   HISTORIA
 ========================= */
 
 function clearHistory(){
@@ -2011,6 +2582,8 @@ function clearHistory(){
     save();
 
     update();
+
+    soundPop();
 }
 
 
@@ -2023,29 +2596,22 @@ function getChartData(){
     if(history.length===0)
         return [0];
 
-    const reversed =
-        [...history].reverse();
-
-    let values=[];
-
-    reversed.forEach(item=>{
-        values.push(item.balance);
-    });
-
-    return values;
+    return [...history]
+    .reverse()
+    .map(item=>item.balance);
 }
 
 
 function drawChart(){
 
-    const canvas =
-        document.getElementById("chart");
+    const canvas=
+    document.getElementById("chart");
 
     if(!canvas)
         return;
 
-    const ctx =
-        canvas.getContext("2d");
+    const ctx=
+    canvas.getContext("2d");
 
     ctx.clearRect(
         0,
@@ -2054,20 +2620,40 @@ function drawChart(){
         canvas.height
     );
 
-    const data =
-        getChartData();
+    const data=
+    getChartData();
 
-    const width =
-        canvas.width;
+    const width=
+    canvas.width;
 
-    const height =
-        canvas.height;
+    const height=
+    canvas.height;
 
-    const padding=45;
+    const paddingLeft=75;
+    const paddingRight=35;
+    const paddingTop=25;
+    const paddingBottom=45;
 
     /*
-       tło
+       stare liczby osi
     */
+
+    const max=
+    Math.max(
+        TARGET,
+        ...data,
+        100
+    );
+
+    const values=[
+        0,
+        Math.round(max*.25),
+        Math.round(max*.5),
+        Math.round(max*.75),
+        Math.round(max)
+    ];
+
+    /* tło */
 
     ctx.fillStyle="#07170f";
 
@@ -2078,68 +2664,63 @@ function drawChart(){
         height
     );
 
-    /*
-       siatka
-    */
+    /* siatka */
 
-    ctx.strokeStyle="#153625";
+    ctx.strokeStyle="#173b28";
     ctx.lineWidth=1;
+
+    ctx.font="13px Arial";
+    ctx.fillStyle="#718b7c";
 
     for(let i=0;i<5;i++){
 
-        const y =
-            padding +
-            i*((height-padding*2)/4);
+        const ratio=i/4;
+
+        const y=
+        height-paddingBottom-
+        ratio*(height-paddingTop-paddingBottom);
 
         ctx.beginPath();
 
         ctx.moveTo(
-            padding,
+            paddingLeft,
             y
         );
 
         ctx.lineTo(
-            width-padding,
+            width-paddingRight,
             y
         );
 
         ctx.stroke();
 
+        const value=
+        values[4-i];
+
+        ctx.fillText(
+            value.toFixed(0)+" zł",
+            8,
+            y+4
+        );
+
     }
-
-    const max =
-        Math.max(
-            TARGET,
-            ...data,
-            1
-        );
-
-    const min =
-        Math.min(
-            0,
-            ...data
-        );
-
-    /*
-       linia
-    */
 
     if(data.length===1){
 
-        const x =
-            width/2;
+        const x=
+        width/2;
 
-        const y =
-            height-padding-
-            (data[0]-min)/(max-min)*
-            (height-padding*2);
+        const y=
+        height-paddingBottom-
+        (data[0]/max)*
+        (height-paddingTop-paddingBottom);
 
         ctx.beginPath();
 
         ctx.arc(
             x,
             y,
-            5,
+            6,
             0,
             Math.PI*2
         );
@@ -2147,83 +2728,90 @@ function drawChart(){
         ctx.fillStyle="#42ff8c";
         ctx.fill();
 
-    }else{
+        return;
+    }
 
-        for(let i=1;i<data.length;i++){
+    const step=
+    (width-paddingLeft-paddingRight)/
+    Math.max(data.length-1,1);
 
-            const x1 =
-                padding+
-                (i-1)/(data.length-1)*
-                (width-padding*2);
+    /*
+       segmenty osobno:
+       wzrost zielony
+       spadek czerwony
+    */
 
-            const x2 =
-                padding+
-                i/(data.length-1)*
-                (width-padding*2);
+    for(let i=1;i<data.length;i++){
 
-            const y1 =
-                height-padding-
-                (data[i-1]-min)/(max-min)*
-                (height-padding*2);
+        const x1=
+        paddingLeft+
+        (i-1)*step;
 
-            const y2 =
-                height-padding-
-                (data[i]-min)/(max-min)*
-                (height-padding*2);
+        const x2=
+        paddingLeft+
+        i*step;
 
-            ctx.beginPath();
+        const y1=
+        height-paddingBottom-
+        (data[i-1]/max)*
+        (height-paddingTop-paddingBottom);
 
-            ctx.moveTo(x1,y1);
-            ctx.lineTo(x2,y2);
+        const y2=
+        height-paddingBottom-
+        (data[i]/max)*
+        (height-paddingTop-paddingBottom);
 
-            ctx.lineWidth=4;
+        ctx.beginPath();
 
-            ctx.lineCap="round";
+        ctx.moveTo(x1,y1);
+        ctx.lineTo(x2,y2);
 
-            /*
-               wzrost = zielony
-               spadek = czerwony
-            */
+        ctx.lineWidth=4;
+        ctx.lineCap="round";
 
-            ctx.strokeStyle =
-                data[i] >= data[i-1]
-                ? "#35ff83"
-                : "#ff4e4e";
+        ctx.strokeStyle=
+        data[i]>=data[i-1]
+        ?" #35ff83"
+        :"#ff4e4e";
 
-            ctx.stroke();
+        /*
+           usuń spację z zielonego koloru
+        */
 
-        }
+        ctx.strokeStyle=
+        data[i]>=data[i-1]
+        ?"#35ff83"
+        :"#ff4e4e";
+
+        ctx.stroke();
 
     }
 
     /*
-       daty
+       daty na dole
     */
 
     ctx.font="12px Arial";
-    ctx.fillStyle="#789283";
+    ctx.fillStyle="#718b7c";
 
-    const reversed =
-        [...history].reverse();
+    const reversed=
+    [...history].reverse();
 
     reversed.forEach((item,i)=>{
 
         if(!item.date)
             return;
 
-        const x =
-            padding+
-            (i/Math.max(reversed.length-1,1))*
-            (width-padding*2);
+        const x=
+        paddingLeft+i*step;
 
         ctx.fillText(
             item.date.split(",")[0],
             x-18,
-            height-12
+            height-13
         );
 
     });
-
 }
 
 
