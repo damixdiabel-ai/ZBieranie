@@ -218,9 +218,17 @@ h3{
     filter:brightness(1.1);
 }
 
-.btn.red-btn{background:#8e2222;}
-.btn.orange-btn{background:#a95e16;}
-.btn.gray-btn{background:#26342b;}
+.btn.red-btn{
+    background:#8e2222;
+}
+
+.btn.orange-btn{
+    background:#a95e16;
+}
+
+.btn.gray-btn{
+    background:#26342b;
+}
 
 .form{
     display:grid;
@@ -283,8 +291,13 @@ input:focus,textarea:focus{
     white-space:nowrap;
 }
 
-.income{color:#58ff78;}
-.expense{color:#ff5d5d;}
+.income{
+    color:#58ff78;
+}
+
+.expense{
+    color:#ff5d5d;
+}
 
 .chart-scroll{
     overflow-x:auto;
@@ -336,31 +349,6 @@ canvas{
     color:#fff;
     border-color:#ffae48;
     background:#54330f;
-}
-
-.wallets{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-}
-
-.wallet{
-    text-align:center;
-    padding:18px 10px;
-    border-radius:18px;
-    background:#08180e;
-    border:1px solid #21472d;
-}
-
-.wallet-icon{
-    font-size:32px;
-}
-
-.wallet-value{
-    margin-top:8px;
-    color:#64ff82;
-    font-weight:900;
-    font-size:21px;
 }
 
 .question{
@@ -487,7 +475,7 @@ canvas{
 
 
 /* =========================================================
-   STARE SEJFY — POZIOMA KORBKA
+   SEJFY — STARY WYGLĄD Z POZIOMĄ KORBĄ
    ========================================================= */
 
 .see{
@@ -498,154 +486,189 @@ canvas{
 
 .safe{
     position:relative;
-    min-height:235px;
-    padding:20px;
-    border-radius:18px;
+    min-height:250px;
+    padding:22px 22px 22px 22px;
+    border-radius:17px;
     background:
-        linear-gradient(145deg,#555d56,#242b26 55%,#151a17);
-    border:2px solid #707970;
+        linear-gradient(145deg,#505850 0%,#343b35 45%,#1a201c 100%);
+    border:2px solid #7b857c;
     overflow:hidden;
     box-shadow:
-        inset 0 0 0 2px #202720,
-        0 10px 25px rgba(0,0,0,.3);
+        inset 0 0 0 2px #242b26,
+        inset 0 0 25px rgba(0,0,0,.25),
+        0 12px 28px rgba(0,0,0,.35);
 }
 
 .safe::before{
     content:"";
     position:absolute;
-    left:12px;
-    right:12px;
-    top:12px;
-    height:7px;
-    border-radius:5px;
-    background:#191f1b;
-    box-shadow:
-        0 4px 0 #727b73,
-        0 7px 0 #2a302b;
+    inset:10px;
+    border:2px solid #687269;
+    border-radius:11px;
+    pointer-events:none;
 }
 
 .safe::after{
     content:"";
     position:absolute;
-    right:12px;
-    top:52px;
-    width:8px;
-    height:105px;
-    border-radius:6px;
-    background:#151a17;
-    border:1px solid #7b847c;
-    box-shadow:0 0 0 3px #313832;
+    left:20px;
+    right:20px;
+    bottom:12px;
+    height:5px;
+    border-radius:5px;
+    background:#111612;
+    box-shadow:0 -3px 0 #717a72;
+}
+
+.safe-name,
+.safe-max,
+.safe-amount,
+.safe-progress,
+.safe-actions{
+    position:relative;
+    z-index:3;
 }
 
 .safe-name{
-    position:relative;
-    z-index:2;
-    font-size:21px;
+    font-size:22px;
     font-weight:900;
-    margin-top:10px;
+    margin-bottom:5px;
 }
 
 .safe-max{
-    position:relative;
-    z-index:2;
-    color:#aab4ac;
-    margin:5px 0 15px;
+    color:#b2bbb4;
+    margin-bottom:14px;
 }
 
 .safe-amount{
-    position:relative;
-    z-index:2;
-    font-size:30px;
+    font-size:31px;
     font-weight:900;
     color:#61ff80;
 }
 
 .safe-progress{
-    position:relative;
-    z-index:2;
-    height:13px;
-    margin:12px 45px 15px 0;
+    height:15px;
+    margin:13px 0 17px;
     border-radius:999px;
-    background:#111611;
-    border:1px solid #69736b;
+    background:#101510;
+    border:1px solid #778078;
     overflow:hidden;
 }
 
 .safe-fill{
     height:100%;
-    background:linear-gradient(90deg,#2ba948,#63ff80);
-    transition:.5s;
+    width:0%;
+    background:linear-gradient(
+        90deg,
+        #218d3d,
+        #5eff7d
+    );
+    transition:width .5s ease;
 }
 
-.safe-actions{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    position:relative;
-    z-index:5;
-}
+
+/* STARA POZIOMA KORBKA */
 
 .crank-area{
     position:absolute;
     right:22px;
-    bottom:25px;
+    top:50%;
+    transform:translateY(-50%);
     width:105px;
-    height:80px;
+    height:105px;
     z-index:4;
 }
 
-.crank-base{
+.crank-center{
     position:absolute;
-    left:28px;
-    top:29px;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:#a1aaa3;
-    border:3px solid #333a35;
-    box-shadow:0 2px 4px #000;
-}
-
-.crank-arm{
-    position:absolute;
-    left:35px;
-    top:34px;
-    width:55px;
-    height:9px;
-    border-radius:8px;
-    background:#8e9890;
-    border:2px solid #303630;
-    transform-origin:left center;
-}
-
-.crank-handle{
-    position:absolute;
-    right:5px;
-    top:22px;
+    left:17px;
+    top:39px;
     width:28px;
     height:28px;
     border-radius:50%;
-    background:#9ba49d;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #d0d5d1,
+            #777f78 55%,
+            #343a35 100%
+        );
+    border:3px solid #242a26;
+    box-shadow:
+        0 2px 5px #000,
+        inset 0 2px 2px rgba(255,255,255,.3);
+}
+
+.crank-horizontal{
+    position:absolute;
+    left:35px;
+    top:47px;
+    width:58px;
+    height:12px;
+    border-radius:8px;
+    background:
+        linear-gradient(
+            180deg,
+            #c0c7c2,
+            #747c75
+        );
+    border:2px solid #303630;
+    box-shadow:0 2px 4px #000;
+    transform-origin:left center;
+}
+
+.crank-knob{
+    position:absolute;
+    right:0;
+    top:35px;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #d5dad6,
+            #7b837c 60%,
+            #303630
+        );
     border:4px solid #303630;
-    box-shadow:0 2px 5px #000;
+    box-shadow:
+        0 3px 6px #000,
+        inset 0 2px 3px rgba(255,255,255,.25);
 }
 
-.safe.cranking .crank-arm{
-    animation:crank .7s linear infinite;
+.safe.cranking .crank-horizontal{
+    animation:horizontalCrank .65s linear infinite;
 }
 
-.safe.cranking .crank-handle{
-    animation:crankHandle .7s linear infinite;
+.safe.cranking .crank-knob{
+    animation:knobCrank .65s linear infinite;
 }
 
-@keyframes crank{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
+@keyframes horizontalCrank{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(360deg);
+    }
 }
 
-@keyframes crankHandle{
-    from{transform:rotate(0deg) translateX(0);}
-    to{transform:rotate(360deg) translateX(0);}
+@keyframes knobCrank{
+    0%{
+        transform:rotate(0deg);
+    }
+    100%{
+        transform:rotate(-360deg);
+    }
+}
+
+.safe-full{
+    border-color:#64ff82;
+    box-shadow:
+        inset 0 0 0 2px #202720,
+        0 0 18px rgba(72,255,105,.15),
+        0 12px 28px rgba(0,0,0,.35);
 }
 
 
@@ -731,10 +754,6 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .wallets{
-        grid-template-columns:repeat(2,1fr);
-    }
-
     .milestones{
         grid-template-columns:repeat(2,1fr);
     }
@@ -754,7 +773,13 @@ footer{
     }
 
     .crank-area{
-        opacity:.75;
+        transform:translateY(-50%) scale(.8);
+        transform-origin:center;
+        right:8px;
+    }
+
+    .safe{
+        padding-right:105px;
     }
 }
 </style>
@@ -800,6 +825,7 @@ footer{
 
     </div>
 
+
     <div class="stats">
 
         <div class="stat">
@@ -813,31 +839,42 @@ footer{
         </div>
 
         <div class="stat">
-            <div id="remaining" class="stat-value">6868,00 zł</div>
+            <div id="remaining" class="stat-value">
+                6868,00 zł
+            </div>
             <div class="stat-name">💸 Pozostało</div>
         </div>
 
     </div>
+
 
     <div class="card" style="margin-top:18px">
 
         <h2>📊 Historia licznika</h2>
 
         <div class="chart-scroll">
-            <canvas id="chart" width="1450" height="430"></canvas>
+            <canvas
+                id="chart"
+                width="1450"
+                height="430"
+            ></canvas>
         </div>
 
     </div>
+
 
     <div class="card">
 
         <h2>🧾 Ostatnie operacje</h2>
 
         <div id="history" class="history">
-            <div class="muted">Ładowanie...</div>
+            <div class="muted">
+                Ładowanie...
+            </div>
         </div>
 
     </div>
+
 
     <div class="card">
 
@@ -855,40 +892,74 @@ footer{
 
     </div>
 
+
+    <!-- SEJFY -->
+
     <div class="card">
 
         <h2>🔐 Sejfy</h2>
+
+        <div class="notice">
+            Stan sejfów jest wspólny i publiczny.
+            Każdy widzi aktualną kwotę oraz zapełnienie.
+        </div>
 
         <div class="see">
 
             <div class="safe" id="safeBox1">
 
-                <div class="safe-name">🔐 Sejf 1</div>
-                <div class="safe-max">MAX 500 zł</div>
-                <div id="safeAmount1" class="safe-amount">0,00 zł</div>
+                <div class="safe-name">
+                    🔐 Sejf 1
+                </div>
+
+                <div class="safe-max">
+                    MAX 500 zł
+                </div>
+
+                <div id="safeAmount1" class="safe-amount">
+                    0,00 zł
+                </div>
 
                 <div class="safe-progress">
-                    <div id="safeFill1" class="safe-fill"></div>
+                    <div
+                        id="safeFill1"
+                        class="safe-fill"
+                    ></div>
                 </div>
 
                 <div class="safe-actions">
-                    <button class="btn" onclick="safeDeposit(1)">
+
+                    <button
+                        class="btn"
+                        onclick="safeDeposit(1)"
+                    >
                         💰 Wpłać
                     </button>
 
-                    <button class="btn gray-btn" onclick="safeClear(1)">
+                    <button
+                        class="btn gray-btn"
+                        onclick="safeClear(1)"
+                    >
                         🧹 Wyczyść
                     </button>
 
-                    <button class="btn orange-btn" onclick="safeCrank(1)">
+                    <button
+                        class="btn orange-btn"
+                        onclick="safeCrank(1)"
+                    >
                         ⚙️ Korba
                     </button>
+
                 </div>
 
                 <div class="crank-area">
-                    <div class="crank-base"></div>
-                    <div class="crank-arm"></div>
-                    <div class="crank-handle"></div>
+
+                    <div class="crank-center"></div>
+
+                    <div class="crank-horizontal"></div>
+
+                    <div class="crank-knob"></div>
+
                 </div>
 
             </div>
@@ -896,32 +967,56 @@ footer{
 
             <div class="safe" id="safeBox2">
 
-                <div class="safe-name">🔐 Sejf 2</div>
-                <div class="safe-max">MAX 1000 zł</div>
-                <div id="safeAmount2" class="safe-amount">0,00 zł</div>
+                <div class="safe-name">
+                    🔐 Sejf 2
+                </div>
+
+                <div class="safe-max">
+                    MAX 1000 zł
+                </div>
+
+                <div id="safeAmount2" class="safe-amount">
+                    0,00 zł
+                </div>
 
                 <div class="safe-progress">
-                    <div id="safeFill2" class="safe-fill"></div>
+                    <div
+                        id="safeFill2"
+                        class="safe-fill"
+                    ></div>
                 </div>
 
                 <div class="safe-actions">
-                    <button class="btn" onclick="safeDeposit(2)">
+
+                    <button
+                        class="btn"
+                        onclick="safeDeposit(2)"
+                    >
                         💰 Wpłać
                     </button>
 
-                    <button class="btn gray-btn" onclick="safeClear(2)">
+                    <button
+                        class="btn gray-btn"
+                        onclick="safeClear(2)"
+                    >
                         🧹 Wyczyść
                     </button>
 
-                    <button class="btn orange-btn" onclick="safeCrank(2)">
+                    <button
+                        class="btn orange-btn"
+                        onclick="safeCrank(2)"
+                    >
                         ⚙️ Korba
                     </button>
+
                 </div>
 
                 <div class="crank-area">
-                    <div class="crank-base"></div>
-                    <div class="crank-arm"></div>
-                    <div class="crank-handle"></div>
+
+                    <div class="crank-center"></div>
+                    <div class="crank-horizontal"></div>
+                    <div class="crank-knob"></div>
+
                 </div>
 
             </div>
@@ -929,32 +1024,56 @@ footer{
 
             <div class="safe" id="safeBox3">
 
-                <div class="safe-name">🔐 Sejf 3</div>
-                <div class="safe-max">MAX 2000 zł</div>
-                <div id="safeAmount3" class="safe-amount">0,00 zł</div>
+                <div class="safe-name">
+                    🔐 Sejf 3
+                </div>
+
+                <div class="safe-max">
+                    MAX 2000 zł
+                </div>
+
+                <div id="safeAmount3" class="safe-amount">
+                    0,00 zł
+                </div>
 
                 <div class="safe-progress">
-                    <div id="safeFill3" class="safe-fill"></div>
+                    <div
+                        id="safeFill3"
+                        class="safe-fill"
+                    ></div>
                 </div>
 
                 <div class="safe-actions">
-                    <button class="btn" onclick="safeDeposit(3)">
+
+                    <button
+                        class="btn"
+                        onclick="safeDeposit(3)"
+                    >
                         💰 Wpłać
                     </button>
 
-                    <button class="btn gray-btn" onclick="safeClear(3)">
+                    <button
+                        class="btn gray-btn"
+                        onclick="safeClear(3)"
+                    >
                         🧹 Wyczyść
                     </button>
 
-                    <button class="btn orange-btn" onclick="safeCrank(3)">
+                    <button
+                        class="btn orange-btn"
+                        onclick="safeCrank(3)"
+                    >
                         ⚙️ Korba
                     </button>
+
                 </div>
 
                 <div class="crank-area">
-                    <div class="crank-base"></div>
-                    <div class="crank-arm"></div>
-                    <div class="crank-handle"></div>
+
+                    <div class="crank-center"></div>
+                    <div class="crank-horizontal"></div>
+                    <div class="crank-knob"></div>
+
                 </div>
 
             </div>
@@ -962,32 +1081,56 @@ footer{
 
             <div class="safe" id="safeBox4">
 
-                <div class="safe-name">🔐 Sejf 4</div>
-                <div class="safe-max">MAX 250 zł</div>
-                <div id="safeAmount4" class="safe-amount">0,00 zł</div>
+                <div class="safe-name">
+                    🔐 Sejf 4
+                </div>
+
+                <div class="safe-max">
+                    MAX 250 zł
+                </div>
+
+                <div id="safeAmount4" class="safe-amount">
+                    0,00 zł
+                </div>
 
                 <div class="safe-progress">
-                    <div id="safeFill4" class="safe-fill"></div>
+                    <div
+                        id="safeFill4"
+                        class="safe-fill"
+                    ></div>
                 </div>
 
                 <div class="safe-actions">
-                    <button class="btn" onclick="safeDeposit(4)">
+
+                    <button
+                        class="btn"
+                        onclick="safeDeposit(4)"
+                    >
                         💰 Wpłać
                     </button>
 
-                    <button class="btn gray-btn" onclick="safeClear(4)">
+                    <button
+                        class="btn gray-btn"
+                        onclick="safeClear(4)"
+                    >
                         🧹 Wyczyść
                     </button>
 
-                    <button class="btn orange-btn" onclick="safeCrank(4)">
+                    <button
+                        class="btn orange-btn"
+                        onclick="safeCrank(4)"
+                    >
                         ⚙️ Korba
                     </button>
+
                 </div>
 
                 <div class="crank-area">
-                    <div class="crank-base"></div>
-                    <div class="crank-arm"></div>
-                    <div class="crank-handle"></div>
+
+                    <div class="crank-center"></div>
+                    <div class="crank-horizontal"></div>
+                    <div class="crank-knob"></div>
+
                 </div>
 
             </div>
@@ -1017,11 +1160,25 @@ footer{
 
             <div class="milestones">
 
-                <div class="milestone" data-goal="500">500 zł</div>
-                <div class="milestone" data-goal="1000">1000 zł</div>
-                <div class="milestone" data-goal="2500">2500 zł</div>
-                <div class="milestone" data-goal="5000">5000 zł</div>
-                <div class="milestone" data-goal="6868">6868 zł</div>
+                <div class="milestone" data-goal="500">
+                    500 zł
+                </div>
+
+                <div class="milestone" data-goal="1000">
+                    1000 zł
+                </div>
+
+                <div class="milestone" data-goal="2500">
+                    2500 zł
+                </div>
+
+                <div class="milestone" data-goal="5000">
+                    5000 zł
+                </div>
+
+                <div class="milestone" data-goal="6868">
+                    6868 zł
+                </div>
 
             </div>
 
@@ -1051,6 +1208,7 @@ footer{
 
         </div>
 
+
         <div class="question">
 
             <button onclick="toggleQuestion(this)">
@@ -1063,6 +1221,7 @@ footer{
 
         </div>
 
+
         <div class="question">
 
             <button onclick="toggleQuestion(this)">
@@ -1070,11 +1229,12 @@ footer{
             </button>
 
             <div class="answer">
-                Tak. Wpłaty dla zwykłych użytkowników odbywają się
-                przez zakładkę Donaty.
+                Tak. Donaty oraz wpłaty do sejfów są dostępne
+                dla zwykłych użytkowników.
             </div>
 
         </div>
+
 
         <div class="question">
 
@@ -1083,7 +1243,7 @@ footer{
             </button>
 
             <div class="answer">
-                Nie. Najpierw donata trafia do oczekujących.
+                Nie. Najpierw trafia do oczekujących.
                 Właściciel musi ją zaakceptować.
             </div>
 
@@ -1095,6 +1255,8 @@ footer{
 
 
 <section id="donaty" class="page">
+
+    <div id="donationGratulation"></div>
 
     <div class="card donation-box">
 
@@ -1124,7 +1286,10 @@ footer{
                 placeholder="Opis, np. Donata"
             >
 
-            <button class="btn" onclick="makeDonation()">
+            <button
+                class="btn"
+                onclick="makeDonation()"
+            >
                 💸 Wyślij donatę
             </button>
 
@@ -1132,21 +1297,31 @@ footer{
 
     </div>
 
+
     <div class="card">
 
         <h2>💵 Szybka donata</h2>
 
         <div class="quick-buttons">
 
-            <button class="btn" onclick="quickDonation(0.50)">
+            <button
+                class="btn"
+                onclick="quickDonation(0.50)"
+            >
                 +0,50 zł
             </button>
 
-            <button class="btn" onclick="quickDonation(10)">
+            <button
+                class="btn"
+                onclick="quickDonation(10)"
+            >
                 +10 zł
             </button>
 
-            <button class="btn" onclick="quickDonation(20)">
+            <button
+                class="btn"
+                onclick="quickDonation(20)"
+            >
                 +20 zł
             </button>
 
@@ -1154,9 +1329,10 @@ footer{
 
     </div>
 
+
     <div class="card">
 
-        <h2>ℹ️ Twoje oczekujące donaty</h2>
+        <h2>ℹ️ Twoje donaty</h2>
 
         <div id="myPendingDonations" class="pending-list">
             <div class="muted">
@@ -1176,9 +1352,8 @@ footer{
         <h2>💳 Karta</h2>
 
         <div class="notice">
-            Tutaj widzisz swoje zaakceptowane donaty zapisane
-            na aktualnym koncie. Inni użytkownicy nie mają
-            dostępu do Twojej prywatnej historii.
+            Tutaj widzisz swoje zaakceptowane donaty.
+            Inni użytkownicy nie mają dostępu do Twojej historii.
         </div>
 
         <div id="cardHistory" class="history">
@@ -1201,38 +1376,40 @@ footer{
         </div>
 
         <p class="muted" style="margin:8px 0 20px">
-            Panel właściciela. Zwykły użytkownik nie może
-            korzystać z funkcji dodawania i odejmowania pieniędzy.
+            Panel właściciela.
         </p>
+
 
         <div id="ownerLogin">
 
             <div class="notice">
-                Zaloguj się na konto właściciela, a następnie
-                przejdź przez trzy zabezpieczenia właściciela.
+                Wpisz wszystkie trzy kody właściciela.
             </div>
 
             <div class="form">
 
                 <input
-                    id="ownerEmail"
-                    type="email"
-                    placeholder="E-mail właściciela"
+                    id="ownerCode1"
+                    type="password"
+                    placeholder="Pierwszy kod"
                 >
 
                 <input
-                    id="ownerPassword"
+                    id="ownerCode2"
                     type="password"
-                    placeholder="Hasło właściciela"
+                    placeholder="Drugi kod"
                 >
 
                 <input
-                    id="ownerCode"
+                    id="ownerCode3"
                     type="password"
-                    placeholder="Pierwszy kod właściciela"
+                    placeholder="Trzeci kod"
                 >
 
-                <button class="btn red-btn" onclick="loginOwner()">
+                <button
+                    class="btn red-btn"
+                    onclick="loginOwner()"
+                >
                     🔐 Zaloguj właściciela
                 </button>
 
@@ -1248,16 +1425,13 @@ footer{
             </div>
 
 
-            <!-- OCZEKUJĄCE DONATY -->
-
             <div class="card" style="border-color:#326a43">
 
                 <h2>💰 Oczekujące donaty</h2>
 
                 <div class="notice">
-                    Tutaj trafiają donaty wysłane przez użytkowników.
-                    Dopiero po zaakceptowaniu zostaną doliczone
-                    do wspólnego licznika.
+                    Donaty czekają tutaj, dopóki właściciel
+                    ich nie zaakceptuje.
                 </div>
 
                 <div
@@ -1299,14 +1473,21 @@ footer{
                     placeholder="Opis"
                 >
 
-                <button class="btn" onclick="ownerAddMoney()">
+                <button
+                    class="btn"
+                    onclick="ownerAddMoney()"
+                >
                     ➕ Dodaj pieniądze
                 </button>
 
             </div>
 
 
-            <hr style="border:0;border-top:1px solid #3a2929;margin:25px 0">
+            <hr style="
+                border:0;
+                border-top:1px solid #3a2929;
+                margin:25px 0
+            ">
 
 
             <h3>💸 Odejmij pieniądze</h3>
@@ -1328,17 +1509,27 @@ footer{
                     placeholder="Opis wydatku"
                 >
 
-                <button class="btn red-btn" onclick="ownerSpendMoney()">
+                <button
+                    class="btn red-btn"
+                    onclick="ownerSpendMoney()"
+                >
                     ➖ Odejmij pieniądze
                 </button>
 
             </div>
 
 
-            <hr style="border:0;border-top:1px solid #3a2929;margin:25px 0">
+            <hr style="
+                border:0;
+                border-top:1px solid #3a2929;
+                margin:25px 0
+            ">
 
 
-            <button class="btn gray-btn" onclick="ownerLogout()">
+            <button
+                class="btn gray-btn"
+                onclick="ownerLogout()"
+            >
                 🚪 Wyloguj właściciela
             </button>
 
@@ -1356,9 +1547,7 @@ footer{
 </footer>
 
 
-<!-- =========================================================
-     JAK WPŁACIĆ
-     ========================================================= -->
+<!-- JAK WPŁACIĆ -->
 
 <div id="howToModal" class="modal">
 
@@ -1367,8 +1556,8 @@ footer{
         <h2>🎬 Jak wpłacić?</h2>
 
         <div class="notice" style="margin-top:15px">
-            Możesz wpłacić pieniądze z dowolnego swojego
-            portfela lub użyć innej uzgodnionej metody.
+            Możesz przekazać pieniądze dowolną uzgodnioną
+            metodą, a następnie wysłać donatę.
         </div>
 
         <div class="card">
@@ -1385,16 +1574,12 @@ footer{
             </span>
         </div>
 
-        <div class="card">
-            👛 <b>Inny portfel</b><br>
-            <span class="muted">
-                Liczy się rzeczywiście przekazana kwota.
-            </span>
-        </div>
-
         <div class="modal-buttons">
 
-            <button class="btn" onclick="closeHowToPay()">
+            <button
+                class="btn"
+                onclick="closeHowToPay()"
+            >
                 Zamknij
             </button>
 
@@ -1405,9 +1590,7 @@ footer{
 </div>
 
 
-<!-- =========================================================
-     SEJF
-     ========================================================= -->
+<!-- SEJF -->
 
 <div id="safeModal" class="modal">
 
@@ -1421,7 +1604,10 @@ footer{
 
         <div class="modal-buttons">
 
-            <button class="btn gray-btn" onclick="closeSafeModal()">
+            <button
+                class="btn gray-btn"
+                onclick="closeSafeModal()"
+            >
                 Zamknij
             </button>
 
@@ -1461,17 +1647,18 @@ const sb = createClient(
 
 const TARGET = 6868;
 
-/*
- * UWAGA:
- * Te trzy kody są dodatkową blokadą interfejsu.
- * Prawdziwe uprawnienia właściciela nadal sprawdza Supabase.
- */
-
 const OWNER_CODES = [
     "ButelKaucja",
     "KaucjaMM0",
     "OliwierDamian"
 ];
+
+const SAFE_MAX = {
+    1:500,
+    2:1000,
+    3:2000,
+    4:250
+};
 
 let currentUser = null;
 
@@ -1482,22 +1669,17 @@ let sharedState = {
 };
 
 let myHistory = [];
-
 let myPending = [];
+let ownerPending = [];
 
 let ownerLogged = false;
 
-const SAFE_MAX = {
-    1:500,
-    2:1000,
-    3:2000,
-    4:250
+let safes = {
+    1:0,
+    2:0,
+    3:0,
+    4:0
 };
-
-let safes = JSON.parse(
-    localStorage.getItem("zbieranie_safes") ||
-    '{"1":0,"2":0,"3":0,"4":0}'
-);
 
 
 /* =========================================================
@@ -1521,7 +1703,9 @@ async function start(){
             const {data,error} =
                 await sb.auth.signInAnonymously();
 
-            if(error) throw error;
+            if(error){
+                throw error;
+            }
 
             currentUser =
                 data.user;
@@ -1530,6 +1714,7 @@ async function start(){
         await loadSharedState();
         await loadHistory();
         await loadMyPending();
+        await loadSharedSafes();
 
         drawAll();
 
@@ -1538,6 +1723,7 @@ async function start(){
             await loadSharedState();
             await loadHistory();
             await loadMyPending();
+            await loadSharedSafes();
 
             if(ownerLogged){
                 await loadOwnerPending();
@@ -1614,20 +1800,19 @@ async function loadHistory(){
     if(error){
 
         console.error(error);
+
         myHistory = [];
+
         return;
     }
 
-    myHistory = data || [];
-
-    drawHistory();
-    drawChart();
-    drawCardHistory();
+    myHistory =
+        data || [];
 }
 
 
 /* =========================================================
-   OCZEKUJĄCE DONATY UŻYTKOWNIKA
+   MOJE DONATY
    ========================================================= */
 
 async function loadMyPending(){
@@ -1635,12 +1820,6 @@ async function loadMyPending(){
     if(!currentUser){
         return;
     }
-
-    /*
-     * Anonimowy użytkownik nie ma zwykłego SELECT.
-     * Dlatego dla konta anonimowego lista może być pusta,
-     * ale sama donata nadal może być wysłana przez RPC.
-     */
 
     const {data,error} =
         await sb
@@ -1652,12 +1831,16 @@ async function loadMyPending(){
     if(error){
 
         console.error(error);
+
         myPending = [];
+
         drawMyPending();
+
         return;
     }
 
-    myPending = data || [];
+    myPending =
+        data || [];
 
     drawMyPending();
 }
@@ -1723,19 +1906,25 @@ async function makeDonation(){
 
     const amount =
         parseFloat(
-            document.getElementById(
-                "donationAmount"
-            ).value.replace(",",".")
+            document
+                .getElementById("donationAmount")
+                .value
+                .replace(",",".")
         );
 
     let description =
-        document.getElementById(
-            "donationDescription"
-        ).value.trim();
+        document
+            .getElementById("donationDescription")
+            .value
+            .trim();
 
-    if(!Number.isFinite(amount) || amount <= 0){
+    if(
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ){
 
         toast("Wpisz prawidłową kwotę.");
+
         return;
     }
 
@@ -1745,7 +1934,7 @@ async function makeDonation(){
 
     try{
 
-        const {data,error} =
+        const {error} =
             await sb.rpc(
                 "make_pending_donation",
                 {
@@ -1768,17 +1957,12 @@ async function makeDonation(){
 
         await loadMyPending();
 
-        /*
-         * Licznik NIE jest tutaj zwiększany.
-         */
-
-        const msg =
-            donationMessage(amount);
-
-        showGratulation(msg);
+        showGratulation(
+            donationMessage(amount)
+        );
 
         toast(
-            "⏳ Donata została wysłana do akceptacji właściciela."
+            "⏳ Donata czeka na akceptację właściciela."
         );
 
     }catch(error){
@@ -1845,13 +2029,13 @@ function donationMessage(amount){
 
 function showGratulation(message){
 
-    const existing =
+    const old =
         document.getElementById(
             "donationGratulation"
         );
 
-    if(existing){
-        existing.remove();
+    if(old){
+        old.remove();
     }
 
     const card =
@@ -1869,8 +2053,11 @@ function showGratulation(message){
             ${message}
         </div>
 
-        <div class="muted" style="margin-top:8px">
-            Twoja donata czeka na akceptację właściciela.
+        <div
+            class="muted"
+            style="margin-top:8px"
+        >
+            Donata czeka na akceptację właściciela.
         </div>
 
     `;
@@ -1884,48 +2071,38 @@ function showGratulation(message){
     );
 
     setTimeout(()=>{
+
         if(card.parentElement){
             card.remove();
         }
+
     },6000);
 }
 
 
 /* =========================================================
-   WŁAŚCICIEL
+   WŁAŚCICIEL — 3 KODY
    ========================================================= */
 
-async function loginOwner(){
+function loginOwner(){
 
-    const email =
-        document.getElementById(
-            "ownerEmail"
-        ).value.trim();
+    const code1 =
+        document
+            .getElementById("ownerCode1")
+            .value;
 
-    const password =
-        document.getElementById(
-            "ownerPassword"
-        ).value;
+    const code2 =
+        document
+            .getElementById("ownerCode2")
+            .value;
 
-    const code =
-        document.getElementById(
-            "ownerCode"
-        ).value;
+    const code3 =
+        document
+            .getElementById("ownerCode3")
+            .value;
 
-    if(!email || !password){
 
-        toast(
-            "Wpisz e-mail i hasło właściciela."
-        );
-
-        return;
-    }
-
-    /*
-     * PIERWSZY KOD
-     */
-
-    if(code !== OWNER_CODES[0]){
+    if(code1 !== OWNER_CODES[0]){
 
         toast(
             "❌ Nieprawidłowy pierwszy kod."
@@ -1934,151 +2111,47 @@ async function loginOwner(){
         return;
     }
 
-    try{
 
-        const {data,error} =
-            await sb.auth.signInWithPassword({
-                email,
-                password
-            });
-
-        if(error){
-            throw error;
-        }
-
-        currentUser =
-            data.user;
-
-        /*
-         * Prawdziwe uprawnienie:
-         * konto musi znajdować się w zbieranie_owners.
-         */
-
-        const {data:owner,error:ownerError} =
-            await sb
-                .from("zbieranie_owners")
-                .select("user_id")
-                .eq("user_id",currentUser.id)
-                .maybeSingle();
-
-        if(ownerError){
-            throw ownerError;
-        }
-
-        if(!owner){
-
-            await sb.auth.signOut();
-
-            currentUser = null;
-
-            toast(
-                "❌ To konto nie jest przypisane jako właściciel."
-            );
-
-            const {data:anonData} =
-                await sb.auth.signInAnonymously();
-
-            currentUser =
-                anonData.user;
-
-            await loadHistory();
-            return;
-        }
-
-        /*
-         * DRUGI KOD
-         */
-
-        const second =
-            prompt(
-                "🔐 Wpisz drugi kod właściciela:"
-            );
-
-        if(second !== OWNER_CODES[1]){
-
-            await sb.auth.signOut();
-
-            ownerLogged = false;
-
-            const {data:anonData} =
-                await sb.auth.signInAnonymously();
-
-            currentUser =
-                anonData.user;
-
-            toast(
-                "❌ Nieprawidłowy drugi kod."
-            );
-
-            await loadHistory();
-
-            return;
-        }
-
-        /*
-         * TRZECI KOD
-         */
-
-        const third =
-            prompt(
-                "👑 Wpisz trzeci kod właściciela:"
-            );
-
-        if(third !== OWNER_CODES[2]){
-
-            await sb.auth.signOut();
-
-            ownerLogged = false;
-
-            const {data:anonData} =
-                await sb.auth.signInAnonymously();
-
-            currentUser =
-                anonData.user;
-
-            toast(
-                "❌ Nieprawidłowy trzeci kod."
-            );
-
-            await loadHistory();
-
-            return;
-        }
-
-        ownerLogged = true;
-
-        document.getElementById(
-            "ownerLogin"
-        ).style.display = "none";
-
-        document.getElementById(
-            "ownerPanel"
-        ).classList.add("active");
-
-        await loadSharedState();
-        await loadHistory();
-        await loadOwnerPending();
-
-        drawAll();
+    if(code2 !== OWNER_CODES[1]){
 
         toast(
-            "👑 Zalogowano jako właściciel."
+            "❌ Nieprawidłowy drugi kod."
         );
 
-    }catch(error){
-
-        console.error(error);
-
-        toast(
-            "Błąd logowania: " +
-            error.message
-        );
+        return;
     }
+
+
+    if(code3 !== OWNER_CODES[2]){
+
+        toast(
+            "❌ Nieprawidłowy trzeci kod."
+        );
+
+        return;
+    }
+
+
+    ownerLogged = true;
+
+    document.getElementById(
+        "ownerLogin"
+    ).style.display = "none";
+
+    document.getElementById(
+        "ownerPanel"
+    ).classList.add("active");
+
+    loadOwnerPending();
+
+    toast(
+        "👑 Zalogowano jako właściciel."
+    );
 }
 
 
 /* =========================================================
-   OCZEKUJĄCE DONATY — WŁAŚCICIEL
+   DONATY WŁAŚCICIELA
    ========================================================= */
 
 async function loadOwnerPending(){
@@ -2110,8 +2183,14 @@ async function loadOwnerPending(){
         return;
     }
 
-    const list =
+    ownerPending =
         data || [];
+
+    drawOwnerPending();
+}
+
+
+function drawOwnerPending(){
 
     const box =
         document.getElementById(
@@ -2122,7 +2201,7 @@ async function loadOwnerPending(){
         return;
     }
 
-    if(!list.length){
+    if(!ownerPending.length){
 
         box.innerHTML =
             '<div class="muted">🎉 Brak oczekujących donat.</div>';
@@ -2131,7 +2210,7 @@ async function loadOwnerPending(){
     }
 
     box.innerHTML =
-        list.map(item=>`
+        ownerPending.map(item=>`
 
             <div class="pending-donation">
 
@@ -2180,7 +2259,9 @@ async function loadOwnerPending(){
 async function ownerAcceptDonation(id,amount){
 
     if(!ownerLogged){
+
         toast("Brak dostępu.");
+
         return;
     }
 
@@ -2214,16 +2295,8 @@ async function ownerAcceptDonation(id,amount){
 
         drawAll();
 
-        /*
-         * Gratulacje po zaakceptowaniu
-         */
-
         showOwnerDonationAccepted(
             Number(amount)
-        );
-
-        toast(
-            "✅ Donata została zaakceptowana i doliczona."
         );
 
     }catch(error){
@@ -2238,86 +2311,18 @@ async function ownerAcceptDonation(id,amount){
 }
 
 
-function showOwnerDonationAccepted(amount){
-
-    const message =
-        donationMessage(amount);
-
-    toast(
-        "🎉 " + message +
-        " +" + money(amount)
-    );
-
-    /*
-     * Mocniejszy efekt dla większych kwot.
-     */
-
-    if(amount >= 100){
-        confetti(30);
-    }
-
-    if(amount >= 250){
-        confetti(60);
-    }
-
-    if(amount >= 500){
-        confetti(100);
-    }
-}
-
-
-function confetti(count){
-
-    for(let i=0;i<count;i++){
-
-        const piece =
-            document.createElement("div");
-
-        piece.textContent =
-            ["💚","💰","🎉","⭐","✨"][Math.floor(
-                Math.random()*5
-            )];
-
-        piece.style.position = "fixed";
-        piece.style.left =
-            Math.random()*100 + "vw";
-        piece.style.top = "-30px";
-        piece.style.fontSize =
-            (16+Math.random()*18) + "px";
-        piece.style.zIndex = "300";
-        piece.style.pointerEvents = "none";
-        piece.style.transition =
-            "transform 2s linear, opacity 2s linear";
-
-        document.body.appendChild(piece);
-
-        requestAnimationFrame(()=>{
-
-            piece.style.transform =
-                `translateY(${110 + Math.random()*80}vh)
-                 rotate(${Math.random()*900}deg)`;
-
-            piece.style.opacity = "0";
-
-        });
-
-        setTimeout(()=>{
-            piece.remove();
-        },2200);
-    }
-}
-
-
 async function ownerDeletePending(id){
 
     if(!ownerLogged){
+
         toast("Brak dostępu.");
+
         return;
     }
 
     if(
         !confirm(
-            "Czy na pewno usunąć tę oczekującą donatę?"
+            "Czy na pewno usunąć tę donatę?"
         )
     ){
         return;
@@ -2358,7 +2363,9 @@ async function ownerDeletePending(id){
 async function ownerClearPending(){
 
     if(!ownerLogged){
+
         toast("Brak dostępu.");
+
         return;
     }
 
@@ -2394,7 +2401,7 @@ async function ownerClearPending(){
         toast(
             "🧹 Usunięto " +
             Number(data || 0) +
-            " oczekujących donat."
+            " donat."
         );
 
     }catch(error){
@@ -2409,33 +2416,72 @@ async function ownerClearPending(){
 }
 
 
+function showOwnerDonationAccepted(amount){
+
+    toast(
+        "🎉 " +
+        donationMessage(amount) +
+        " +" +
+        money(amount)
+    );
+
+    if(amount >= 20){
+        confetti(20);
+    }
+
+    if(amount >= 50){
+        confetti(30);
+    }
+
+    if(amount >= 100){
+        confetti(50);
+    }
+
+    if(amount >= 250){
+        confetti(70);
+    }
+
+    if(amount >= 500){
+        confetti(100);
+    }
+}
+
+
 /* =========================================================
-   WŁAŚCICIEL — DODAWANIE
+   WŁAŚCICIEL — DODAWANIE / ODEJMOWANIE
    ========================================================= */
 
 async function ownerAddMoney(){
 
     if(!ownerLogged){
+
         toast("Brak dostępu.");
+
         return;
     }
 
     const amount =
         parseFloat(
-            document.getElementById(
-                "ownerAddAmount"
-            ).value.replace(",",".")
+            document
+                .getElementById("ownerAddAmount")
+                .value
+                .replace(",",".")
         );
 
     const description =
-        document.getElementById(
-            "ownerAddDescription"
-        ).value.trim() ||
+        document
+            .getElementById("ownerAddDescription")
+            .value
+            .trim() ||
         "Wpłata właściciela";
 
-    if(!Number.isFinite(amount) || amount <= 0){
+    if(
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ){
 
         toast("Wpisz prawidłową kwotę.");
+
         return;
     }
 
@@ -2483,33 +2529,37 @@ async function ownerAddMoney(){
 }
 
 
-/* =========================================================
-   WŁAŚCICIEL — ODEJMOWANIE
-   ========================================================= */
-
 async function ownerSpendMoney(){
 
     if(!ownerLogged){
+
         toast("Brak dostępu.");
+
         return;
     }
 
     const amount =
         parseFloat(
-            document.getElementById(
-                "ownerSpendAmount"
-            ).value.replace(",",".")
+            document
+                .getElementById("ownerSpendAmount")
+                .value
+                .replace(",",".")
         );
 
     const description =
-        document.getElementById(
-            "ownerSpendDescription"
-        ).value.trim() ||
+        document
+            .getElementById("ownerSpendDescription")
+            .value
+            .trim() ||
         "Wydatek";
 
-    if(!Number.isFinite(amount) || amount <= 0){
+    if(
+        !Number.isFinite(amount) ||
+        amount <= 0
+    ){
 
         toast("Wpisz prawidłową kwotę.");
+
         return;
     }
 
@@ -2561,9 +2611,7 @@ async function ownerSpendMoney(){
    WYLOGOWANIE
    ========================================================= */
 
-async function ownerLogout(){
-
-    await sb.auth.signOut();
+function ownerLogout(){
 
     ownerLogged = false;
 
@@ -2575,28 +2623,463 @@ async function ownerLogout(){
         "ownerPanel"
     ).classList.remove("active");
 
-    try{
+    document.getElementById(
+        "ownerCode1"
+    ).value = "";
 
-        const {data} =
-            await sb.auth.signInAnonymously();
+    document.getElementById(
+        "ownerCode2"
+    ).value = "";
 
-        currentUser =
-            data.user;
-
-    }catch(error){
-
-        console.error(error);
-    }
-
-    await loadSharedState();
-    await loadHistory();
-    await loadMyPending();
-
-    drawAll();
+    document.getElementById(
+        "ownerCode3"
+    ).value = "";
 
     toast(
         "Wylogowano właściciela."
     );
+}
+
+
+/* =========================================================
+   WSPÓLNE SEJFY
+   ========================================================= */
+
+async function loadSharedSafes(){
+
+    const {data,error} =
+        await sb
+            .from("zbieranie_safes")
+            .select("id,amount")
+            .order("id");
+
+    if(error){
+
+        console.error(error);
+
+        return;
+    }
+
+    if(data){
+
+        data.forEach(item=>{
+
+            if(
+                SAFE_MAX[item.id] !== undefined
+            ){
+
+                safes[item.id] =
+                    Number(item.amount || 0);
+            }
+
+        });
+    }
+
+    drawSafes();
+}
+
+
+async function safeDeposit(id){
+
+    const amount =
+        prompt(
+            "Ile zł wpłacić do sejfu?"
+        );
+
+    if(amount === null){
+        return;
+    }
+
+    const value =
+        parseFloat(
+            amount.replace(",",".")
+        );
+
+    if(
+        !Number.isFinite(value) ||
+        value <= 0
+    ){
+
+        toast(
+            "Nieprawidłowa kwota."
+        );
+
+        return;
+    }
+
+    if(
+        Number(safes[id]) + value >
+        SAFE_MAX[id]
+    ){
+
+        toast(
+            "❌ Sejf nie pomieści tej kwoty."
+        );
+
+        return;
+    }
+
+    try{
+
+        const {error} =
+            await sb.rpc(
+                "safe_deposit",
+                {
+                    p_safe_id:id,
+                    p_amount:value
+                }
+            );
+
+        if(error){
+            throw error;
+        }
+
+        await loadSharedSafes();
+
+        toast(
+            "💰 Dodano " +
+            money(value) +
+            " do sejfu."
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        toast(
+            "Nie udało się wpłacić do sejfu: " +
+            error.message
+        );
+    }
+}
+
+
+async function safeClear(id){
+
+    if(
+        !confirm(
+            "Czy na pewno wyczyścić sejf?"
+        )
+    ){
+        return;
+    }
+
+    try{
+
+        const {error} =
+            await sb.rpc(
+                "safe_clear",
+                {
+                    p_safe_id:id
+                }
+            );
+
+        if(error){
+            throw error;
+        }
+
+        await loadSharedSafes();
+
+        toast(
+            "🧹 Sejf wyczyszczony."
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        toast(
+            "Nie udało się wyczyścić sejfu: " +
+            error.message
+        );
+    }
+}
+
+
+function safeCrank(id){
+
+    const amount =
+        Number(
+            safes[id] || 0
+        );
+
+    if(
+        amount < SAFE_MAX[id]
+    ){
+
+        showSafeMessage(
+            "🚫 Brak dostępu",
+            `
+
+                <p>
+                    Sejf nie jest jeszcze pełny.
+                </p>
+
+                <p
+                    class="muted"
+                    style="margin-top:10px"
+                >
+                    Aktualnie:
+                    <b>${money(amount)}</b>
+                </p>
+
+                <p
+                    class="muted"
+                    style="margin-top:5px"
+                >
+                    Potrzeba:
+                    <b>${money(SAFE_MAX[id])}</b>
+                </p>
+
+            `
+        );
+
+        return;
+    }
+
+
+    const box =
+        document.getElementById(
+            "safeBox"+id
+        );
+
+    if(box){
+        box.classList.add("cranking");
+    }
+
+
+    showSafeMessage(
+        "🔐 Sejf pełny",
+        `
+
+            <div
+                style="
+                    text-align:center;
+                    padding:10px;
+                "
+            >
+
+                <p>
+                    Sejf jest pełny!
+                </p>
+
+                <p
+                    class="muted"
+                    style="margin-top:10px"
+                >
+                    W sejfie:
+                    <b>${money(amount)}</b>
+                </p>
+
+                <p
+                    class="muted"
+                    style="margin-top:10px"
+                >
+                    Przekręć poziomą korbę,
+                    aby rozpocząć wypłatę.
+                </p>
+
+                <button
+                    class="btn orange-btn"
+                    style="margin-top:18px"
+                    onclick="releaseSafe(${id})"
+                >
+                    ↔️ PRZEKRĘĆ KORBĘ
+                </button>
+
+            </div>
+
+        `
+    );
+}
+
+
+async function releaseSafe(id){
+
+    const box =
+        document.getElementById(
+            "safeBox"+id
+        );
+
+    if(box){
+        box.classList.add("cranking");
+    }
+
+    const amount =
+        Number(
+            safes[id] || 0
+        );
+
+    if(
+        amount < SAFE_MAX[id]
+    ){
+
+        closeSafeModal();
+
+        toast(
+            "❌ Sejf nie jest pełny."
+        );
+
+        return;
+    }
+
+
+    showSafeMessage(
+        "⚙️ Otwieranie sejfu...",
+        `
+
+            <div
+                style="
+                    text-align:center;
+                    padding:20px;
+                "
+            >
+
+                <div style="font-size:55px">
+                    ⚙️
+                </div>
+
+                <h3 style="margin-top:10px">
+                    Pociągasz poziomą korbę...
+                </h3>
+
+                <p class="muted">
+                    Sejf się otwiera.
+                </p>
+
+            </div>
+
+        `
+    );
+
+
+    await sleep(1400);
+
+
+    try{
+
+        const {error} =
+            await sb.rpc(
+                "safe_withdraw",
+                {
+                    p_safe_id:id
+                }
+            );
+
+        if(error){
+            throw error;
+        }
+
+        await loadSharedSafes();
+        await loadSharedState();
+        await loadHistory();
+
+        if(box){
+            box.classList.remove("cranking");
+        }
+
+        closeSafeModal();
+
+        drawAll();
+
+        confettiForSafe(amount);
+
+        toast(
+            "💰 " +
+            money(amount) +
+            " dodano do wspólnego licznika."
+        );
+
+    }catch(error){
+
+        if(box){
+            box.classList.remove("cranking");
+        }
+
+        console.error(error);
+
+        toast(
+            "Nie udało się wypłacić sejfu: " +
+            error.message
+        );
+    }
+}
+
+
+function drawSafes(){
+
+    for(let i=1;i<=4;i++){
+
+        const amount =
+            Number(
+                safes[i] || 0
+            );
+
+        const max =
+            SAFE_MAX[i];
+
+        const percent =
+            Math.min(
+                100,
+                amount/max*100
+            );
+
+        const amountElement =
+            document.getElementById(
+                "safeAmount"+i
+            );
+
+        const fillElement =
+            document.getElementById(
+                "safeFill"+i
+            );
+
+        const box =
+            document.getElementById(
+                "safeBox"+i
+            );
+
+        if(amountElement){
+
+            amountElement.textContent =
+                money(amount);
+        }
+
+        if(fillElement){
+
+            fillElement.style.width =
+                percent + "%";
+        }
+
+        if(box){
+
+            box.classList.toggle(
+                "safe-full",
+                amount >= max
+            );
+        }
+    }
+}
+
+
+function confettiForSafe(amount){
+
+    if(amount >= 2000){
+
+        confetti(120);
+
+    }else if(amount >= 1000){
+
+        confetti(80);
+
+    }else if(amount >= 500){
+
+        confetti(50);
+
+    }else{
+
+        confetti(25);
+    }
 }
 
 
@@ -2645,31 +3128,39 @@ function drawAll(){
     document.getElementById(
         "bottles"
     ).textContent =
-        Number(sharedState.bottles || 0);
+        Number(
+            sharedState.bottles || 0
+        );
 
     document.getElementById(
         "days"
     ).textContent =
-        Number(sharedState.days || 0);
+        Number(
+            sharedState.days || 0
+        );
 
     document.getElementById(
         "mainProgress"
     ).style.width =
         percent + "%";
 
-    document.querySelectorAll(
-        ".milestone"
-    ).forEach(el=>{
 
-        const goal =
-            Number(el.dataset.goal);
+    document
+        .querySelectorAll(".milestone")
+        .forEach(el=>{
 
-        el.classList.toggle(
-            "done",
-            balance >= goal
-        );
+            const goal =
+                Number(
+                    el.dataset.goal
+                );
 
-    });
+            el.classList.toggle(
+                "done",
+                balance >= goal
+            );
+
+        });
+
 
     drawHistory();
     drawChart();
@@ -2700,14 +3191,16 @@ function drawHistory(){
 
     const last =
         [...myHistory]
-        .reverse()
-        .slice(0,30);
+            .reverse()
+            .slice(0,30);
 
     box.innerHTML =
         last.map(item=>{
 
             const amount =
-                Number(item.amount || 0);
+                Number(
+                    item.amount || 0
+                );
 
             const positive =
                 amount >= 0;
@@ -2765,15 +3258,15 @@ function drawCardHistory(){
 
     const donations =
         myHistory
-        .filter(item =>
-            Number(item.amount) > 0 &&
-            String(
-                item.description || ""
+            .filter(item =>
+                Number(item.amount) > 0 &&
+                String(
+                    item.description || ""
+                )
+                .toLowerCase()
+                .includes("donat")
             )
-            .toLowerCase()
-            .includes("donat")
-        )
-        .reverse();
+            .reverse();
 
     if(!donations.length){
 
@@ -2822,9 +3315,7 @@ function drawCardHistory(){
 function drawChart(){
 
     const canvas =
-        document.getElementById(
-            "chart"
-        );
+        document.getElementById("chart");
 
     const ctx =
         canvas.getContext("2d");
@@ -2836,14 +3327,20 @@ function drawChart(){
         canvas.height;
 
     ctx.clearRect(
-        0,0,w,h
+        0,
+        0,
+        w,
+        h
     );
 
     ctx.fillStyle =
         "#06130a";
 
     ctx.fillRect(
-        0,0,w,h
+        0,
+        0,
+        w,
+        h
     );
 
     const padLeft = 70;
@@ -2897,6 +3394,7 @@ function drawChart(){
         );
     }
 
+
     if(!myHistory.length){
 
         ctx.fillStyle =
@@ -2913,6 +3411,7 @@ function drawChart(){
 
         return;
     }
+
 
     const data =
         myHistory.map(item=>({
@@ -2931,6 +3430,7 @@ function drawChart(){
 
         }));
 
+
     const maxY =
         TARGET;
 
@@ -2938,6 +3438,7 @@ function drawChart(){
         data.length > 1
         ? chartW/(data.length-1)
         : chartW;
+
 
     const points =
         data.map((item,index)=>{
@@ -2965,7 +3466,12 @@ function drawChart(){
 
         });
 
-    for(let i=1;i<points.length;i++){
+
+    for(
+        let i=1;
+        i<points.length;
+        i++
+    ){
 
         const a =
             points[i-1];
@@ -2995,6 +3501,7 @@ function drawChart(){
         ctx.stroke();
     }
 
+
     points.forEach((p,index)=>{
 
         ctx.beginPath();
@@ -3013,6 +3520,7 @@ function drawChart(){
             : "#ff5252";
 
         ctx.fill();
+
 
         if(
             index === 0 ||
@@ -3052,374 +3560,8 @@ function drawChart(){
 
 
 /* =========================================================
-   SEJFY
+   MODALE
    ========================================================= */
-
-function drawSafes(){
-
-    for(let i=1;i<=4;i++){
-
-        const amount =
-            Number(
-                safes[i] || 0
-            );
-
-        const max =
-            SAFE_MAX[i];
-
-        const percent =
-            Math.min(
-                100,
-                amount/max*100
-            );
-
-        document.getElementById(
-            "safeAmount"+i
-        ).textContent =
-            money(amount);
-
-        document.getElementById(
-            "safeFill"+i
-        ).style.width =
-            percent + "%";
-    }
-}
-
-
-function saveSafes(){
-
-    localStorage.setItem(
-        "zbieranie_safes",
-        JSON.stringify(safes)
-    );
-}
-
-
-function safeDeposit(id){
-
-    const amount =
-        prompt(
-            "Ile zł wpłacić do sejfu?"
-        );
-
-    if(amount === null){
-        return;
-    }
-
-    const value =
-        parseFloat(
-            amount.replace(",",".")
-        );
-
-    if(
-        !Number.isFinite(value) ||
-        value <= 0
-    ){
-
-        toast(
-            "Nieprawidłowa kwota."
-        );
-
-        return;
-    }
-
-    if(
-        Number(safes[id]) + value >
-        SAFE_MAX[id]
-    ){
-
-        toast(
-            "❌ Sejf nie pomieści tej kwoty."
-        );
-
-        return;
-    }
-
-    safes[id] =
-        Math.round(
-            (
-                Number(safes[id]) +
-                value
-            )*100
-        )/100;
-
-    saveSafes();
-
-    drawSafes();
-
-    toast(
-        "💰 Dodano " +
-        money(value) +
-        " do sejfu."
-    );
-}
-
-
-function safeClear(id){
-
-    if(
-        !confirm(
-            "Czy na pewno wyczyścić sejf?"
-        )
-    ){
-        return;
-    }
-
-    safes[id] = 0;
-
-    saveSafes();
-
-    drawSafes();
-
-    toast(
-        "🧹 Sejf wyczyszczony."
-    );
-}
-
-
-function safeCrank(id){
-
-    const amount =
-        Number(
-            safes[id] || 0
-        );
-
-    if(
-        amount < SAFE_MAX[id]
-    ){
-
-        showSafeMessage(
-            "🚫 Brak dostępu",
-            `
-                <p>
-                    Sejf nie jest jeszcze pełny.
-                </p>
-
-                <p
-                    class="muted"
-                    style="margin-top:10px"
-                >
-                    Napełnij sejf do:
-                    <b>${money(SAFE_MAX[id])}</b>
-                </p>
-            `
-        );
-
-        return;
-    }
-
-    const code =
-        String(
-            Math.floor(
-                1000 +
-                Math.random()*9000
-            )
-        );
-
-    const box =
-        document.getElementById(
-            "safeBox"+id
-        );
-
-    if(box){
-        box.classList.add(
-            "cranking"
-        );
-    }
-
-    showSafeMessage(
-        "🔐 Sejf pełny",
-        `
-
-            <div
-                style="
-                    text-align:center;
-                    padding:10px;
-                "
-            >
-
-                <p>
-                    Sejf jest pełny!
-                </p>
-
-                <p
-                    class="muted"
-                    style="margin-top:10px"
-                >
-                    Kod sejfu:
-                </p>
-
-                <h2
-                    style="
-                        text-align:center;
-                        font-size:38px;
-                        letter-spacing:8px;
-                        margin:12px 0;
-                    "
-                >
-                    ${code}
-                </h2>
-
-                <p class="muted">
-                    Przekręć korbę i otwórz sejf.
-                </p>
-
-                <button
-                    class="btn orange-btn"
-                    style="margin-top:18px"
-                    onclick="releaseSafe(${id},${amount})"
-                >
-                    ↔️ PRZEKRĘĆ KORBĘ
-                </button>
-
-            </div>
-
-        `
-    );
-}
-
-
-async function releaseSafe(id,amount){
-
-    if(!ownerLogged){
-
-        closeSafeModal();
-
-        toast(
-            "🔒 Otwieranie sejfu wymaga właściciela."
-        );
-
-        return;
-    }
-
-    const box =
-        document.getElementById(
-            "safeBox"+id
-        );
-
-    if(box){
-
-        box.classList.add(
-            "cranking"
-        );
-    }
-
-    showSafeMessage(
-        "⚙️ Otwieranie sejfu...",
-        `
-
-            <div
-                style="
-                    text-align:center;
-                    padding:20px;
-                "
-            >
-
-                <div style="font-size:55px">
-                    ⚙️
-                </div>
-
-                <h3 style="margin-top:10px">
-                    Pociągasz korbę...
-                </h3>
-
-                <p class="muted">
-                    Sejf się otwiera.
-                </p>
-
-            </div>
-
-        `
-    );
-
-    await sleep(1400);
-
-    try{
-
-        const {error} =
-            await sb.rpc(
-                "owner_add_money",
-                {
-                    p_amount:amount,
-                    p_description:
-                        "🔐 Wypłata z sejfu " + id
-                }
-            );
-
-        if(error){
-            throw error;
-        }
-
-        safes[id] = 0;
-
-        saveSafes();
-
-        if(box){
-            box.classList.remove(
-                "cranking"
-            );
-        }
-
-        closeSafeModal();
-
-        await loadSharedState();
-        await loadHistory();
-
-        drawAll();
-
-        confettiForSafe(
-            amount
-        );
-
-        toast(
-            "💰 " +
-            money(amount) +
-            " dodano do wspólnego licznika."
-        );
-
-    }catch(error){
-
-        if(box){
-            box.classList.remove(
-                "cranking"
-            );
-        }
-
-        console.error(error);
-
-        toast(
-            "Nie udało się wypłacić sejfu: " +
-            error.message
-        );
-    }
-}
-
-
-function confettiForSafe(amount){
-
-    if(amount >= 2000){
-        confetti(120);
-    }else if(amount >= 1000){
-        confetti(80);
-    }else if(amount >= 500){
-        confetti(50);
-    }else{
-        confetti(25);
-    }
-}
-
-
-function sleep(ms){
-
-    return new Promise(
-        resolve =>
-            setTimeout(
-                resolve,
-                ms
-            )
-    );
-}
-
 
 function showSafeMessage(
     title,
@@ -3438,9 +3580,7 @@ function showSafeMessage(
 
     document.getElementById(
         "safeModal"
-    ).classList.add(
-        "active"
-    );
+    ).classList.add("active");
 }
 
 
@@ -3448,17 +3588,31 @@ function closeSafeModal(){
 
     document.getElementById(
         "safeModal"
-    ).classList.remove(
-        "active"
-    );
+    ).classList.remove("active");
 
-    document.querySelectorAll(
-        ".safe"
-    ).forEach(el=>{
-        el.classList.remove(
-            "cranking"
-        );
-    });
+    document
+        .querySelectorAll(".safe")
+        .forEach(el=>{
+            el.classList.remove(
+                "cranking"
+            );
+        });
+}
+
+
+function showHowToPay(){
+
+    document.getElementById(
+        "howToModal"
+    ).classList.add("active");
+}
+
+
+function closeHowToPay(){
+
+    document.getElementById(
+        "howToModal"
+    ).classList.remove("active");
 }
 
 
@@ -3471,38 +3625,38 @@ function showPage(
     button
 ){
 
-    document.querySelectorAll(
-        ".page"
-    ).forEach(page=>{
-        page.classList.remove(
-            "active"
-        );
-    });
+    document
+        .querySelectorAll(".page")
+        .forEach(page=>{
+            page.classList.remove(
+                "active"
+            );
+        });
 
-    document.getElementById(
-        id
-    ).classList.add(
-        "active"
-    );
+    document
+        .getElementById(id)
+        .classList.add("active");
 
-    document.querySelectorAll(
-        "nav button"
-    ).forEach(btn=>{
-        btn.classList.remove(
-            "active"
-        );
-    });
+
+    document
+        .querySelectorAll("nav button")
+        .forEach(btn=>{
+            btn.classList.remove(
+                "active"
+            );
+        });
+
 
     if(button){
-        button.classList.add(
-            "active"
-        );
+        button.classList.add("active");
     }
+
 
     window.scrollTo({
         top:0,
         behavior:"smooth"
     });
+
 
     if(
         id === "wlasciciel" &&
@@ -3511,8 +3665,14 @@ function showPage(
         loadOwnerPending();
     }
 
+
     if(id === "donaty"){
         loadMyPending();
+    }
+
+
+    if(id === "saldo"){
+        loadSharedSafes();
     }
 }
 
@@ -3533,31 +3693,7 @@ function toggleQuestion(button){
 
 
 /* =========================================================
-   JAK WPŁACIĆ
-   ========================================================= */
-
-function showHowToPay(){
-
-    document.getElementById(
-        "howToModal"
-    ).classList.add(
-        "active"
-    );
-}
-
-
-function closeHowToPay(){
-
-    document.getElementById(
-        "howToModal"
-    ).classList.remove(
-        "active"
-    );
-}
-
-
-/* =========================================================
-   FORMATOWANIE
+   POMOCNICZE
    ========================================================= */
 
 function money(value){
@@ -3605,26 +3741,86 @@ function formatDate(value){
 function escapeHtml(value){
 
     return String(value)
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+}
+
+
+function sleep(ms){
+
+    return new Promise(
+        resolve =>
+            setTimeout(
+                resolve,
+                ms
+            )
+    );
+}
+
+
+/* =========================================================
+   CONFETTI
+   ========================================================= */
+
+function confetti(count){
+
+    for(let i=0;i<count;i++){
+
+        const piece =
+            document.createElement("div");
+
+        piece.textContent =
+            ["💚","💰","🎉","⭐","✨"][
+                Math.floor(
+                    Math.random()*5
+                )
+            ];
+
+        piece.style.position =
+            "fixed";
+
+        piece.style.left =
+            Math.random()*100 +
+            "vw";
+
+        piece.style.top =
+            "-30px";
+
+        piece.style.fontSize =
+            (16+Math.random()*18) +
+            "px";
+
+        piece.style.zIndex =
+            "300";
+
+        piece.style.pointerEvents =
+            "none";
+
+        piece.style.transition =
+            "transform 2s linear, opacity 2s linear";
+
+        document.body.appendChild(piece);
+
+        requestAnimationFrame(()=>{
+
+            piece.style.transform =
+                `translateY(${110 + Math.random()*80}vh)
+                 rotate(${Math.random()*900}deg)`;
+
+            piece.style.opacity =
+                "0";
+
+        });
+
+        setTimeout(()=>{
+
+            piece.remove();
+
+        },2200);
+    }
 }
 
 
@@ -3644,9 +3840,7 @@ function toast(message){
     el.textContent =
         message;
 
-    el.classList.add(
-        "show"
-    );
+    el.classList.add("show");
 
     clearTimeout(
         toastTimer
@@ -3654,9 +3848,11 @@ function toast(message){
 
     toastTimer =
         setTimeout(()=>{
+
             el.classList.remove(
                 "show"
             );
+
         },3500);
 }
 
