@@ -2,44 +2,41 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <title>ZBieranie</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
 :root{
     --bg:#06130b;
-    --panel:#0d2014;
-    --panel2:#102a1a;
+    --panel:#0d2114;
+    --panel2:#112b1a;
     --green:#35ff73;
-    --green2:#1fd15a;
-    --darkgreen:#0a3b1a;
-    --text:#f3fff6;
+    --green2:#18c957;
+    --red:#ff4c5c;
+    --orange:#ffad42;
+    --gold:#ffd34d;
+    --blue:#4aa8ff;
     --muted:#a8c5af;
-    --red:#ff4f5f;
-    --orange:#ffae42;
-    --blue:#49a7ff;
-    --shadow:0 10px 35px rgba(0,0,0,.35);
+    --text:#f3fff6;
 }
 
 *{
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
     margin:0;
+    min-height:100vh;
+    color:var(--text);
     font-family:Arial,Helvetica,sans-serif;
     background:
         radial-gradient(circle at 20% 10%,rgba(53,255,115,.08),transparent 30%),
-        radial-gradient(circle at 80% 20%,rgba(53,255,115,.05),transparent 25%),
+        radial-gradient(circle at 80% 20%,rgba(53,255,115,.05),transparent 30%),
         var(--bg);
-    color:var(--text);
-    min-height:100vh;
 }
 
 button,
@@ -52,46 +49,52 @@ button{
     cursor:pointer;
 }
 
+button:disabled{
+    cursor:not-allowed;
+    opacity:.42;
+    filter:grayscale(.5);
+}
+
 .hidden{
     display:none !important;
 }
 
 .app{
     width:min(1180px,94%);
-    margin:0 auto;
-    padding:22px 0 50px;
+    margin:auto;
+    padding:20px 0 45px;
 }
+
+/* HEADER */
 
 header{
     position:relative;
     overflow:hidden;
-    padding:28px;
-    border:1px solid rgba(53,255,115,.2);
-    background:
-        linear-gradient(145deg,rgba(16,42,26,.96),rgba(6,19,11,.97));
-    border-radius:26px;
-    box-shadow:var(--shadow);
-    margin-bottom:20px;
+    padding:27px;
+    border-radius:25px;
+    background:linear-gradient(145deg,#10291a,#07160c);
+    border:1px solid rgba(53,255,115,.18);
+    margin-bottom:18px;
+    box-shadow:0 15px 45px rgba(0,0,0,.35);
 }
 
-header::before{
+header:after{
     content:"$";
     position:absolute;
-    right:24px;
-    top:-28px;
-    font-size:170px;
-    font-weight:900;
+    right:20px;
+    top:-45px;
     color:rgba(53,255,115,.045);
+    font-size:190px;
+    font-weight:1000;
 }
 
 .logo{
     position:relative;
     z-index:2;
-    font-size:40px;
-    font-weight:1000;
-    letter-spacing:-1px;
     color:var(--green);
-    text-shadow:0 0 22px rgba(53,255,115,.32);
+    font-size:42px;
+    font-weight:1000;
+    text-shadow:0 0 25px rgba(53,255,115,.22);
 }
 
 .subtitle{
@@ -101,35 +104,37 @@ header::before{
     margin-top:5px;
 }
 
+/* NAV */
+
 nav{
     display:flex;
     flex-wrap:wrap;
     gap:8px;
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .tab{
     flex:1 1 140px;
-    padding:13px 15px;
-    border:1px solid rgba(53,255,115,.15);
-    color:#d6ffe0;
+    padding:13px;
     border-radius:15px;
-    background:#0a1b10;
-    transition:.18s ease;
-    font-weight:800;
+    border:1px solid rgba(53,255,115,.14);
+    background:#091a0e;
+    color:#d8ffe1;
+    font-weight:900;
+    transition:.18s;
 }
 
 .tab:hover{
     transform:translateY(-1px);
-    border-color:rgba(53,255,115,.4);
 }
 
 .tab.active{
-    background:linear-gradient(180deg,#123c20,#0b2513);
-    border-color:rgba(53,255,115,.5);
     color:var(--green);
-    box-shadow:0 0 20px rgba(53,255,115,.08);
+    background:#10371c;
+    border-color:rgba(53,255,115,.48);
 }
+
+/* PAGE */
 
 .page{
     display:none;
@@ -151,78 +156,99 @@ nav{
     }
 }
 
+/* CARDS */
+
 .card{
-    background:linear-gradient(145deg,rgba(16,42,26,.96),rgba(9,25,15,.97));
-    border:1px solid rgba(53,255,115,.15);
-    border-radius:22px;
     padding:20px;
-    box-shadow:var(--shadow);
-    margin-bottom:18px;
+    margin-bottom:17px;
+    border-radius:22px;
+    background:linear-gradient(145deg,#10291a,#09170d);
+    border:1px solid rgba(53,255,115,.14);
+    box-shadow:0 12px 35px rgba(0,0,0,.3);
 }
 
-.card h2,
-.card h3{
+.card h2{
     margin-top:0;
 }
 
+/* BALANCE */
+
 .balance-wrap{
     text-align:center;
-    padding:32px 20px;
+    padding:35px 20px;
 }
 
 .balance-label{
     color:var(--muted);
-    font-weight:700;
+    font-weight:800;
 }
 
 .balance{
-    margin:7px 0 14px;
+    margin:8px 0 14px;
+    color:var(--green);
     font-size:64px;
     line-height:1;
     font-weight:1000;
-    color:var(--green);
-    text-shadow:0 0 25px rgba(53,255,115,.18);
+    text-shadow:0 0 27px rgba(53,255,115,.2);
 }
 
 .target{
-    color:#c6e7cf;
+    color:#c8e6cf;
 }
 
+/* MAIN PROGRESS */
+
 .progress-shell{
+    position:relative;
     overflow:hidden;
     width:100%;
-    height:23px;
-    margin-top:18px;
+    height:24px;
+    margin-top:19px;
+    background:#051008;
+    border:1px solid #153b20;
     border-radius:999px;
-    background:#061008;
-    border:1px solid #153a20;
 }
 
 .progress{
-    height:100%;
+    position:relative;
+    overflow:hidden;
     width:0%;
-    min-width:0;
+    height:100%;
     border-radius:999px;
+    background:#0f913b;
+    transition:width .7s cubic-bezier(.2,.85,.25,1);
+}
+
+.progress:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    width:140%;
     background:
         repeating-linear-gradient(
             -45deg,
-            #0b8e37 0 12px,
-            #0d6f2e 12px 24px
+            rgba(1,55,20,.72) 0 11px,
+            transparent 11px 22px
         );
-    transition:width .65s ease;
-    animation:stripeMove 1.2s linear infinite;
+    animation:progressForward 1.15s linear infinite;
 }
 
-@keyframes stripeMove{
-    from{background-position:0 0;}
-    to{background-position:48px 0;}
+@keyframes progressForward{
+    from{
+        transform:translateX(-45px);
+    }
+    to{
+        transform:translateX(45px);
+    }
 }
 
 .progress-text{
     margin-top:10px;
     color:#c8ebd1;
-    font-weight:800;
+    font-weight:900;
 }
+
+/* STATS */
 
 .stats{
     display:grid;
@@ -231,17 +257,17 @@ nav{
 }
 
 .stat{
-    background:#09190e;
-    border:1px solid rgba(53,255,115,.13);
-    border-radius:17px;
-    padding:18px;
+    padding:17px;
     text-align:center;
+    border-radius:17px;
+    background:#08170d;
+    border:1px solid rgba(53,255,115,.1);
 }
 
 .stat .n{
+    color:var(--green);
     font-size:28px;
     font-weight:1000;
-    color:var(--green);
 }
 
 .stat .l{
@@ -249,60 +275,59 @@ nav{
     color:var(--muted);
 }
 
+/* BUTTONS */
+
 .actions{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
-    gap:10px;
+    grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+    gap:9px;
 }
 
 .btn{
-    border:0;
-    border-radius:14px;
-    padding:13px 15px;
-    font-weight:900;
+    padding:13px 14px;
     color:white;
-    background:#12301a;
-    border:1px solid rgba(53,255,115,.18);
-}
-
-.btn:hover{
-    filter:brightness(1.1);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    background:#17281c;
+    font-weight:900;
 }
 
 .btn.green{
-    background:linear-gradient(180deg,#20c957,#138a39);
+    background:linear-gradient(180deg,#22ca57,#13833a);
 }
 
 .btn.red{
-    background:linear-gradient(180deg,#e44453,#a32632);
-}
-
-.btn.orange{
-    background:linear-gradient(180deg,#f0a63d,#b56b11);
+    background:linear-gradient(180deg,#e84756,#a72331);
 }
 
 .btn.blue{
-    background:linear-gradient(180deg,#398fdc,#205e96);
+    background:linear-gradient(180deg,#398ed9,#225f96);
+}
+
+.btn.orange{
+    background:linear-gradient(180deg,#efaa43,#b86f16);
 }
 
 .btn.gray{
-    background:#25302a;
+    background:#26302a;
 }
+
+/* INPUT */
 
 .input-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:10px;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:9px;
 }
 
 input,
 textarea{
     width:100%;
-    border:1px solid #274833;
-    background:#07130b;
-    color:white;
-    border-radius:13px;
     padding:12px 13px;
+    color:white;
+    background:#06110a;
+    border:1px solid #284833;
+    border-radius:13px;
     outline:none;
 }
 
@@ -311,10 +336,7 @@ textarea:focus{
     border-color:var(--green);
 }
 
-textarea{
-    min-height:90px;
-    resize:vertical;
-}
+/* QUICK */
 
 .quick{
     display:flex;
@@ -324,76 +346,30 @@ textarea{
 }
 
 .quick button{
-    border:1px solid rgba(53,255,115,.17);
-    background:#102719;
-    color:#dffff0;
-    border-radius:12px;
     padding:10px 13px;
-    font-weight:800;
+    color:#e3ffea;
+    background:#11281a;
+    border:1px solid rgba(53,255,115,.15);
+    border-radius:12px;
+    font-weight:900;
 }
+
+/* NOTICE */
 
 .notice{
     padding:13px 15px;
+    color:#c9ded0;
+    background:#09170d;
+    border:1px solid rgba(255,255,255,.05);
     border-radius:14px;
-    background:#0a180e;
-    border:1px solid rgba(255,255,255,.06);
-    color:#c7decf;
 }
 
-.owner-gate{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
+.small{
+    color:var(--muted);
+    font-size:13px;
 }
 
-.owner-panel{
-    border:1px solid rgba(255,78,93,.25);
-    background:linear-gradient(145deg,#2a0c10,#18090c);
-}
-
-.owner-panel .card-title{
-    color:#ff6b79;
-}
-
-.code-row{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-}
-
-.code-row input{
-    text-align:center;
-    letter-spacing:2px;
-}
-
-.error{
-    color:#ff7280;
-    margin-top:8px;
-}
-
-.success{
-    color:#67ff95;
-    margin-top:8px;
-}
-
-.chart-wrap{
-    overflow-x:auto;
-    overflow-y:hidden;
-    padding-bottom:8px;
-}
-
-.chart-canvas{
-    display:block;
-    width:max(900px,100%);
-    height:320px;
-    background:
-        linear-gradient(rgba(53,255,115,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(53,255,115,.035) 1px,transparent 1px),
-        #08160c;
-    background-size:60px 40px;
-    border-radius:16px;
-    border:1px solid rgba(53,255,115,.1);
-}
+/* HISTORY */
 
 .history-list{
     display:flex;
@@ -403,471 +379,136 @@ textarea{
 
 .history-item{
     display:grid;
-    grid-template-columns:130px 1fr auto;
-    gap:12px;
+    grid-template-columns:140px 1fr auto;
+    gap:10px;
     align-items:center;
     padding:12px 14px;
     border-radius:14px;
-    background:#08160c;
+    background:#08150c;
     border:1px solid rgba(255,255,255,.05);
 }
 
 .history-date{
-    color:var(--muted);
-    font-size:13px;
+    color:#829a8a;
+    font-size:12px;
 }
 
 .history-desc{
     color:#e2f3e6;
 }
 
+.amount{
+    white-space:nowrap;
+    font-weight:1000;
+}
+
 .amount.plus{
     color:var(--green);
-    font-weight:1000;
 }
 
 .amount.minus{
     color:var(--red);
-    font-weight:1000;
 }
 
 details{
-    background:#08160c;
-    border:1px solid rgba(53,255,115,.1);
-    border-radius:15px;
     overflow:hidden;
+    border-radius:15px;
+    background:#08150c;
+    border:1px solid rgba(53,255,115,.08);
 }
 
-details summary{
+summary{
     cursor:pointer;
-    padding:14px 16px;
+    padding:14px;
     font-weight:900;
-    color:#d9ffe3;
 }
 
 .details-body{
     padding:0 14px 14px;
 }
 
-.donation-item{
-    display:grid;
-    grid-template-columns:100px 1fr auto auto;
-    gap:10px;
-    align-items:center;
-    padding:11px 0;
-    border-top:1px solid rgba(255,255,255,.05);
+/* CHART */
+
+.chart-wrap{
+    overflow-x:auto;
+    padding-bottom:6px;
 }
 
-.badge{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    padding:5px 8px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:900;
-    background:#2b2611;
-    color:#ffc95e;
+.chart-canvas{
+    display:block;
+    width:max(950px,100%);
+    height:320px;
+    border-radius:16px;
+    background:
+        linear-gradient(rgba(53,255,115,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(53,255,115,.035) 1px,transparent 1px),
+        #08160c;
+    background-size:60px 40px;
 }
 
-.goals{
-    display:grid;
-    gap:12px;
+/* OWNER */
+
+.owner-panel{
+    background:linear-gradient(145deg,#281013,#17090c);
+    border-color:rgba(255,79,95,.2);
 }
+
+.owner-title{
+    color:#ff6574;
+}
+
+.code-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:9px;
+}
+
+.code-row input{
+    text-align:center;
+    letter-spacing:3px;
+}
+
+.error{
+    color:#ff717d;
+    margin-top:8px;
+}
+
+.success{
+    color:#65ff93;
+    margin-top:8px;
+}
+
+/* GOALS */
 
 .goal{
-    border-radius:18px;
     padding:18px;
-    background:linear-gradient(145deg,#2b1b06,#1a1004);
-    border:1px solid rgba(255,174,66,.24);
+    border-radius:18px;
+    background:linear-gradient(145deg,#291a06,#180f04);
+    border:1px solid rgba(255,174,66,.22);
 }
 
-.goal .big{
+.goal-big{
+    color:#ffb94d;
     font-size:28px;
     font-weight:1000;
-    color:#ffb84d;
 }
 
 .milestones{
     display:grid;
     grid-template-columns:repeat(5,1fr);
     gap:8px;
-    margin-top:14px;
-}
-
-.milestone{
-    text-align:center;
-    border-radius:12px;
-    padding:10px;
-    background:#1c1307;
-    border:1px solid rgba(255,174,66,.12);
-    color:#e9cf9d;
-}
-
-.qna{
-    display:grid;
-    gap:10px;
-}
-
-.q{
-    background:#09160c;
-    padding:15px;
-    border:1px solid rgba(53,255,115,.09);
-    border-radius:14px;
-}
-
-.q b{
-    color:var(--green);
-}
-
-.modal-bg{
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    display:none;
-    place-items:center;
-    padding:20px;
-    background:rgba(0,0,0,.68);
-    backdrop-filter:blur(5px);
-}
-
-.modal-bg.show{
-    display:grid;
-}
-
-.modal{
-    width:min(510px,100%);
-    background:linear-gradient(145deg,#12261a,#09130d);
-    border:1px solid rgba(53,255,115,.25);
-    border-radius:24px;
-    padding:22px;
-    box-shadow:0 20px 70px rgba(0,0,0,.55);
-    animation:modalIn .18s ease;
-}
-
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:scale(.97);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-.modal h2{
-    margin-top:0;
-}
-
-.modal-actions{
-    display:flex;
-    gap:9px;
-    flex-wrap:wrap;
-    margin-top:15px;
-}
-
-.owner-only{
-    display:none;
-}
-
-.owner-active .owner-only{
-    display:block;
-}
-
-.owner-active .owner-hide{
-    display:none;
-}
-
-.locked{
-    position:relative;
-}
-
-.locked::after{
-    content:"🔒";
-    position:absolute;
-    right:13px;
-    top:13px;
-    font-size:18px;
-}
-
-.safe-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:18px;
-}
-
-.safe{
-    position:relative;
-    min-height:300px;
-    overflow:hidden;
-    border-radius:22px;
-    padding:20px;
-    background:
-        linear-gradient(155deg,#56605a 0%,#353d38 35%,#202621 70%,#111612 100%);
-    border:2px solid #768179;
-    box-shadow:
-        inset 0 0 0 2px #1f251f,
-        inset 0 0 25px rgba(255,255,255,.035),
-        0 13px 35px rgba(0,0,0,.35);
-}
-
-.safe::before{
-    content:"";
-    position:absolute;
-    left:15px;
-    right:15px;
-    top:14px;
-    height:8px;
-    border-radius:6px;
-    background:#151b17;
-    box-shadow:
-        0 5px 0 #838c85,
-        0 8px 0 #2a302c;
-}
-
-.safe::after{
-    content:"";
-    position:absolute;
-    left:14px;
-    right:14px;
-    bottom:12px;
-    height:10px;
-    border-radius:50%;
-    background:rgba(0,0,0,.26);
-    filter:blur(1px);
-}
-
-.safe-title{
-    position:relative;
-    z-index:2;
-    font-size:24px;
-    font-weight:1000;
-    margin-top:10px;
-}
-
-.safe-max{
-    position:relative;
-    z-index:2;
-    color:#c1cbc4;
-    font-size:13px;
-    margin-top:2px;
-}
-
-.safe-visual{
-    position:relative;
-    z-index:2;
-    height:95px;
-    margin-top:15px;
-}
-
-.safe-door{
-    position:absolute;
-    left:50%;
-    top:1px;
-    transform:translateX(-50%);
-    width:132px;
-    height:82px;
-    border-radius:10px 16px 16px 10px;
-    background:
-        linear-gradient(155deg,#676f69,#343b36);
-    border:3px solid #222823;
-    box-shadow:
-        inset 0 0 0 3px #7f8781,
-        inset 0 -10px 17px rgba(0,0,0,.24);
-}
-
-.safe-door::before,
-.safe-door::after{
-    content:"";
-    position:absolute;
-    top:18px;
-    width:9px;
-    height:47px;
-    border-radius:5px;
-    background:#1b211c;
-    border:1px solid #778078;
-}
-
-.safe-door::before{
-    left:13px;
-}
-
-.safe-door::after{
-    right:13px;
-}
-
-.safe-lock{
-    position:absolute;
-    left:50%;
-    top:32px;
-    transform:translateX(-50%);
-    width:36px;
-    height:21px;
-    border-radius:7px;
-    background:#171d18;
-    border:2px solid #949d96;
-    z-index:2;
-}
-
-.safe-wheel{
-    position:absolute;
-    left:50%;
-    top:38px;
-    transform:translateX(-50%);
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    background:#4b544e;
-    border:4px solid #1e241f;
-    z-index:4;
-}
-
-.safe-wheel::before{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:7px;
-    height:7px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background:#a8b0aa;
-}
-
-.crank{
-    position:absolute;
-    left:50%;
-    top:44px;
-    transform:translateX(-50%);
-    width:116px;
-    height:44px;
-    z-index:3;
-}
-
-.crank-arm{
-    position:absolute;
-    left:17px;
-    top:18px;
-    width:72px;
-    height:9px;
-    border-radius:8px;
-    background:linear-gradient(#a9b1aa,#686f69);
-    border:2px solid #252b27;
-    transform-origin:8px 50%;
-    box-shadow:0 3px 4px rgba(0,0,0,.45);
-}
-
-.crank-handle{
-    position:absolute;
-    right:7px;
-    top:5px;
-    width:30px;
-    height:30px;
-    border-radius:50%;
-    background:linear-gradient(145deg,#bcc3bd,#676e68);
-    border:4px solid #282e29;
-    box-shadow:
-        0 3px 5px rgba(0,0,0,.55),
-        inset 0 0 0 2px #8d958f;
-}
-
-.crank-handle::after{
-    content:"";
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:8px;
-    height:8px;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    background:#343b35;
-}
-
-.safe.cranking .crank-arm{
-    animation:crankMove .55s linear infinite;
-}
-
-.safe.cranking .crank-handle{
-    animation:handleMove .55s linear infinite;
-}
-
-@keyframes crankMove{
-    0%{transform:rotate(0deg);}
-    50%{transform:rotate(180deg);}
-    100%{transform:rotate(360deg);}
-}
-
-@keyframes handleMove{
-    0%{transform:rotate(0deg);}
-    50%{transform:rotate(-180deg);}
-    100%{transform:rotate(-360deg);}
-}
-
-.safe-info{
-    position:relative;
-    z-index:2;
-    margin-top:4px;
-}
-
-.safe-money{
-    font-size:25px;
-    font-weight:1000;
-    color:#e9fff0;
-}
-
-.safe-bar{
-    margin-top:8px;
-    height:12px;
-    border-radius:999px;
-    overflow:hidden;
-    background:#101510;
-    border:1px solid #4a534c;
-}
-
-.safe-fill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#2bcf61,#7aff9f);
-    transition:width .45s ease;
-}
-
-.safe-code{
-    margin-top:9px;
-    font-weight:1000;
-    color:#ffd25d;
-}
-
-.safe-actions{
-    position:relative;
-    z-index:5;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:7px;
     margin-top:13px;
 }
 
-.safe-actions .btn{
-    padding:10px 6px;
-    font-size:13px;
+.milestone{
+    padding:10px;
+    text-align:center;
+    border-radius:11px;
+    background:#1b1207;
+    color:#ead09e;
 }
 
-.full-badge{
-    position:absolute;
-    right:15px;
-    top:24px;
-    z-index:4;
-    padding:7px 10px;
-    border-radius:999px;
-    color:#08220f;
-    background:#6dff96;
-    font-size:12px;
-    font-weight:1000;
-}
-
-.owner-section{
-    margin-top:12px;
-}
+/* DONATIONS */
 
 .mini-list{
     display:grid;
@@ -879,48 +520,522 @@ details summary{
     grid-template-columns:1fr auto;
     gap:10px;
     align-items:center;
-    padding:10px 0;
-    border-top:1px solid rgba(255,255,255,.06);
+    padding:11px 0;
+    border-top:1px solid rgba(255,255,255,.05);
 }
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:5px 9px;
+    border-radius:999px;
+    color:#ffd36b;
+    background:#332914;
+    font-size:11px;
+    font-weight:1000;
+}
+
+.donation-item{
+    display:grid;
+    grid-template-columns:95px 1fr auto auto;
+    gap:10px;
+    align-items:center;
+    padding:11px 0;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+
+/* SAFE */
+
+.safe-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(250px,1fr));
+    gap:18px;
+}
+
+.safe{
+    position:relative;
+    min-height:420px;
+    overflow:hidden;
+    padding:21px;
+    border-radius:24px;
+    background:
+        linear-gradient(
+            165deg,
+            #68736c 0%,
+            #4a534d 26%,
+            #2d352f 58%,
+            #161c18 100%
+        );
+    border:2px solid #7c877f;
+    box-shadow:
+        inset 0 0 0 3px #1e241f,
+        inset 0 0 35px rgba(255,255,255,.04),
+        0 15px 35px rgba(0,0,0,.4);
+    transition:transform .8s ease,opacity .8s ease;
+}
+
+.safe:before{
+    content:"";
+    position:absolute;
+    left:15px;
+    right:15px;
+    top:13px;
+    height:9px;
+    border-radius:6px;
+    background:#111611;
+    box-shadow:
+        0 5px 0 #858f87,
+        0 8px 0 #272e28;
+}
+
+.safe-title{
+    position:relative;
+    z-index:5;
+    margin-top:8px;
+    font-size:25px;
+    font-weight:1000;
+}
+
+.safe-max{
+    position:relative;
+    z-index:5;
+    color:#c5cec8;
+    font-size:13px;
+}
+
+.safe-visual{
+    position:relative;
+    z-index:2;
+    height:180px;
+    margin-top:12px;
+}
+
+.safe-body{
+    position:absolute;
+    left:50%;
+    top:8px;
+    transform:translateX(-50%);
+    width:175px;
+    height:145px;
+    border-radius:13px;
+    background:
+        linear-gradient(150deg,#707a73,#424a44 60%,#242b26);
+    border:3px solid #252c27;
+    box-shadow:
+        inset 0 0 0 3px #868e88,
+        inset 0 -15px 25px rgba(0,0,0,.25);
+}
+
+.safe-body:before,
+.safe-body:after{
+    content:"";
+    position:absolute;
+    top:22px;
+    bottom:22px;
+    width:9px;
+    border-radius:5px;
+    background:#181e19;
+    border:1px solid #7a837c;
+}
+
+.safe-body:before{
+    left:14px;
+}
+
+.safe-body:after{
+    right:14px;
+}
+
+.safe-lock{
+    position:absolute;
+    left:50%;
+    top:66px;
+    transform:translateX(-50%);
+    width:43px;
+    height:26px;
+    border-radius:7px;
+    background:#151b17;
+    border:2px solid #9aa39d;
+    z-index:4;
+}
+
+.safe-wheel{
+    position:absolute;
+    left:50%;
+    top:77px;
+    transform:translateX(-50%);
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle,#aeb6b0 0 7%,#485049 8% 34%,#1e241f 35% 53%,#737c75 54% 66%,#252b26 67%);
+    border:4px solid #1c221e;
+    z-index:5;
+    box-shadow:0 3px 7px rgba(0,0,0,.5);
+}
+
+.crank{
+    position:absolute;
+    left:50%;
+    top:96px;
+    transform:translateX(-50%);
+    width:150px;
+    height:52px;
+    z-index:6;
+}
+
+.crank-arm{
+    position:absolute;
+    left:18px;
+    top:21px;
+    width:95px;
+    height:10px;
+    border-radius:8px;
+    background:linear-gradient(#b3bbb5,#696f6a);
+    border:2px solid #252b27;
+    transform-origin:10px 50%;
+    box-shadow:0 3px 5px rgba(0,0,0,.55);
+}
+
+.crank-handle{
+    position:absolute;
+    right:8px;
+    top:5px;
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:linear-gradient(145deg,#c2c8c3,#686f69);
+    border:4px solid #262c28;
+    box-shadow:
+        inset 0 0 0 2px #8f9891,
+        0 3px 6px rgba(0,0,0,.6);
+}
+
+.crank-handle:after{
+    content:"";
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:8px;
+    height:8px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    background:#303730;
+}
+
+.safe.cranking .crank-arm{
+    animation:crank .65s linear infinite;
+}
+
+@keyframes crank{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.safe.opening{
+    transform:translateY(-150px) scale(.9);
+    opacity:0;
+}
+
+.safe.opening .safe-body{
+    animation:safeDoorOpen .75s ease forwards;
+}
+
+@keyframes safeDoorOpen{
+    from{
+        transform:translateX(-50%) rotateX(0deg) translateY(0);
+    }
+    to{
+        transform:translateX(-50%) rotateX(72deg) translateY(-70px);
+    }
+}
+
+.safe-money{
+    position:relative;
+    z-index:5;
+    color:#effff3;
+    font-size:26px;
+    font-weight:1000;
+}
+
+.safe-bar{
+    position:relative;
+    z-index:5;
+    height:13px;
+    margin-top:8px;
+    overflow:hidden;
+    background:#101510;
+    border:1px solid #59635c;
+    border-radius:999px;
+}
+
+.safe-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#21cb58,#7bffa0);
+    transition:width .45s ease;
+}
+
+.safe-code{
+    position:relative;
+    z-index:5;
+    margin-top:8px;
+    color:#ffd35a;
+    font-size:17px;
+    font-weight:1000;
+}
+
+.safe-actions{
+    position:relative;
+    z-index:10;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:7px;
+    margin-top:12px;
+}
+
+.safe-actions .btn{
+    min-height:42px;
+    padding:9px 5px;
+    font-size:12px;
+}
+
+.full-badge{
+    position:absolute;
+    right:15px;
+    top:25px;
+    z-index:15;
+    padding:7px 10px;
+    color:#06230f;
+    background:#72ff9a;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:1000;
+}
+
+/* MODALS */
+
+.modal-bg{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:none;
+    place-items:center;
+    padding:20px;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(5px);
+}
+
+.modal-bg.show{
+    display:grid;
+}
+
+.modal{
+    width:min(520px,100%);
+    padding:23px;
+    border-radius:24px;
+    background:linear-gradient(145deg,#12281a,#08130c);
+    border:1px solid rgba(53,255,115,.25);
+    box-shadow:0 25px 80px rgba(0,0,0,.55);
+    animation:modalIn .18s ease;
+}
+
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+/* TOAST */
 
 .toast{
     position:fixed;
     left:50%;
-    bottom:22px;
-    z-index:2000;
-    transform:translateX(-50%) translateY(20px);
+    bottom:20px;
+    z-index:5000;
+    max-width:92vw;
+    padding:13px 17px;
+    color:#ebfff0;
+    background:#12261a;
+    border:1px solid rgba(53,255,115,.25);
+    border-radius:15px;
+    transform:translate(-50%,20px);
     opacity:0;
     pointer-events:none;
-    padding:12px 16px;
-    border-radius:14px;
-    background:#102318;
-    color:#e9fff0;
-    border:1px solid rgba(53,255,115,.22);
-    box-shadow:var(--shadow);
-    transition:.2s ease;
-    max-width:min(92vw,560px);
+    transition:.22s;
+    font-weight:900;
     text-align:center;
-    font-weight:800;
 }
 
 .toast.show{
-    transform:translateX(-50%) translateY(0);
     opacity:1;
+    transform:translate(-50%,0);
 }
 
-.small{
-    font-size:13px;
-    color:var(--muted);
+/* CELEBRATION */
+
+.celebration{
+    position:fixed;
+    inset:0;
+    z-index:9000;
+    overflow:hidden;
+    display:none;
+    place-items:center;
+    background:
+        radial-gradient(circle at center,
+            rgba(255,211,77,.20),
+            rgba(0,0,0,.88) 65%);
 }
 
-footer{
-    margin-top:28px;
+.celebration.show{
+    display:grid;
+}
+
+.celebration-card{
+    position:relative;
+    z-index:20;
+    width:min(700px,90%);
+    padding:35px 25px;
     text-align:center;
-    color:#6e8977;
-    font-size:12px;
+    border:3px solid var(--gold);
+    border-radius:30px;
+    background:linear-gradient(145deg,#172b15,#08120b);
+    box-shadow:
+        0 0 35px rgba(255,211,77,.3),
+        0 20px 100px rgba(0,0,0,.65);
+    animation:celebrateCard .7s cubic-bezier(.2,.9,.25,1);
 }
+
+@keyframes celebrateCard{
+    0%{
+        opacity:0;
+        transform:scale(.5) rotate(-4deg);
+    }
+    70%{
+        transform:scale(1.06) rotate(1deg);
+    }
+    100%{
+        opacity:1;
+        transform:scale(1) rotate(0);
+    }
+}
+
+.celebration-title{
+    color:#ffe16f;
+    font-size:clamp(34px,7vw,72px);
+    font-weight:1000;
+    text-shadow:0 0 30px rgba(255,211,77,.4);
+}
+
+.celebration-sub{
+    margin-top:10px;
+    font-size:26px;
+    font-weight:1000;
+}
+
+.celebration-amount{
+    margin-top:8px;
+    color:var(--green);
+    font-size:35px;
+    font-weight:1000;
+}
+
+.celebrate-item{
+    position:absolute;
+    z-index:5;
+    font-size:clamp(22px,4vw,48px);
+    animation:celebrateFloat 3.5s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes celebrateFloat{
+    0%{
+        transform:translateY(110vh) rotate(0deg) scale(.5);
+        opacity:0;
+    }
+    10%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-20vh) rotate(650deg) scale(1.2);
+        opacity:0;
+    }
+}
+
+.confetti-piece{
+    position:absolute;
+    top:-20px;
+    width:9px;
+    height:16px;
+    border-radius:2px;
+    animation:confettiFall 3.2s linear forwards;
+}
+
+@keyframes confettiFall{
+    to{
+        transform:translateY(115vh) rotate(900deg);
+    }
+}
+
+.goldbar{
+    position:absolute;
+    width:72px;
+    height:28px;
+    border-radius:7px;
+    background:linear-gradient(145deg,#fff08a,#d89b17 55%,#9c6911);
+    border:2px solid #ffe275;
+    box-shadow:0 0 15px rgba(255,211,77,.4);
+    color:#7b4c04;
+    font-size:10px;
+    font-weight:1000;
+    display:grid;
+    place-items:center;
+    animation:goldFloat 3.8s linear forwards;
+}
+
+@keyframes goldFloat{
+    0%{
+        transform:translateY(115vh) rotate(-10deg);
+        opacity:0;
+    }
+    15%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-15vh) rotate(35deg);
+        opacity:0;
+    }
+}
+
+.scooter{
+    position:absolute;
+    font-size:46px;
+    animation:scooterFly 3.7s ease-in-out forwards;
+}
+
+@keyframes scooterFly{
+    from{
+        transform:translateX(-150px) translateY(80px) rotate(-8deg);
+        opacity:0;
+    }
+    15%{opacity:1;}
+    to{
+        transform:translateX(110vw) translateY(-70px) rotate(8deg);
+        opacity:0;
+    }
+}
+
+/* RESPONSIVE */
 
 @media(max-width:800px){
+
     .stats{
         grid-template-columns:1fr;
     }
@@ -929,19 +1044,16 @@ footer{
         grid-template-columns:1fr;
     }
 
-    .owner-gate,
     .code-row{
         grid-template-columns:1fr;
     }
 
     .history-item{
         grid-template-columns:1fr;
-        gap:4px;
     }
 
     .donation-item{
         grid-template-columns:1fr;
-        align-items:start;
     }
 
     .milestones{
@@ -949,575 +1061,1092 @@ footer{
     }
 
     .balance{
-        font-size:49px;
+        font-size:48px;
+    }
+
+    .safe{
+        min-height:400px;
     }
 }
+
 </style>
 </head>
 
 <body>
+
 <div class="app">
 
 <header>
     <div class="logo">ZBieranie</div>
-    <div class="subtitle">Wspólny licznik • 6868 zł</div>
+    <div class="subtitle">Wspólny licznik • Cel 6868 zł</div>
 </header>
 
 <nav>
-    <button class="tab active" onclick="showPage('saldo',this)">💰 Saldo</button>
-    <button class="tab" onclick="showPage('cele',this)">🎯 Cele</button>
-    <button class="tab" onclick="showPage('pytania',this)">🟪 Pytania 📝</button>
-    <button class="tab" onclick="showPage('donaty',this)">💰 Donaty</button>
-    <button class="tab" onclick="showPage('karta',this)">💳 Karta</button>
-    <button class="tab" onclick="showPage('wlasciciel',this)">👑 Właściciel</button>
+
+<button class="tab active"
+onclick="showPage('saldo',this)">
+💰 Saldo
+</button>
+
+<button class="tab"
+onclick="showPage('cele',this)">
+🎯 Cele
+</button>
+
+<button class="tab"
+onclick="showPage('pytania',this)">
+🟪 Pytania 📝
+</button>
+
+<button class="tab"
+onclick="showPage('donaty',this)">
+💰 Donaty
+</button>
+
+<button class="tab"
+onclick="showPage('karta',this)">
+💳 Karta
+</button>
+
+<button class="tab"
+onclick="showPage('wlasciciel',this)">
+👑 Właściciel
+</button>
+
 </nav>
 
-<!-- ===================================================== -->
+
+<!-- =================================================== -->
 <!-- SALDO -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
 <section id="saldo" class="page active">
 
-    <div class="card balance-wrap">
-        <div class="balance-label">Aktualnie</div>
-        <div class="balance" id="balance">0,00 zł</div>
-        <div class="target">Cel: 6868,00 zł</div>
+<div class="card balance-wrap">
 
-        <div class="progress-shell">
-            <div class="progress" id="mainProgress"></div>
-        </div>
+<div class="balance-label">
+Aktualnie
+</div>
 
-        <div class="progress-text" id="progressText">0,00%</div>
-    </div>
+<div
+class="balance"
+id="balance">
+0,00 zł
+</div>
 
-    <!-- SZYBKA WPŁATA TYLKO WŁAŚCICIEL -->
-    <div class="card owner-only">
-        <h2>⚡ Szybka wpłata</h2>
-        <div class="small">Widoczne i działające tylko dla właściciela.</div>
+<div class="target">
+Cel: 6868,00 zł
+</div>
 
-        <div class="quick">
-            <button onclick="ownerQuickAdd(0.50)">+0,50 zł</button>
-            <button onclick="ownerQuickAdd(1)">+1 zł</button>
-            <button onclick="ownerQuickAdd(5)">+5 zł</button>
-            <button onclick="ownerQuickAdd(10)">+10 zł</button>
-            <button onclick="ownerQuickAdd(20)">+20 zł</button>
-            <button onclick="ownerQuickAdd(50)">+50 zł</button>
-        </div>
+<div class="progress-shell">
 
-        <div class="input-grid" style="margin-top:10px">
-            <input id="quickCustomAmount" type="number" min="0.01" step="0.01" placeholder="Własna kwota">
-            <input id="quickCustomDescription" type="text" placeholder="Opis wpłaty">
-            <button class="btn green" onclick="ownerCustomAdd()">💰 Dodaj</button>
-        </div>
-    </div>
+<div
+class="progress"
+id="mainProgress">
+</div>
 
-    <div class="card owner-hide">
-        <div class="notice">
-            🔒 Szybka wpłata jest dostępna tylko dla właściciela.
-        </div>
-    </div>
+</div>
 
-    <div class="card">
-        <h2>📊 Statystyki</h2>
+<div
+class="progress-text"
+id="progressText">
+0,00%
+</div>
 
-        <div class="stats">
-            <div class="stat">
-                <div class="n" id="bottles">0</div>
-                <div class="l">Butelki</div>
-            </div>
+</div>
 
-            <div class="stat">
-                <div class="n" id="days">0</div>
-                <div class="l">Dni</div>
-            </div>
 
-            <div class="stat">
-                <div class="n" id="remaining">6868,00 zł</div>
-                <div class="l">Pozostało</div>
-            </div>
-        </div>
-    </div>
+<!-- SZYBKA WPŁATA -->
 
-    <div class="card">
-        <h2>📈 Wykres</h2>
+<div class="card">
 
-        <div class="chart-wrap">
-            <canvas id="chart" class="chart-canvas" width="1200" height="320"></canvas>
-        </div>
+<h2>⚡ Szybka wpłata</h2>
 
-        <div class="small" style="margin-top:8px">
-            Przewijaj poziomo, gdy historii będzie dużo.
-        </div>
-    </div>
+<div class="notice">
+Ta funkcja działa tylko dla właściciela.
+Kliknięcie przez anonimowego użytkownika pokaże komunikat o braku dostępu.
+</div>
 
-    <div class="card">
-        <h2>🧾 Ostatnie operacje</h2>
+<div class="quick">
 
-        <details open>
-            <summary>Rozwiń / zwiń historię</summary>
-            <div class="details-body">
-                <div id="historyList" class="history-list"></div>
-            </div>
-        </details>
-    </div>
+<button onclick="ownerQuickAdd(0.50)">
++0,50 zł
+</button>
 
-    <div class="card owner-only">
-        <h2>🧹 Czyszczenie danych</h2>
-        <div class="small">
-            Właściciel może wyczyścić historię, wykres i saldo.
-        </div>
+<button onclick="ownerQuickAdd(1)">
++1 zł
+</button>
 
-        <div class="quick">
-            <button class="btn red" onclick="ownerClearEverything()">
-                🗑️ Wyczyść historię, wykres i saldo
-            </button>
-        </div>
-    </div>
+<button onclick="ownerQuickAdd(5)">
++5 zł
+</button>
 
-    <div class="card">
-        <h2>🎬 Jak wpłacić?</h2>
+<button onclick="ownerQuickAdd(10)">
++10 zł
+</button>
 
-        <div class="notice">
-            Możesz przekazać pieniądze właścicielowi dowolną metodą:
-            gotówką, przelewem lub z portfela.
-            Donaty internetowe trafiają najpierw do oczekujących.
-        </div>
+<button onclick="ownerQuickAdd(20)">
++20 zł
+</button>
 
-        <div class="quick">
-            <button class="btn green" onclick="openInfoModal()">
-                🎬 Pokaż instrukcję
-            </button>
-        </div>
-    </div>
+<button onclick="ownerQuickAdd(50)">
++50 zł
+</button>
 
-    <div class="card">
-        <h2>🔐 Sejfy</h2>
+</div>
 
-        <div class="notice" style="margin-bottom:14px">
-            Stan sejfów jest wspólny i widoczny dla wszystkich.
-            <b>Wpłata, wypłata i czyszczenie są tylko dla właściciela.</b>
-        </div>
+<div class="input-grid"
+style="margin-top:10px">
 
-        <div id="safeGrid" class="safe-grid"></div>
-    </div>
+<input
+id="quickCustomAmount"
+type="number"
+min="0.01"
+step="0.01"
+placeholder="Własna kwota">
+
+<input
+id="quickCustomDescription"
+type="text"
+placeholder="Opis">
+
+<button
+class="btn green"
+onclick="ownerCustomAdd()">
+💰 Dodaj
+</button>
+
+</div>
+
+</div>
+
+
+<!-- STATYSTYKI -->
+
+<div class="card">
+
+<h2>📊 Statystyki</h2>
+
+<div class="stats">
+
+<div class="stat">
+<div
+class="n"
+id="bottles">
+0
+</div>
+<div class="l">
+Butelki
+</div>
+</div>
+
+<div class="stat">
+<div
+class="n"
+id="days">
+0
+</div>
+<div class="l">
+Dni
+</div>
+</div>
+
+<div class="stat">
+<div
+class="n"
+id="remaining">
+6868,00 zł
+</div>
+<div class="l">
+Pozostało
+</div>
+</div>
+
+</div>
+</div>
+
+
+<!-- WYKRES -->
+
+<div class="card">
+
+<h2>📈 Wykres</h2>
+
+<div class="chart-wrap">
+
+<canvas
+id="chart"
+class="chart-canvas"
+width="1200"
+height="320">
+</canvas>
+
+</div>
+
+<div class="small">
+Przewijaj wykres poziomo.
+</div>
+
+</div>
+
+
+<!-- HISTORIA -->
+
+<div class="card">
+
+<h2>🧾 Ostatnie operacje</h2>
+
+<details open>
+
+<summary>
+Kliknij, aby rozwinąć / zwinąć
+</summary>
+
+<div class="details-body">
+
+<div
+id="historyList"
+class="history-list">
+</div>
+
+</div>
+
+</details>
+
+</div>
+
+
+<!-- CZYSZCZENIE -->
+
+<div class="card">
+
+<h2>🧹 Czyszczenie danych</h2>
+
+<div class="notice">
+Tylko właściciel może wyczyścić saldo, historię i wykres.
+</div>
+
+<button
+class="btn red"
+style="margin-top:12px"
+onclick="ownerClearEverything()">
+🗑️ Wyczyść saldo, historię i wykres
+</button>
+
+</div>
+
+
+<!-- JAK WPŁACIĆ -->
+
+<div class="card">
+
+<h2>🎬 Jak wpłacić?</h2>
+
+<div class="notice">
+Gotówką, przelewem lub z portfela.
+Donaty internetowe trafiają najpierw do oczekujących.
+</div>
+
+<button
+class="btn green"
+style="margin-top:12px"
+onclick="openModal('infoModal')">
+🎬 Pokaż instrukcję
+</button>
+
+</div>
+
+
+<!-- SEJFY -->
+
+<div class="card">
+
+<h2>🔐 Sejfy</h2>
+
+<div class="notice"
+style="margin-bottom:14px">
+
+Stan sejfów jest wspólny dla wszystkich.
+Wpłata, wypłata i wyczyszczenie sejfu są dostępne
+wyłącznie dla właściciela.
+
+</div>
+
+<div
+id="safeGrid"
+class="safe-grid">
+</div>
+
+</div>
 
 </section>
 
-<!-- ===================================================== -->
+
+<!-- =================================================== -->
 <!-- CELE -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
 <section id="cele" class="page">
 
-    <div class="card">
-        <h2>🎯 Cele</h2>
+<div class="card">
 
-        <div class="goals">
-            <div class="goal">
-                <div class="big">2× Kukirin G4</div>
-                <div class="small" style="margin-top:5px">
-                    Główny cel projektu.
-                </div>
+<h2>🎯 Cele</h2>
 
-                <div class="milestones">
-                    <div class="milestone">500 zł</div>
-                    <div class="milestone">1000 zł</div>
-                    <div class="milestone">2500 zł</div>
-                    <div class="milestone">5000 zł</div>
-                    <div class="milestone">6868 zł</div>
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="goal">
+
+<div class="goal-big">
+2× Kukirin G4
+</div>
+
+<div class="small">
+Główny cel projektu.
+</div>
+
+<div class="milestones">
+
+<div class="milestone">
+500 zł
+</div>
+
+<div class="milestone">
+1000 zł
+</div>
+
+<div class="milestone">
+2500 zł
+</div>
+
+<div class="milestone">
+5000 zł
+</div>
+
+<div class="milestone">
+6868 zł
+</div>
+
+</div>
+
+</div>
+
+</div>
 
 </section>
 
-<!-- ===================================================== -->
+
+<!-- =================================================== -->
 <!-- PYTANIA -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
 <section id="pytania" class="page">
 
-    <div class="card">
-        <h2>🟪 Pytania 📝</h2>
+<div class="card">
 
-        <div class="qna">
-            <div class="q">
-                <b>❓ Kiedy powstało ZBieranie?</b>
-                <div class="small" style="margin-top:5px">
-                    Projekt został stworzony do wspólnego zapisywania pieniędzy
-                    i historii zbierania.
-                </div>
-            </div>
+<h2>🟪 Pytania 📝</h2>
 
-            <div class="q">
-                <b>❓ Czy licznik jest wspólny?</b>
-                <div class="small" style="margin-top:5px">
-                    Tak. Dane salda i sejfów są współdzielone przez stronę.
-                </div>
-            </div>
+<div class="qna">
 
-            <div class="q">
-                <b>❓ Co dzieje się z donatą?</b>
-                <div class="small" style="margin-top:5px">
-                    Najpierw trafia do oczekujących donat. Dopiero właściciel
-                    może ją zatwierdzić.
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="notice">
+<b>❓ Kiedy powstało ZBieranie?</b>
+<br><br>
+Projekt został zrobiony do wspólnego zapisywania
+i kontrolowania zbieranych pieniędzy.
+</div>
+
+<div class="notice">
+<b>❓ Czy licznik jest wspólny?</b>
+<br><br>
+Tak.
+</div>
+
+<div class="notice">
+<b>❓ Czy donata od razu zwiększa saldo?</b>
+<br><br>
+Nie. Najpierw czeka na zatwierdzenie właściciela.
+</div>
+
+</div>
+
+</div>
 
 </section>
 
-<!-- ===================================================== -->
+
+<!-- =================================================== -->
 <!-- DONATY -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
 <section id="donaty" class="page">
 
-    <div class="card">
-        <h2>💰 Donata</h2>
+<div class="card">
 
-        <div class="notice">
-            Donata nie zwiększa od razu licznika.
-            Najpierw trafia do właściciela jako oczekująca.
-        </div>
+<h2>💰 Donata</h2>
 
-        <div class="input-grid" style="margin-top:12px">
-            <input id="donationAmount" type="number" min="0.01" step="0.01" placeholder="Kwota, np. 10,50">
-            <input id="donationDescription" type="text" placeholder="Opis donaty">
-            <button class="btn green" onclick="makeDonation()">
-                💚 Wyślij donatę
-            </button>
-        </div>
+<div class="notice">
 
-        <div class="quick">
-            <button onclick="setDonation(0.50)">0,50 zł</button>
-            <button onclick="setDonation(10)">10 zł</button>
-            <button onclick="setDonation(20)">20 zł</button>
-        </div>
-    </div>
+Donata trafia do oczekujących.
+Dopiero właściciel może ją przyjąć.
 
-    <div class="card">
-        <h2>⏳ Moje oczekujące donaty</h2>
-        <div id="myPendingList" class="mini-list"></div>
-    </div>
+</div>
+
+<div
+class="input-grid"
+style="margin-top:12px">
+
+<input
+id="donationAmount"
+type="number"
+min="0.01"
+step="0.01"
+placeholder="Kwota">
+
+<input
+id="donationDescription"
+type="text"
+placeholder="Opis donaty">
+
+<button
+class="btn green"
+onclick="makeDonation()">
+💚 Wyślij
+</button>
+
+</div>
+
+<div class="quick">
+
+<button onclick="setDonation(0.50)">
+0,50 zł
+</button>
+
+<button onclick="setDonation(10)">
+10 zł
+</button>
+
+<button onclick="setDonation(20)">
+20 zł
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>⏳ Moje oczekujące donaty</h2>
+
+<div
+id="myPendingList"
+class="mini-list">
+</div>
+
+</div>
 
 </section>
 
-<!-- ===================================================== -->
+
+<!-- =================================================== -->
 <!-- KARTA -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
 <section id="karta" class="page">
 
-    <div class="card">
-        <h2>💳 Karta</h2>
+<div class="card">
 
-        <div class="notice">
-            Tutaj widzisz swoje własne operacje związane z donatami.
-        </div>
+<h2>💳 Karta</h2>
 
-        <div id="myCardHistory" class="history-list" style="margin-top:12px"></div>
-    </div>
+<div class="notice">
+Tutaj znajdują się Twoje zatwierdzone wpłaty donatowe.
+</div>
+
+<div
+id="myCardHistory"
+class="history-list"
+style="margin-top:12px">
+</div>
+
+<button
+class="btn red"
+style="margin-top:12px"
+onclick="clearMyCardHistory()">
+🗑️ Wyczyść moje wpłaty z karty
+</button>
+
+</div>
 
 </section>
 
-<!-- ===================================================== -->
+
+<!-- =================================================== -->
 <!-- WŁAŚCICIEL -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
 <section id="wlasciciel" class="page">
 
-    <div id="ownerLoginCard" class="card owner-panel">
-        <h2 class="card-title">👑 Właściciel</h2>
+<div
+id="ownerLoginCard"
+class="card owner-panel">
 
-        <div class="notice">
-            Aby wejść do panelu właściciela, wpisz trzy kody.
-        </div>
+<h2 class="owner-title">
+👑 Właściciel
+</h2>
 
-        <div class="code-row" style="margin-top:12px">
-            <input id="ownerCode1" type="password" placeholder="Kod 1">
-            <input id="ownerCode2" type="password" placeholder="Kod 2">
-            <input id="ownerCode3" type="password" placeholder="Kod 3">
-        </div>
+<div class="notice">
+Wpisz wszystkie trzy kody.
+</div>
 
-        <button class="btn red" style="margin-top:12px;width:100%" onclick="loginOwner()">
-            👑 Wejdź jako właściciel
-        </button>
+<div
+class="code-row"
+style="margin-top:12px">
 
-        <div id="ownerLoginError" class="error"></div>
-    </div>
+<input
+id="ownerCode1"
+type="password"
+placeholder="Kod 1">
 
-    <div id="ownerPanel" class="hidden">
+<input
+id="ownerCode2"
+type="password"
+placeholder="Kod 2">
 
-        <div class="card owner-panel">
-            <h2 class="card-title">👑 Panel właściciela</h2>
+<input
+id="ownerCode3"
+type="password"
+placeholder="Kod 3">
 
-            <div class="success">
-                Właściciel jest aktywny.
-            </div>
+</div>
 
-            <div class="actions" style="margin-top:12px">
-                <button class="btn gray" onclick="logoutOwner()">
-                    🔒 Wyjdź
-                </button>
+<button
+class="btn red"
+style="width:100%;margin-top:12px"
+onclick="loginOwner()">
+👑 Wejdź
+</button>
 
-                <button class="btn blue" onclick="refreshEverything()">
-                    🔄 Odśwież
-                </button>
-            </div>
-        </div>
+<div
+id="ownerLoginError"
+class="error">
+</div>
 
-        <!-- OPERACJE -->
-        <div class="card owner-panel">
-            <h2 class="card-title">💸 Operacje</h2>
+</div>
 
-            <div class="input-grid">
-                <input id="ownerAddAmount" type="number" min="0.01" step="0.01" placeholder="Wpłata">
-                <input id="ownerAddDescription" type="text" placeholder="Opis wpłaty">
-                <button class="btn green" onclick="ownerAddMoney()">➕ Wpłać</button>
-            </div>
 
-            <div class="input-grid" style="margin-top:10px">
-                <input id="ownerSpendAmount" type="number" min="0.01" step="0.01" placeholder="Wypłata">
-                <input id="ownerSpendDescription" type="text" placeholder="Opis wypłaty">
-                <button class="btn red" onclick="ownerSpendMoney()">➖ Wypłacić</button>
-            </div>
-        </div>
+<div
+id="ownerPanel"
+class="hidden">
 
-        <!-- OSTATNIE OPERACJE -->
-        <div class="card owner-panel">
-            <h2 class="card-title">🧾 Ostatnie operacje</h2>
 
-            <details>
-                <summary>Kliknij, aby rozwinąć</summary>
-                <div class="details-body">
-                    <div id="ownerHistoryList" class="history-list"></div>
-                </div>
-            </details>
-        </div>
+<div class="card owner-panel">
 
-        <!-- OCZEKUJĄCE DONATY -->
-        <div class="card owner-panel">
-            <h2 class="card-title">⏳ Oczekujące donaty</h2>
+<h2 class="owner-title">
+👑 Panel właściciela
+</h2>
 
-            <div class="actions" style="margin-bottom:12px">
-                <button class="btn blue" onclick="loadOwnerPending()">
-                    🔄 Odśwież donaty
-                </button>
+<div class="success">
+✅ Właściciel jest aktywny.
+</div>
 
-                <button class="btn red" onclick="ownerClearPending()">
-                    🗑️ Wyczyść wszystkie
-                </button>
-            </div>
+<div class="actions"
+style="margin-top:12px">
 
-            <div id="ownerPendingList" class="mini-list"></div>
-        </div>
+<button
+class="btn gray"
+onclick="logoutOwner()">
+🔒 Wyjdź
+</button>
 
-        <!-- SEJFY -->
-        <div class="card owner-panel">
-            <h2 class="card-title">🔐 Sejfy właściciela</h2>
+<button
+class="btn blue"
+onclick="refreshEverything()">
+🔄 Odśwież
+</button>
 
-            <div class="notice">
-                Tylko właściciel ma przyciski wpłaty, wypłaty i czyszczenia.
-                Kod 4-cyfrowy jest generowany wspólnie dla danego sejfu
-                i pokazuje się po jego pełnym zapełnieniu.
-            </div>
+</div>
 
-            <div id="ownerSafeInfo" class="mini-list" style="margin-top:12px"></div>
-        </div>
+</div>
 
-    </div>
+
+<!-- OPERACJE -->
+
+<div class="card owner-panel">
+
+<h2 class="owner-title">
+💸 Operacje
+</h2>
+
+<div
+class="input-grid">
+
+<input
+id="ownerAddAmount"
+type="number"
+min="0.01"
+step="0.01"
+placeholder="Wpłata">
+
+<input
+id="ownerAddDescription"
+type="text"
+placeholder="Opis">
+
+<button
+class="btn green"
+onclick="ownerAddMoney()">
+➕ Wpłać
+</button>
+
+</div>
+
+
+<div
+class="input-grid"
+style="margin-top:10px">
+
+<input
+id="ownerSpendAmount"
+type="number"
+min="0.01"
+step="0.01"
+placeholder="Wypłata">
+
+<input
+id="ownerSpendDescription"
+type="text"
+placeholder="Opis">
+
+<button
+class="btn red"
+onclick="ownerSpendMoney()">
+➖ Wypłacić
+</button>
+
+</div>
+
+</div>
+
+
+<!-- HISTORIA OWNER -->
+
+<div class="card owner-panel">
+
+<h2 class="owner-title">
+🧾 Ostatnie operacje
+</h2>
+
+<details>
+
+<summary>
+Rozwiń historię
+</summary>
+
+<div class="details-body">
+
+<div
+id="ownerHistoryList"
+class="history-list">
+</div>
+
+</div>
+
+</details>
+
+</div>
+
+
+<!-- DONATY OWNER -->
+
+<div class="card owner-panel">
+
+<h2 class="owner-title">
+⏳ Oczekujące donaty
+</h2>
+
+<div class="actions">
+
+<button
+class="btn blue"
+onclick="loadOwnerPending()">
+🔄 Odśwież
+</button>
+
+<button
+class="btn red"
+onclick="ownerClearPending()">
+🗑️ Wyczyść wszystkie
+</button>
+
+</div>
+
+<div
+id="ownerPendingList"
+class="mini-list"
+style="margin-top:10px">
+</div>
+
+</div>
+
+
+<!-- SEJFY OWNER -->
+
+<div class="card owner-panel">
+
+<h2 class="owner-title">
+🔐 Sejfy
+</h2>
+
+<div class="notice">
+Właściciel może wpłacać, wypłacać i czyścić sejfy.
+Po pełnym zapełnieniu pojawia się wspólny 4-cyfrowy kod.
+</div>
+
+<div
+id="ownerSafeInfo"
+class="mini-list"
+style="margin-top:10px">
+</div>
+
+</div>
+
+</div>
 
 </section>
 
-<footer>
-    ZBieranie • wspólny licznik
-</footer>
-
 </div>
 
-<!-- ===================================================== -->
+
+<!-- =================================================== -->
 <!-- INFO MODAL -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
-<div id="infoModal" class="modal-bg">
-    <div class="modal">
-        <h2>🎬 Jak wpłacić?</h2>
+<div
+id="infoModal"
+class="modal-bg">
 
-        <div class="notice">
-            <b>1.</b> Gotówką — przekazujesz pieniądze właścicielowi.<br><br>
-            <b>2.</b> Przelewem — wysyłasz pieniądze właścicielowi.<br><br>
-            <b>3.</b> Z portfela — niezależnie od rodzaju portfela.<br><br>
-            <b>4.</b> Donata na stronie — trafia do oczekujących i wymaga zatwierdzenia.
-        </div>
+<div class="modal">
 
-        <div class="modal-actions">
-            <button class="btn gray" onclick="closeModal('infoModal')">
-                Zamknij
-            </button>
-        </div>
-    </div>
+<h2>
+🎬 Jak wpłacić?
+</h2>
+
+<div class="notice">
+
+<b>1.</b> Gotówką.<br><br>
+
+<b>2.</b> Przelewem.<br><br>
+
+<b>3.</b> Z portfela.<br><br>
+
+<b>4.</b> Donatą przez stronę.
+
 </div>
 
-<!-- ===================================================== -->
-<!-- OWNER MESSAGE -->
-<!-- ===================================================== -->
+<button
+class="btn gray"
+style="margin-top:13px"
+onclick="closeModal('infoModal')">
+Zamknij
+</button>
 
-<div id="ownerRequiredModal" class="modal-bg">
-    <div class="modal">
-        <h2>🔒 Brak dostępu</h2>
-
-        <div class="notice">
-            Potrzebujesz być właścicielem, żeby użyć tej funkcji.
-        </div>
-
-        <div class="modal-actions">
-            <button class="btn red" onclick="closeModal('ownerRequiredModal')">
-                Rozumiem
-            </button>
-        </div>
-    </div>
 </div>
 
-<!-- ===================================================== -->
+</div>
+
+
+<!-- =================================================== -->
+<!-- OWNER REQUIRED -->
+<!-- =================================================== -->
+
+<div
+id="ownerRequiredModal"
+class="modal-bg">
+
+<div class="modal">
+
+<h2>
+🔒 Potrzebujesz być właścicielem
+</h2>
+
+<div class="notice">
+Ta funkcja jest dostępna tylko dla właściciela.
+</div>
+
+<button
+class="btn red"
+style="margin-top:13px"
+onclick="closeModal('ownerRequiredModal')">
+Rozumiem
+</button>
+
+</div>
+
+</div>
+
+
+<!-- =================================================== -->
 <!-- SAFE CODE -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
-<div id="safeCodeModal" class="modal-bg">
-    <div class="modal">
-        <h2 id="safeCodeTitle">🔐 Sejf</h2>
+<div
+id="safeCodeModal"
+class="modal-bg">
 
-        <div class="notice">
-            Sejf jest pełny.
-        </div>
+<div class="modal">
 
-        <div style="
-            margin:16px 0;
-            text-align:center;
-            font-size:46px;
-            font-weight:1000;
-            letter-spacing:8px;
-            color:#ffd25d;
-        " id="shownSafeCode">
-            ----
-        </div>
+<h2 id="safeCodeTitle">
+🔐 Kod sejfu
+</h2>
 
-        <div class="small">
-            Wpisz kod poniżej, aby odblokować mechanizm.
-        </div>
-
-        <input id="safeCodeInput"
-               type="text"
-               inputmode="numeric"
-               maxlength="4"
-               placeholder="4 cyfry"
-               style="margin-top:10px;text-align:center;letter-spacing:5px;font-size:22px">
-
-        <div id="safeCodeError" class="error"></div>
-
-        <div class="modal-actions">
-            <button class="btn green" onclick="checkSafeCode()">
-                ✅ Odblokuj
-            </button>
-
-            <button class="btn gray" onclick="closeModal('safeCodeModal')">
-                Anuluj
-            </button>
-        </div>
-    </div>
+<div class="notice">
+Sejf jest pełny.
 </div>
 
-<!-- ===================================================== -->
+<div
+id="shownSafeCode"
+style="
+text-align:center;
+margin:18px 0;
+font-size:50px;
+font-weight:1000;
+letter-spacing:9px;
+color:#ffd34d;
+">
+----</div>
+
+<input
+id="safeCodeInput"
+type="text"
+inputmode="numeric"
+maxlength="4"
+placeholder="Wpisz kod"
+style="
+text-align:center;
+font-size:25px;
+letter-spacing:7px">
+
+<div
+id="safeCodeError"
+class="error">
+</div>
+
+<div class="quick">
+
+<button
+class="btn green"
+onclick="checkSafeCode()">
+✅ Odblokuj
+</button>
+
+<button
+class="btn gray"
+onclick="closeModal('safeCodeModal')">
+Anuluj
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =================================================== -->
 <!-- SAFE PULL -->
-<!-- ===================================================== -->
+<!-- =================================================== -->
 
-<div id="safePullModal" class="modal-bg">
-    <div class="modal">
-        <h2>⬆️ POCIĄGNIJ W GÓRĘ</h2>
+<div
+id="safePullModal"
+class="modal-bg">
 
-        <div class="notice">
-            Mechanizm jest odblokowany. Pociągnięcie przeniesie zawartość
-            sejfu do wspólnego salda.
-        </div>
+<div class="modal">
 
-        <div class="modal-actions">
-            <button class="btn green" onclick="pullSafeUp()">
-                ⬆️ POCIĄGNIJ W GÓRĘ
-            </button>
+<h2>
+⬆️ POCIĄGNIJ W GÓRĘ
+</h2>
 
-            <button class="btn gray" onclick="closeModal('safePullModal')">
-                Anuluj
-            </button>
-        </div>
-    </div>
+<div class="notice">
+Mechanizm jest odblokowany.
+Pociągnięcie przeniesie zawartość sejfu do salda.
 </div>
 
-<!-- ===================================================== -->
-<!-- SAFE OWNER DEPOSIT -->
-<!-- ===================================================== -->
+<button
+class="btn green"
+style="margin-top:13px;width:100%;font-size:19px"
+onclick="pullSafeUp()">
+⬆️ POCIĄGNIJ W GÓRĘ
+</button>
 
-<div id="safeDepositModal" class="modal-bg">
-    <div class="modal">
-        <h2>💰 Wpłata do sejfu</h2>
+<button
+class="btn gray"
+style="margin-top:8px;width:100%"
+onclick="closeModal('safePullModal')">
+Anuluj
+</button>
 
-        <div class="notice" id="safeDepositText"></div>
-
-        <input id="safeDepositAmount"
-               type="number"
-               min="0.01"
-               step="0.01"
-               placeholder="Kwota"
-               style="margin-top:10px">
-
-        <div id="safeDepositError" class="error"></div>
-
-        <div class="modal-actions">
-            <button class="btn green" onclick="confirmSafeDeposit()">
-                💰 Wpłać
-            </button>
-
-            <button class="btn gray" onclick="closeModal('safeDepositModal')">
-                Anuluj
-            </button>
-        </div>
-    </div>
 </div>
 
-<div id="safeClearModal" class="modal-bg">
-    <div class="modal">
-        <h2>🗑️ Wyczyść sejf</h2>
-
-        <div class="notice" id="safeClearText"></div>
-
-        <div class="modal-actions">
-            <button class="btn red" onclick="confirmSafeClear()">
-                Tak, wyczyść
-            </button>
-
-            <button class="btn gray" onclick="closeModal('safeClearModal')">
-                Anuluj
-            </button>
-        </div>
-    </div>
 </div>
 
-<div id="toast" class="toast"></div>
+
+<!-- =================================================== -->
+<!-- SAFE DEPOSIT -->
+<!-- =================================================== -->
+
+<div
+id="safeDepositModal"
+class="modal-bg">
+
+<div class="modal">
+
+<h2>
+💰 Wpłata do sejfu
+</h2>
+
+<div
+id="safeDepositText"
+class="notice">
+</div>
+
+<input
+id="safeDepositAmount"
+type="number"
+min="0.01"
+step="0.01"
+placeholder="Kwota"
+style="margin-top:10px">
+
+<div
+id="safeDepositError"
+class="error">
+</div>
+
+<div class="quick">
+
+<button
+class="btn green"
+onclick="confirmSafeDeposit()">
+💰 Wpłać
+</button>
+
+<button
+class="btn gray"
+onclick="closeModal('safeDepositModal')">
+Anuluj
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =================================================== -->
+<!-- SAFE CLEAR -->
+<!-- =================================================== -->
+
+<div
+id="safeClearModal"
+class="modal-bg">
+
+<div class="modal">
+
+<h2>
+🗑️ Wyczyść sejf
+</h2>
+
+<div
+id="safeClearText"
+class="notice">
+</div>
+
+<div class="quick">
+
+<button
+class="btn red"
+onclick="confirmSafeClear()">
+Tak, wyczyść
+</button>
+
+<button
+class="btn gray"
+onclick="closeModal('safeClearModal')">
+Anuluj
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =================================================== -->
+<!-- CELEBRATION -->
+<!-- =================================================== -->
+
+<div
+id="celebration"
+class="celebration">
+
+<div class="celebration-card">
+
+<div class="celebration-title">
+🎉 CEL PRZEBITY! 🎉
+</div>
+
+<div class="celebration-sub">
+6868,00 zł ZDOBYTE!
+</div>
+
+<div
+id="celebrationAmount"
+class="celebration-amount">
+</div>
+
+<div style="
+margin-top:14px;
+font-size:24px">
+💰 🪙 🥇 💵 💸 🛴⚡ 🚀 🎊
+</div>
+
+<button
+class="btn green"
+style="margin-top:20px;font-size:18px"
+onclick="closeCelebration()">
+🔥 ZAMKNIJ
+</button>
+
+</div>
+
+</div>
+
+
+<div
+id="toast"
+class="toast">
+</div>
+
 
 <script>
+
 const SUPABASE_URL =
-    "https://jcgiteoaewnxjomnlkpe.supabase.co";
+"https://jcgiteoaewnxjomnlkpe.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_n8Dv-miLjH8YjPVZHclUAg_mNFbQ3b2";
+"sb_publishable_n8Dv-miLjH8YjPVZHclUAg_mNFbQ3b2";
 
-const { createClient } = supabase;
+const {createClient} = supabase;
 
-const sb = createClient(
+const sb =
+createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+
+
+/* =================================================== */
+/* USTAWIENIA */
+/* =================================================== */
 
 const TARGET = 6868;
 
@@ -1534,7 +2163,9 @@ const SAFE_MAX = {
     4:250
 };
 
+
 let currentUser = null;
+
 let sharedState = {
     balance:0,
     bottles:0,
@@ -1547,65 +2178,114 @@ let ownerPending = [];
 let allSafeData = [];
 
 let ownerLogged = false;
+
 let selectedSafeId = null;
 let unlockedSafeId = null;
-let donationRefreshing = false;
 
-/* ========================================================= */
+let refreshRunning = false;
+let refreshAgain = false;
+
+let previousDisplayedBalance = null;
+let celebrationRunning = false;
+
+
+/* =================================================== */
 /* START */
-/* ========================================================= */
+/* =================================================== */
 
-document.addEventListener("DOMContentLoaded", start);
+document.addEventListener(
+    "DOMContentLoaded",
+    start
+);
+
 
 async function start(){
 
     try{
-        const sessionResult = await sb.auth.getSession();
+
+        const sessionResult =
+            await sb.auth.getSession();
 
         if(sessionResult.data.session){
-            currentUser = sessionResult.data.session.user;
+
+            currentUser =
+                sessionResult.data.session.user;
+
         }else{
-            const auth = await sb.auth.signInAnonymously();
+
+            const auth =
+                await sb.auth.signInAnonymously();
 
             if(auth.error){
+
                 console.error(auth.error);
-                toast("Nie udało się uruchomić sesji.");
+
+                toast(
+                    "Nie udało się uruchomić sesji."
+                );
+
                 return;
             }
 
-            currentUser = auth.data.user;
+            currentUser =
+                auth.data.user;
+
         }
 
     }catch(error){
+
         console.error(error);
-        toast("Błąd połączenia z Supabase.");
+
+        toast(
+            "Błąd połączenia z Supabase."
+        );
+
         return;
     }
 
+
     await refreshEverything();
 
-    setInterval(refreshPublicData,5000);
+
+    setInterval(
+        refreshPublicData,
+        5000
+    );
+
 }
 
-/* ========================================================= */
+
+/* =================================================== */
 /* HELPERY */
-/* ========================================================= */
+/* =================================================== */
 
 function money(value){
+
     return Number(value || 0)
-        .toLocaleString("pl-PL", {
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }) + " zł";
+        .toLocaleString(
+            "pl-PL",
+            {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+            }
+        ) + " zł";
 }
 
+
 function amountNumber(value){
+
     const n = Number(value);
-    if(!Number.isFinite(n)) return 0;
+
+    if(!Number.isFinite(n)){
+        return 0;
+    }
+
     return Math.round(n * 100) / 100;
 }
 
+
 function escapeHtml(value){
+
     return String(value ?? "")
         .replaceAll("&","&amp;")
         .replaceAll("<","&lt;")
@@ -1614,398 +2294,1048 @@ function escapeHtml(value){
         .replaceAll("'","&#039;");
 }
 
+
 function toast(message){
-    const el = document.getElementById("toast");
-    el.textContent = message;
+
+    const el =
+        document.getElementById("toast");
+
+    el.textContent =
+        message;
+
     el.classList.add("show");
 
-    clearTimeout(window.__toastTimer);
+    clearTimeout(
+        window.toastTimer
+    );
 
-    window.__toastTimer = setTimeout(() => {
-        el.classList.remove("show");
-    },2800);
+    window.toastTimer =
+        setTimeout(
+            ()=>{
+                el.classList.remove("show");
+            },
+            2800
+        );
 }
+
 
 function openModal(id){
-    document.getElementById(id).classList.add("show");
+
+    document
+        .getElementById(id)
+        .classList.add("show");
 }
+
 
 function closeModal(id){
-    document.getElementById(id).classList.remove("show");
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
 }
 
+
 function requireOwner(){
+
     if(!ownerLogged){
-        openModal("ownerRequiredModal");
+
+        openModal(
+            "ownerRequiredModal"
+        );
+
         return false;
     }
 
     return true;
 }
 
+
+/* =================================================== */
+/* STRONY */
+/* =================================================== */
+
 function showPage(id,button){
 
-    document.querySelectorAll(".page").forEach(page=>{
-        page.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".page")
+        .forEach(
+            page=>{
+                page.classList.remove("active");
+            }
+        );
 
-    document.getElementById(id).classList.add("active");
+    document
+        .getElementById(id)
+        .classList.add("active");
 
-    document.querySelectorAll(".tab").forEach(tab=>{
-        tab.classList.remove("active");
-    });
+
+    document
+        .querySelectorAll(".tab")
+        .forEach(
+            tab=>{
+                tab.classList.remove("active");
+            }
+        );
+
 
     if(button){
         button.classList.add("active");
     }
 
-    if(id === "wlasciciel" && ownerLogged){
-        loadOwnerHistory();
-        loadOwnerPending();
-    }
 }
 
-/* ========================================================= */
-/* PUBLIC DATA */
-/* ========================================================= */
+
+/* =================================================== */
+/* ODŚWIEŻANIE */
+/* =================================================== */
 
 async function refreshPublicData(){
 
-    await Promise.all([
-        loadSharedState(),
-        loadHistory(),
-        loadPendingMine(),
-        loadSafes()
-    ]);
+    if(refreshRunning){
 
-    drawAll();
+        refreshAgain = true;
 
-    if(ownerLogged){
-        await loadOwnerPending();
-        await loadOwnerHistory();
-        renderOwnerSafes();
+        return;
     }
+
+    refreshRunning = true;
+
+    try{
+
+        await Promise.all([
+            loadSharedState(),
+            loadHistory(),
+            loadPendingMine(),
+            loadSafes()
+        ]);
+
+        drawAll();
+
+        if(ownerLogged){
+
+            await loadOwnerPending();
+            await loadOwnerHistory();
+
+            renderOwnerSafes();
+        }
+
+    }finally{
+
+        refreshRunning = false;
+
+        if(refreshAgain){
+
+            refreshAgain = false;
+
+            refreshPublicData();
+        }
+
+    }
+
 }
+
 
 async function refreshEverything(){
+
     await refreshPublicData();
-    await loadOwnerPending();
-    await loadOwnerHistory();
-    renderOwnerSafes();
+
+    if(ownerLogged){
+
+        await loadOwnerPending();
+        await loadOwnerHistory();
+    }
+
+    drawAll();
 }
 
-/* ========================================================= */
-/* SHARED STATE */
-/* ========================================================= */
+
+/* =================================================== */
+/* STATE */
+/* =================================================== */
 
 async function loadSharedState(){
 
-    const {data,error} = await sb
+    const {
+        data,
+        error
+    } =
+    await sb
         .from("zbieranie_state")
-        .select("id,balance,bottles,days")
+        .select(
+            "id,balance,bottles,days"
+        )
         .eq("id",1)
         .maybeSingle();
 
+
     if(error){
-        console.error("loadSharedState:",error);
+
+        console.error(
+            "loadSharedState:",
+            error
+        );
+
         return;
     }
 
+
     if(data){
+
         sharedState = {
-            balance:amountNumber(data.balance),
-            bottles:Number(data.bottles || 0),
-            days:Number(data.days || 0)
+
+            balance:
+                amountNumber(data.balance),
+
+            bottles:
+                Number(data.bottles || 0),
+
+            days:
+                Number(data.days || 0)
+
         };
+
     }
+
 }
+
 
 function drawState(){
 
-    const balance = amountNumber(sharedState.balance);
+    const balance =
+        amountNumber(
+            sharedState.balance
+        );
 
-    const percent = Math.max(
-        0,
-        Math.min(100,(balance / TARGET) * 100)
+
+    const percent =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                balance / TARGET * 100
+            )
+        );
+
+
+    document
+        .getElementById("balance")
+        .textContent =
+            money(balance);
+
+
+    document
+        .getElementById("bottles")
+        .textContent =
+            sharedState.bottles;
+
+
+    document
+        .getElementById("days")
+        .textContent =
+            sharedState.days;
+
+
+    document
+        .getElementById("remaining")
+        .textContent =
+            balance >= TARGET
+            ? "CEL OSIĄGNIĘTY!"
+            : money(
+                TARGET - balance
+              );
+
+
+    document
+        .getElementById("progressText")
+        .textContent =
+            balance >= TARGET
+            ? "100% • CEL PRZEBITY!"
+            : percent.toLocaleString(
+                "pl-PL",
+                {
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                }
+              ) + "%";
+
+
+    const progress =
+        document.getElementById(
+            "mainProgress"
+        );
+
+
+    /*
+       Pasek jest aktualizowany tylko wtedy,
+       gdy faktycznie zmieniła się wartość.
+       Dzięki temu opóźnione odświeżenia nie
+       powodują ciągłego cofania animacji.
+    */
+
+    if(
+        previousDisplayedBalance === null ||
+        Math.abs(
+            previousDisplayedBalance - balance
+        ) > 0.001
+    ){
+
+        progress.style.width =
+            percent + "%";
+
+        previousDisplayedBalance =
+            balance;
+
+    }
+
+
+    checkGoalCelebration(
+        balance
     );
 
-    document.getElementById("balance").textContent = money(balance);
-    document.getElementById("bottles").textContent = sharedState.bottles;
-    document.getElementById("days").textContent = sharedState.days;
-    document.getElementById("remaining").textContent =
-        money(Math.max(0,TARGET - balance));
-
-    document.getElementById("progressText").textContent =
-        percent.toLocaleString("pl-PL",{
-            minimumFractionDigits:2,
-            maximumFractionDigits:2
-        }) + "%";
-
-    document.getElementById("mainProgress").style.width =
-        percent + "%";
 }
 
-/* ========================================================= */
+
+/* =================================================== */
+/* CEL 6868 */
+/* =================================================== */
+
+function checkGoalCelebration(balance){
+
+    if(balance > TARGET){
+
+        if(
+            !celebrationRunning &&
+            sessionStorage.getItem(
+                "zbieranie_goal_seen"
+            ) !== "1"
+        ){
+
+            celebrationRunning = true;
+
+            sessionStorage.setItem(
+                "zbieranie_goal_seen",
+                "1"
+            );
+
+            showCelebration(balance);
+        }
+
+    }else{
+
+        sessionStorage.removeItem(
+            "zbieranie_goal_seen"
+        );
+
+    }
+
+}
+
+
+function showCelebration(balance){
+
+    const overlay =
+        document.getElementById(
+            "celebration"
+        );
+
+
+    document
+        .getElementById(
+            "celebrationAmount"
+        )
+        .textContent =
+            "Aktualnie: " + money(balance);
+
+
+    overlay
+        .querySelectorAll(
+            ".celebrate-item,.confetti-piece,.goldbar,.scooter"
+        )
+        .forEach(el=>el.remove());
+
+
+    const items = [
+        "💰",
+        "💵",
+        "💸",
+        "🪙",
+        "🥇",
+        "✨",
+        "⭐",
+        "🎉",
+        "🎊",
+        "🚀",
+        "🛴⚡"
+    ];
+
+
+    for(let i=0;i<130;i++){
+
+        const el =
+            document.createElement("div");
+
+        el.className =
+            "celebrate-item";
+
+        el.textContent =
+            items[
+                Math.floor(
+                    Math.random() * items.length
+                )
+            ];
+
+        el.style.left =
+            Math.random() * 100 + "%";
+
+        el.style.animationDelay =
+            Math.random() * 1.7 + "s";
+
+        el.style.animationDuration =
+            2.5 +
+            Math.random() * 2 +
+            "s";
+
+        overlay.appendChild(el);
+
+    }
+
+
+    for(let i=0;i<180;i++){
+
+        const el =
+            document.createElement("div");
+
+        el.className =
+            "confetti-piece";
+
+        el.style.left =
+            Math.random() * 100 + "%";
+
+        el.style.animationDelay =
+            Math.random() * 1.7 + "s";
+
+        el.style.animationDuration =
+            2.5 +
+            Math.random() * 1.6 +
+            "s";
+
+        el.style.background =
+            [
+                "#35ff73",
+                "#ffd34d",
+                "#ff4c5c",
+                "#4aa8ff",
+                "#ffffff"
+            ][
+                Math.floor(
+                    Math.random()*5
+                )
+            ];
+
+        el.style.transform =
+            `rotate(${Math.random()*360}deg)`;
+
+        overlay.appendChild(el);
+
+    }
+
+
+    for(let i=0;i<18;i++){
+
+        const el =
+            document.createElement("div");
+
+        el.className =
+            "goldbar";
+
+        el.textContent =
+            "GOLD";
+
+        el.style.left =
+            Math.random()*95 + "%";
+
+        el.style.animationDelay =
+            Math.random()*1.5 + "s";
+
+        el.style.animationDuration =
+            3 +
+            Math.random()*1.5 +
+            "s";
+
+        overlay.appendChild(el);
+
+    }
+
+
+    for(let i=0;i<8;i++){
+
+        const el =
+            document.createElement("div");
+
+        el.className =
+            "scooter";
+
+        el.textContent =
+            "🛴⚡";
+
+        el.style.top =
+            10 +
+            Math.random()*75 +
+            "%";
+
+        el.style.animationDelay =
+            Math.random()*1.5 + "s";
+
+        el.style.animationDuration =
+            2.8 +
+            Math.random()*1.5 +
+            "s";
+
+        overlay.appendChild(el);
+
+    }
+
+
+    overlay.classList.add("show");
+
+}
+
+
+function closeCelebration(){
+
+    document
+        .getElementById(
+            "celebration"
+        )
+        .classList.remove("show");
+
+    celebrationRunning = false;
+
+}
+
+
+/* =================================================== */
 /* HISTORIA */
-/* ========================================================= */
+/* =================================================== */
 
 async function loadHistory(){
 
-    if(!currentUser) return;
-
-    const {data,error} = await sb
-        .from("zbieranie_history")
-        .select("id,user_id,amount,description,balance_after,created_at")
-        .eq("user_id",currentUser.id)
-        .order("created_at",{ascending:false})
-        .limit(200);
-
-    if(error){
-        console.error("loadHistory:",error);
+    if(!currentUser){
         return;
     }
 
-    myHistory = data || [];
+
+    const {
+        data,
+        error
+    } =
+    await sb
+        .from("zbieranie_history")
+        .select(
+            "id,user_id,amount,description,balance_after,created_at"
+        )
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        )
+        .limit(300);
+
+
+    if(error){
+
+        console.error(
+            "loadHistory:",
+            error
+        );
+
+        return;
+    }
+
+
+    myHistory =
+        data || [];
+
 }
+
 
 function renderHistory(){
 
-    const el = document.getElementById("historyList");
+    const el =
+        document.getElementById(
+            "historyList"
+        );
+
 
     if(!myHistory.length){
+
         el.innerHTML =
-            `<div class="notice">Brak operacji.</div>`;
+            `<div class="notice">
+                Brak operacji.
+             </div>`;
+
         return;
     }
 
-    el.innerHTML = myHistory.map(item => {
 
-        const amount = Number(item.amount || 0);
+    el.innerHTML =
+        myHistory
+            .map(
+                item=>{
 
-        const date = new Date(item.created_at)
-            .toLocaleString("pl-PL");
+                    const amount =
+                        Number(
+                            item.amount || 0
+                        );
 
-        return `
-            <div class="history-item">
-                <div class="history-date">
-                    ${escapeHtml(date)}
-                </div>
+                    return `
+                    <div class="history-item">
 
-                <div class="history-desc">
-                    ${escapeHtml(item.description || "Operacja")}
-                </div>
+                        <div class="history-date">
+                            ${escapeHtml(
+                                new Date(
+                                    item.created_at
+                                ).toLocaleString(
+                                    "pl-PL"
+                                )
+                            )}
+                        </div>
 
-                <div class="amount ${amount >= 0 ? "plus" : "minus"}">
-                    ${amount >= 0 ? "+" : ""}${money(Math.abs(amount))}
-                </div>
-            </div>
-        `;
-    }).join("");
+                        <div class="history-desc">
+                            ${escapeHtml(
+                                item.description ||
+                                "Operacja"
+                            )}
+                        </div>
+
+                        <div class="amount ${
+                            amount >= 0
+                            ? "plus"
+                            : "minus"
+                        }">
+                            ${
+                                amount >= 0
+                                ? "+"
+                                : "-"
+                            }${money(
+                                Math.abs(amount)
+                            )}
+                        </div>
+
+                    </div>
+                    `;
+                }
+            )
+            .join("");
+
 }
+
+
+/* =================================================== */
+/* OWNER HISTORY */
+/* =================================================== */
 
 async function loadOwnerHistory(){
 
-    if(!ownerLogged) return;
+    if(!ownerLogged){
+        return;
+    }
 
-    const {data,error} = await sb.rpc(
+
+    const {
+        data,
+        error
+    } =
+    await sb.rpc(
         "owner_get_history"
     );
 
-    if(error){
-        console.error("owner_get_history:",error);
 
-        document.getElementById("ownerHistoryList").innerHTML =
+    const el =
+        document.getElementById(
+            "ownerHistoryList"
+        );
+
+
+    if(error){
+
+        console.error(error);
+
+        el.innerHTML =
             `<div class="notice">
-                Nie udało się pobrać pełnej historii właściciela.
-            </div>`;
+                Nie udało się pobrać historii.
+             </div>`;
 
         return;
     }
 
-    const rows = data || [];
+
+    const rows =
+        data || [];
+
 
     if(!rows.length){
-        document.getElementById("ownerHistoryList").innerHTML =
-            `<div class="notice">Brak operacji.</div>`;
+
+        el.innerHTML =
+            `<div class="notice">
+                Brak operacji.
+             </div>`;
+
         return;
     }
 
-    document.getElementById("ownerHistoryList").innerHTML =
-        rows.map(item=>{
 
-            const amount = Number(item.amount || 0);
+    el.innerHTML =
+        rows.map(
+            item=>{
 
-            return `
+                const amount =
+                    Number(
+                        item.amount || 0
+                    );
+
+                return `
                 <div class="history-item">
+
                     <div class="history-date">
                         ${escapeHtml(
-                            new Date(item.created_at).toLocaleString("pl-PL")
+                            new Date(
+                                item.created_at
+                            ).toLocaleString(
+                                "pl-PL"
+                            )
                         )}
                     </div>
 
                     <div class="history-desc">
-                        ${escapeHtml(item.description || "Operacja")}
+                        ${escapeHtml(
+                            item.description ||
+                            "Operacja"
+                        )}
                     </div>
 
-                    <div class="amount ${amount >= 0 ? "plus":"minus"}">
-                        ${amount >= 0 ? "+" : ""}${money(Math.abs(amount))}
+                    <div class="amount ${
+                        amount >= 0
+                        ? "plus"
+                        : "minus"
+                    }">
+                        ${
+                            amount >= 0
+                            ? "+"
+                            : "-"
+                        }${money(
+                            Math.abs(amount)
+                        )}
                     </div>
+
                 </div>
-            `;
+                `;
+            }
+        ).join("");
 
-        }).join("");
 }
 
-/* ========================================================= */
+
+/* =================================================== */
 /* CHART */
-/* ========================================================= */
+/* =================================================== */
 
 function drawChart(){
 
-    const canvas = document.getElementById("chart");
-    const ctx = canvas.getContext("2d");
+    const canvas =
+        document.getElementById(
+            "chart"
+        );
 
-    const width = canvas.width;
-    const height = canvas.height;
+    const ctx =
+        canvas.getContext("2d");
 
-    ctx.clearRect(0,0,width,height);
-
-    ctx.font = "12px Arial";
-    ctx.textBaseline = "middle";
 
     if(!myHistory.length){
-        ctx.fillStyle = "#7f9987";
+
+        ctx.clearRect(
+            0,0,
+            canvas.width,
+            canvas.height
+        );
+
+        ctx.fillStyle =
+            "#769080";
+
+        ctx.font =
+            "13px Arial";
+
         ctx.fillText(
             "Brak danych do wykresu",
             25,
-            height / 2
+            160
         );
+
         return;
     }
 
-    const rows = [...myHistory].reverse();
 
-    const points = rows.map((row,index)=>({
-        x:70 + index * 100,
-        y:height - 45 - (
-            Math.min(
-                TARGET,
-                Math.max(0,Number(row.balance_after || 0))
-            ) / TARGET
-        ) * (height - 85)
-    }));
+    const rows =
+        [...myHistory]
+            .reverse();
 
-    const chartWidth = Math.max(
-        1200,
-        70 + Math.max(0,points.length - 1) * 100 + 90
+
+    const width =
+        Math.max(
+            1200,
+            80 +
+            Math.max(
+                0,
+                rows.length - 1
+            ) * 100
+        );
+
+
+    canvas.width =
+        width;
+
+
+    ctx.clearRect(
+        0,0,
+        canvas.width,
+        canvas.height
     );
 
-    if(canvas.width !== chartWidth){
-        canvas.width = chartWidth;
-    }
 
-    const c = canvas.getContext("2d");
+    ctx.strokeStyle =
+        "rgba(185,225,195,.16)";
 
-    c.clearRect(0,0,canvas.width,canvas.height);
+    ctx.lineWidth = 1;
 
-    /* osie */
-    c.strokeStyle = "rgba(190,225,197,.16)";
-    c.lineWidth = 1;
+    ctx.beginPath();
 
-    c.beginPath();
-    c.moveTo(45,15);
-    c.lineTo(45,height - 35);
-    c.lineTo(canvas.width - 20,height - 35);
-    c.stroke();
+    ctx.moveTo(
+        45,
+        15
+    );
 
-    /* poziome linie */
-    for(let i=0;i<=5;i++){
+    ctx.lineTo(
+        45,
+        285
+    );
+
+    ctx.lineTo(
+        canvas.width - 20,
+        285
+    );
+
+    ctx.stroke();
+
+
+    for(let i=0;i<6;i++){
 
         const y =
-            15 + i * ((height - 50) / 5);
+            15 +
+            i * 54;
 
-        c.strokeStyle = "rgba(53,255,115,.06)";
-        c.beginPath();
-        c.moveTo(45,y);
-        c.lineTo(canvas.width - 20,y);
-        c.stroke();
+        ctx.strokeStyle =
+            "rgba(53,255,115,.06)";
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            45,
+            y
+        );
+
+        ctx.lineTo(
+            canvas.width - 20,
+            y
+        );
+
+        ctx.stroke();
+
     }
 
-    /* punkty i linia */
-    for(let i=1;i<points.length;i++){
 
-        const a = points[i-1];
-        const b = points[i];
+    const points =
+        rows.map(
+            (row,index)=>{
 
-        const amount =
-            Number(rows[i].amount || 0);
+                const value =
+                    Math.max(
+                        0,
+                        Math.min(
+                            TARGET,
+                            Number(
+                                row.balance_after || 0
+                            )
+                        )
+                    );
 
-        c.strokeStyle =
-            amount >= 0
-                ? "#35ff73"
-                : "#ff4f5f";
+                return {
 
-        c.lineWidth = 4;
+                    x:
+                        75 +
+                        index * 100,
 
-        c.beginPath();
-        c.moveTo(a.x,a.y);
-        c.lineTo(b.x,b.y);
-        c.stroke();
+                    y:
+                        275 -
+                        (
+                            value /
+                            TARGET
+                        ) * 230
 
-        c.fillStyle =
-            amount >= 0
-                ? "#35ff73"
-                : "#ff4f5f";
+                };
 
-        c.beginPath();
-        c.arc(b.x,b.y,5,0,Math.PI*2);
-        c.fill();
+            }
+        );
+
+
+    for(let i=0;i<points.length;i++){
+
+        if(i === 0){
+            continue;
+        }
+
+
+        const a =
+            points[i-1];
+
+        const b =
+            points[i];
+
+
+        const change =
+            Number(
+                rows[i].amount || 0
+            );
+
+
+        ctx.strokeStyle =
+            change >= 0
+            ? "#35ff73"
+            : "#ff4c5c";
+
+        ctx.lineWidth = 4;
+
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            a.x,
+            a.y
+        );
+
+        ctx.lineTo(
+            b.x,
+            b.y
+        );
+
+        ctx.stroke();
+
+
+        ctx.fillStyle =
+            change >= 0
+            ? "#35ff73"
+            : "#ff4c5c";
+
+
+        ctx.beginPath();
+
+        ctx.arc(
+            b.x,
+            b.y,
+            5,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+
+        ctx.fillStyle =
+            "#879d8d";
+
+        ctx.font =
+            "11px Arial";
+
 
         const date =
-            new Date(rows[i].created_at)
-                .toLocaleDateString("pl-PL");
+            new Date(
+                rows[i].created_at
+            ).toLocaleDateString(
+                "pl-PL"
+            );
 
-        c.fillStyle = "#9ab39f";
-        c.font = "11px Arial";
-        c.save();
-        c.translate(b.x,height - 17);
-        c.rotate(-0.2);
-        c.fillText(date,0,0);
-        c.restore();
+
+        ctx.save();
+
+        ctx.translate(
+            b.x,
+            305
+        );
+
+        ctx.rotate(-.2);
+
+        ctx.fillText(
+            date,
+            0,
+            0
+        );
+
+        ctx.restore();
+
     }
 
-    const labels = [
+
+    [
         6868,
         5000,
         2500,
         1000,
         500,
         0
-    ];
+    ].forEach(
+        (value,index)=>{
 
-    labels.forEach((value,index)=>{
+            const y =
+                15 +
+                index * 54;
 
-        const y =
-            15 + index * ((height - 50) / 5);
+            ctx.fillStyle =
+                "#789280";
 
-        c.fillStyle = "#789380";
-        c.font = "11px Arial";
-        c.fillText(
-            value + " zł",
-            3,
-            y
-        );
-    });
+            ctx.font =
+                "11px Arial";
+
+            ctx.fillText(
+                value + " zł",
+                3,
+                y
+            );
+
+        }
+    );
+
 }
 
-/* ========================================================= */
+
+/* =================================================== */
 /* DONATY */
-/* ========================================================= */
+/* =================================================== */
 
 function setDonation(amount){
-    document.getElementById("donationAmount").value =
-        amount.toFixed(2);
+
+    document
+        .getElementById(
+            "donationAmount"
+        )
+        .value =
+            amount.toFixed(2);
+
 }
+
 
 function donationMessage(amount){
 
@@ -2036,22 +3366,42 @@ function donationMessage(amount){
     return "💚 Dzięki za donatę!";
 }
 
+
 async function makeDonation(){
 
     const amount =
         amountNumber(
-            document.getElementById("donationAmount").value
+            document
+                .getElementById(
+                    "donationAmount"
+                )
+                .value
         );
 
+
     const description =
-        document.getElementById("donationDescription").value.trim();
+        document
+            .getElementById(
+                "donationDescription"
+            )
+            .value
+            .trim();
+
 
     if(amount <= 0){
-        toast("Podaj prawidłową kwotę.");
+
+        toast(
+            "Podaj prawidłową kwotę."
+        );
+
         return;
     }
 
-    const {error} = await sb.rpc(
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "make_pending_donation",
         {
             p_amount:amount,
@@ -2059,360 +3409,688 @@ async function makeDonation(){
         }
     );
 
+
     if(error){
+
         console.error(error);
-        toast("Nie udało się wysłać donaty.");
+
+        toast(
+            "Nie udało się wysłać donaty."
+        );
+
         return;
     }
 
-    document.getElementById("donationAmount").value = "";
-    document.getElementById("donationDescription").value = "";
+
+    document
+        .getElementById(
+            "donationAmount"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "donationDescription"
+        )
+        .value = "";
+
 
     await loadPendingMine();
+
     renderMyPending();
 
-    toast(donationMessage(amount) + " Czeka na zatwierdzenie właściciela.");
+
+    toast(
+        donationMessage(amount) +
+        " Czeka na zatwierdzenie właściciela."
+    );
+
 }
+
 
 async function loadPendingMine(){
 
-    if(!currentUser) return;
-
-    const {data,error} = await sb
-        .from("zbieranie_pending_donations")
-        .select("id,amount,description,created_at")
-        .eq("user_id",currentUser.id)
-        .order("created_at",{ascending:false});
-
-    if(error){
-        console.error("loadPendingMine:",error);
+    if(!currentUser){
         return;
     }
 
-    myPending = data || [];
+
+    const {
+        data,
+        error
+    } =
+    await sb
+        .from(
+            "zbieranie_pending_donations"
+        )
+        .select(
+            "id,amount,description,created_at"
+        )
+        .eq(
+            "user_id",
+            currentUser.id
+        )
+        .order(
+            "created_at",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        console.error(
+            "loadPendingMine:",
+            error
+        );
+
+        return;
+    }
+
+
+    myPending =
+        data || [];
+
 }
+
 
 function renderMyPending(){
 
     const el =
-        document.getElementById("myPendingList");
+        document.getElementById(
+            "myPendingList"
+        );
+
 
     if(!myPending.length){
+
         el.innerHTML =
-            `<div class="notice">Nie masz oczekujących donat.</div>`;
+            `<div class="notice">
+                Nie masz oczekujących donat.
+             </div>`;
+
         return;
     }
 
-    el.innerHTML = myPending.map(item=>`
-        <div class="mini-row">
-            <div>
-                <b>${money(item.amount)}</b>
-                <div class="small">
-                    ${escapeHtml(item.description || "Bez opisu")}
-                </div>
-            </div>
 
-            <span class="badge">OCZEKUJE</span>
-        </div>
-    `).join("");
+    el.innerHTML =
+        myPending.map(
+            item=>`
+
+            <div class="mini-row">
+
+                <div>
+
+                    <b>
+                        ${money(item.amount)}
+                    </b>
+
+                    <div class="small">
+                        ${escapeHtml(
+                            item.description ||
+                            "Bez opisu"
+                        )}
+                    </div>
+
+                </div>
+
+                <span class="badge">
+                    OCZEKUJE
+                </span>
+
+            </div>
+            `
+        ).join("");
+
 }
+
+
+/* =================================================== */
+/* OWNER DONATIONS */
+/* =================================================== */
 
 async function loadOwnerPending(){
 
-    if(!ownerLogged) return;
+    if(!ownerLogged){
+        return;
+    }
 
-    const {data,error} = await sb.rpc(
+
+    const {
+        data,
+        error
+    } =
+    await sb.rpc(
         "owner_get_pending_donations"
     );
 
+
+    const el =
+        document.getElementById(
+            "ownerPendingList"
+        );
+
+
     if(error){
+
         console.error(error);
 
-        document.getElementById("ownerPendingList").innerHTML =
+        el.innerHTML =
             `<div class="notice">
-                Nie udało się pobrać oczekujących donat.
-            </div>`;
+                Nie udało się pobrać donat.
+             </div>`;
 
         return;
     }
 
-    ownerPending = data || [];
+
+    ownerPending =
+        data || [];
+
 
     renderOwnerPending();
+
 }
+
 
 function renderOwnerPending(){
 
     const el =
-        document.getElementById("ownerPendingList");
+        document.getElementById(
+            "ownerPendingList"
+        );
+
 
     if(!ownerPending.length){
+
         el.innerHTML =
             `<div class="notice">
                 Brak oczekujących donat.
-            </div>`;
+             </div>`;
+
         return;
     }
 
-    el.innerHTML = ownerPending.map(item=>`
 
-        <div class="donation-item">
+    el.innerHTML =
+        ownerPending.map(
+            item=>`
 
-            <div>
+            <div class="donation-item">
+
                 <span class="badge">
                     OCZEKUJE
                 </span>
-            </div>
 
-            <div>
-                <b>${money(item.amount)}</b>
+                <div>
 
-                <div class="small">
-                    ${escapeHtml(item.description || "Bez opisu")}
+                    <b>
+                        ${money(item.amount)}
+                    </b>
+
+                    <div class="small">
+                        ${escapeHtml(
+                            item.description ||
+                            "Bez opisu"
+                        )}
+                    </div>
+
+                    <div class="small">
+                        ${escapeHtml(
+                            new Date(
+                                item.created_at
+                            ).toLocaleString(
+                                "pl-PL"
+                            )
+                        )}
+                    </div>
+
                 </div>
 
-                <div class="small">
-                    ${escapeHtml(
-                        new Date(item.created_at)
-                            .toLocaleString("pl-PL")
-                    )}
-                </div>
+                <button
+                    class="btn green"
+                    onclick="acceptDonation(${Number(item.id)})">
+                    ✅ Przyjmij
+                </button>
+
+                <button
+                    class="btn red"
+                    onclick="deletePendingDonation(${Number(item.id)})">
+                    🗑️ Usuń
+                </button>
+
             </div>
 
-            <button class="btn green"
-                onclick="acceptDonation(${Number(item.id)})">
-                ✅ Przyjmij
-            </button>
+            `
+        ).join("");
 
-            <button class="btn red"
-                onclick="deletePendingDonation(${Number(item.id)})">
-                🗑️ Usuń
-            </button>
-
-        </div>
-
-    `).join("");
 }
+
 
 async function acceptDonation(id){
 
-    if(!requireOwner()) return;
+    if(!requireOwner()){
+        return;
+    }
 
-    const {data,error} = await sb.rpc(
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "owner_accept_donation",
         {
             p_id:id
         }
     );
 
+
     if(error){
+
         console.error(error);
-        toast("Nie udało się przyjąć donaty.");
+
+        toast(
+            "Nie udało się przyjąć donaty."
+        );
+
         return;
     }
 
-    toast("✅ Donata została zatwierdzona i dodana do salda.");
+
+    toast(
+        "✅ Donata została dodana do salda."
+    );
+
 
     await refreshEverything();
+
 }
+
 
 async function deletePendingDonation(id){
 
-    if(!requireOwner()) return;
-
-    if(!confirm("Czy na pewno usunąć tę donatę?")){
+    if(!requireOwner()){
         return;
     }
 
-    const {error} = await sb.rpc(
+
+    if(!confirm(
+        "Czy na pewno usunąć tę donatę?"
+    )){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "owner_delete_pending_donation",
         {
             p_id:id
         }
     );
 
+
     if(error){
+
         console.error(error);
-        toast("Nie udało się usunąć donaty.");
+
+        toast(
+            "Nie udało się usunąć donaty."
+        );
+
         return;
     }
 
-    toast("🗑️ Donata została usunięta.");
+
+    toast(
+        "🗑️ Donata została usunięta."
+    );
+
 
     await loadOwnerPending();
+
 }
+
 
 async function ownerClearPending(){
 
-    if(!requireOwner()) return;
-
-    if(!confirm("Czy na pewno wyczyścić wszystkie oczekujące donaty?")){
+    if(!requireOwner()){
         return;
     }
 
-    if(!confirm("Naprawdę usunąć wszystkie oczekujące donaty?")){
+
+    if(!confirm(
+        "Czy na pewno wyczyścić wszystkie oczekujące donaty?"
+    )){
         return;
     }
 
-    const {error} = await sb.rpc(
+
+    if(!confirm(
+        "Usuń wszystkie oczekujące donaty?"
+    )){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "owner_clear_pending_donations"
     );
 
+
     if(error){
+
         console.error(error);
-        toast("Nie udało się wyczyścić donat.");
+
+        toast(
+            "Nie udało się wyczyścić donat."
+        );
+
         return;
     }
 
-    toast("🗑️ Wszystkie oczekujące donaty zostały wyczyszczone.");
+
+    toast(
+        "🗑️ Oczekujące donaty wyczyszczone."
+    );
+
 
     await loadOwnerPending();
+
 }
 
-/* ========================================================= */
-/* WŁAŚCICIEL */
-/* ========================================================= */
+
+/* =================================================== */
+/* OWNER LOGIN */
+/* =================================================== */
 
 function loginOwner(){
 
     const c1 =
-        document.getElementById("ownerCode1").value;
+        document
+            .getElementById(
+                "ownerCode1"
+            )
+            .value;
 
     const c2 =
-        document.getElementById("ownerCode2").value;
+        document
+            .getElementById(
+                "ownerCode2"
+            )
+            .value;
 
     const c3 =
-        document.getElementById("ownerCode3").value;
+        document
+            .getElementById(
+                "ownerCode3"
+            )
+            .value;
+
 
     const error =
-        document.getElementById("ownerLoginError");
+        document.getElementById(
+            "ownerLoginError"
+        );
+
 
     error.textContent = "";
 
+
     if(c1 !== OWNER_CODES[0]){
-        error.textContent = "Nieprawidłowy pierwszy kod.";
+
+        error.textContent =
+            "Nieprawidłowy pierwszy kod.";
+
         return;
     }
+
 
     if(c2 !== OWNER_CODES[1]){
-        error.textContent = "Nieprawidłowy drugi kod.";
+
+        error.textContent =
+            "Nieprawidłowy drugi kod.";
+
         return;
     }
 
+
     if(c3 !== OWNER_CODES[2]){
-        error.textContent = "Nieprawidłowy trzeci kod.";
+
+        error.textContent =
+            "Nieprawidłowy trzeci kod.";
+
         return;
     }
+
 
     ownerLogged = true;
 
-    document.body.classList.add("owner-active");
 
-    document.getElementById("ownerLoginCard")
+    document
+        .getElementById(
+            "ownerLoginCard"
+        )
         .classList.add("hidden");
 
-    document.getElementById("ownerPanel")
+
+    document
+        .getElementById(
+            "ownerPanel"
+        )
         .classList.remove("hidden");
 
-    document.getElementById("ownerCode1").value = "";
-    document.getElementById("ownerCode2").value = "";
-    document.getElementById("ownerCode3").value = "";
+
+    document
+        .getElementById(
+            "ownerCode1"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "ownerCode2"
+        )
+        .value = "";
+
+    document
+        .getElementById(
+            "ownerCode3"
+        )
+        .value = "";
+
 
     loadOwnerPending();
     loadOwnerHistory();
+
     renderOwnerSafes();
 
-    toast("👑 Zalogowano jako właściciel.");
+
+    toast(
+        "👑 Właściciel aktywny."
+    );
+
 }
+
 
 function logoutOwner(){
 
     ownerLogged = false;
 
-    document.body.classList.remove("owner-active");
-
-    document.getElementById("ownerLoginCard")
+    document
+        .getElementById(
+            "ownerLoginCard"
+        )
         .classList.remove("hidden");
 
-    document.getElementById("ownerPanel")
+
+    document
+        .getElementById(
+            "ownerPanel"
+        )
         .classList.add("hidden");
 
-    toast("🔒 Wylogowano właściciela.");
+
+    toast(
+        "🔒 Wylogowano."
+    );
+
 }
 
-/* ========================================================= */
+
+/* =================================================== */
 /* OWNER MONEY */
-/* ========================================================= */
+/* =================================================== */
 
 async function ownerQuickAdd(amount){
 
-    if(!requireOwner()) return;
+    if(!requireOwner()){
+        return;
+    }
+
 
     await doOwnerAdd(
         amount,
-        "⚡ Szybka wpłata właściciela"
+        "⚡ Szybka wpłata"
     );
+
 }
+
 
 async function ownerCustomAdd(){
 
-    if(!requireOwner()) return;
-
-    const amount =
-        amountNumber(
-            document.getElementById("quickCustomAmount").value
-        );
-
-    const description =
-        document.getElementById("quickCustomDescription")
-            .value
-            .trim();
-
-    if(amount <= 0){
-        toast("Podaj prawidłową kwotę.");
+    if(!requireOwner()){
         return;
     }
 
+
+    const amount =
+        amountNumber(
+            document
+                .getElementById(
+                    "quickCustomAmount"
+                )
+                .value
+        );
+
+
+    const description =
+        document
+            .getElementById(
+                "quickCustomDescription"
+            )
+            .value
+            .trim();
+
+
+    if(amount <= 0){
+
+        toast(
+            "Podaj prawidłową kwotę."
+        );
+
+        return;
+    }
+
+
     await doOwnerAdd(
         amount,
-        description || "💰 Wpłata właściciela"
+        description ||
+        "💰 Wpłata właściciela"
     );
 
-    document.getElementById("quickCustomAmount").value = "";
-    document.getElementById("quickCustomDescription").value = "";
+
+    document
+        .getElementById(
+            "quickCustomAmount"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "quickCustomDescription"
+        )
+        .value = "";
+
 }
+
 
 async function ownerAddMoney(){
 
-    if(!requireOwner()) return;
-
-    const amount =
-        amountNumber(
-            document.getElementById("ownerAddAmount").value
-        );
-
-    const description =
-        document.getElementById("ownerAddDescription")
-            .value
-            .trim();
-
-    if(amount <= 0){
-        toast("Podaj prawidłową kwotę.");
+    if(!requireOwner()){
         return;
     }
 
+
+    const amount =
+        amountNumber(
+            document
+                .getElementById(
+                    "ownerAddAmount"
+                )
+                .value
+        );
+
+
+    const description =
+        document
+            .getElementById(
+                "ownerAddDescription"
+            )
+            .value
+            .trim();
+
+
+    if(amount <= 0){
+
+        toast(
+            "Podaj prawidłową kwotę."
+        );
+
+        return;
+    }
+
+
     await doOwnerAdd(
         amount,
-        description || "💰 Wpłata właściciela"
+        description ||
+        "💰 Wpłata właściciela"
     );
 
-    document.getElementById("ownerAddAmount").value = "";
-    document.getElementById("ownerAddDescription").value = "";
+
+    document
+        .getElementById(
+            "ownerAddAmount"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "ownerAddDescription"
+        )
+        .value = "";
+
 }
 
-async function doOwnerAdd(amount,description){
 
-    const {error} = await sb.rpc(
+async function doOwnerAdd(
+    amount,
+    description
+){
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "owner_add_money",
         {
             p_amount:amount,
@@ -2420,614 +4098,1110 @@ async function doOwnerAdd(amount,description){
         }
     );
 
+
     if(error){
+
         console.error(error);
-        toast("Nie udało się dodać pieniędzy.");
+
+        toast(
+            "Nie udało się dodać pieniędzy."
+        );
+
         return;
     }
 
-    toast("💰 Dodano " + money(amount));
-    await refreshPublicData();
+
+    toast(
+        "💰 Dodano " +
+        money(amount)
+    );
+
+
+    await refreshEverything();
+
 }
+
 
 async function ownerSpendMoney(){
 
-    if(!requireOwner()) return;
+    if(!requireOwner()){
+        return;
+    }
+
 
     const amount =
         amountNumber(
-            document.getElementById("ownerSpendAmount").value
+            document
+                .getElementById(
+                    "ownerSpendAmount"
+                )
+                .value
         );
 
+
     const description =
-        document.getElementById("ownerSpendDescription")
+        document
+            .getElementById(
+                "ownerSpendDescription"
+            )
             .value
             .trim();
 
+
     if(amount <= 0){
-        toast("Podaj prawidłową kwotę.");
+
+        toast(
+            "Podaj prawidłową kwotę."
+        );
+
         return;
     }
 
-    const {error} = await sb.rpc(
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "owner_spend_money",
         {
             p_amount:amount,
-            p_description:description || "💸 Wypłata właściciela"
+            p_description:
+                description ||
+                "💸 Wypłata właściciela"
         }
     );
 
+
     if(error){
+
         console.error(error);
-        toast("Nie udało się wypłacić pieniędzy.");
+
+        toast(
+            "Nie udało się wypłacić."
+        );
+
         return;
     }
 
-    document.getElementById("ownerSpendAmount").value = "";
-    document.getElementById("ownerSpendDescription").value = "";
 
-    toast("💸 Wypłacono " + money(amount));
+    document
+        .getElementById(
+            "ownerSpendAmount"
+        )
+        .value = "";
 
-    await refreshPublicData();
+
+    document
+        .getElementById(
+            "ownerSpendDescription"
+        )
+        .value = "";
+
+
+    toast(
+        "💸 Wypłacono " +
+        money(amount)
+    );
+
+
+    await refreshEverything();
+
 }
 
-/* ========================================================= */
-/* CLEAR EVERYTHING */
-/* ========================================================= */
+
+/* =================================================== */
+/* OWNER CLEAR */
+/* =================================================== */
 
 async function ownerClearEverything(){
 
-    if(!requireOwner()) return;
-
-    if(!confirm("Czy na pewno wyczyścić saldo, historię i wykres?")){
+    if(!requireOwner()){
         return;
     }
 
-    if(!confirm("Usuń wszystkie te dane? Tej operacji nie można cofnąć.")){
+
+    if(!confirm(
+        "Czy na pewno wyczyścić saldo, historię i wykres?"
+    )){
         return;
     }
 
-    const {error} = await sb.rpc(
+
+    if(!confirm(
+        "Usuń wszystko? Tej operacji nie można cofnąć."
+    )){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "owner_clear_all_data"
     );
 
+
     if(error){
+
         console.error(error);
-        toast("Nie udało się wyczyścić danych.");
+
+        toast(
+            "Nie udało się wyczyścić danych."
+        );
+
         return;
     }
 
-    toast("🧹 Saldo, historia i wykres zostały wyczyszczone.");
+
+    previousDisplayedBalance =
+        null;
+
+
+    sessionStorage.removeItem(
+        "zbieranie_goal_seen"
+    );
+
+
+    toast(
+        "🧹 Saldo, historia i wykres wyczyszczone."
+    );
+
 
     await refreshEverything();
+
 }
 
-/* ========================================================= */
-/* SEJFY — PUBLICZNY ODCZYT */
-/* ========================================================= */
+
+/* =================================================== */
+/* KARTA — CZYSZCZENIE WŁASNYCH WPŁAT */
+/* =================================================== */
+
+async function clearMyCardHistory(){
+
+    if(!confirm(
+        "Czy na pewno wyczyścić Twoje wpłaty z karty?"
+    )){
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } =
+    await sb.rpc(
+        "clear_my_card_history"
+    );
+
+
+    if(error){
+
+        console.error(error);
+
+        toast(
+            "Nie udało się wyczyścić wpłat z karty."
+        );
+
+        return;
+    }
+
+
+    toast(
+        "🗑️ Wyczyszczono " +
+        Number(data || 0) +
+        " wpłat."
+    );
+
+
+    await refreshPublicData();
+
+}
+
+
+/* =================================================== */
+/* SEJFY */
+/* =================================================== */
 
 async function loadSafes(){
 
-    const {data,error} = await sb
+    const {
+        data,
+        error
+    } =
+    await sb
         .from("zbieranie_safes")
-        .select("id,amount,max_amount,unlock_code,updated_at")
+        .select(
+            "id,amount,max_amount,unlock_code,updated_at"
+        )
         .order("id");
 
+
     if(error){
-        console.error("loadSafes:",error);
 
-        const defaults = Object.entries(SAFE_MAX)
-            .map(([id,max])=>({
-                id:Number(id),
-                amount:0,
-                max_amount:max,
-                unlock_code:null
-            }));
+        console.error(
+            "loadSafes:",
+            error
+        );
 
-        allSafeData = defaults;
-        renderSafes();
         return;
     }
 
-    allSafeData = data || [];
+
+    allSafeData =
+        data || [];
+
 
     renderSafes();
     renderOwnerSafes();
+
 }
 
-/* ========================================================= */
-/* SEJFY — RENDER */
-/* ========================================================= */
 
 function renderSafes(){
 
     const grid =
-        document.getElementById("safeGrid");
+        document.getElementById(
+            "safeGrid"
+        );
+
 
     if(!allSafeData.length){
+
         grid.innerHTML =
             `<div class="notice">
-                Nie udało się pobrać sejfów.
-            </div>`;
+                Brak danych sejfów.
+             </div>`;
+
         return;
     }
 
-    grid.innerHTML = allSafeData.map(safe => {
 
-        const amount =
-            amountNumber(safe.amount);
+    grid.innerHTML =
+        allSafeData.map(
+            safe=>{
 
-        const max =
-            amountNumber(safe.max_amount || SAFE_MAX[safe.id]);
+                const amount =
+                    amountNumber(
+                        safe.amount
+                    );
 
-        const percent =
-            Math.max(
-                0,
-                Math.min(100,(amount / max) * 100)
-            );
+                const max =
+                    amountNumber(
+                        safe.max_amount ||
+                        SAFE_MAX[safe.id]
+                    );
 
-        const full =
-            amount >= max;
+                const percent =
+                    Math.max(
+                        0,
+                        Math.min(
+                            100,
+                            amount / max * 100
+                        )
+                    );
 
-        const codeReady =
-            full && !!safe.unlock_code;
+                const full =
+                    amount >= max;
 
-        return `
-            <div class="safe ${full ? "full" : ""}"
-                 id="safe-${safe.id}">
 
-                ${full ? `<div class="full-badge">PEŁNY</div>` : ""}
+                return `
 
-                <div class="safe-title">
-                    🔐 Sejf ${safe.id}
-                </div>
+                <div
+                    class="safe"
+                    id="safe-${safe.id}">
 
-                <div class="safe-max">
-                    MAX: ${money(max)}
-                </div>
+                    ${
+                        full
+                        ? `
+                        <div class="full-badge">
+                            PEŁNY
+                        </div>
+                        `
+                        : ""
+                    }
 
-                <div class="safe-visual">
 
-                    <div class="safe-door"></div>
-                    <div class="safe-lock"></div>
-                    <div class="safe-wheel"></div>
-
-                    <div class="crank">
-                        <div class="crank-arm"></div>
-                        <div class="crank-handle"></div>
+                    <div class="safe-title">
+                        🔐 Sejf ${safe.id}
                     </div>
 
-                </div>
+                    <div class="safe-max">
+                        MAX: ${money(max)}
+                    </div>
 
-                <div class="safe-info">
+
+                    <div class="safe-visual">
+
+                        <div class="safe-body">
+                        </div>
+
+                        <div class="safe-lock">
+                        </div>
+
+                        <div class="safe-wheel">
+                        </div>
+
+                        <div class="crank">
+
+                            <div class="crank-arm">
+                            </div>
+
+                            <div class="crank-handle">
+                            </div>
+
+                        </div>
+
+                    </div>
+
 
                     <div class="safe-money">
                         ${money(amount)}
                     </div>
 
+
                     <div class="safe-bar">
-                        <div class="safe-fill"
-                             style="width:${percent}%">
+
+                        <div
+                            class="safe-fill"
+                            style="width:${percent}%">
                         </div>
+
                     </div>
 
-                    ${
-                        codeReady
-                        ? `
-                            <div class="safe-code">
-                                🔑 Kod gotowy
-                            </div>
-                          `
-                        : `
-                            <div class="safe-code" style="color:#9db1a3">
-                                🔒 Kod pojawi się po pełnym zapełnieniu
-                            </div>
-                          `
-                    }
 
                     ${
-                        full
+                        full && safe.unlock_code
                         ? `
-                            <div class="quick" style="margin-top:8px">
-                                <button class="btn blue"
-                                    onclick="safeCrank(${safe.id})">
-                                    🔄 Zakręć
-                                </button>
-                            </div>
-                          `
-                        : `
-                            <div class="small" style="margin-top:8px">
-                                Sejf nie jest jeszcze pełny.
-                            </div>
-                          `
+                        <div class="safe-code">
+                            🔑 KOD: ${escapeHtml(
+                                safe.unlock_code
+                            )}
+                        </div>
+                        `
+                        :
+                        `
+                        <div
+                            class="safe-code"
+                            style="color:#9eaea4;font-size:13px">
+                            🔒 Kod pojawi się po pełnym zapełnieniu
+                        </div>
+                        `
+                    }
+
+
+                    <div class="safe-actions">
+
+                        <button
+                            class="btn gray"
+                            ${
+                                ownerLogged
+                                ? `onclick="safeDepositClick(${safe.id})"`
+                                : `disabled title="Tylko właściciel"`
+                            }>
+                            💰 Wpłata
+                        </button>
+
+
+                        <button
+                            class="btn blue"
+                            ${
+                                ownerLogged && full
+                                ? `onclick="safeWithdrawClick(${safe.id})"`
+                                : `disabled title="Tylko właściciel"`
+                            }>
+                            ⬆️ Wypłata
+                        </button>
+
+
+                        <button
+                            class="btn red"
+                            ${
+                                ownerLogged
+                                ? `onclick="safeClearClick(${safe.id})"`
+                                : `disabled title="Tylko właściciel"`
+                            }>
+                            🗑️ Wyczyść
+                        </button>
+
+                    </div>
+
+
+                    ${
+                        !ownerLogged
+                        ?
+                        `
+                        <div
+                            class="small"
+                            style="
+                                margin-top:10px;
+                                text-align:center">
+                            🔒 Funkcje sejfu są tylko dla właściciela.
+                        </div>
+                        `
+                        :
+                        ""
                     }
 
                 </div>
 
-                <div class="safe-actions">
+                `;
 
-                    <button class="btn gray"
-                        onclick="safeDepositClick(${safe.id})">
-                        💰 Wpłata
-                    </button>
+            }
+        ).join("");
 
-                    <button class="btn gray"
-                        onclick="safeWithdrawClick(${safe.id})">
-                        ⬆️ Wypłata
-                    </button>
-
-                    <button class="btn gray"
-                        onclick="safeClearClick(${safe.id})">
-                        🗑️ Wyczyść
-                    </button>
-
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
 }
+
+
+/* =================================================== */
+/* OWNER SAFE LIST */
+/* =================================================== */
 
 function renderOwnerSafes(){
 
     const el =
-        document.getElementById("ownerSafeInfo");
+        document.getElementById(
+            "ownerSafeInfo"
+        );
+
 
     if(!ownerLogged){
+
         el.innerHTML = "";
+
         return;
     }
 
-    if(!allSafeData.length){
-        el.innerHTML =
-            `<div class="notice">Brak danych sejfów.</div>`;
-        return;
-    }
 
-    el.innerHTML = allSafeData.map(safe=>{
+    el.innerHTML =
+        allSafeData.map(
+            safe=>{
 
-        const amount =
-            amountNumber(safe.amount);
+                const amount =
+                    amountNumber(
+                        safe.amount
+                    );
 
-        const max =
-            amountNumber(
-                safe.max_amount || SAFE_MAX[safe.id]
-            );
+                const max =
+                    amountNumber(
+                        safe.max_amount ||
+                        SAFE_MAX[safe.id]
+                    );
 
-        const full = amount >= max;
+                const full =
+                    amount >= max;
 
-        return `
-            <div class="mini-row">
 
-                <div>
-                    <b>🔐 Sejf ${safe.id}</b>
-                    <div class="small">
-                        ${money(amount)} / ${money(max)}
+                return `
+
+                <div class="mini-row">
+
+                    <div>
+
+                        <b>
+                            🔐 Sejf ${safe.id}
+                        </b>
+
+                        <div class="small">
+                            ${money(amount)}
+                            /
+                            ${money(max)}
+                        </div>
+
+                        ${
+                            full && safe.unlock_code
+                            ?
+                            `
+                            <div
+                                style="
+                                    margin-top:4px;
+                                    color:#ffd34d;
+                                    font-weight:1000">
+                                🔑 KOD:
+                                ${escapeHtml(
+                                    safe.unlock_code
+                                )}
+                            </div>
+                            `
+                            :
+                            ""
+                        }
+
                     </div>
-                    ${
-                        full && safe.unlock_code
-                        ? `<div style="color:#ffd25d;font-weight:1000">
-                             Kod: ${escapeHtml(safe.unlock_code)}
-                           </div>`
-                        : ""
-                    }
-                </div>
 
-                <div class="quick" style="margin:0">
 
-                    <button class="btn green"
-                        onclick="safeDepositClick(${safe.id})">
-                        💰
-                    </button>
+                    <div class="quick"
+                         style="margin:0">
 
-                    ${
-                        full
-                        ? `
-                            <button class="btn blue"
-                                onclick="safeCrank(${safe.id})">
-                                🔄
+                        <button
+                            class="btn green"
+                            onclick="safeDepositClick(${safe.id})">
+                            💰
+                        </button>
+
+
+                        ${
+                            full
+                            ?
+                            `
+                            <button
+                                class="btn blue"
+                                onclick="safeWithdrawClick(${safe.id})">
+                                ⬆️
                             </button>
-                          `
-                        : ""
-                    }
+                            `
+                            :
+                            ""
+                        }
 
-                    <button class="btn red"
-                        onclick="safeClearClick(${safe.id})">
-                        🗑️
-                    </button>
+
+                        <button
+                            class="btn red"
+                            onclick="safeClearClick(${safe.id})">
+                            🗑️
+                        </button>
+
+                    </div>
 
                 </div>
 
-            </div>
-        `;
-    }).join("");
+                `;
+
+            }
+        ).join("");
+
 }
 
-/* ========================================================= */
-/* SEJFY — TYLKO WŁAŚCICIEL */
-/* ========================================================= */
+
+/* =================================================== */
+/* SAFE DEPOSIT */
+/* =================================================== */
 
 function safeDepositClick(id){
 
-    if(!requireOwner()) return;
+    if(!requireOwner()){
+        return;
+    }
 
-    selectedSafeId = id;
+
+    selectedSafeId =
+        Number(id);
+
 
     const safe =
-        allSafeData.find(x=>Number(x.id) === Number(id));
+        allSafeData.find(
+            x=>Number(x.id) === Number(id)
+        );
 
-    if(!safe) return;
 
-    document.getElementById("safeDepositText")
+    if(!safe){
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "safeDepositText"
+        )
         .textContent =
             `Sejf ${id}: ${money(safe.amount)} / ${money(safe.max_amount)}`;
 
-    document.getElementById("safeDepositAmount").value = "";
-    document.getElementById("safeDepositError").textContent = "";
 
-    openModal("safeDepositModal");
+    document
+        .getElementById(
+            "safeDepositAmount"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "safeDepositError"
+        )
+        .textContent = "";
+
+
+    openModal(
+        "safeDepositModal"
+    );
+
 }
+
 
 async function confirmSafeDeposit(){
 
-    if(!requireOwner()) return;
+    if(!requireOwner()){
+        return;
+    }
+
 
     const amount =
         amountNumber(
-            document.getElementById("safeDepositAmount").value
+            document
+                .getElementById(
+                    "safeDepositAmount"
+                )
+                .value
         );
 
+
     if(amount <= 0){
-        document.getElementById("safeDepositError")
-            .textContent = "Podaj prawidłową kwotę.";
+
+        document
+            .getElementById(
+                "safeDepositError"
+            )
+            .textContent =
+                "Podaj prawidłową kwotę.";
+
         return;
     }
 
-    const {data,error} = await sb.rpc(
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "safe_deposit",
         {
-            p_safe_id:Number(selectedSafeId),
-            p_amount:amount
+            p_safe_id:
+                Number(selectedSafeId),
+
+            p_amount:
+                amount
         }
     );
 
+
     if(error){
+
         console.error(error);
 
-        document.getElementById("safeDepositError")
+        document
+            .getElementById(
+                "safeDepositError"
+            )
             .textContent =
-                error.message || "Nie udało się wpłacić.";
+                error.message ||
+                "Nie udało się wpłacić.";
 
         return;
     }
 
-    closeModal("safeDepositModal");
 
-    const safeId = Number(selectedSafeId);
+    closeModal(
+        "safeDepositModal"
+    );
+
 
     toast(
         "💰 Dodano " +
         money(amount) +
         " do sejfu " +
-        safeId
+        selectedSafeId
     );
 
+
     await loadSafes();
-    drawAll();
-    renderOwnerSafes();
+
 }
 
-function safeWithdrawClick(id){
 
-    if(!requireOwner()) return;
-
-    const safe =
-        allSafeData.find(x=>Number(x.id) === Number(id));
-
-    if(!safe) return;
-
-    if(Number(safe.amount) < Number(safe.max_amount)){
-        toast("Sejf nie jest jeszcze pełny.");
-        return;
-    }
-
-    safeCrank(id);
-}
+/* =================================================== */
+/* SAFE CLEAR */
+/* =================================================== */
 
 function safeClearClick(id){
 
-    if(!requireOwner()) return;
+    if(!requireOwner()){
+        return;
+    }
 
-    selectedSafeId = id;
+
+    selectedSafeId =
+        Number(id);
+
 
     const safe =
-        allSafeData.find(x=>Number(x.id) === Number(id));
+        allSafeData.find(
+            x=>Number(x.id) === Number(id)
+        );
 
-    if(!safe) return;
 
-    document.getElementById("safeClearText")
+    if(!safe){
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "safeClearText"
+        )
         .textContent =
-            `Sejf ${id} ma obecnie ${money(safe.amount)}.`;
+            `Sejf ${id} zawiera ${money(safe.amount)}.`;
 
-    openModal("safeClearModal");
+
+    openModal(
+        "safeClearModal"
+    );
+
 }
+
 
 async function confirmSafeClear(){
 
-    if(!requireOwner()) return;
+    if(!requireOwner()){
+        return;
+    }
 
-    const id = Number(selectedSafeId);
 
-    const {error} = await sb.rpc(
+    const id =
+        Number(selectedSafeId);
+
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "safe_clear",
         {
             p_safe_id:id
         }
     );
 
+
     if(error){
+
         console.error(error);
-        toast("Nie udało się wyczyścić sejfu.");
+
+        toast(
+            "Nie udało się wyczyścić sejfu."
+        );
+
         return;
     }
 
-    closeModal("safeClearModal");
 
-    toast("🗑️ Sejf został wyczyszczony.");
+    closeModal(
+        "safeClearModal"
+    );
+
+
+    toast(
+        "🗑️ Sejf wyczyszczony."
+    );
+
 
     await loadSafes();
-    drawAll();
-    renderOwnerSafes();
+
 }
 
-/* ========================================================= */
-/* SEJF — KOD 4 CYFRY */
-/* ========================================================= */
 
-function safeCrank(id){
+/* =================================================== */
+/* SAFE WITHDRAW */
+/* =================================================== */
 
-    const safe =
-        allSafeData.find(x=>Number(x.id) === Number(id));
+function safeWithdrawClick(id){
 
-    if(!safe) return;
-
-    if(Number(safe.amount) < Number(safe.max_amount)){
-        toast("🔒 Sejf nie jest jeszcze pełny.");
+    if(!requireOwner()){
         return;
     }
 
-    if(!safe.unlock_code){
-        toast("Kod sejfu jeszcze się nie pojawił.");
-        return;
-    }
-
-    selectedSafeId = Number(id);
-
-    const box =
-        document.getElementById("safe-" + id);
-
-    if(box){
-        box.classList.add("cranking");
-
-        setTimeout(()=>{
-            box.classList.remove("cranking");
-        },900);
-    }
-
-    document.getElementById("safeCodeTitle")
-        .textContent =
-            "🔐 Kod sejfu " + id;
-
-    document.getElementById("shownSafeCode")
-        .textContent =
-            safe.unlock_code;
-
-    document.getElementById("safeCodeInput").value = "";
-    document.getElementById("safeCodeError").textContent = "";
-
-    openModal("safeCodeModal");
-}
-
-function checkSafeCode(){
-
-    if(!selectedSafeId) return;
 
     const safe =
         allSafeData.find(
-            x=>Number(x.id) === Number(selectedSafeId)
+            x=>Number(x.id) === Number(id)
         );
 
-    if(!safe) return;
 
-    const input =
-        document.getElementById("safeCodeInput")
+    if(!safe){
+        return;
+    }
+
+
+    if(
+        Number(safe.amount) <
+        Number(safe.max_amount)
+    ){
+
+        toast(
+            "Sejf nie jest jeszcze pełny."
+        );
+
+        return;
+    }
+
+
+    safeCrank(id);
+
+}
+
+
+function safeCrank(id){
+
+    if(!requireOwner()){
+        return;
+    }
+
+
+    const safe =
+        allSafeData.find(
+            x=>Number(x.id) === Number(id)
+        );
+
+
+    if(!safe){
+        return;
+    }
+
+
+    if(
+        Number(safe.amount) <
+        Number(safe.max_amount)
+    ){
+
+        toast(
+            "Sejf nie jest jeszcze pełny."
+        );
+
+        return;
+    }
+
+
+    if(!safe.unlock_code){
+
+        toast(
+            "Kod jeszcze nie istnieje."
+        );
+
+        return;
+    }
+
+
+    selectedSafeId =
+        Number(id);
+
+
+    const box =
+        document.getElementById(
+            "safe-" + id
+        );
+
+
+    if(box){
+
+        box.classList.add(
+            "cranking"
+        );
+
+
+        setTimeout(
+            ()=>{
+                box.classList.remove(
+                    "cranking"
+                );
+            },
+            1000
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "safeCodeTitle"
+        )
+        .textContent =
+            "🔐 Kod sejfu " + id;
+
+
+    document
+        .getElementById(
+            "shownSafeCode"
+        )
+        .textContent =
+            safe.unlock_code;
+
+
+    document
+        .getElementById(
+            "safeCodeInput"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "safeCodeError"
+        )
+        .textContent = "";
+
+
+    openModal(
+        "safeCodeModal"
+    );
+
+}
+
+
+function checkSafeCode(){
+
+    if(!selectedSafeId){
+        return;
+    }
+
+
+    const safe =
+        allSafeData.find(
+            x=>Number(x.id) ===
+            Number(selectedSafeId)
+        );
+
+
+    if(!safe){
+        return;
+    }
+
+
+    const value =
+        document
+            .getElementById(
+                "safeCodeInput"
+            )
             .value
             .trim();
 
-    if(input !== String(safe.unlock_code)){
-        document.getElementById("safeCodeError")
+
+    if(
+        value !==
+        String(safe.unlock_code)
+    ){
+
+        document
+            .getElementById(
+                "safeCodeError"
+            )
             .textContent =
                 "❌ Nieprawidłowy kod.";
 
         return;
     }
 
-    unlockedSafeId = selectedSafeId;
 
-    closeModal("safeCodeModal");
+    unlockedSafeId =
+        selectedSafeId;
 
-    openModal("safePullModal");
+
+    closeModal(
+        "safeCodeModal"
+    );
+
+
+    openModal(
+        "safePullModal"
+    );
+
 }
 
-/* ========================================================= */
-/* SEJF — POCIĄGNIĘCIE */
-/* ========================================================= */
+
+/* =================================================== */
+/* PULL SAFE */
+/* =================================================== */
 
 async function pullSafeUp(){
+
+    if(!requireOwner()){
+        return;
+    }
+
 
     if(!unlockedSafeId){
         return;
     }
 
-    const id = Number(unlockedSafeId);
+
+    const id =
+        Number(unlockedSafeId);
+
 
     const safe =
         allSafeData.find(
             x=>Number(x.id) === id
         );
 
+
     if(!safe){
-        closeModal("safePullModal");
         return;
     }
 
-    closeModal("safePullModal");
 
-    const box =
-        document.getElementById("safe-" + id);
-
-    if(box){
-        box.style.transition =
-            "transform .9s ease, opacity .9s ease";
-
-        box.style.transform =
-            "translateY(-170px) scale(.92)";
-
-        box.style.opacity = "0";
-    }
-
-    /* małe opóźnienie dla animacji */
-    await new Promise(resolve =>
-        setTimeout(resolve,520)
+    closeModal(
+        "safePullModal"
     );
 
-    const {data,error} = await sb.rpc(
+
+    const box =
+        document.getElementById(
+            "safe-" + id
+        );
+
+
+    if(box){
+
+        box.classList.add(
+            "opening"
+        );
+
+    }
+
+
+    await new Promise(
+        resolve=>
+            setTimeout(
+                resolve,
+                700
+            )
+    );
+
+
+    const {
+        error
+    } =
+    await sb.rpc(
         "safe_withdraw",
         {
             p_safe_id:id,
-            p_code:String(safe.unlock_code)
+            p_code:
+                String(
+                    safe.unlock_code
+                )
         }
     );
+
 
     if(error){
 
         console.error(error);
 
         if(box){
-            box.style.transform = "";
-            box.style.opacity = "";
+            box.classList.remove(
+                "opening"
+            );
         }
 
         toast(
             error.message ||
-            "Nie udało się wypłacić zawartości sejfu."
+            "Nie udało się wypłacić sejfu."
         );
 
         return;
     }
 
-    spawnMoneyEffect(Number(safe.amount),id);
+
+    showSafeMoneyEffect(
+        Number(safe.amount)
+    );
+
 
     toast(
         "🎉 " +
@@ -3035,205 +5209,219 @@ async function pullSafeUp(){
         " trafiło do salda!"
     );
 
+
     unlockedSafeId = null;
     selectedSafeId = null;
 
+
     await refreshEverything();
+
 }
 
-/* ========================================================= */
-/* ANIMACJA PIENIĘDZY */
-/* ========================================================= */
 
-function spawnMoneyEffect(amount,safeId){
+/* =================================================== */
+/* SAFE EFFECT */
+/* =================================================== */
 
-    let amountText = "💸 " + money(amount);
+function showSafeMoneyEffect(
+    amount
+){
 
-    if(amount >= 2000){
-        amountText =
-            "💰💰💰 " + money(amount) + " 💰💰💰";
-    }else if(amount >= 1000){
-        amountText =
-            "💰💰 " + money(amount) + " 💰💰";
-    }else if(amount >= 500){
-        amountText =
-            "💸✨ " + money(amount) + " ✨💸";
-    }
-
-    const el = document.createElement("div");
-
-    el.style.position = "fixed";
-    el.style.left = "50%";
-    el.style.top = "45%";
-    el.style.zIndex = "3000";
-    el.style.transform = "translate(-50%,-50%) scale(.7)";
-    el.style.opacity = "0";
-    el.style.pointerEvents = "none";
-    el.style.padding = "18px 24px";
-    el.style.borderRadius = "20px";
-    el.style.background = "#102a18";
-    el.style.border = "2px solid #35ff73";
-    el.style.boxShadow =
-        "0 0 40px rgba(53,255,115,.25)";
-    el.style.color = "#35ff73";
-    el.style.fontSize =
-        amount >= 1000 ? "32px" : "25px";
-    el.style.fontWeight = "1000";
-    el.textContent = amountText;
-
-    document.body.appendChild(el);
-
-    requestAnimationFrame(()=>{
-        el.style.transition =
-            "all .65s ease";
-        el.style.transform =
-            "translate(-50%,-90%) scale(1.08)";
-        el.style.opacity = "1";
-    });
-
-    setTimeout(()=>{
-        el.style.transform =
-            "translate(-50%,-120%) scale(.9)";
-        el.style.opacity = "0";
-    },850);
-
-    setTimeout(()=>{
-        el.remove();
-    },1500);
-
-    /* proste konfetti */
     const count =
-        amount >= 2000 ? 100 :
-        amount >= 1000 ? 70 :
-        amount >= 500 ? 45 :
-        amount >= 250 ? 30 : 18;
+        amount >= 2000
+        ? 120
+        : amount >= 1000
+        ? 90
+        : amount >= 500
+        ? 65
+        : 35;
+
+
+    const items = [
+        "💰",
+        "💵",
+        "💸",
+        "🪙",
+        "🥇",
+        "✨"
+    ];
+
 
     for(let i=0;i<count;i++){
 
-        const p = document.createElement("div");
+        const el =
+            document.createElement(
+                "div"
+            );
 
-        p.style.position = "fixed";
-        p.style.left = "50%";
-        p.style.top = "45%";
-        p.style.zIndex = "2999";
-        p.style.width = "7px";
-        p.style.height = "11px";
-        p.style.borderRadius = "2px";
-        p.style.background =
-            Math.random() > .5
-                ? "#35ff73"
-                : "#ffd25d";
-        p.style.pointerEvents = "none";
 
-        const dx = (Math.random() - .5) * 650;
-        const dy = -100 - Math.random() * 500;
-        const rot = (Math.random() - .5) * 900;
+        el.textContent =
+            items[
+                Math.floor(
+                    Math.random()*items.length
+                )
+            ];
 
-        document.body.appendChild(p);
 
-        requestAnimationFrame(()=>{
-            p.style.transition =
-                "transform .95s cubic-bezier(.17,.67,.2,1), opacity .95s";
-            p.style.transform =
-                `translate(${dx}px,${dy}px) rotate(${rot}deg)`;
-            p.style.opacity = "0";
-        });
+        el.style.position =
+            "fixed";
 
-        setTimeout(()=>{
-            p.remove();
-        },1100);
+        el.style.left =
+            "50%";
+
+        el.style.top =
+            "50%";
+
+        el.style.zIndex =
+            "7000";
+
+        el.style.fontSize =
+            (18 +
+             Math.random()*28) +
+            "px";
+
+        el.style.pointerEvents =
+            "none";
+
+
+        const dx =
+            (Math.random()-.5)*700;
+
+        const dy =
+            -100 -
+            Math.random()*550;
+
+
+        document.body.appendChild(
+            el
+        );
+
+
+        requestAnimationFrame(
+            ()=>{
+                el.style.transition =
+                    "transform 1s ease,opacity 1s";
+
+                el.style.transform =
+                    `translate(${dx}px,${dy}px)
+                     rotate(${Math.random()*800}deg)`;
+
+                el.style.opacity = "0";
+            }
+        );
+
+
+        setTimeout(
+            ()=>{
+                el.remove();
+            },
+            1100
+        );
+
     }
+
 }
 
-/* ========================================================= */
-/* INFO */
-/* ========================================================= */
 
-function openInfoModal(){
-    openModal("infoModal");
+/* =================================================== */
+/* RENDER ALL */
+/* =================================================== */
+
+function renderMyCardHistory(){
+
+    const el =
+        document.getElementById(
+            "myCardHistory"
+        );
+
+
+    const rows =
+        myHistory.filter(
+            item=>
+                String(
+                    item.description || ""
+                )
+                .toLowerCase()
+                .includes("donat")
+        );
+
+
+    if(!rows.length){
+
+        el.innerHTML =
+            `<div class="notice">
+                Brak wpłat z karty.
+             </div>`;
+
+        return;
+    }
+
+
+    el.innerHTML =
+        rows.map(
+            item=>{
+
+                const amount =
+                    Number(
+                        item.amount || 0
+                    );
+
+
+                return `
+                <div class="history-item">
+
+                    <div class="history-date">
+                        ${escapeHtml(
+                            new Date(
+                                item.created_at
+                            ).toLocaleString(
+                                "pl-PL"
+                            )
+                        )}
+                    </div>
+
+                    <div class="history-desc">
+                        ${escapeHtml(
+                            item.description ||
+                            "Donata"
+                        )}
+                    </div>
+
+                    <div class="amount plus">
+                        +${money(amount)}
+                    </div>
+
+                </div>
+                `;
+
+            }
+        ).join("");
+
 }
 
-/* ========================================================= */
-/* RENDER */
-/* ========================================================= */
 
 function drawAll(){
 
     drawState();
+
     renderHistory();
+
     renderMyPending();
+
     renderMyCardHistory();
+
     renderSafes();
+
     drawChart();
 
     if(ownerLogged){
         renderOwnerSafes();
     }
+
 }
 
-function renderMyCardHistory(){
-
-    const el =
-        document.getElementById("myCardHistory");
-
-    const rows =
-        myHistory.filter(item =>
-            String(item.description || "")
-                .toLowerCase()
-                .includes("donat")
-        );
-
-    if(!rows.length){
-        el.innerHTML =
-            `<div class="notice">
-                Brak operacji donatowych.
-            </div>`;
-        return;
-    }
-
-    el.innerHTML = rows.map(item=>{
-
-        const amount =
-            Number(item.amount || 0);
-
-        return `
-            <div class="history-item">
-
-                <div class="history-date">
-                    ${escapeHtml(
-                        new Date(item.created_at)
-                            .toLocaleString("pl-PL")
-                    )}
-                </div>
-
-                <div class="history-desc">
-                    ${escapeHtml(item.description || "Donata")}
-                </div>
-
-                <div class="amount ${amount >= 0 ? "plus":"minus"}">
-                    ${amount >= 0 ? "+" : ""}${money(Math.abs(amount))}
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
-}
-
-/* ========================================================= */
-/* START OWNIERSHIP REFRESH VISUAL */
-/* ========================================================= */
-
-setInterval(()=>{
-
-    if(ownerLogged){
-        renderOwnerSafes();
-    }
-
-},2000);
 
 </script>
 
-<!-- Strona: https://damixdiabel-ai.github.io/ZBieranie/ -->
 </body>
 </html>
