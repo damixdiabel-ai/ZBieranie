@@ -2,1076 +2,684 @@
 <html lang="pl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZBieranie 💰</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>ZBieranie</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 *{
-    box-sizing:border-box;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
 html,body{
-    margin:0;
-    padding:0;
-    min-height:100%;
-    font-family:Arial,Helvetica,sans-serif;
-    background:
-        radial-gradient(circle at 50% -10%,#123d25 0%,#06140c 45%,#020604 100%);
-    color:white;
+  margin:0;
+  min-height:100%;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#06100a;
+  color:#fff;
 }
 
 body{
-    overflow-x:hidden;
+  overflow-x:hidden;
+}
+
+button,input,textarea{
+  font:inherit;
 }
 
 button{
-    font-family:inherit;
+  cursor:pointer;
 }
 
 .app{
-    width:min(1050px,94%);
-    margin:auto;
-    padding:25px 0 60px;
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  padding:18px;
 }
 
-/* =========================
-   HEADER
-========================= */
-
-.header{
-    text-align:center;
-    padding:20px 15px 10px;
+header{
+  text-align:center;
+  padding:15px 10px 8px;
 }
 
 .logo{
-    font-size:48px;
-    font-weight:900;
-    color:#39ff88;
-    text-shadow:
-        0 0 10px #20ff73,
-        0 0 30px rgba(32,255,115,.45);
-    animation:logoPulse 2.5s ease-in-out infinite;
+  font-size:42px;
+  font-weight:900;
+  color:#55ff88;
+  text-shadow:0 0 18px rgba(50,255,110,.55);
 }
 
 .subtitle{
-    color:#9ec9ae;
-    margin-top:5px;
-    font-size:15px;
+  color:#94b69e;
+  margin-top:4px;
 }
 
-@keyframes logoPulse{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.025)}
+.sync{
+  margin:10px auto 0;
+  width:max-content;
+  padding:6px 12px;
+  border-radius:20px;
+  background:#0d2113;
+  border:1px solid #204d2b;
+  color:#8cffaa;
+  font-size:12px;
 }
 
-/* =========================
-   TABS
-========================= */
-
-.tabs{
-    display:flex;
-    gap:10px;
-    margin:20px 0;
+.sync.off{
+  color:#ff7777;
+  border-color:#622222;
+  background:#210d0d;
 }
 
-.tab{
-    flex:1;
-    padding:16px;
-    border:1px solid #1d6539;
-    background:#081b10;
-    color:#a9cdb5;
-    border-radius:18px;
-    cursor:pointer;
-    font-size:17px;
-    font-weight:bold;
-    transition:.25s;
+.nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:18px 0;
 }
 
-.tab:hover{
-    box-shadow:0 0 20px rgba(255,157,36,.55);
-    border-color:#ff9d24;
-    color:#fff;
+.nav button{
+  border:1px solid #255c32;
+  background:#0b1c10;
+  color:#bdfbc9;
+  border-radius:14px;
+  padding:11px 14px;
+  transition:.2s;
 }
 
-.tab.active{
-    color:#071109;
-    background:#39ff88;
-    border-color:#39ff88;
-    box-shadow:0 0 22px rgba(57,255,136,.35);
+.nav button:hover{
+  transform:translateY(-2px);
+  border-color:#48ff7b;
 }
 
-/* =========================
-   PAGES
-========================= */
+.nav button.active{
+  background:#164f26;
+  color:#fff;
+  box-shadow:0 0 18px rgba(57,255,105,.15);
+}
 
 .page{
-    display:none;
-    animation:pageIn .45s ease;
+  display:none;
+  animation:pageIn .3s ease;
 }
 
 .page.active{
-    display:block;
+  display:block;
 }
 
 @keyframes pageIn{
-    from{
-        opacity:0;
-        transform:translateX(35px);
-        filter:blur(5px);
-    }
-    to{
-        opacity:1;
-        transform:translateX(0);
-        filter:blur(0);
-    }
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
 }
-
-/* =========================
-   CARDS
-========================= */
 
 .card{
-    background:rgba(5,20,11,.88);
-    border:1px solid #164c2b;
-    border-radius:24px;
-    padding:22px;
-    margin-bottom:18px;
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.25),
-        inset 0 0 20px rgba(30,255,110,.025);
+  background:linear-gradient(145deg,#0a1a0e,#08130b);
+  border:1px solid #204d2b;
+  border-radius:22px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 8px 30px rgba(0,0,0,.25);
 }
 
-.card h2{
-    margin:0 0 18px;
-    font-size:21px;
+.balance-card{
+  text-align:center;
+  padding:28px 20px;
 }
 
-.money{
-    text-align:center;
-    font-size:56px;
-    font-weight:900;
-    color:#48ff91;
-    text-shadow:0 0 20px rgba(72,255,145,.3);
+.money-icon{
+  font-size:54px;
+  filter:drop-shadow(0 0 12px rgba(65,255,112,.35));
 }
 
-/* =========================
-   BIG BALANCE BAR
-========================= */
-
-.balanceBar{
-    height:42px;
-    width:100%;
-    margin-top:20px;
-    background:#020a05;
-    border:2px solid #164d2b;
-    border-radius:999px;
-    overflow:hidden;
-    position:relative;
-    box-shadow:inset 0 0 12px #000;
+.balance{
+  font-size:clamp(42px,8vw,82px);
+  font-weight:900;
+  color:#62ff8e;
+  text-shadow:0 0 22px rgba(58,255,103,.35);
+  margin:4px 0 8px;
 }
 
-.balanceFill{
-    height:100%;
-    width:0%;
-    border-radius:999px;
-    position:relative;
-    overflow:hidden;
-    background:linear-gradient(90deg,#0c7d3d,#22e86d,#39ff88);
-    transition:width 1.1s cubic-bezier(.2,.8,.2,1);
-    will-change:width;
+.target{
+  color:#93b89d;
 }
 
-.balanceFill::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    width:220%;
-    background:
-        repeating-linear-gradient(
-            135deg,
-            rgba(0,0,0,.28) 0px,
-            rgba(0,0,0,.28) 13px,
-            transparent 13px,
-            transparent 27px
-        );
-    animation:stripeMove 1.15s linear infinite;
-    will-change:transform;
+.progress-wrap{
+  margin:22px auto 8px;
+  max-width:850px;
 }
 
-@keyframes stripeMove{
-    from{transform:translate3d(0,0,0)}
-    to{transform:translate3d(-27px,0,0)}
+.progress{
+  height:25px;
+  border-radius:999px;
+  background:#071108;
+  border:1px solid #285c34;
+  overflow:hidden;
+  position:relative;
 }
 
-.balanceInfo{
-    text-align:center;
-    margin-top:9px;
-    color:#8db99c;
-    font-size:14px;
+.progress-fill{
+  height:100%;
+  width:0%;
+  border-radius:999px;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      #0d6b2b 0px,
+      #0d6b2b 12px,
+      #155b2c 12px,
+      #155b2c 24px
+    );
+  background-size:34px 34px;
+  animation:stripes 1.1s linear infinite;
+  transition:width:.7s cubic-bezier(.2,.8,.2,1);
 }
 
-/* =========================
-   STATS
-========================= */
+@keyframes stripes{
+  from{background-position:0 0}
+  to{background-position:34px 0}
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  margin-top:7px;
+  color:#8fb39a;
+  font-size:14px;
+}
 
 .stats{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
 }
 
 .stat{
-    background:#07190e;
-    border:1px solid #174d2c;
-    border-radius:18px;
-    padding:18px 10px;
-    text-align:center;
+  background:#08170c;
+  border:1px solid #1d4627;
+  border-radius:17px;
+  padding:15px;
+  text-align:center;
 }
 
-.statIcon{
-    font-size:28px;
+.stat-number{
+  font-size:27px;
+  font-weight:900;
 }
 
-.statValue{
-    color:#42ff8c;
-    font-size:25px;
-    font-weight:900;
-    margin-top:5px;
+.stat-label{
+  color:#82a78c;
+  font-size:13px;
+  margin-top:3px;
 }
 
-.statName{
-    color:#85aa91;
-    font-size:13px;
+.section-title{
+  font-size:25px;
+  font-weight:900;
+  margin-bottom:14px;
 }
 
-/* =========================
-   MONEY BUTTONS
-========================= */
-
-.moneyButtons{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+.actions{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
 }
 
-.moneyBtn{
-    border:1px solid #216f3d;
-    background:#092015;
-    color:#d9ffe5;
-    border-radius:17px;
-    padding:16px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.18s;
+.action{
+  border:1px solid #245e32;
+  border-radius:17px;
+  padding:16px;
+  background:#0a1c0f;
+  color:#fff;
+  text-align:left;
+  transition:.2s;
 }
 
-.moneyBtn:hover{
-    transform:translateY(-2px);
-    background:#0d2d1b;
-    box-shadow:0 0 18px rgba(57,255,136,.18);
+.action:hover{
+  transform:translateY(-2px);
+  border-color:#56ff83;
 }
 
-.moneyBtn:active{
-    transform:scale(.97);
+.action.green{
+  border-color:#21783a;
 }
 
-.moneyBtn.expense{
-    border-color:#7d2828;
-    color:#ff8e8e;
+.action.red{
+  border-color:#793030;
 }
 
-.moneyBtn.expense:hover{
-    background:#301010;
+.action-title{
+  font-weight:900;
+  font-size:17px;
 }
 
-/* =========================
-   HISTORY
-========================= */
+.action-desc{
+  color:#8dab94;
+  font-size:13px;
+  margin-top:5px;
+}
 
 .history{
-    display:flex;
-    flex-direction:column;
-    gap:9px;
+  max-height:520px;
+  overflow:auto;
 }
 
-.historyItem{
-    display:grid;
-    grid-template-columns:110px 1fr auto auto;
-    gap:10px;
-    align-items:center;
-    background:#07180d;
-    border:1px solid #123c24;
-    padding:12px;
-    border-radius:14px;
+.history-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid #18351f;
 }
 
-.historyDate{
-    color:#6e9d7d;
-    font-size:12px;
+.history-desc{
+  font-weight:700;
 }
 
-.historyDesc{
-    color:#d9ffe3;
-}
-
-.historyAmount{
-    font-weight:900;
-}
-
-.historyBalance{
-    color:#82a98e;
-    font-size:12px;
+.history-date{
+  color:#719079;
+  font-size:12px;
+  margin-top:4px;
 }
 
 .income{
-    color:#43ff8a;
+  color:#51ff82;
 }
 
 .expense{
-    color:#ff5757;
+  color:#ff6060;
 }
 
-.moreBtn{
-    margin-top:12px;
-    width:100%;
-    background:#0b2817;
-    color:#b6e8c5;
-    border:1px solid #1b5c32;
-    border-radius:14px;
-    padding:12px;
-    cursor:pointer;
+.amount{
+  font-size:18px;
+  font-weight:900;
+  white-space:nowrap;
 }
 
-/* =========================
-   CLEAR
-========================= */
-
-.clearBtn{
-    margin-top:14px;
-    width:100%;
-    background:#280d0d;
-    border:1px solid #8c2929;
-    color:#ff7070;
-    padding:13px;
-    border-radius:14px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.2s;
+.chart-scroll{
+  overflow-x:auto;
+  padding-bottom:8px;
 }
 
-.clearBtn:hover{
-    background:#421010;
-    box-shadow:0 0 16px rgba(255,50,50,.15);
-}
-
-/* =========================
-   CHART
-========================= */
-
-.chartScroll{
-    width:100%;
-    overflow-x:auto;
-    overflow-y:hidden;
-    border-radius:15px;
-    background:#030b06;
-    border:1px solid #123a22;
-}
-
-.chartInner{
-    width:1450px;
-    min-width:1450px;
-    height:390px;
+.chart{
+  min-width:900px;
 }
 
 canvas{
-    display:block;
-    width:1450px;
-    height:390px;
+  display:block;
 }
 
-/* =========================
-   GOALS
-========================= */
-
-.goalsPage{
-    background:
-        radial-gradient(circle at 50% 0%,rgba(255,153,35,.14),transparent 45%);
+.chart-info{
+  color:#78947e;
+  font-size:12px;
+  margin-top:7px;
 }
 
-.goalMain{
-    border-color:#8a4b14;
+.goals{
+  background:linear-gradient(145deg,#28190a,#130d07);
+  border-color:#8b5a19;
 }
 
-.goalAmount{
-    text-align:center;
-    color:#ffad3e;
-    font-size:55px;
-    font-weight:900;
-    text-shadow:0 0 20px rgba(255,157,45,.3);
-}
-
-.orangeBar{
-    height:32px;
-    border-radius:999px;
-    background:#160d04;
-    border:2px solid #71400f;
-    overflow:hidden;
-    margin-top:18px;
-}
-
-.orangeFill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#bd5e08,#ff9d24,#ffc15a);
-    transition:width 1s ease;
-}
-
-.goalPercent{
-    text-align:center;
-    color:#ffb34e;
-    margin-top:8px;
-    font-weight:bold;
+.goal-main{
+  font-size:30px;
+  font-weight:900;
+  color:#ffb33e;
+  text-align:center;
+  margin:20px 0;
 }
 
 .milestones{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:8px;
-    margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
 }
 
 .milestone{
-    text-align:center;
-    padding:12px 5px;
-    background:#180e05;
-    border:1px solid #75420f;
-    border-radius:14px;
-    color:#c99455;
-    font-size:12px;
+  text-align:center;
+  border:1px solid #6b4817;
+  background:#211407;
+  padding:13px 5px;
+  border-radius:14px;
+  color:#d6a65f;
 }
 
 .milestone.done{
-    color:#ffd18c;
-    border-color:#ff9d24;
-    box-shadow:0 0 15px rgba(255,157,36,.15);
+  color:#ffbd4a;
+  border-color:#d28a25;
 }
 
-/* =========================
-   SAFES
-========================= */
-
-.safesTitle{
-    color:#43ff8a;
-}
-
-.safesGrid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:22px;
-}
-
-.safeCard{
-    position:relative;
-    background:
-        linear-gradient(180deg,#102619,#07150c);
-    border:1px solid #285d3b;
-    border-radius:24px;
-    padding:18px;
-    text-align:center;
-    min-height:395px;
-    overflow:hidden;
-    transition:.25s;
-}
-
-.safeCard:hover{
-    border-color:#42ff8c;
-    box-shadow:0 0 25px rgba(57,255,136,.14);
-}
-
-.safeTitle{
-    color:#a4cdb0;
-    font-weight:bold;
-    margin-bottom:4px;
-}
-
-.safeMax{
-    color:#49ff91;
-    font-size:14px;
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-.safe{
-    width:175px;
-    height:235px;
-    margin:10px auto 12px;
-    position:relative;
-    transform:translateZ(0);
-}
-
-.safeBody{
-    position:absolute;
-    left:16px;
-    right:16px;
-    top:25px;
-    bottom:15px;
-    border-radius:14px;
-    border:6px solid #303936;
-    background:
-        linear-gradient(135deg,#515b57,#202825 45%,#424b47);
-    box-shadow:
-        inset 0 0 20px #101411,
-        0 12px 20px rgba(0,0,0,.45);
-}
-
-.safeDoor{
-    position:absolute;
-    inset:12px;
-    border-radius:9px;
-    border:3px solid #646e69;
-    background:linear-gradient(145deg,#4b5551,#242c29);
-    transform-origin:left center;
-    transition:
-        transform .8s cubic-bezier(.2,.8,.2,1),
-        opacity .5s ease;
-    z-index:3;
-}
-
-.safe.open .safeDoor{
-    transform:perspective(500px) rotateY(-82deg);
-    opacity:.25;
-}
-
-.safeWheel{
-    position:absolute;
-    width:76px;
-    height:76px;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    border-radius:50%;
-    border:8px solid #a6afaa;
-    background:#242b28;
-    box-shadow:
-        inset 0 0 0 4px #39423e,
-        0 0 10px rgba(0,0,0,.5);
-    z-index:5;
-    transition:transform .8s ease;
-}
-
-.safe.spinning .safeWheel{
-    transform:translate(-50%,-50%) rotate(360deg);
-}
-
-.safeWheel::before{
-    content:"";
-    position:absolute;
-    width:10px;
-    height:30px;
-    background:#bbc3be;
-    border-radius:5px;
-    left:50%;
-    top:-16px;
-    transform:translateX(-50%);
-}
-
-.safeHandle{
-    position:absolute;
-    right:-12px;
-    top:50%;
-    width:42px;
-    height:12px;
-    border-radius:10px;
-    background:#aeb6b1;
-    z-index:6;
-}
-
-.safeHandle::after{
-    content:"";
-    position:absolute;
-    width:12px;
-    height:30px;
-    right:-4px;
-    top:-9px;
-    background:#8e9893;
-    border-radius:6px;
-}
-
-.safeCode{
-    position:absolute;
-    top:38px;
-    left:50%;
-    transform:translateX(-50%);
-    z-index:7;
-    background:#07110b;
-    color:#50ff96;
-    border:1px solid #42ff8c;
-    padding:5px 9px;
-    border-radius:7px;
-    font-size:13px;
-    font-weight:bold;
-    box-shadow:0 0 12px rgba(57,255,136,.25);
-}
-
-.safeCrankHint{
-    min-height:25px;
-    color:#ffbf60;
-    font-size:13px;
-    font-weight:bold;
-}
-
-.safeBar{
-    height:12px;
-    background:#020704;
-    border-radius:999px;
-    overflow:hidden;
-    border:1px solid #214a30;
-}
-
-.safeBarFill{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#14984b,#48ff91);
-    transition:width .45s ease;
-}
-
-.safeMoney{
-    margin-top:7px;
-    color:#c6e5cf;
-    font-weight:bold;
-}
-
-.safeActions{
-    margin-top:12px;
-    display:flex;
-    gap:8px;
-    justify-content:center;
-    opacity:0;
-    transform:translateY(7px);
-    pointer-events:none;
-    transition:.2s;
-}
-
-.safeCard:hover .safeActions,
-.safeCard.selected .safeActions{
-    opacity:1;
-    transform:translateY(0);
-    pointer-events:auto;
-}
-
-.safeAction{
-    border:1px solid #28633b;
-    background:#092116;
-    color:#baffca;
-    border-radius:10px;
-    padding:9px 11px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.safeAction:hover{
-    background:#10351e;
-}
-
-.safeAction.clear{
-    border-color:#8a2b2b;
-    color:#ff7777;
-    background:#210b0b;
-}
-
-/* =========================
-   SAFE ANIMATION
-========================= */
-
-.safe.opening{
-    animation:safeShake .18s linear infinite;
-}
-
-@keyframes safeShake{
-    0%{transform:translateX(0)}
-    25%{transform:translateX(-3px) rotate(-.5deg)}
-    50%{transform:translateX(3px) rotate(.5deg)}
-    75%{transform:translateX(-2px)}
-    100%{transform:translateX(0)}
-}
-
-.safe.replace{
-    animation:safeReplacement .9s cubic-bezier(.2,.8,.2,1);
-}
-
-@keyframes safeReplacement{
-    0%{
-        opacity:0;
-        transform:translateY(110px) scale(.8);
-    }
-    55%{
-        opacity:1;
-        transform:translateY(-14px) scale(1.04);
-    }
-    75%{
-        transform:translateY(5px) scale(.98);
-    }
-    100%{
-        transform:translateY(0) scale(1);
-    }
-}
-
-.groundCrack{
-    position:absolute;
-    left:50%;
-    bottom:8px;
-    width:140px;
-    height:20px;
-    transform:translateX(-50%);
-    opacity:0;
-    pointer-events:none;
-}
-
-.groundCrack.show{
-    animation:crack .8s ease;
-}
-
-.groundCrack::before,
-.groundCrack::after{
-    content:"";
-    position:absolute;
-    top:8px;
-    width:60px;
-    height:3px;
-    background:#315e3e;
-}
-
-.groundCrack::before{
-    left:5px;
-    transform:rotate(22deg);
-}
-
-.groundCrack::after{
-    right:5px;
-    transform:rotate(-22deg);
-}
-
-@keyframes crack{
-    0%{opacity:0;transform:translateX(-50%) scale(.4)}
-    40%{opacity:1;transform:translateX(-50%) scale(1.2)}
-    100%{opacity:0;transform:translateX(-50%) scale(1)}
-}
-
-/* =========================
-   WALLET
-========================= */
-
-.walletGrid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
+.wallets{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
 }
 
 .wallet{
-    position:relative;
-    min-height:125px;
-    border-radius:20px;
-    padding:18px;
-    background:linear-gradient(145deg,#182b20,#0b1810);
-    border:1px solid #315e40;
-    overflow:hidden;
+  border:1px solid #275c34;
+  border-radius:17px;
+  padding:18px 10px;
+  text-align:center;
+  background:#0b190e;
 }
 
-.wallet::before{
-    content:"";
-    position:absolute;
-    width:100px;
-    height:100px;
-    border-radius:50%;
-    background:rgba(56,255,137,.06);
-    right:-30px;
-    top:-30px;
+.wallet strong{
+  display:block;
+  font-size:23px;
+  color:#66ff90;
 }
 
-.walletIcon{
-    font-size:32px;
+.wallet span{
+  color:#78937e;
+  font-size:12px;
 }
 
-.walletAmount{
-    color:#4dff93;
-    font-size:22px;
-    font-weight:900;
+.modal-bg{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.78);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:1000;
 }
 
-.walletText{
-    color:#89aa94;
-    font-size:12px;
+.modal-bg.show{
+  display:flex;
 }
-
-.walletBtn{
-    margin-top:8px;
-    border:1px solid #2c7044;
-    background:#0a2515;
-    color:#c4ffd4;
-    padding:8px 11px;
-    border-radius:9px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-/* =========================
-   MODALS
-========================= */
 
 .modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(8px);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    z-index:1000;
-    padding:20px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modalBox{
-    width:min(460px,100%);
-    background:
-        linear-gradient(180deg,#102719,#061109);
-    border:1px solid #2c8a4b;
-    border-radius:25px;
-    padding:28px;
-    text-align:center;
-    box-shadow:0 0 50px rgba(57,255,136,.2);
-    animation:modalIn .25s ease;
+  width:min(520px,100%);
+  background:#09150c;
+  border:1px solid #2c6839;
+  border-radius:23px;
+  padding:22px;
+  box-shadow:0 20px 70px rgba(0,0,0,.55);
+  animation:modalIn .22s ease;
 }
 
 @keyframes modalIn{
-    from{
-        opacity:0;
-        transform:scale(.85);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-.modalTitle{
-    font-size:26px;
-    color:#4dff93;
-    font-weight:900;
-}
-
-.modalText{
-    color:#9fc5ab;
-    margin:10px 0 18px;
-}
-
-.codeInput{
-    width:100%;
-    padding:15px;
-    border-radius:13px;
-    border:1px solid #296b40;
-    background:#020804;
-    color:#52ff98;
-    text-align:center;
-    font-size:25px;
-    letter-spacing:8px;
-    outline:none;
-}
-
-.modalButtons{
-    display:flex;
-    gap:10px;
-    margin-top:14px;
-}
-
-.modalBtn{
-    flex:1;
-    border:1px solid #2b7a46;
-    background:#0c2817;
-    color:#c7ffd5;
-    padding:13px;
-    border-radius:13px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.modalBtn.close{
-    border-color:#713232;
-    color:#ff9090;
-    background:#260d0d;
-}
-
-.pullBtn{
-    width:100%;
-    padding:18px;
-    border:2px solid #42ff8c;
-    background:#0a2c18;
-    color:#54ff99;
-    border-radius:16px;
-    font-size:20px;
-    font-weight:900;
-    cursor:pointer;
-    margin-top:14px;
-    animation:pullPulse 1s ease-in-out infinite;
-}
-
-@keyframes pullPulse{
-    0%,100%{
-        box-shadow:0 0 0 rgba(57,255,136,0);
-        transform:translateY(0);
-    }
-    50%{
-        box-shadow:0 0 24px rgba(57,255,136,.28);
-        transform:translateY(-2px);
-    }
-}
-
-/* =========================
-   CELEBRATION
-========================= */
-
-#celebrationLayer{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:2000;
-    overflow:hidden;
-}
-
-.confetti{
-    position:absolute;
-    width:9px;
-    height:16px;
-    top:-30px;
-    animation:confettiFall linear forwards;
-}
-
-@keyframes confettiFall{
-    to{
-        transform:translate3d(var(--x),110vh,0) rotate(900deg);
-    }
-}
-
-.bill{
-    position:absolute;
-    font-size:27px;
-    top:50%;
-    left:50%;
-    animation:billFly 1.8s cubic-bezier(.1,.7,.2,1) forwards;
-}
-
-@keyframes billFly{
-    0%{
-        opacity:0;
-        transform:translate(-50%,-50%) scale(.3) rotate(0);
-    }
-    20%{
-        opacity:1;
-    }
-    100%{
-        opacity:0;
-        transform:
-            translate(
-                calc(-50% + var(--x)),
-                calc(-50% + var(--y))
-            )
-            scale(1.2)
-            rotate(var(--r));
-    }
-}
-
-.celebrationText{
-    position:fixed;
-    left:50%;
-    top:42%;
-    transform:translate(-50%,-50%) scale(.7);
-    z-index:2100;
-    text-align:center;
-    pointer-events:none;
+  from{
     opacity:0;
+    transform:scale(.92);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
 }
 
-.celebrationText.show{
-    animation:celebrateText 2.2s ease forwards;
+.modal h2{
+  margin-top:0;
 }
 
-.celebrationSmall{
-    color:#fff;
-    font-size:25px;
-    font-weight:bold;
-    text-shadow:0 0 15px #000;
+.modal input,
+.modal textarea{
+  width:100%;
+  background:#061009;
+  color:#fff;
+  border:1px solid #285636;
+  border-radius:13px;
+  padding:12px;
+  margin:7px 0;
+  outline:none;
 }
 
-.celebrationBig{
-    color:#4dff93;
-    font-size:58px;
-    font-weight:900;
-    text-shadow:
-        0 0 12px #00ff66,
-        0 0 35px rgba(0,255,102,.6);
+.modal input:focus,
+.modal textarea:focus{
+  border-color:#55ff84;
 }
 
-@keyframes celebrateText{
-    0%{
-        opacity:0;
-        transform:translate(-50%,-50%) scale(.5);
-    }
-    15%{
-        opacity:1;
-        transform:translate(-50%,-50%) scale(1.12);
-    }
-    30%{
-        transform:translate(-50%,-50%) scale(1);
-    }
-    80%{
-        opacity:1;
-    }
-    100%{
-        opacity:0;
-        transform:translate(-50%,-70%) scale(.95);
-    }
+.modal-actions{
+  display:flex;
+  gap:10px;
+  margin-top:12px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+.btn{
+  border:0;
+  border-radius:13px;
+  padding:12px 16px;
+  background:#174c26;
+  color:#fff;
+  font-weight:800;
+}
 
-@media(max-width:700px){
-    .logo{
-        font-size:37px;
-    }
+.btn:hover{
+  filter:brightness(1.15);
+}
 
-    .money{
-        font-size:42px;
-    }
+.btn.red{
+  background:#711f1f;
+}
 
-    .stats{
-        grid-template-columns:1fr;
-    }
+.btn.gray{
+  background:#243128;
+}
 
-    .moneyButtons{
-        grid-template-columns:1fr;
-    }
+.notice{
+  padding:13px;
+  border-radius:14px;
+  background:#0c2112;
+  border:1px solid #245b31;
+  color:#9de8ae;
+  margin:10px 0;
+}
 
-    .historyItem{
-        grid-template-columns:1fr 1fr;
-    }
+.question{
+  padding:15px;
+  border-bottom:1px solid #1c3822;
+}
 
-    .milestones{
-        grid-template-columns:1fr 1fr;
-    }
+.question b{
+  display:block;
+  margin-bottom:5px;
+}
 
-    .safesGrid{
-        grid-template-columns:1fr;
-    }
+.donation{
+  border-color:#5c4820;
+  background:linear-gradient(145deg,#191306,#0c0b07);
+}
 
-    .walletGrid{
-        grid-template-columns:1fr;
-    }
+.card-page{
+  border-color:#244a72;
+  background:linear-gradient(145deg,#091421,#071019);
+}
+
+.admin-page{
+  border-color:#6b2020;
+  background:linear-gradient(145deg,#190909,#0d0707);
+}
+
+.admin-page .section-title{
+  color:#ff6464;
+}
+
+.safes{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+
+.safe{
+  min-height:190px;
+  position:relative;
+  background:linear-gradient(145deg,#17231a,#0c130e);
+  border:1px solid #385340;
+  border-radius:20px;
+  padding:20px;
+  overflow:hidden;
+}
+
+.safe-door{
+  position:absolute;
+  right:15px;
+  top:15px;
+  width:80px;
+  height:105px;
+  border-radius:9px;
+  background:#203024;
+  border:3px solid #4a634d;
+  transform:perspective(300px) rotateY(-12deg);
+}
+
+.safe-door:after{
+  content:"";
+  position:absolute;
+  right:8px;
+  top:42px;
+  width:9px;
+  height:20px;
+  background:#111;
+  border-radius:4px;
+}
+
+.safe h3{
+  position:relative;
+  z-index:2;
+  margin:0 0 7px;
+}
+
+.safe-amount{
+  position:relative;
+  z-index:2;
+  font-size:28px;
+  font-weight:900;
+  color:#69ff92;
+}
+
+.safe-max{
+  position:relative;
+  z-index:2;
+  color:#76927d;
+  font-size:12px;
+}
+
+.safe-progress{
+  position:relative;
+  z-index:2;
+  height:8px;
+  background:#071008;
+  border-radius:20px;
+  margin:12px 0;
+  overflow:hidden;
+}
+
+.safe-fill{
+  height:100%;
+  background:#43e96e;
+  transition:.5s;
+}
+
+.safe-buttons{
+  position:relative;
+  z-index:3;
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.safe-buttons button{
+  border:1px solid #35573e;
+  background:#112217;
+  color:#fff;
+  border-radius:10px;
+  padding:8px 10px;
+}
+
+.safe.full{
+  border-color:#4de879;
+  box-shadow:0 0 25px rgba(63,255,113,.08);
+}
+
+#toast{
+  position:fixed;
+  left:50%;
+  bottom:22px;
+  transform:translate(-50%,20px);
+  opacity:0;
+  pointer-events:none;
+  background:#102817;
+  border:1px solid #3c874d;
+  padding:13px 18px;
+  border-radius:14px;
+  z-index:2000;
+  transition:.25s;
+}
+
+#toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+#confetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:3000;
+}
+
+.empty{
+  color:#708a75;
+  text-align:center;
+  padding:30px 10px;
+}
+
+footer{
+  text-align:center;
+  color:#58705e;
+  padding:30px 0 10px;
+  font-size:12px;
+}
+
+@media(max-width:750px){
+  .stats,
+  .actions,
+  .wallets{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .milestones{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .safes{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:480px){
+  .app{
+    padding:10px;
+  }
+
+  .logo{
+    font-size:34px;
+  }
+
+  .stats,
+  .actions,
+  .wallets{
+    grid-template-columns:1fr;
+  }
+
+  .milestones{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .balance{
+    font-size:46px;
+  }
 }
 </style>
 </head>
@@ -1080,2003 +688,1983 @@ canvas{
 
 <div class="app">
 
-<header class="header">
-    <div class="logo">💰 ZBieranie</div>
-    <div class="subtitle">Zbieraj. Oszczędzaj. Osiągnij cel.</div>
+<header>
+  <div class="logo">💰 ZBieranie</div>
+  <div class="subtitle">Wspólnie do 6868 zł</div>
+  <div id="sync" class="sync">🟢 Łączenie z bazą...</div>
 </header>
 
-<div class="tabs">
-    <button class="tab active" onclick="switchPage('balancePage',this)">
-        💰 Saldo
-    </button>
-
-    <button class="tab" onclick="switchPage('goalsPage',this)">
-        🎯 Cele
-    </button>
+<div class="nav">
+  <button class="active" data-page="saldo" onclick="showPage('saldo',this)">💰 Saldo</button>
+  <button data-page="cele" onclick="showPage('cele',this)">🎯 Cele</button>
+  <button data-page="pytania" onclick="showPage('pytania',this)">🟪 Pytania 📝</button>
+  <button data-page="donaty" onclick="showPage('donaty',this)">💰 Donaty</button>
+  <button data-page="karta" onclick="showPage('karta',this)">💳 Karta</button>
+  <button data-page="admin" onclick="showPage('admin',this)">🔴 Admin</button>
 </div>
 
-<!-- ======================================================
-     SALDO
-====================================================== -->
+<!-- SALDO -->
 
-<main id="balancePage" class="page active">
+<section id="page-saldo" class="page active">
 
-<section class="card">
+  <div class="card balance-card">
 
-    <h2>💵 Aktualne saldo</h2>
+    <div class="money-icon">💵</div>
 
-    <div id="balanceDisplay" class="money">0,00 zł</div>
+    <div id="balance" class="balance">0,00 zł</div>
 
-    <div class="balanceBar">
-        <div id="balanceFill" class="balanceFill"></div>
+    <div class="target">
+      Cel: <b>6868,00 zł</b>
     </div>
 
-    <div id="balanceInfo" class="balanceInfo">
-        0,00 zł / 6868,00 zł
+    <div class="progress-wrap">
+
+      <div class="progress">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+
+      <div class="progress-info">
+        <span id="progressPercent">0%</span>
+        <span id="remaining">Pozostało: 6868,00 zł</span>
+      </div>
+
     </div>
-
-    <button class="clearBtn" onclick="clearBalance()">
-        🗑 Wyczyść saldo
-    </button>
-
-</section>
-
-
-<section class="card">
-
-    <h2>📊 Statystyki</h2>
 
     <div class="stats">
 
-        <div class="stat">
-            <div class="statIcon">🍾</div>
-            <div id="bottlesValue" class="statValue">0</div>
-            <div class="statName">butelek</div>
-        </div>
+      <div class="stat">
+        <div id="bottles" class="stat-number">0</div>
+        <div class="stat-label">🍾 Butelki</div>
+      </div>
 
-        <div class="stat">
-            <div class="statIcon">📅</div>
-            <div id="daysValue" class="statValue">0</div>
-            <div class="statName">dni</div>
-        </div>
+      <div class="stat">
+        <div id="days" class="stat-number">0</div>
+        <div class="stat-label">📅 Dni</div>
+      </div>
 
-        <div class="stat">
-            <div class="statIcon">🎯</div>
-            <div id="remainingValue" class="statValue">6868,00 zł</div>
-            <div class="statName">pozostało</div>
-        </div>
+      <div class="stat">
+        <div id="entries" class="stat-number">0</div>
+        <div class="stat-label">📊 Wpłaty</div>
+      </div>
 
     </div>
 
-</section>
+  </div>
 
+  <div class="card">
 
-<section class="card">
+    <div class="section-title">💰 Dodaj pieniądze</div>
 
-    <h2>📈 Historia zarobków</h2>
+    <div class="actions">
 
-    <div class="chartScroll">
-        <div class="chartInner">
-            <canvas id="chart" width="1450" height="390"></canvas>
-        </div>
+      <button class="action green" onclick="quickAdd(.5,'Kaucja')">
+        <div class="action-title">+0,50 zł</div>
+        <div class="action-desc">🍾 Kaucja za butelkę</div>
+      </button>
+
+      <button class="action green" onclick="quickAdd(10,'20 butelek')">
+        <div class="action-title">+10 zł</div>
+        <div class="action-desc">🍾 20 butelek</div>
+      </button>
+
+      <button class="action green" onclick="quickAdd(20,'40 butelek')">
+        <div class="action-title">+20 zł</div>
+        <div class="action-desc">🍾 40 butelek</div>
+      </button>
+
+      <button class="action green" onclick="openIncome()">
+        <div class="action-title">➕ Własna kwota</div>
+        <div class="action-desc">Dodaj dowolny zarobek</div>
+      </button>
+
+      <button class="action red" onclick="openExpense()">
+        <div class="action-title">➖ Wydatek</div>
+        <div class="action-desc">Odejmij pieniądze</div>
+      </button>
+
+      <button class="action" onclick="showHowToPay()">
+        <div class="action-title">🎬 Jak wpłacić?</div>
+        <div class="action-desc">Zobacz wszystkie sposoby</div>
+      </button>
+
     </div>
 
-    <button class="clearBtn" onclick="clearChart()">
-        🗑 Wyczyść wykresy i saldo
+  </div>
+
+  <div class="card">
+
+    <div class="section-title">📈 Historia salda</div>
+
+    <div class="chart-scroll">
+      <div class="chart">
+        <canvas id="chart" width="1450" height="430"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-info">
+      ↔️ Przesuń wykres poziomo, jeśli jest dużo wpisów.
+    </div>
+
+    <button class="btn red" style="margin-top:12px" onclick="clearChartRequest()">
+      🗑️ Wyczyść wykres i historię
     </button>
 
-</section>
+  </div>
 
+  <div class="card">
 
-<section class="card">
+    <div class="section-title">📜 Historia</div>
 
-    <h2>💰 Dodaj pieniądze</h2>
-
-    <div class="moneyButtons">
-
-        <button class="moneyBtn" onclick="addMoney(0.5,'Kaucja')">
-            +0,50 zł<br>
-            <small>Kaucja</small>
-        </button>
-
-        <button class="moneyBtn" onclick="addMoney(10,'20 butelek')">
-            +10 zł<br>
-            <small>20 butelek</small>
-        </button>
-
-        <button class="moneyBtn" onclick="addMoney(20,'40 butelek')">
-            +20 zł<br>
-            <small>40 butelek</small>
-        </button>
-
-        <button class="moneyBtn" onclick="customIncome()">
-            💵 Inna kwota
-        </button>
-
-        <button class="moneyBtn expense" onclick="customExpense()">
-            🔴 Wydatek
-        </button>
-
+    <div id="history" class="history">
+      <div class="empty">Ładowanie...</div>
     </div>
 
-</section>
+  </div>
 
+  <div class="card">
 
-<section class="card">
+    <div class="section-title">🔐 Sejfy</div>
 
-    <h2>📜 Historia pieniędzy</h2>
+    <div class="safes" id="safes"></div>
 
-    <div id="history" class="history"></div>
-
-    <button id="historyMore" class="moreBtn" onclick="toggleHistory()">
-        Pokaż więcej ▼
-    </button>
-
-    <button class="clearBtn" onclick="clearHistory()">
-        🗑 Wyczyść historię
-    </button>
+  </div>
 
 </section>
 
+<!-- CELE -->
 
-<!-- PORTFELE -->
+<section id="page-cele" class="page">
 
-<section class="card">
+  <div class="card goals">
 
-    <h2>👛 Portfele</h2>
+    <div class="section-title">🎯 Cele</div>
 
-    <div class="walletGrid">
-
-        <div class="wallet">
-            <div class="walletIcon">👛</div>
-            <div class="walletAmount">100 zł</div>
-            <div class="walletText">Szybka wpłata do portfela</div>
-            <button class="walletBtn" onclick="walletDeposit(100)">
-                + Wpłać
-            </button>
-        </div>
-
-        <div class="wallet">
-            <div class="walletIcon">👛</div>
-            <div class="walletAmount">250 zł</div>
-            <div class="walletText">Szybka wpłata do portfela</div>
-            <button class="walletBtn" onclick="walletDeposit(250)">
-                + Wpłać
-            </button>
-        </div>
-
-        <div class="wallet">
-            <div class="walletIcon">👛</div>
-            <div class="walletAmount">500 zł</div>
-            <div class="walletText">Szybka wpłata do portfela</div>
-            <button class="walletBtn" onclick="walletDeposit(500)">
-                + Wpłać
-            </button>
-        </div>
-
-        <div class="wallet">
-            <div class="walletIcon">👛</div>
-            <div class="walletAmount">1000 zł</div>
-            <div class="walletText">Szybka wpłata do portfela</div>
-            <button class="walletBtn" onclick="walletDeposit(1000)">
-                + Wpłać
-            </button>
-        </div>
-
+    <div class="goal-main">
+      🛴 2× Kukirin G4
     </div>
 
-</section>
+    <div class="progress-wrap">
+      <div class="progress">
+        <div id="goalFill" class="progress-fill"></div>
+      </div>
 
-
-<!-- SEJFY -->
-
-<section class="card">
-
-    <h2 class="safesTitle">🔐 Sejfy</h2>
-
-    <div class="safesGrid" id="safesGrid"></div>
-
-</section>
-
-</main>
-
-
-<!-- ======================================================
-     CELE
-====================================================== -->
-
-<main id="goalsPage" class="page goalsPage">
-
-<section class="card goalMain">
-
-    <h2>🎯 Mój główny cel</h2>
-
-    <div class="goalAmount">
-        6868 zł
-    </div>
-
-    <div class="orangeBar">
-        <div id="goalFill" class="orangeFill"></div>
-    </div>
-
-    <div id="goalPercent" class="goalPercent">
-        0%
+      <div class="progress-info">
+        <span id="goalPercent">0%</span>
+        <span>6868 zł</span>
+      </div>
     </div>
 
     <div class="milestones">
 
-        <div class="milestone" data-goal="500">
-            500 zł
-        </div>
-
-        <div class="milestone" data-goal="1000">
-            1000 zł
-        </div>
-
-        <div class="milestone" data-goal="2500">
-            2500 zł
-        </div>
-
-        <div class="milestone" data-goal="5000">
-            5000 zł
-        </div>
-
-        <div class="milestone" data-goal="6868">
-            6868 zł
-        </div>
+      <div class="milestone" data-value="500">500 zł</div>
+      <div class="milestone" data-value="1000">1000 zł</div>
+      <div class="milestone" data-value="2500">2500 zł</div>
+      <div class="milestone" data-value="5000">5000 zł</div>
+      <div class="milestone" data-value="6868">6868 zł</div>
 
     </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="section-title">💼 Portfele</div>
+
+    <div class="wallets">
+
+      <div class="wallet">
+        <strong>100 zł</strong>
+        <span>mały portfel</span>
+      </div>
+
+      <div class="wallet">
+        <strong>250 zł</strong>
+        <span>portfel</span>
+      </div>
+
+      <div class="wallet">
+        <strong>500 zł</strong>
+        <span>większy portfel</span>
+      </div>
+
+      <div class="wallet">
+        <strong>1000 zł</strong>
+        <span>duży portfel</span>
+      </div>
+
+    </div>
+
+  </div>
 
 </section>
 
+<!-- PYTANIA -->
 
-<section class="card">
+<section id="page-pytania" class="page">
 
-    <h2>🛴 Moje cele</h2>
+  <div class="card">
 
-    <div style="
-        background:#1a0e05;
-        border:1px solid #874b13;
-        border-radius:20px;
-        padding:25px;
-        text-align:center;
-    ">
+    <div class="section-title">🟪 Pytania 📝</div>
 
-        <div style="font-size:50px;">🛴</div>
-
-        <div style="
-            color:#ffad3e;
-            font-size:25px;
-            font-weight:900;
-            margin-top:8px;
-        ">
-            2× Kukirin G4
-        </div>
-
+    <div class="question">
+      <b>❓ Kiedy powstało ZBieranie?</b>
+      <span id="siteInfo">
+        ZBieranie to wspólny licznik pieniędzy i celów.
+      </span>
     </div>
+
+    <div class="question">
+      <b>❓ Na co zbieramy?</b>
+      <span>Na realizację wspólnego celu: 6868 zł.</span>
+    </div>
+
+    <div class="question">
+      <b>❓ Czy licznik jest wspólny?</b>
+      <span>Tak — główne saldo jest przechowywane w bazie.</span>
+    </div>
+
+  </div>
+
+  <div class="card">
+
+    <div class="section-title">💡 Propozycje</div>
+
+    <textarea
+      id="proposal"
+      rows="5"
+      placeholder="Masz pomysł na stronę?..."
+    ></textarea>
+
+    <button class="btn" onclick="saveProposal()">
+      💾 Zapisz propozycję
+    </button>
+
+  </div>
 
 </section>
 
-</main>
+<!-- DONATY -->
 
-</div>
+<section id="page-donaty" class="page">
 
+  <div class="card donation">
 
-<!-- ======================================================
-     CODE MODAL
-====================================================== -->
+    <div class="section-title">💰 Donaty</div>
 
-<div id="codeModal" class="modal">
+    <div class="notice">
+      Tutaj można zapisać przekazaną kwotę w PLN.
+    </div>
 
-    <div class="modalBox">
+    <input
+      id="donationAmount"
+      type="number"
+      step="0.01"
+      min="0.01"
+      placeholder="Kwota, np. 5.50"
+    >
 
-        <div class="modalTitle">
-            🔐 Odblokuj sejf
-        </div>
+    <input
+      id="donationDesc"
+      type="text"
+      maxlength="100"
+      placeholder="Od kogo / opis"
+    >
 
-        <div id="modalSafeText" class="modalText">
-            Wpisz 4-cyfrowy kod.
-        </div>
+    <button class="btn" onclick="makeDonation()">
+      💰 Dodaj donat
+    </button>
 
-        <input
-            id="codeInput"
-            class="codeInput"
-            maxlength="4"
-            inputmode="numeric"
-            placeholder="0000"
-        >
+  </div>
 
-        <div id="pullArea"></div>
+</section>
 
-        <div class="modalButtons">
+<!-- KARTA -->
 
-            <button class="modalBtn" onclick="unlockSafe()">
-                🔓 Odblokuj
-            </button>
+<section id="page-karta" class="page">
 
-            <button class="modalBtn close" onclick="closeCodeModal()">
-                Zamknij
-            </button>
+  <div class="card card-page">
 
-        </div>
+    <div class="section-title">💳 Karta</div>
+
+    <div class="notice">
+      Historia widoczna tutaj dotyczy tylko tego użytkownika.
+    </div>
+
+    <div id="cardHistory" class="history">
+      <div class="empty">Ładowanie...</div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ADMIN -->
+
+<section id="page-admin" class="page">
+
+  <div id="adminLogin" class="card admin-page">
+
+    <div class="section-title">🔴 Admin</div>
+
+    <div class="notice">
+      Panel administracyjny.
+    </div>
+
+    <input
+      id="adminCode"
+      type="password"
+      placeholder="Kod Admin"
+    >
+
+    <button class="btn red" onclick="loginAdmin()">
+      🔐 Zaloguj
+    </button>
+
+  </div>
+
+  <div id="adminPanel" class="card admin-page" style="display:none">
+
+    <div class="section-title">🔴 Panel Admin</div>
+
+    <div class="notice">
+      Zalogowano jako Admin.
+    </div>
+
+    <div class="actions">
+
+      <button class="action green" onclick="openIncome(true)">
+        <div class="action-title">➕ Wpłata</div>
+        <div class="action-desc">Dodaj do wspólnego salda</div>
+      </button>
+
+      <button class="action red" onclick="openExpense(true)">
+        <div class="action-title">➖ Wypłata</div>
+        <div class="action-desc">Odejmij ze wspólnego salda</div>
+      </button>
+
+      <button class="action red" onclick="ownerClear('chart')">
+        <div class="action-title">🗑️ Wyczyść dane</div>
+        <div class="action-desc">Dwa potwierdzenia</div>
+      </button>
+
+      <button class="action red" onclick="clearMemory()">
+        <div class="action-title">🧠 Wyczyść pamięć</div>
+        <div class="action-desc">Wymaga 10× ButelKaucja</div>
+      </button>
 
     </div>
 
-</div>
+  </div>
 
+</section>
 
-<!-- ======================================================
-     MESSAGE MODAL
-====================================================== -->
-
-<div id="messageModal" class="modal">
-
-    <div class="modalBox">
-
-        <div id="messageTitle" class="modalTitle">
-            🔐 Sejf
-        </div>
-
-        <div id="messageText" class="modalText">
-            Wiadomość
-        </div>
-
-        <button class="modalBtn" onclick="closeMessageModal()">
-            OK
-        </button>
-
-    </div>
+<footer>
+  ZBieranie • wspólny licznik pieniędzy
+</footer>
 
 </div>
 
+<div id="toast"></div>
+<div id="confetti"></div>
 
-<div id="celebrationLayer"></div>
-<div id="celebrationText" class="celebrationText"></div>
+<!-- MODAL -->
 
+<div id="modalBg" class="modal-bg">
+  <div class="modal" id="modal"></div>
+</div>
 
 <script>
+/* =========================================================
+   SUPABASE
+========================================================= */
 
-/* ======================================================
-   DANE
-====================================================== */
+const SUPABASE_URL =
+  "https://jcgiteoaewnxjomnlkpe.supabase.co";
 
-const TARGET = 6868;
+const SUPABASE_KEY =
+  "sb_publishable_n8Dv-miLjH8YjPVZHclUAg_mNFbQ3b2";
 
-let balance = Number(localStorage.getItem("zb_balance") || 0);
-let bottles = Number(localStorage.getItem("zb_bottles") || 0);
-let days = Number(localStorage.getItem("zb_days") || 0);
+const GOAL = 6868;
 
-let history = JSON.parse(
-    localStorage.getItem("zb_history") || "[]"
-);
+let sb = null;
+let currentUser = null;
 
-let historyExpanded = false;
+let balance = 0;
+let bottles = 0;
+let days = 0;
+let history = [];
 
-let safes = JSON.parse(
-    localStorage.getItem("zb_safes") || "null"
-);
+let admin = false;
 
-if(!safes){
+const safeLimits = [500,1000,2000,250];
 
-    safes = [
-        {
-            id:1,
-            max:500,
-            amount:0,
-            code:null,
-            unlocked:false
-        },
-        {
-            id:2,
-            max:1000,
-            amount:0,
-            code:null,
-            unlocked:false
-        },
-        {
-            id:3,
-            max:2000,
-            amount:0,
-            code:null,
-            unlocked:false
-        },
-        {
-            id:4,
-            max:250,
-            amount:0,
-            code:null,
-            unlocked:false
-        }
-    ];
+let safes = [0,0,0,0];
+let safeCodes = [null,null,null,null];
+
+
+/* =========================================================
+   HELPERY
+========================================================= */
+
+function money(n){
+  return Number(n || 0).toLocaleString("pl-PL",{
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  }) + " zł";
 }
 
+function escapeHtml(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
 
-/* ======================================================
-   SAVE
-====================================================== */
+function toast(message){
+  const el = document.getElementById("toast");
 
-function save(){
+  el.textContent = message;
+  el.classList.add("show");
 
-    localStorage.setItem("zb_balance",balance);
-    localStorage.setItem("zb_bottles",bottles);
-    localStorage.setItem("zb_days",days);
-    localStorage.setItem(
-        "zb_history",
-        JSON.stringify(history)
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(()=>{
+    el.classList.remove("show");
+  },2800);
+}
+
+function openModal(html){
+  document.getElementById("modal").innerHTML = html;
+  document.getElementById("modalBg").classList.add("show");
+}
+
+function closeModal(){
+  document.getElementById("modalBg").classList.remove("show");
+}
+
+document.getElementById("modalBg").addEventListener("click",e=>{
+  if(e.target.id === "modalBg"){
+    closeModal();
+  }
+});
+
+
+/* =========================================================
+   START
+========================================================= */
+
+async function start(){
+
+  setSync("🟡 Łączenie z bazą...");
+
+  try{
+
+    sb = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
     );
-    localStorage.setItem(
-        "zb_safes",
-        JSON.stringify(safes)
-    );
-}
 
+    let {data:{session}} = await sb.auth.getSession();
 
-/* ======================================================
-   FORMAT
-====================================================== */
+    if(!session){
 
-function money(value){
+      const result = await sb.auth.signInAnonymously();
 
-    return Number(value)
-        .toFixed(2)
-        .replace(".",",") + " zł";
+      if(result.error){
+        throw result.error;
+      }
 
-}
-
-
-/* ======================================================
-   SOUND
-====================================================== */
-
-let audioCtx=null;
-
-function getAudio(){
-
-    if(!audioCtx){
-
-        audioCtx = new (
-            window.AudioContext ||
-            window.webkitAudioContext
-        )();
-
+      session = result.data.session;
     }
 
-    if(audioCtx.state==="suspended"){
-        audioCtx.resume();
-    }
+    currentUser = session.user;
 
-    return audioCtx;
+    await loadSharedState();
+    await loadHistory();
+
+    setSync("🟢 Połączono z bazą");
+
+  }catch(error){
+
+    console.error(error);
+
+    setSync("🔴 Brak połączenia z bazą",true);
+
+    loadLocal();
+
+    toast("⚠️ Tryb lokalny — sprawdź Supabase");
+  }
+
+  drawAll();
+}
+
+function setSync(text,off=false){
+
+  const el = document.getElementById("sync");
+
+  el.textContent = text;
+  el.classList.toggle("off",off);
 }
 
 
-function sound(type){
+/* =========================================================
+   SHARED STATE
+========================================================= */
 
-    try{
+async function loadSharedState(){
 
-        const ctx=getAudio();
+  const {data,error} = await sb
+    .from("zbieranie_state")
+    .select("*")
+    .eq("id",1)
+    .single();
 
-        const osc=ctx.createOscillator();
-        const gain=ctx.createGain();
+  if(error) throw error;
 
-        osc.connect(gain);
-        gain.connect(ctx.destination);
+  balance = Number(data.balance || 0);
+  bottles = Number(data.bottles || 0);
+  days = Number(data.days || 0);
+}
 
-        const now=ctx.currentTime;
+async function saveSharedState(){
 
-        if(type==="click"){
+  if(!sb) return false;
 
-            osc.frequency.setValueAtTime(650,now);
-            gain.gain.setValueAtTime(.07,now);
-            gain.gain.exponentialRampToValueAtTime(
-                .001,
-                now+.08
-            );
+  const {error} = await sb
+    .from("zbieranie_state")
+    .update({
+      balance:Number(balance.toFixed(2)),
+      bottles:Math.floor(bottles),
+      days:Math.floor(days),
+      updated_at:new Date().toISOString()
+    })
+    .eq("id",1);
 
-        }
+  if(error){
 
-        else if(type==="pop"){
+    console.error("SAVE STATE:",error);
 
-            osc.frequency.setValueAtTime(220,now);
-            osc.frequency.exponentialRampToValueAtTime(
-                800,
-                now+.18
-            );
+    toast("❌ Supabase zablokował zapis");
 
-            gain.gain.setValueAtTime(.11,now);
-            gain.gain.exponentialRampToValueAtTime(
-                .001,
-                now+.2
-            );
+    return false;
+  }
 
-        }
-
-        else if(type==="whoosh"){
-
-            osc.type="sawtooth";
-
-            osc.frequency.setValueAtTime(
-                100,
-                now
-            );
-
-            osc.frequency.exponentialRampToValueAtTime(
-                800,
-                now+.55
-            );
-
-            gain.gain.setValueAtTime(.001,now);
-            gain.gain.linearRampToValueAtTime(
-                .08,
-                now+.1
-            );
-
-            gain.gain.exponentialRampToValueAtTime(
-                .001,
-                now+.6
-            );
-
-        }
-
-        else if(type==="unlock"){
-
-            osc.frequency.setValueAtTime(
-                500,
-                now
-            );
-
-            osc.frequency.exponentialRampToValueAtTime(
-                1000,
-                now+.25
-            );
-
-            gain.gain.setValueAtTime(.08,now);
-            gain.gain.exponentialRampToValueAtTime(
-                .001,
-                now+.3
-            );
-
-        }
-
-        else if(type==="open"){
-
-            osc.type="square";
-
-            osc.frequency.setValueAtTime(
-                160,
-                now
-            );
-
-            osc.frequency.exponentialRampToValueAtTime(
-                900,
-                now+.8
-            );
-
-            gain.gain.setValueAtTime(.08,now);
-            gain.gain.exponentialRampToValueAtTime(
-                .001,
-                now+.9
-            );
-
-        }
-
-        else if(type==="error"){
-
-            osc.frequency.setValueAtTime(
-                180,
-                now
-            );
-
-            osc.frequency.setValueAtTime(
-                120,
-                now+.16
-            );
-
-            gain.gain.setValueAtTime(.09,now);
-            gain.gain.exponentialRampToValueAtTime(
-                .001,
-                now+.3
-            );
-
-        }
-
-        osc.start(now);
-        osc.stop(now+.95);
-
-    }catch(e){}
-
+  return true;
 }
 
 
-/* ======================================================
-   PAGE
-====================================================== */
+/* =========================================================
+   HISTORY
+========================================================= */
 
-function switchPage(id,button){
+async function loadHistory(){
 
-    document.querySelectorAll(".page")
-        .forEach(p=>p.classList.remove("active"));
+  if(!sb || !currentUser){
+    return;
+  }
 
-    document.querySelectorAll(".tab")
-        .forEach(t=>t.classList.remove("active"));
+  const {data,error} = await sb
+    .from("zbieranie_history")
+    .select("*")
+    .eq("user_id",currentUser.id)
+    .order("created_at",{ascending:true});
 
-    document.getElementById(id)
-        .classList.add("active");
+  if(error){
 
+    console.error(error);
+
+    history = [];
+
+    return;
+  }
+
+  history = data || [];
+}
+
+async function addHistory(amount,description){
+
+  const row = {
+    user_id:currentUser.id,
+    amount:Number(amount.toFixed(2)),
+    description,
+    balance_after:Number(balance.toFixed(2)),
+    created_at:new Date().toISOString()
+  };
+
+  const {data,error} = await sb
+    .from("zbieranie_history")
+    .insert(row)
+    .select()
+    .single();
+
+  if(error){
+
+    console.error(error);
+
+    return;
+  }
+
+  history.push(data);
+}
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+async function addMoney(amount,description){
+
+  amount = Number(amount);
+
+  if(!Number.isFinite(amount) || amount <= 0){
+    toast("❌ Podaj poprawną kwotę");
+    return;
+  }
+
+  amount = Number(amount.toFixed(2));
+
+  const oldBalance = balance;
+
+  balance = Number((balance + amount).toFixed(2));
+
+  const match = String(description).match(/(\d+)\s*butelek/i);
+
+  if(match){
+    bottles += Number(match[1]);
+  }
+
+  const saved = await saveSharedState();
+
+  if(!saved){
+
+    balance = oldBalance;
+
+    drawAll();
+
+    return;
+  }
+
+  await addHistory(amount,description);
+
+  drawAll();
+
+  toast("💚 Dodano " + money(amount));
+
+  sound("add");
+}
+
+
+async function spendMoney(amount,description){
+
+  amount = Number(amount);
+
+  if(!Number.isFinite(amount) || amount <= 0){
+    toast("❌ Podaj poprawną kwotę");
+    return;
+  }
+
+  if(amount > balance){
+    toast("❌ Nie ma tylu pieniędzy");
+    return;
+  }
+
+  amount = Number(amount.toFixed(2));
+
+  const oldBalance = balance;
+
+  balance = Number((balance - amount).toFixed(2));
+
+  const saved = await saveSharedState();
+
+  if(!saved){
+
+    balance = oldBalance;
+
+    drawAll();
+
+    return;
+  }
+
+  await addHistory(-amount,description);
+
+  drawAll();
+
+  toast("🔴 Wydano " + money(amount));
+
+  sound("remove");
+}
+
+
+/* =========================================================
+   QUICK ADD
+========================================================= */
+
+function quickAdd(amount,description){
+  addMoney(amount,description);
+}
+
+
+/* =========================================================
+   INCOME MODAL
+========================================================= */
+
+function openIncome(adminMode=false){
+
+  openModal(`
+    <h2>➕ Dodaj pieniądze</h2>
+
+    <input
+      id="incomeAmount"
+      type="number"
+      min="0.01"
+      step="0.01"
+      placeholder="Kwota, np. 12.50"
+    >
+
+    <input
+      id="incomeDescription"
+      type="text"
+      maxlength="100"
+      placeholder="Skąd pieniądze?"
+    >
+
+    <div class="modal-actions">
+      <button class="btn" onclick="confirmIncome()">Dodaj</button>
+      <button class="btn gray" onclick="closeModal()">Anuluj</button>
+    </div>
+  `);
+}
+
+async function confirmIncome(){
+
+  const amount = Number(
+    document.getElementById("incomeAmount").value
+  );
+
+  const description =
+    document.getElementById("incomeDescription").value.trim()
+    || "Wpłata";
+
+  closeModal();
+
+  await addMoney(amount,description);
+}
+
+
+/* =========================================================
+   EXPENSE MODAL
+========================================================= */
+
+function openExpense(){
+
+  openModal(`
+    <h2>➖ Wydatek</h2>
+
+    <input
+      id="expenseAmount"
+      type="number"
+      min="0.01"
+      step="0.01"
+      placeholder="Kwota"
+    >
+
+    <input
+      id="expenseDescription"
+      type="text"
+      maxlength="100"
+      placeholder="Na co wydano?"
+    >
+
+    <div class="modal-actions">
+      <button class="btn red" onclick="confirmExpense()">Wydaj</button>
+      <button class="btn gray" onclick="closeModal()">Anuluj</button>
+    </div>
+  `);
+}
+
+async function confirmExpense(){
+
+  const amount = Number(
+    document.getElementById("expenseAmount").value
+  );
+
+  const description =
+    document.getElementById("expenseDescription").value.trim()
+    || "Wydatek";
+
+  closeModal();
+
+  await spendMoney(amount,description);
+}
+
+
+/* =========================================================
+   DRAW ALL
+========================================================= */
+
+function drawAll(){
+
+  const safeBalance = Math.max(0,Math.min(balance,GOAL));
+
+  const percent = Math.min(
+    100,
+    Math.max(0,(safeBalance/GOAL)*100)
+  );
+
+  document.getElementById("balance").textContent = money(balance);
+
+  document.getElementById("progressPercent").textContent =
+    percent.toFixed(2) + "%";
+
+  document.getElementById("remaining").textContent =
+    "Pozostało: " + money(Math.max(0,GOAL-balance));
+
+  document.getElementById("progressFill").style.width =
+    percent + "%";
+
+  document.getElementById("goalFill").style.width =
+    percent + "%";
+
+  document.getElementById("goalPercent").textContent =
+    percent.toFixed(2) + "%";
+
+  document.getElementById("bottles").textContent =
+    bottles;
+
+  document.getElementById("days").textContent =
+    days;
+
+  document.getElementById("entries").textContent =
+    history.length;
+
+  document.querySelectorAll(".milestone").forEach(el=>{
+    el.classList.toggle(
+      "done",
+      balance >= Number(el.dataset.value)
+    );
+  });
+
+  drawHistory();
+  drawChart();
+  drawSafes();
+}
+
+
+/* =========================================================
+   HISTORY UI
+========================================================= */
+
+function drawHistory(){
+
+  const el = document.getElementById("history");
+
+  if(!history.length){
+
+    el.innerHTML =
+      `<div class="empty">Brak historii.</div>`;
+
+    return;
+  }
+
+  const items = [...history].reverse();
+
+  el.innerHTML = items.map(item=>{
+
+    const amount = Number(item.amount || 0);
+
+    const positive = amount >= 0;
+
+    const date = new Date(item.created_at);
+
+    return `
+      <div class="history-item">
+
+        <div>
+          <div class="history-desc">
+            ${escapeHtml(item.description)}
+          </div>
+
+          <div class="history-date">
+            ${date.toLocaleString("pl-PL")}
+            • saldo ${money(item.balance_after)}
+          </div>
+        </div>
+
+        <div class="amount ${positive ? "income":"expense"}">
+          ${positive ? "+" : ""}${money(amount)}
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+
+/* =========================================================
+   CHART
+========================================================= */
+
+function drawChart(){
+
+  const canvas = document.getElementById("chart");
+
+  const ctx = canvas.getContext("2d");
+
+  const width = canvas.width;
+  const height = canvas.height;
+
+  ctx.clearRect(0,0,width,height);
+
+  const padLeft = 65;
+  const padRight = 25;
+  const padTop = 25;
+  const padBottom = 55;
+
+  const chartW = width-padLeft-padRight;
+  const chartH = height-padTop-padBottom;
+
+  const maxValue =
+    Math.max(
+      GOAL,
+      ...history.map(x=>Math.abs(Number(x.balance_after||0))),
+      100
+    );
+
+  /* SIATKA */
+
+  ctx.font = "12px Arial";
+  ctx.textAlign = "right";
+  ctx.fillStyle = "#6c8872";
+  ctx.strokeStyle = "#16321d";
+  ctx.lineWidth = 1;
+
+  for(let i=0;i<=7;i++){
+
+    const value = maxValue*(i/7);
+
+    const y =
+      padTop+chartH-(i/7)*chartH;
+
+    ctx.beginPath();
+    ctx.moveTo(padLeft,y);
+    ctx.lineTo(width-padRight,y);
+    ctx.stroke();
+
+    ctx.fillText(
+      Math.round(value)+" zł",
+      padLeft-8,
+      y+4
+    );
+  }
+
+  if(!history.length){
+
+    ctx.textAlign="center";
+    ctx.fillStyle="#607965";
+
+    ctx.fillText(
+      "Brak danych do wykresu",
+      width/2,
+      height/2
+    );
+
+    return;
+  }
+
+  const values = history.map(x=>
+    Number(x.balance_after || 0)
+  );
+
+  const xStep =
+    values.length===1
+      ? chartW
+      : chartW/(values.length-1);
+
+  function point(i){
+
+    const x =
+      padLeft+i*xStep;
+
+    const y =
+      padTop+chartH-(values[i]/maxValue)*chartH;
+
+    return {x,y};
+  }
+
+  /* LINIE */
+
+  for(let i=1;i<values.length;i++){
+
+    const a = point(i-1);
+    const b = point(i);
+
+    ctx.beginPath();
+
+    ctx.moveTo(a.x,a.y);
+    ctx.lineTo(b.x,b.y);
+
+    ctx.strokeStyle =
+      values[i]>=values[i-1]
+        ? "#48ff78"
+        : "#ff5151";
+
+    ctx.lineWidth = 4;
+    ctx.lineCap = "round";
+
+    ctx.stroke();
+  }
+
+  /* PUNKTY + DATY */
+
+  ctx.textAlign="center";
+  ctx.font="11px Arial";
+
+  values.forEach((value,i)=>{
+
+    const p=point(i);
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,5,0,Math.PI*2);
+
+    ctx.fillStyle =
+      i===0 || value>=values[i-1]
+        ? "#55ff82"
+        : "#ff5555";
+
+    ctx.fill();
+
+    const d =
+      new Date(history[i].created_at);
+
+    ctx.fillStyle="#6f8975";
+
+    ctx.fillText(
+      d.toLocaleDateString("pl-PL"),
+      p.x,
+      height-25
+    );
+  });
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function showPage(page,button){
+
+  document.querySelectorAll(".page")
+    .forEach(x=>x.classList.remove("active"));
+
+  const target =
+    document.getElementById("page-"+page);
+
+  if(target){
+    target.classList.add("active");
+  }
+
+  document.querySelectorAll(".nav button")
+    .forEach(x=>x.classList.remove("active"));
+
+  if(button){
     button.classList.add("active");
+  }
 
-    sound("click");
-
-    if(id==="goalsPage"){
-        updateGoals();
-    }
-
+  if(page==="karta"){
+    loadCardHistory();
+  }
 }
 
 
-/* ======================================================
-   UPDATE
-====================================================== */
+/* =========================================================
+   CARD HISTORY
+========================================================= */
 
-function update(){
+function loadCardHistory(){
 
-    document.getElementById("balanceDisplay")
-        .textContent=money(balance);
+  const el =
+    document.getElementById("cardHistory");
 
-    const percent=Math.min(
-        100,
-        Math.max(0,(balance/TARGET)*100)
+  if(!history.length){
+
+    el.innerHTML =
+      `<div class="empty">Brak Twoich wpisów.</div>`;
+
+    return;
+  }
+
+  const donations =
+    history.filter(x=>
+      String(x.description || "")
+        .toLowerCase()
+        .includes("donat")
     );
 
-    document.getElementById("balanceFill")
-        .style.width=percent+"%";
+  if(!donations.length){
 
-    document.getElementById("balanceInfo")
-        .textContent=
-        money(balance)+" / "+money(TARGET);
+    el.innerHTML =
+      `<div class="empty">Brak donatów.</div>`;
 
-    document.getElementById("bottlesValue")
-        .textContent=bottles;
+    return;
+  }
 
-    document.getElementById("daysValue")
-        .textContent=days;
+  el.innerHTML =
+    [...donations].reverse().map(item=>{
 
-    document.getElementById("remainingValue")
-        .textContent=money(
-            Math.max(0,TARGET-balance)
-        );
+      return `
+        <div class="history-item">
 
-    renderHistory();
-    renderChart();
-    renderSafes();
-    updateGoals();
+          <div>
+            <div class="history-desc">
+              ${escapeHtml(item.description)}
+            </div>
 
-    save();
+            <div class="history-date">
+              ${new Date(item.created_at)
+                .toLocaleString("pl-PL")}
+            </div>
+          </div>
 
+          <div class="amount income">
+            +${money(item.amount)}
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
 }
 
 
-/* ======================================================
-   ADD MONEY
-====================================================== */
+/* =========================================================
+   DONATION
+========================================================= */
 
-function addMoney(amount,description){
+async function makeDonation(){
 
-    sound("pop");
+  const amount =
+    Number(document.getElementById("donationAmount").value);
 
-    balance+=amount;
+  const desc =
+    document.getElementById("donationDesc").value.trim()
+    || "Donata";
 
-    if(
-        description==="20 butelek"
-    ){
-        bottles+=20;
-    }
+  if(amount<=0){
 
-    if(
-        description==="40 butelek"
-    ){
-        bottles+=40;
-    }
+    toast("❌ Podaj kwotę");
 
-    if(
-        description==="Kaucja"
-    ){
-        bottles+=1;
-    }
+    return;
+  }
 
-    addHistory(
-        description,
-        amount
-    );
+  document.getElementById("donationAmount").value="";
+  document.getElementById("donationDesc").value="";
 
-    update();
-
+  await addMoney(
+    amount,
+    "💰 Donata — "+desc
+  );
 }
 
 
-/* ======================================================
-   CUSTOM
-====================================================== */
+/* =========================================================
+   HOW TO PAY
+========================================================= */
 
-function customIncome(){
+function showHowToPay(){
 
-    const amount=parseFloat(
-        prompt("Ile pieniędzy chcesz dodać?")
-    );
+  openModal(`
+    <h2>🎬 Jak wpłacić?</h2>
 
-    if(!Number.isFinite(amount) || amount<=0){
-        return;
-    }
+    <div class="notice">
+      💳 <b>Karta</b><br>
+      Przekaż uzgodnioną kwotę i zapisz ją jako donat.
+    </div>
 
-    const desc=
-        prompt("Skąd są te pieniądze?") ||
-        "Inna wpłata";
+    <div class="notice">
+      🏦 <b>Przelew</b><br>
+      Przekaż pieniądze na uzgodniony rachunek.
+    </div>
 
-    addMoney(amount,desc);
+    <div class="notice">
+      💵 <b>Gotówka</b><br>
+      Przekaż gotówkę osobie zbierającej.
+    </div>
 
+    <div class="notice">
+      👛 <b>Inny portfel</b><br>
+      Możesz przekazać pieniądze z dowolnego portfela.
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal()">Gotowe</button>
+    </div>
+  `);
 }
 
 
-function customExpense(){
+/* =========================================================
+   ADMIN
+========================================================= */
 
-    const amount=parseFloat(
-        prompt("Ile wydajesz?")
-    );
+function loginAdmin(){
 
-    if(!Number.isFinite(amount) || amount<=0){
-        return;
+  const code =
+    document.getElementById("adminCode").value;
+
+  if(code !== "KaucjaMM0"){
+
+    toast("❌ Zły kod");
+
+    return;
+  }
+
+  admin=true;
+
+  document.getElementById("adminLogin")
+    .style.display="none";
+
+  document.getElementById("adminPanel")
+    .style.display="block";
+
+  toast("🔴 Zalogowano");
+
+  sound("unlock");
+}
+
+
+async function clearChartRequest(){
+
+  if(!admin){
+
+    openModal(`
+      <h2>🔐 Admin</h2>
+
+      <p>
+        Czyszczenie danych wymaga panelu Admin.
+      </p>
+
+      <button class="btn red" onclick="closeModal();showPage('admin',document.querySelector('[data-page=admin]'))">
+        Przejdź do Admina
+      </button>
+    `);
+
+    return;
+  }
+
+  await ownerClear("chart");
+}
+
+
+async function ownerClear(type){
+
+  if(!admin){
+
+    toast("🔐 Brak dostępu");
+
+    return;
+  }
+
+  const first =
+    confirm("Czy na pewno?");
+
+  if(!first){
+    return;
+  }
+
+  const second =
+    confirm("Usuń");
+
+  if(!second){
+    return;
+  }
+
+  if(type==="chart"){
+
+    balance=0;
+    bottles=0;
+    days=0;
+
+    const saved =
+      await saveSharedState();
+
+    if(!saved){
+      return;
     }
 
-    const desc=
-        prompt("Na co wydatek?") ||
-        "Wydatek";
+    const {error} =
+      await sb
+        .from("zbieranie_history")
+        .delete()
+        .eq("user_id",currentUser.id);
 
-    balance=Math.max(0,balance-amount);
+    if(error){
+      console.error(error);
+    }
 
-    addHistory(
-        desc,
-        -amount
-    );
+    history=[];
+
+    drawAll();
+
+    toast("🗑️ Dane wyczyszczone");
+  }
+}
+
+
+/* =========================================================
+   MEMORY
+========================================================= */
+
+async function clearMemory(){
+
+  if(!admin){
+
+    toast("🔐 Brak dostępu");
+
+    return;
+  }
+
+  let count=0;
+
+  while(count<10){
+
+    const code =
+      prompt(
+        "Wpisz ButelKaucja ("+
+        (count+1)+"/10)"
+      );
+
+    if(code===null){
+      return;
+    }
+
+    if(code!=="ButelKaucja"){
+
+      alert("❌ Zły kod.");
+
+      return;
+    }
+
+    count++;
+  }
+
+  const first =
+    confirm("Czy na pewno wyczyścić pamięć?");
+
+  if(!first)return;
+
+  const second =
+    confirm("Usuń pamięć");
+
+  if(!second)return;
+
+  const {error} =
+    await sb
+      .from("zbieranie_memory")
+      .delete()
+      .neq("id",0);
+
+  if(error){
+
+    console.error(error);
+
+    toast("❌ Supabase odrzucił czyszczenie");
+
+    return;
+  }
+
+  toast("🧠 Pamięć wyczyszczona");
+}
+
+
+/* =========================================================
+   SAFE SYSTEM
+========================================================= */
+
+function drawSafes(){
+
+  const container =
+    document.getElementById("safes");
+
+  container.innerHTML =
+    safeLimits.map((limit,i)=>{
+
+      const amount =
+        Number(safes[i] || 0);
+
+      const percent =
+        Math.min(100,(amount/limit)*100);
+
+      const full =
+        amount >= limit;
+
+      return `
+        <div class="safe ${full ? "full":""}">
+
+          <div class="safe-door"></div>
+
+          <h3>🔐 Sejf ${i+1}</h3>
+
+          <div class="safe-amount">
+            ${money(amount)}
+          </div>
+
+          <div class="safe-max">
+            MAX ${money(limit)}
+          </div>
+
+          <div class="safe-progress">
+            <div
+              class="safe-fill"
+              style="width:${percent}%"
+            ></div>
+          </div>
+
+          <div class="safe-buttons">
+
+            <button onclick="safeDeposit(${i})">
+              ➕ Włóż
+            </button>
+
+            <button onclick="clearSafe(${i})">
+              🗑️ Wyczyść
+            </button>
+
+            <button onclick="crankSafe(${i})">
+              ⚙️ Korba
+            </button>
+
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+
+function safeDeposit(i){
+
+  const remaining =
+    safeLimits[i]-safes[i];
+
+  if(remaining<=0){
+
+    toast("🔐 Sejf jest pełny");
+
+    return;
+  }
+
+  openModal(`
+    <h2>🔐 Sejf ${i+1}</h2>
+
+    <p>
+      Maksymalnie możesz teraz włożyć:
+      <b>${money(remaining)}</b>
+    </p>
+
+    <input
+      id="safeAmount"
+      type="number"
+      min="0.01"
+      max="${remaining}"
+      step="0.01"
+      placeholder="Kwota"
+    >
+
+    <div class="modal-actions">
+
+      <button
+        class="btn"
+        onclick="confirmSafeDeposit(${i})"
+      >
+        Włóż
+      </button>
+
+      <button
+        class="btn gray"
+        onclick="closeModal()"
+      >
+        Anuluj
+      </button>
+
+    </div>
+  `);
+}
+
+
+function confirmSafeDeposit(i){
+
+  const amount =
+    Number(document.getElementById("safeAmount").value);
+
+  if(amount<=0){
+    toast("❌ Zła kwota");
+    return;
+  }
+
+  if(amount > safeLimits[i]-safes[i]){
+    toast("❌ Za dużo");
+    return;
+  }
+
+  safes[i] =
+    Number((safes[i]+amount).toFixed(2));
+
+  if(safes[i]>=safeLimits[i]){
+
+    safes[i]=safeLimits[i];
+
+    safeCodes[i] =
+      String(
+        Math.floor(
+          1000+Math.random()*9000
+        )
+      );
+
+    toast("🔐 Sejf pełny! Wygenerowano kod.");
+  }else{
+
+    toast("🔐 Włożono "+money(amount));
+  }
+
+  saveSafes();
+
+  closeModal();
+
+  drawSafes();
+}
+
+
+function clearSafe(i){
+
+  const first =
+    confirm("Czy na pewno wyczyścić sejf "+(i+1)+"?");
+
+  if(!first)return;
+
+  const second =
+    confirm("Usuń");
+
+  if(!second)return;
+
+  safes[i]=0;
+  safeCodes[i]=null;
+
+  saveSafes();
+  drawSafes();
+
+  toast("🗑️ Sejf wyczyszczony");
+}
+
+
+function crankSafe(i){
+
+  if(safes[i] < safeLimits[i]){
+
+    openModal(`
+      <h2>🚫 Brak dostępu</h2>
+
+      <p>
+        Sejf nie jest jeszcze pełny.
+      </p>
+
+      <button
+        class="btn gray"
+        onclick="closeModal()"
+      >
+        Zamknij
+      </button>
+    `);
 
     sound("error");
 
-    update();
+    return;
+  }
 
+  openModal(`
+    <h2>🔐 Sejf ${i+1}</h2>
+
+    <p>
+      Sejf jest pełny.
+    </p>
+
+    <input
+      id="safeCode"
+      type="text"
+      inputmode="numeric"
+      maxlength="4"
+      placeholder="4-cyfrowy kod"
+    >
+
+    <div class="modal-actions">
+
+      <button
+        class="btn"
+        onclick="checkSafeCode(${i})"
+      >
+        🔓 Sprawdź
+      </button>
+
+      <button
+        class="btn gray"
+        onclick="closeModal()"
+      >
+        Anuluj
+      </button>
+
+    </div>
+  `);
 }
 
 
-/* ======================================================
-   HISTORY
-====================================================== */
+function checkSafeCode(i){
 
-function addHistory(description,amount){
+  const code =
+    document.getElementById("safeCode").value.trim();
 
-    history.push({
+  if(code !== safeCodes[i]){
 
-        date:new Date().toLocaleDateString(
-            "pl-PL"
-        ),
+    toast("❌ Zły kod");
 
-        timestamp:Date.now(),
+    sound("error");
 
-        description,
+    return;
+  }
 
-        amount,
+  openModal(`
+    <h2>🔓 Dostęp przyznany</h2>
 
-        balance
+    <p>
+      Pociągnij korbę w górę.
+    </p>
 
-    });
+    <button
+      class="btn"
+      onclick="releaseSafe(${i})"
+    >
+      ⬆️ POCIĄGNIJ W GÓRĘ
+    </button>
+  `);
 
+  sound("unlock");
 }
 
 
-function renderHistory(){
+async function releaseSafe(i){
 
-    const box=
-        document.getElementById("history");
+  const amount=safes[i];
 
-    box.innerHTML="";
+  closeModal();
 
-    const list=history
-        .slice()
-        .reverse();
+  if(amount<=0){
+    return;
+  }
 
-    const visible=
-        historyExpanded
-        ? list
-        : list.slice(0,6);
+  await addMoney(
+    amount,
+    "🔐 Otwarcie sejfu "+(i+1)
+  );
 
-    visible.forEach(item=>{
+  safes[i]=0;
+  safeCodes[i]=null;
 
-        const row=
-            document.createElement("div");
+  saveSafes();
 
-        row.className="historyItem";
+  celebrate(amount);
 
-        row.innerHTML=`
+  drawSafes();
+}
 
-            <div class="historyDate">
-                ${item.date}
-            </div>
 
-            <div class="historyDesc">
-                ${escapeHTML(item.description)}
-            </div>
+/* =========================================================
+   SAFE LOCAL STORAGE
+========================================================= */
 
-            <div class="historyAmount ${
-                item.amount>=0
-                ? "income"
-                : "expense"
-            }">
-                ${item.amount>=0?"+":""}${money(item.amount)}
-            </div>
+function saveSafes(){
 
-            <div class="historyBalance">
-                ${money(item.balance)}
-            </div>
+  localStorage.setItem(
+    "zbieranie_safes",
+    JSON.stringify(safes)
+  );
 
-        `;
+  localStorage.setItem(
+    "zbieranie_safe_codes",
+    JSON.stringify(safeCodes)
+  );
+}
 
-        box.appendChild(row);
+function loadSafes(){
 
-    });
+  try{
 
-    const more=
-        document.getElementById("historyMore");
+    const a =
+      JSON.parse(
+        localStorage.getItem("zbieranie_safes")
+      );
 
-    if(history.length<=6){
+    const b =
+      JSON.parse(
+        localStorage.getItem("zbieranie_safe_codes")
+      );
 
-        more.style.display="none";
-
-    }else{
-
-        more.style.display="block";
-
-        more.textContent=
-            historyExpanded
-            ? "Pokaż mniej ▲"
-            : "Pokaż więcej ▼";
-
+    if(Array.isArray(a) && a.length===4){
+      safes=a.map(Number);
     }
 
+    if(Array.isArray(b) && b.length===4){
+      safeCodes=b;
+    }
+
+  }catch(e){
+    console.error(e);
+  }
 }
 
 
-function toggleHistory(){
+/* =========================================================
+   CONFETTI
+========================================================= */
 
-    historyExpanded=!historyExpanded;
+function celebrate(amount){
 
-    sound("click");
+  const box =
+    document.getElementById("confetti");
 
-    renderHistory();
+  const strength =
+    amount>=2000 ? 180 :
+    amount>=1000 ? 120 :
+    amount>=500 ? 75 :
+    40;
 
-}
+  for(let i=0;i<strength;i++){
 
+    const piece =
+      document.createElement("div");
 
-function escapeHTML(text){
+    piece.style.position="absolute";
+    piece.style.left=(Math.random()*100)+"%";
+    piece.style.top="-20px";
 
-    return String(text)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    piece.style.width=
+      (5+Math.random()*8)+"px";
 
-}
+    piece.style.height=
+      (8+Math.random()*12)+"px";
 
+    piece.style.background=
+      ["#45ff75","#ffcf45","#fff","#ff4d4d","#55b7ff"]
+      [Math.floor(Math.random()*5)];
 
-/* ======================================================
-   CLEAR
-====================================================== */
+    piece.style.borderRadius="2px";
 
-function askCode(){
+    const duration =
+      1200+Math.random()*1800;
 
-    const code=prompt(
-        "Podaj kod, aby wykonać tę operację:"
+    piece.animate(
+      [
+        {
+          transform:"translateY(0) rotate(0deg)"
+        },
+        {
+          transform:
+            `translateY(${window.innerHeight+100}px)
+             rotate(${Math.random()*900-450}deg)`
+        }
+      ],
+      {
+        duration,
+        easing:"cubic-bezier(.2,.8,.4,1)"
+      }
     );
 
-    return code==="ButelKaucja";
+    box.appendChild(piece);
 
+    setTimeout(()=>{
+      piece.remove();
+    },duration+100);
+  }
+
+  sound("win");
 }
 
 
-function clearBalance(){
+/* =========================================================
+   SOUND
+========================================================= */
 
-    if(!askCode()){
+function sound(type){
 
-        sound("error");
-        alert("❌ Nieprawidłowy kod!");
-        return;
+  try{
 
+    const AudioCtx =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    const ctx=new AudioCtx();
+
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    let freq=440;
+
+    if(type==="add")freq=650;
+    if(type==="remove")freq=180;
+    if(type==="unlock")freq=800;
+    if(type==="error")freq=120;
+    if(type==="win")freq=900;
+
+    osc.frequency.value=freq;
+
+    gain.gain.setValueAtTime(
+      .0001,
+      ctx.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .08,
+      ctx.currentTime+.02
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .0001,
+      ctx.currentTime+.22
+    );
+
+    osc.start();
+
+    osc.stop(ctx.currentTime+.23);
+
+  }catch(e){}
+}
+
+
+/* =========================================================
+   PROPOSAL
+========================================================= */
+
+function saveProposal(){
+
+  const value =
+    document.getElementById("proposal").value.trim();
+
+  if(!value){
+
+    toast("✍️ Napisz propozycję");
+
+    return;
+  }
+
+  localStorage.setItem(
+    "zbieranie_proposal",
+    value
+  );
+
+  document.getElementById("proposal").value="";
+
+  toast("💡 Propozycja zapisana");
+}
+
+
+/* =========================================================
+   LOCAL FALLBACK
+========================================================= */
+
+function loadLocal(){
+
+  try{
+
+    const saved =
+      JSON.parse(
+        localStorage.getItem("zbieranie_state_local")
+      );
+
+    if(saved){
+
+      balance=Number(saved.balance||0);
+      bottles=Number(saved.bottles||0);
+      days=Number(saved.days||0);
     }
 
-    if(!confirm(
-        "Czy na pewno wyczyścić główne saldo?"
-    )){
-        return;
+    const h =
+      JSON.parse(
+        localStorage.getItem("zbieranie_history_local")
+      );
+
+    if(Array.isArray(h)){
+      history=h;
     }
+
+  }catch(e){
 
     balance=0;
-
-    sound("whoosh");
-
-    update();
-
-}
-
-
-function clearHistory(){
-
-    if(!askCode()){
-
-        sound("error");
-        alert("❌ Nieprawidłowy kod!");
-        return;
-
-    }
-
-    if(!confirm(
-        "Czy na pewno wyczyścić historię?"
-    )){
-        return;
-    }
-
-    history=[];
-
-    sound("whoosh");
-
-    update();
-
-}
-
-
-function clearChart(){
-
-    if(!askCode()){
-
-        sound("error");
-        alert("❌ Nieprawidłowy kod!");
-        return;
-
-    }
-
-    if(!confirm(
-        "Wyczyszczenie wykresów wyczyści także główne saldo, historię, dni i butelki. Kontynuować?"
-    )){
-        return;
-    }
-
-    balance=0;
-    history=[];
-    days=0;
     bottles=0;
+    days=0;
+    history=[];
+  }
+}
 
-    sound("whoosh");
+function saveLocal(){
 
-    update();
+  localStorage.setItem(
+    "zbieranie_state_local",
+    JSON.stringify({
+      balance,
+      bottles,
+      days
+    })
+  );
 
+  localStorage.setItem(
+    "zbieranie_history_local",
+    JSON.stringify(history)
+  );
 }
 
 
-/* ======================================================
-   CHART
-====================================================== */
+/* =========================================================
+   PERIODIC SYNC
+========================================================= */
 
-function renderChart(){
+setInterval(async()=>{
 
-    const canvas=
-        document.getElementById("chart");
+  if(!sb || !currentUser){
+    return;
+  }
 
-    const ctx=canvas.getContext("2d");
+  try{
 
-    const W=1450;
-    const H=390;
+    await loadSharedState();
 
-    ctx.clearRect(0,0,W,H);
+    drawAll();
 
-    ctx.fillStyle="#030b06";
-    ctx.fillRect(0,0,W,H);
+    setSync("🟢 Połączono z bazą");
 
-    const left=75;
-    const right=25;
-    const top=25;
-    const bottom=65;
+  }catch(error){
 
-    const chartW=W-left-right;
-    const chartH=H-top-bottom;
+    console.error(error);
 
-    /*
-       STARE LICZBY NA OSI
-    */
-
-    const maxY=7000;
-
-    ctx.font="13px Arial";
-    ctx.textAlign="right";
-
-    for(let i=0;i<=7;i++){
-
-        const value=i*1000;
-
-        const y=
-            top+
-            chartH-
-            (value/maxY)*chartH;
-
-        ctx.strokeStyle="#12361f";
-        ctx.lineWidth=1;
-
-        ctx.beginPath();
-        ctx.moveTo(left,y);
-        ctx.lineTo(W-right,y);
-        ctx.stroke();
-
-        ctx.fillStyle="#6c9478";
-        ctx.fillText(
-            value+" zł",
-            left-12,
-            y+4
-        );
-
-    }
-
-    /*
-       BRAK DANYCH
-    */
-
-    if(history.length===0){
-
-        ctx.fillStyle="#557260";
-        ctx.textAlign="center";
-        ctx.font="17px Arial";
-
-        ctx.fillText(
-            "Brak danych — zacznij zbierać pieniądze!",
-            W/2,
-            H/2
-        );
-
-        return;
-
-    }
-
-    /*
-       HISTORIA
-    */
-
-    const data=history;
-
-    const points=[];
-
-    data.forEach((item,index)=>{
-
-        const x=
-            data.length===1
-            ? left+chartW/2
-            : left+
-              (index/(data.length-1))*chartW;
-
-        const val=
-            Math.max(
-                0,
-                Math.min(maxY,item.balance)
-            );
-
-        const y=
-            top+
-            chartH-
-            (val/maxY)*chartH;
-
-        points.push({
-            x,
-            y,
-            item
-        });
-
-    });
-
-    /*
-       LINIE:
-       WZROST = ZIELONY
-       SPADEK = CZERWONY
-    */
-
-    for(let i=1;i<points.length;i++){
-
-        const a=points[i-1];
-        const b=points[i];
-
-        ctx.beginPath();
-        ctx.moveTo(a.x,a.y);
-        ctx.lineTo(b.x,b.y);
-
-        ctx.lineWidth=4;
-
-        if(b.item.balance>=a.item.balance){
-
-            ctx.strokeStyle="#3cff86";
-
-        }else{
-
-            ctx.strokeStyle="#ff4c4c";
-
-        }
-
-        ctx.stroke();
-
-    }
-
-    /*
-       PUNKTY
-    */
-
-    points.forEach(point=>{
-
-        ctx.beginPath();
-
-        ctx.arc(
-            point.x,
-            point.y,
-            5,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle="#ffffff";
-        ctx.fill();
-
-        ctx.beginPath();
-
-        ctx.arc(
-            point.x,
-            point.y,
-            3,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle="#42ff8c";
-        ctx.fill();
-
-    });
-
-    /*
-       DATY
-    */
-
-    ctx.textAlign="center";
-    ctx.font="12px Arial";
-    ctx.fillStyle="#789b82";
-
-    points.forEach(point=>{
-
-        ctx.fillText(
-            point.item.date,
-            point.x,
-            H-25
-        );
-
-    });
-
-}
-
-
-/* ======================================================
-   GOALS
-====================================================== */
-
-function updateGoals(){
-
-    const percent=Math.min(
-        100,
-        (balance/TARGET)*100
+    setSync(
+      "🔴 Problem z synchronizacją",
+      true
     );
+  }
 
-    const fill=
-        document.getElementById("goalFill");
+},5000);
 
-    if(fill){
-        fill.style.width=percent+"%";
-    }
 
-    const p=
-        document.getElementById("goalPercent");
+/* =========================================================
+   INIT
+========================================================= */
 
-    if(p){
-        p.textContent=
-            percent.toFixed(1)+"%";
-    }
+loadSafes();
 
-    document.querySelectorAll(
-        ".milestone"
-    ).forEach(el=>{
-
-        const goal=
-            Number(el.dataset.goal);
-
-        if(balance>=goal){
-            el.classList.add("done");
-        }else{
-            el.classList.remove("done");
-        }
-
-    });
-
-}
-
-
-/* ======================================================
-   WALLETS
-====================================================== */
-
-function walletDeposit(amount){
-
-    if(!confirm(
-        `Wpłacić ${money(amount)}?`
-    )){
-        return;
-    }
-
-    addMoney(
-        amount,
-        `Portfel ${money(amount)}`
-    );
-
-}
-
-
-/* ======================================================
-   SAFE RENDER
-====================================================== */
-
-function renderSafes(){
-
-    const grid=
-        document.getElementById("safesGrid");
-
-    if(!grid)return;
-
-    grid.innerHTML="";
-
-    safes.forEach((safe,index)=>{
-
-        const percent=
-            Math.min(
-                100,
-                (safe.amount/safe.max)*100
-            );
-
-        const full=
-            safe.amount>=safe.max;
-
-        const unlocked=
-            safe.unlocked;
-
-        const card=
-            document.createElement("div");
-
-        card.className="safeCard";
-
-        card.innerHTML=`
-
-            <div class="safeTitle">
-                🔐 Sejf ${safe.id}
-            </div>
-
-            <div class="safeMax">
-                MAX: ${money(safe.max)}
-            </div>
-
-            <div class="safe">
-
-                <div class="safeBody">
-
-                    ${
-                        full && safe.code
-                        ?
-                        `<div class="safeCode">
-                            ${safe.code}
-                        </div>`
-                        :
-                        ""
-                    }
-
-                    <div class="safeDoor"></div>
-
-                    <div class="safeWheel"></div>
-
-                    <div class="safeHandle"></div>
-
-                </div>
-
-            </div>
-
-            <div class="groundCrack"></div>
-
-            <div class="safeCrankHint">
-
-                ${
-                    unlocked
-                    ?
-                    "⬆️ POCIĄGNIJ W GÓRĘ"
-                    :
-                    full
-                    ?
-                    "🔐 Wpisz kod, aby odblokować"
-                    :
-                    "🔒 Sejf jeszcze niegotowy"
-                }
-
-            </div>
-
-            <div class="safeBar">
-
-                <div
-                    class="safeBarFill"
-                    style="width:${percent}%"
-                ></div>
-
-            </div>
-
-            <div class="safeMoney">
-                ${money(safe.amount)}
-            </div>
-
-            <div class="safeActions">
-
-                <button
-                    class="safeAction"
-                    onclick="depositSafe(${index})"
-                >
-                    💰 Wpłać
-                </button>
-
-                <button
-                    class="safeAction clear"
-                    onclick="clearSafe(${index})"
-                >
-                    🗑 Wyczyść
-                </button>
-
-                <button
-                    class="safeAction"
-                    onclick="safeCrank(${index})"
-                >
-                    🔄 Korbka
-                </button>
-
-            </div>
-
-        `;
-
-        grid.appendChild(card);
-
-    });
-
-}
-
-
-/* ======================================================
-   SAFE DEPOSIT
-====================================================== */
-
-function depositSafe(index){
-
-    const safe=safes[index];
-
-    const left=
-        safe.max-safe.amount;
-
-    if(left<=0){
-
-        showMessage(
-            "🔐 Sejf pełny!",
-            "Ten sejf jest już pełny. Najpierw go odblokuj i otwórz."
-        );
-
-        return;
-
-    }
-
-    const amount=parseFloat(
-        prompt(
-            `Ile wpłacić?\nPozostało miejsca: ${money(left)}`
-        )
-    );
-
-    if(
-        !Number.isFinite(amount) ||
-        amount<=0
-    ){
-        return;
-    }
-
-    const realAmount=
-        Math.min(amount,left);
-
-    safe.amount+=realAmount;
-
-    sound("pop");
-
-    if(
-        safe.amount>=safe.max &&
-        !safe.code
-    ){
-
-        safe.code=
-            String(
-                Math.floor(
-                    1000+
-                    Math.random()*9000
-                )
-            );
-
-        safe.unlocked=false;
-
-        sound("unlock");
-
-        showMessage(
-            "🔐 SEJF GOTOWY!",
-            `Sejf ${safe.id} osiągnął limit ${money(safe.max)}.<br><br>
-            Na sejfie pojawił się nowy 4-cyfrowy kod.`
-        );
-
-    }
-
-    update();
-
-}
-
-
-/* ======================================================
-   SAFE CRANK
-====================================================== */
-
-let activeSafeIndex=null;
-
-function safeCrank(index){
-
-    const safe=safes[index];
-
-    sound("click");
-
-    if(safe.amount<safe.max){
-
-        showMessage(
-            "⛔ Brak dostępu",
-            "Sejf nie jest jeszcze gotowy."
-        );
-
-        sound("error");
-
-        return;
-
-    }
-
-    if(!safe.unlocked){
-
-        openCodeModal(index);
-
-        return;
-
-    }
-
-    /*
-       ODKLIKNIĘCIE KORBKI
-       = JEDEN OBRÓT
-    */
-
-    openSafe(index);
-
-}
-
-
-/* ======================================================
-   CODE MODAL
-====================================================== */
-
-function openCodeModal(index){
-
-    activeSafeIndex=index;
-
-    const safe=safes[index];
-
-    document.getElementById(
-        "modalSafeText"
-    ).innerHTML=
-        `Sejf ${safe.id}<br>
-         Wpisz kod z sejfu.`;
-
-    document.getElementById(
-        "codeInput"
-    ).value="";
-
-    document.getElementById(
-        "pullArea"
-    ).innerHTML="";
-
-    document.getElementById(
-        "codeModal"
-    ).classList.add("show");
-
-    setTimeout(()=>{
-        document.getElementById(
-            "codeInput"
-        ).focus();
-    },100);
-
-}
-
-
-function closeCodeModal(){
-
-    document.getElementById(
-        "codeModal"
-    ).classList.remove("show");
-
-    activeSafeIndex=null;
-
-}
-
-
-function unlockSafe(){
-
-    if(activeSafeIndex===null){
-        return;
-    }
-
-    const input=
-        document.getElementById(
-            "codeInput"
-        ).value.trim();
-
-    const safe=
-        safes[activeSafeIndex];
-
-    if(input!==String(safe.code)){
-
-        sound("error");
-
-        document.getElementById(
-            "codeInput"
-        ).animate(
-            [
-                {transform:"translateX(-6px)"},
-                {transform:"translateX(6px)"},
-                {transform:"translateX(-4px)"},
-                {transform:"translateX(0)"}
-            ],
-            {
-                duration:250
-            }
-        );
-
-        showMessage(
-            "❌ Nieprawidłowy kod!",
-            "Spróbuj ponownie."
-        );
-
-        return;
-
-    }
-
-    safe.unlocked=true;
-
-    sound("unlock");
-
-    document.getElementById(
-        "modalSafeText"
-    ).innerHTML=
-        `<b style="color:#4dff93">
-        🔓 SEJF ODBLOKOWANY!
-        </b><br><br>
-        Teraz pociągnij w górę i przekręć korbkę.`;
-
-    document.getElementById(
-        "pullArea"
-    ).innerHTML=`
-
-        <button
-            class="pullBtn"
-            onclick="pullAndClose()"
-        >
-            ⬆️ POCIĄGNIJ W GÓRĘ
-        </button>
-
-    `;
-
-}
-
-
-function pullAndClose(){
-
-    if(activeSafeIndex===null){
-        return;
-    }
-
-    sound("whoosh");
-
-    const index=activeSafeIndex;
-
-    closeCodeModal();
-
-    setTimeout(()=>{
-        openSafe(index);
-    },350);
-
-}
-
-
-/* ======================================================
-   OPEN SAFE
-====================================================== */
-
-function openSafe(index){
-
-    const card=
-        document.querySelectorAll(
-            ".safeCard"
-        )[index];
-
-    const visual=
-        card?.querySelector(".safe");
-
-    const safe=safes[index];
-
-    if(!visual){
-        return;
-    }
-
-    sound("open");
-
-    visual.classList.add("spinning");
-
-    setTimeout(()=>{
-
-        visual.classList.add("opening");
-
-    },300);
-
-    setTimeout(()=>{
-
-        visual.classList.add("open");
-
-    },650);
-
-    const strength=
-        safe.max===250 ? 0.65 :
-        safe.max===500 ? 1 :
-        safe.max===1000 ? 1.5 :
-        2;
-
-    setTimeout(()=>{
-
-        celebrate(
-            safe.max,
-            strength
-        );
-
-    },700);
-
-    setTimeout(()=>{
-
-        /*
-           PIENIĄDZE Z SEJFU
-           TRAFIAJĄ DO GŁÓWNEGO SALDA
-        */
-
-        balance+=safe.amount;
-
-        addHistory(
-            `Otwarcie sejfu ${safe.id}`,
-            safe.amount
-        );
-
-        /*
-           RESET SEJFU
-        */
-
-        safe.amount=0;
-        safe.code=null;
-        safe.unlocked=false;
-
-        save();
-
-    },1200);
-
-    setTimeout(()=>{
-
-        update();
-
-        const newCard=
-            document.querySelectorAll(
-                ".safeCard"
-            )[index];
-
-        if(newCard){
-
-            newCard.classList.add(
-                "selected"
-            );
-
-            const newSafe=
-                newCard.querySelector(
-                    ".safe"
-                );
-
-            if(newSafe){
-
-                newSafe.classList.add(
-                    "replace"
-                );
-
-            }
-
-            const crack=
-                newCard.querySelector(
-                    ".groundCrack"
-                );
-
-            if(crack){
-
-                crack.classList.add("show");
-
-            }
-
-            setTimeout(()=>{
-
-                newCard.classList.remove(
-                    "selected"
-                );
-
-            },1000);
-
-        }
-
-    },1750);
-
-}
-
-
-/* ======================================================
-   CLEAR SAFE
-====================================================== */
-
-function clearSafe(index){
-
-    if(!askCode()){
-
-        sound("error");
-
-        alert(
-            "❌ Nieprawidłowy kod!"
-        );
-
-        return;
-
-    }
-
-    if(!confirm(
-        `Wyczyścić sejf ${safes[index].id}?`
-    )){
-        return;
-    }
-
-    safes[index].amount=0;
-    safes[index].code=null;
-    safes[index].unlocked=false;
-
-    sound("whoosh");
-
-    update();
-
-}
-
-
-/* ======================================================
-   MESSAGE
-====================================================== */
-
-function showMessage(title,text){
-
-    document.getElementById(
-        "messageTitle"
-    ).innerHTML=title;
-
-    document.getElementById(
-        "messageText"
-    ).innerHTML=text;
-
-    document.getElementById(
-        "messageModal"
-    ).classList.add("show");
-
-}
-
-
-function closeMessageModal(){
-
-    document.getElementById(
-        "messageModal"
-    ).classList.remove("show");
-
-}
-
-
-/* ======================================================
-   CELEBRATION
-====================================================== */
-
-function celebrate(amount,strength){
-
-    const layer=
-        document.getElementById(
-            "celebrationLayer"
-        );
-
-    const text=
-        document.getElementById(
-            "celebrationText"
-        );
-
-    /*
-       250 = najmniej
-       500 = średnio
-       1000 = mocno
-       2000 = najmocniej
-    */
-
-    let confettiCount=
-        amount===250 ? 35 :
-        amount===500 ? 70 :
-        amount===1000 ? 130 :
-        220;
-
-    let billCount=
-        amount===250 ? 8 :
-        amount===500 ? 18 :
-        amount===1000 ? 35 :
-        65;
-
-    for(let i=0;i<confettiCount;i++){
-
-        const c=
-            document.createElement("div");
-
-        c.className="confetti";
-
-        c.style.left=
-            Math.random()*100+"%";
-
-        c.style.setProperty(
-            "--x",
-            (Math.random()*500-250)+"px"
-        );
-
-        c.style.animationDuration=
-            (2+Math.random()*2.5)+"s";
-
-        c.style.animationDelay=
-            (Math.random()*.5)+"s";
-
-        c.style.transform=
-            `rotate(${Math.random()*360}deg)`;
-
-        /*
-           Nie ustawiamy konkretnego koloru
-           z CSS - przeglądarka dostaje
-           różne kolory przez HSL.
-        */
-
-        c.style.backgroundColor=
-            `hsl(${Math.random()*360},90%,60%)`;
-
-        layer.appendChild(c);
-
-        setTimeout(()=>{
-            c.remove();
-        },5500);
-
-    }
-
-
-    for(let i=0;i<billCount;i++){
-
-        const bill=
-            document.createElement("div");
-
-        bill.className="bill";
-        bill.textContent="💵";
-
-        bill.style.setProperty(
-            "--x",
-            (Math.random()*900-450)+"px"
-        );
-
-        bill.style.setProperty(
-            "--y",
-            (Math.random()*650-500)+"px"
-        );
-
-        bill.style.setProperty(
-            "--r",
-            (Math.random()*1000-500)+"deg"
-        );
-
-        bill.style.animationDelay=
-            (Math.random()*.35)+"s";
-
-        layer.appendChild(bill);
-
-        setTimeout(()=>{
-            bill.remove();
-        },2300);
-
-    }
-
-
-    text.innerHTML=`
-
-        <div class="celebrationSmall">
-            🎉 SEJF OTWARTY! 🎉
-        </div>
-
-        <div class="celebrationBig">
-            +${money(amount)}
-        </div>
-
-    `;
-
-    text.classList.remove("show");
-
-    void text.offsetWidth;
-
-    text.classList.add("show");
-
-
-    /*
-       Dodatkowe dźwięki
-    */
-
-    sound("pop");
-
-    setTimeout(()=>{
-        sound("whoosh");
-    },250);
-
-    setTimeout(()=>{
-        sound("pop");
-    },500);
-
-    setTimeout(()=>{
-        sound("pop");
-    },800);
-
-}
-
-
-/* ======================================================
-   ENTER CODE
-====================================================== */
-
-document.getElementById(
-    "codeInput"
-).addEventListener(
-    "keydown",
-    e=>{
-
-        if(e.key==="Enter"){
-            unlockSafe();
-        }
-
-    }
-);
-
-
-/* ======================================================
-   START
-====================================================== */
-
-update();
+start();
 
 </script>
 
