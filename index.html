@@ -669,7 +669,14 @@ summary{
     height:46px;
     border-radius:50%;
     background:
-        radial-gradient(circle,#aeb6b0 0 7%,#485049 8% 34%,#1e241f 35% 53%,#737c75 54% 66%,#252b26 67%);
+        radial-gradient(
+            circle,
+            #aeb6b0 0 7%,
+            #485049 8% 34%,
+            #1e241f 35% 53%,
+            #737c75 54% 66%,
+            #252b26 67%
+        );
     border:4px solid #1c221e;
     z-index:5;
     box-shadow:0 3px 7px rgba(0,0,0,.5);
@@ -889,9 +896,11 @@ summary{
     display:none;
     place-items:center;
     background:
-        radial-gradient(circle at center,
+        radial-gradient(
+            circle at center,
             rgba(255,211,77,.20),
-            rgba(0,0,0,.88) 65%);
+            rgba(0,0,0,.88) 65%
+        );
 }
 
 .celebration.show{
@@ -1025,7 +1034,9 @@ summary{
         transform:translateX(-150px) translateY(80px) rotate(-8deg);
         opacity:0;
     }
-    15%{opacity:1;}
+    15%{
+        opacity:1;
+    }
     to{
         transform:translateX(110vw) translateY(-70px) rotate(8deg);
         opacity:0;
@@ -1078,7 +1089,7 @@ summary{
 
 <header>
     <div class="logo">ZBieranie</div>
-    <div class="subtitle">Wspólny licznik • Cel 6868 zł</div>
+    <div class="subtitle">Wspólny licznik • Cel 6290 zł</div>
 </header>
 
 <nav>
@@ -1135,7 +1146,7 @@ id="balance">
 </div>
 
 <div class="target">
-Cel: 6868,00 zł
+Cel: 6290,00 zł
 </div>
 
 <div class="progress-shell">
@@ -1164,7 +1175,6 @@ id="progressText">
 
 <div class="notice">
 Ta funkcja działa tylko dla właściciela.
-Kliknięcie przez anonimowego użytkownika pokaże komunikat o braku dostępu.
 </div>
 
 <div class="quick">
@@ -1255,7 +1265,7 @@ Dni
 <div
 class="n"
 id="remaining">
-6868,00 zł
+6290,00 zł
 </div>
 <div class="l">
 Pozostało
@@ -1395,7 +1405,7 @@ class="safe-grid">
 <div class="goal">
 
 <div class="goal-big">
-2× Kukirin G4
+Nowy komputer
 </div>
 
 <div class="small">
@@ -1421,7 +1431,7 @@ Główny cel projektu.
 </div>
 
 <div class="milestone">
-6868 zł
+6290 zł
 </div>
 
 </div>
@@ -2095,7 +2105,7 @@ class="celebration">
 </div>
 
 <div class="celebration-sub">
-6868,00 zł ZDOBYTE!
+6290,00 zł ZDOBYTE!
 </div>
 
 <div
@@ -2148,12 +2158,12 @@ createClient(
 /* USTAWIENIA */
 /* =================================================== */
 
-const TARGET = 6868;
+const TARGET = 6290;
 
 const OWNER_CODES = [
     "ButelKaucja",
     "KaucjaMM0",
-    "OliwierDamian"
+    "DamianZbiera"
 ];
 
 const SAFE_MAX = {
@@ -2419,6 +2429,13 @@ async function refreshPublicData(){
             renderOwnerSafes();
         }
 
+    }catch(error){
+
+        console.error(
+            "refreshPublicData:",
+            error
+        );
+
     }finally{
 
         refreshRunning = false;
@@ -2566,17 +2583,14 @@ function drawState(){
 
 
     /*
-       Pasek jest aktualizowany tylko wtedy,
-       gdy faktycznie zmieniła się wartość.
-       Dzięki temu opóźnione odświeżenia nie
-       powodują ciągłego cofania animacji.
+        Pamiętamy ostatnią wartość.
+        Opóźnione odświeżenie nie może cofnąć
+        paska do wcześniejszego stanu.
     */
 
     if(
         previousDisplayedBalance === null ||
-        Math.abs(
-            previousDisplayedBalance - balance
-        ) > 0.001
+        balance >= previousDisplayedBalance
     ){
 
         progress.style.width =
@@ -2596,7 +2610,7 @@ function drawState(){
 
 
 /* =================================================== */
-/* CEL 6868 */
+/* CEL */
 /* =================================================== */
 
 function checkGoalCelebration(balance){
@@ -2617,7 +2631,9 @@ function checkGoalCelebration(balance){
                 "1"
             );
 
-            showCelebration(balance);
+            showCelebration(
+                balance
+            );
         }
 
     }else{
@@ -2644,14 +2660,17 @@ function showCelebration(balance){
             "celebrationAmount"
         )
         .textContent =
-            "Aktualnie: " + money(balance);
+            "Aktualnie: " +
+            money(balance);
 
 
     overlay
         .querySelectorAll(
             ".celebrate-item,.confetti-piece,.goldbar,.scooter"
         )
-        .forEach(el=>el.remove());
+        .forEach(
+            el=>el.remove()
+        );
 
 
     const items = [
@@ -2680,22 +2699,27 @@ function showCelebration(balance){
         el.textContent =
             items[
                 Math.floor(
-                    Math.random() * items.length
+                    Math.random() *
+                    items.length
                 )
             ];
 
         el.style.left =
-            Math.random() * 100 + "%";
+            Math.random()*100 +
+            "%";
 
         el.style.animationDelay =
-            Math.random() * 1.7 + "s";
+            Math.random()*1.7 +
+            "s";
 
         el.style.animationDuration =
             2.5 +
-            Math.random() * 2 +
+            Math.random()*2 +
             "s";
 
-        overlay.appendChild(el);
+        overlay.appendChild(
+            el
+        );
 
     }
 
@@ -2709,14 +2733,16 @@ function showCelebration(balance){
             "confetti-piece";
 
         el.style.left =
-            Math.random() * 100 + "%";
+            Math.random()*100 +
+            "%";
 
         el.style.animationDelay =
-            Math.random() * 1.7 + "s";
+            Math.random()*1.7 +
+            "s";
 
         el.style.animationDuration =
             2.5 +
-            Math.random() * 1.6 +
+            Math.random()*1.6 +
             "s";
 
         el.style.background =
@@ -2732,10 +2758,9 @@ function showCelebration(balance){
                 )
             ];
 
-        el.style.transform =
-            `rotate(${Math.random()*360}deg)`;
-
-        overlay.appendChild(el);
+        overlay.appendChild(
+            el
+        );
 
     }
 
@@ -2752,17 +2777,21 @@ function showCelebration(balance){
             "GOLD";
 
         el.style.left =
-            Math.random()*95 + "%";
+            Math.random()*95 +
+            "%";
 
         el.style.animationDelay =
-            Math.random()*1.5 + "s";
+            Math.random()*1.5 +
+            "s";
 
         el.style.animationDuration =
             3 +
             Math.random()*1.5 +
             "s";
 
-        overlay.appendChild(el);
+        overlay.appendChild(
+            el
+        );
 
     }
 
@@ -2784,19 +2813,24 @@ function showCelebration(balance){
             "%";
 
         el.style.animationDelay =
-            Math.random()*1.5 + "s";
+            Math.random()*1.5 +
+            "s";
 
         el.style.animationDuration =
             2.8 +
             Math.random()*1.5 +
             "s";
 
-        overlay.appendChild(el);
+        overlay.appendChild(
+            el
+        );
 
     }
 
 
-    overlay.classList.add("show");
+    overlay.classList.add(
+        "show"
+    );
 
 }
 
@@ -2964,7 +2998,10 @@ async function loadOwnerHistory(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            "owner_get_history:",
+            error
+        );
 
         el.innerHTML =
             `<div class="notice">
@@ -3056,13 +3093,15 @@ function drawChart(){
         canvas.getContext("2d");
 
 
-    if(!myHistory.length){
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-        ctx.clearRect(
-            0,0,
-            canvas.width,
-            canvas.height
-        );
+
+    if(!myHistory.length){
 
         ctx.fillStyle =
             "#769080";
@@ -3085,7 +3124,7 @@ function drawChart(){
             .reverse();
 
 
-    const width =
+    const chartWidth =
         Math.max(
             1200,
             80 +
@@ -3097,11 +3136,12 @@ function drawChart(){
 
 
     canvas.width =
-        width;
+        chartWidth;
 
 
     ctx.clearRect(
-        0,0,
+        0,
+        0,
         canvas.width,
         canvas.height
     );
@@ -3111,6 +3151,7 @@ function drawChart(){
         "rgba(185,225,195,.16)";
 
     ctx.lineWidth = 1;
+
 
     ctx.beginPath();
 
@@ -3192,12 +3233,7 @@ function drawChart(){
         );
 
 
-    for(let i=0;i<points.length;i++){
-
-        if(i === 0){
-            continue;
-        }
-
+    for(let i=1;i<points.length;i++){
 
         const a =
             points[i-1];
@@ -3290,7 +3326,7 @@ function drawChart(){
 
 
     [
-        6868,
+        6290,
         5000,
         2500,
         1000,
@@ -3909,7 +3945,6 @@ function loginOwner(){
 
     loadOwnerPending();
     loadOwnerHistory();
-
     renderOwnerSafes();
 
 
@@ -4210,7 +4245,7 @@ async function ownerSpendMoney(){
 
 
 /* =================================================== */
-/* OWNER CLEAR */
+/* OWNER CLEAR — NAPRAWIONE */
 /* =================================================== */
 
 async function ownerClearEverything(){
@@ -4234,47 +4269,165 @@ async function ownerClearEverything(){
     }
 
 
-    const {
-        error
-    } =
-    await sb.rpc(
-        "owner_clear_all_data"
-    );
+    try{
+
+        const result =
+            await sb.rpc(
+                "owner_clear_all_data"
+            );
 
 
-    if(error){
+        if(result.error){
+            throw result.error;
+        }
 
-        console.error(error);
 
-        toast(
-            "Nie udało się wyczyścić danych."
+        /*
+            ZERUJEMY WSZYSTKO OD RAZU
+            NA EKRANIE.
+        */
+
+        sharedState = {
+            balance:0,
+            bottles:0,
+            days:0
+        };
+
+
+        myHistory = [];
+
+
+        /*
+            Bardzo ważne:
+            pozwalamy paskowi zjechać do zera,
+            bo użytkownik świadomie wyczyścił dane.
+        */
+
+        previousDisplayedBalance = null;
+
+
+        sessionStorage.removeItem(
+            "zbieranie_goal_seen"
         );
 
-        return;
+
+        const progress =
+            document.getElementById(
+                "mainProgress"
+            );
+
+
+        progress.style.width =
+            "0%";
+
+
+        document
+            .getElementById(
+                "balance"
+            )
+            .textContent =
+                "0,00 zł";
+
+
+        document
+            .getElementById(
+                "bottles"
+            )
+            .textContent =
+                "0";
+
+
+        document
+            .getElementById(
+                "days"
+            )
+            .textContent =
+                "0";
+
+
+        document
+            .getElementById(
+                "remaining"
+            )
+            .textContent =
+                money(TARGET);
+
+
+        document
+            .getElementById(
+                "progressText"
+            )
+            .textContent =
+                "0,00%";
+
+
+        document
+            .getElementById(
+                "historyList"
+            )
+            .innerHTML =
+                `<div class="notice">
+                    Brak operacji.
+                 </div>`;
+
+
+        drawChart();
+
+
+        if(
+            document
+                .getElementById(
+                    "ownerHistoryList"
+                )
+        ){
+
+            document
+                .getElementById(
+                    "ownerHistoryList"
+                )
+                .innerHTML =
+                    `<div class="notice">
+                        Brak operacji.
+                     </div>`;
+        }
+
+
+        toast(
+            "🧹 Saldo, historia i wykres wyczyszczone."
+        );
+
+
+        /*
+            Jeszcze jedno odświeżenie z bazy,
+            żeby wszyscy użytkownicy zobaczyli 0.
+        */
+
+        await refreshEverything();
+
+
+    }catch(error){
+
+        console.error(
+            "ownerClearEverything:",
+            error
+        );
+
+
+        toast(
+            "❌ Nie udało się wyczyścić danych: " +
+            (
+                error.message ||
+                "nieznany błąd"
+            )
+        );
+
     }
-
-
-    previousDisplayedBalance =
-        null;
-
-
-    sessionStorage.removeItem(
-        "zbieranie_goal_seen"
-    );
-
-
-    toast(
-        "🧹 Saldo, historia i wykres wyczyszczone."
-    );
-
-
-    await refreshEverything();
 
 }
 
 
 /* =================================================== */
-/* KARTA — CZYSZCZENIE WŁASNYCH WPŁAT */
+/* KARTA */
 /* =================================================== */
 
 async function clearMyCardHistory(){
@@ -4330,7 +4483,9 @@ async function loadSafes(){
         error
     } =
     await sb
-        .from("zbieranie_safes")
+        .from(
+            "zbieranie_safes"
+        )
         .select(
             "id,amount,max_amount,unlock_code,updated_at"
         )
@@ -4483,7 +4638,9 @@ function renderSafes(){
                         `
                         <div
                             class="safe-code"
-                            style="color:#9eaea4;font-size:13px">
+                            style="
+                                color:#9eaea4;
+                                font-size:13px">
                             🔒 Kod pojawi się po pełnym zapełnieniu
                         </div>
                         `
@@ -4497,7 +4654,7 @@ function renderSafes(){
                             ${
                                 ownerLogged
                                 ? `onclick="safeDepositClick(${safe.id})"`
-                                : `disabled title="Tylko właściciel"`
+                                : `onclick="requireOwner()"`
                             }>
                             💰 Wpłata
                         </button>
@@ -4508,18 +4665,18 @@ function renderSafes(){
                             ${
                                 ownerLogged && full
                                 ? `onclick="safeWithdrawClick(${safe.id})"`
-                                : `disabled title="Tylko właściciel"`
+                                : `onclick="requireOwner()"`
                             }>
                             ⬆️ Wypłata
                         </button>
 
 
                         <button
-                            class="btn red"
+                            class="btn gray"
                             ${
                                 ownerLogged
                                 ? `onclick="safeClearClick(${safe.id})"`
-                                : `disabled title="Tylko właściciel"`
+                                : `onclick="requireOwner()"`
                             }>
                             🗑️ Wyczyść
                         </button>
@@ -4536,7 +4693,7 @@ function renderSafes(){
                             style="
                                 margin-top:10px;
                                 text-align:center">
-                            🔒 Funkcje sejfu są tylko dla właściciela.
+                            🔒 Tylko właściciel
                         </div>
                         `
                         :
@@ -5324,7 +5481,32 @@ function showSafeMoneyEffect(
 
 
 /* =================================================== */
-/* RENDER ALL */
+/* RENDER */
+/* =================================================== */
+
+function drawAll(){
+
+    drawState();
+
+    renderHistory();
+
+    renderMyPending();
+
+    renderMyCardHistory();
+
+    renderSafes();
+
+    drawChart();
+
+    if(ownerLogged){
+        renderOwnerSafes();
+    }
+
+}
+
+
+/* =================================================== */
+/* KARTA */
 /* =================================================== */
 
 function renderMyCardHistory(){
@@ -5398,28 +5580,6 @@ function renderMyCardHistory(){
         ).join("");
 
 }
-
-
-function drawAll(){
-
-    drawState();
-
-    renderHistory();
-
-    renderMyPending();
-
-    renderMyCardHistory();
-
-    renderSafes();
-
-    drawChart();
-
-    if(ownerLogged){
-        renderOwnerSafes();
-    }
-
-}
-
 
 </script>
 
