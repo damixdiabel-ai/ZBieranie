@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
@@ -33,9 +34,18 @@ body{
     min-height:100vh;
     color:var(--text);
     font-family:Arial,Helvetica,sans-serif;
+
     background:
-        radial-gradient(circle at 20% 10%,rgba(53,255,115,.08),transparent 30%),
-        radial-gradient(circle at 80% 20%,rgba(53,255,115,.05),transparent 30%),
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(53,255,115,.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(53,255,115,.05),
+            transparent 30%
+        ),
         var(--bg);
 }
 
@@ -52,7 +62,6 @@ button{
 button:disabled{
     cursor:not-allowed;
     opacity:.42;
-    filter:grayscale(.5);
 }
 
 .hidden{
@@ -65,25 +74,46 @@ button:disabled{
     padding:20px 0 45px;
 }
 
-/* HEADER */
+
+/* =========================================================
+   HEADER
+========================================================= */
 
 header{
     position:relative;
     overflow:hidden;
+
     padding:27px;
+
     border-radius:25px;
-    background:linear-gradient(145deg,#10291a,#07160c);
-    border:1px solid rgba(53,255,115,.18);
+
+    background:
+        linear-gradient(
+            145deg,
+            #10291a,
+            #07160c
+        );
+
+    border:
+        1px solid rgba(53,255,115,.18);
+
     margin-bottom:18px;
-    box-shadow:0 15px 45px rgba(0,0,0,.35);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.35);
 }
 
 header:after{
     content:"$";
+
     position:absolute;
+
     right:20px;
     top:-45px;
-    color:rgba(53,255,115,.045);
+
+    color:
+        rgba(53,255,115,.045);
+
     font-size:190px;
     font-weight:1000;
 }
@@ -91,20 +121,29 @@ header:after{
 .logo{
     position:relative;
     z-index:2;
+
     color:var(--green);
+
     font-size:42px;
     font-weight:1000;
-    text-shadow:0 0 25px rgba(53,255,115,.22);
+
+    text-shadow:
+        0 0 25px rgba(53,255,115,.22);
 }
 
 .subtitle{
     position:relative;
     z-index:2;
+
     color:var(--muted);
+
     margin-top:5px;
 }
 
-/* NAV */
+
+/* =========================================================
+   NAV
+========================================================= */
 
 nav{
     display:flex;
@@ -115,12 +154,20 @@ nav{
 
 .tab{
     flex:1 1 140px;
+
     padding:13px;
+
     border-radius:15px;
-    border:1px solid rgba(53,255,115,.14);
+
+    border:
+        1px solid rgba(53,255,115,.14);
+
     background:#091a0e;
+
     color:#d8ffe1;
+
     font-weight:900;
+
     transition:.18s;
 }
 
@@ -130,15 +177,23 @@ nav{
 
 .tab.active{
     color:var(--green);
+
     background:#10371c;
-    border-color:rgba(53,255,115,.48);
+
+    border-color:
+        rgba(53,255,115,.48);
 }
 
-/* PAGE */
+
+/* =========================================================
+   PAGE
+========================================================= */
 
 .page{
     display:none;
-    animation:pageIn .2s ease;
+
+    animation:
+        pageIn .2s ease;
 }
 
 .page.active{
@@ -146,32 +201,53 @@ nav{
 }
 
 @keyframes pageIn{
+
     from{
         opacity:0;
         transform:translateY(5px);
     }
+
     to{
         opacity:1;
         transform:translateY(0);
     }
+
 }
 
-/* CARDS */
+
+/* =========================================================
+   CARDS
+========================================================= */
 
 .card{
     padding:20px;
+
     margin-bottom:17px;
+
     border-radius:22px;
-    background:linear-gradient(145deg,#10291a,#09170d);
-    border:1px solid rgba(53,255,115,.14);
-    box-shadow:0 12px 35px rgba(0,0,0,.3);
+
+    background:
+        linear-gradient(
+            145deg,
+            #10291a,
+            #09170d
+        );
+
+    border:
+        1px solid rgba(53,255,115,.14);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.3);
 }
 
 .card h2{
     margin-top:0;
 }
 
-/* BALANCE */
+
+/* =========================================================
+   BALANCE
+========================================================= */
 
 .balance-wrap{
     text-align:center;
@@ -185,149 +261,239 @@ nav{
 
 .balance{
     margin:8px 0 14px;
+
     color:var(--green);
+
     font-size:64px;
     line-height:1;
+
     font-weight:1000;
-    text-shadow:0 0 27px rgba(53,255,115,.2);
+
+    text-shadow:
+        0 0 27px rgba(53,255,115,.2);
 }
 
 .target{
     color:#c8e6cf;
 }
 
-/* MAIN PROGRESS */
+
+/* =========================================================
+   PROGRESS
+========================================================= */
 
 .progress-shell{
     position:relative;
+
     overflow:hidden;
+
     width:100%;
     height:24px;
+
     margin-top:19px;
+
     background:#051008;
-    border:1px solid #153b20;
+
+    border:
+        1px solid #153b20;
+
     border-radius:999px;
 }
 
 .progress{
     position:relative;
+
     overflow:hidden;
+
     width:0%;
     height:100%;
+
     border-radius:999px;
+
     background:#0f913b;
-    transition:width .7s cubic-bezier(.2,.85,.25,1);
+
+    transition:
+        width .7s cubic-bezier(.2,.85,.25,1);
 }
 
 .progress:after{
     content:"";
+
     position:absolute;
     inset:0;
+
     width:140%;
+
     background:
         repeating-linear-gradient(
             -45deg,
             rgba(1,55,20,.72) 0 11px,
             transparent 11px 22px
         );
-    animation:progressForward 1.15s linear infinite;
+
+    animation:
+        progressForward 1.15s linear infinite;
 }
 
 @keyframes progressForward{
+
     from{
         transform:translateX(-45px);
     }
+
     to{
         transform:translateX(45px);
     }
+
 }
 
 .progress-text{
     margin-top:10px;
+
     color:#c8ebd1;
+
     font-weight:900;
 }
 
-/* STATS */
+
+/* =========================================================
+   STATS
+========================================================= */
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:12px;
 }
 
 .stat{
     padding:17px;
+
     text-align:center;
+
     border-radius:17px;
+
     background:#08170d;
-    border:1px solid rgba(53,255,115,.1);
+
+    border:
+        1px solid rgba(53,255,115,.1);
 }
 
 .stat .n{
     color:var(--green);
+
     font-size:28px;
+
     font-weight:1000;
 }
 
 .stat .l{
     margin-top:4px;
+
     color:var(--muted);
 }
 
-/* BUTTONS */
+
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 .actions{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(145px,1fr));
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(145px,1fr));
+
     gap:9px;
 }
 
 .btn{
     padding:13px 14px;
+
     color:white;
-    border:1px solid rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
     border-radius:14px;
+
     background:#17281c;
+
     font-weight:900;
 }
 
 .btn.green{
-    background:linear-gradient(180deg,#22ca57,#13833a);
+    background:
+        linear-gradient(
+            180deg,
+            #22ca57,
+            #13833a
+        );
 }
 
 .btn.red{
-    background:linear-gradient(180deg,#e84756,#a72331);
+    background:
+        linear-gradient(
+            180deg,
+            #e84756,
+            #a72331
+        );
 }
 
 .btn.blue{
-    background:linear-gradient(180deg,#398ed9,#225f96);
+    background:
+        linear-gradient(
+            180deg,
+            #398ed9,
+            #225f96
+        );
 }
 
 .btn.orange{
-    background:linear-gradient(180deg,#efaa43,#b86f16);
+    background:
+        linear-gradient(
+            180deg,
+            #efaa43,
+            #b86f16
+        );
 }
 
 .btn.gray{
     background:#26302a;
 }
 
-/* INPUT */
+
+/* =========================================================
+   INPUT
+========================================================= */
 
 .input-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(170px,1fr));
+
     gap:9px;
 }
 
 input,
 textarea{
     width:100%;
+
     padding:12px 13px;
+
     color:white;
+
     background:#06110a;
-    border:1px solid #284833;
+
+    border:
+        1px solid #284833;
+
     border-radius:13px;
+
     outline:none;
 }
 
@@ -336,60 +502,96 @@ textarea:focus{
     border-color:var(--green);
 }
 
-/* QUICK */
+
+/* =========================================================
+   QUICK
+========================================================= */
 
 .quick{
     display:flex;
+
     flex-wrap:wrap;
+
     gap:8px;
+
     margin-top:10px;
 }
 
 .quick button{
     padding:10px 13px;
+
     color:#e3ffea;
+
     background:#11281a;
-    border:1px solid rgba(53,255,115,.15);
+
+    border:
+        1px solid rgba(53,255,115,.15);
+
     border-radius:12px;
+
     font-weight:900;
 }
 
-/* NOTICE */
+
+/* =========================================================
+   NOTICE
+========================================================= */
 
 .notice{
     padding:13px 15px;
+
     color:#c9ded0;
+
     background:#09170d;
-    border:1px solid rgba(255,255,255,.05);
+
+    border:
+        1px solid rgba(255,255,255,.05);
+
     border-radius:14px;
 }
 
 .small{
     color:var(--muted);
+
     font-size:13px;
 }
 
-/* HISTORY */
+
+/* =========================================================
+   HISTORY
+========================================================= */
 
 .history-list{
     display:flex;
+
     flex-direction:column;
+
     gap:8px;
 }
 
 .history-item{
     display:grid;
-    grid-template-columns:140px 1fr auto;
+
+    grid-template-columns:
+        140px 1fr auto;
+
     gap:10px;
+
     align-items:center;
+
     padding:12px 14px;
+
     border-radius:14px;
+
     background:#08150c;
-    border:1px solid rgba(255,255,255,.05);
+
+    border:
+        1px solid rgba(255,255,255,.05);
 }
 
 .history-date{
     color:#829a8a;
+
     font-size:12px;
 }
 
@@ -399,6 +601,7 @@ textarea:focus{
 
 .amount{
     white-space:nowrap;
+
     font-weight:1000;
 }
 
@@ -412,153 +615,317 @@ textarea:focus{
 
 details{
     overflow:hidden;
+
     border-radius:15px;
+
     background:#08150c;
-    border:1px solid rgba(53,255,115,.08);
+
+    border:
+        1px solid rgba(53,255,115,.08);
 }
 
 summary{
     cursor:pointer;
+
     padding:14px;
+
     font-weight:900;
 }
 
 .details-body{
-    padding:0 14px 14px;
+    padding:
+        0 14px 14px;
 }
 
-/* CHART */
+
+/* =========================================================
+   CHART
+========================================================= */
 
 .chart-wrap{
     overflow-x:auto;
+
     padding-bottom:6px;
 }
 
 .chart-canvas{
     display:block;
-    width:max(950px,100%);
+
+    width:max(1000px,100%);
+
     height:320px;
+
     border-radius:16px;
+
     background:
-        linear-gradient(rgba(53,255,115,.035) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(53,255,115,.035) 1px,transparent 1px),
+        linear-gradient(
+            rgba(53,255,115,.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(53,255,115,.035) 1px,
+            transparent 1px
+        ),
         #08160c;
-    background-size:60px 40px;
+
+    background-size:
+        60px 40px;
 }
 
-/* OWNER */
+
+/* =========================================================
+   OWNER
+========================================================= */
 
 .owner-panel{
-    background:linear-gradient(145deg,#281013,#17090c);
-    border-color:rgba(255,79,95,.2);
+    background:
+        linear-gradient(
+            145deg,
+            #281013,
+            #17090c
+        );
+
+    border-color:
+        rgba(255,79,95,.2);
 }
 
 .owner-title{
     color:#ff6574;
 }
 
+.owner-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:10px;
+
+    margin-top:12px;
+}
+
+.owner-stat{
+    padding:16px;
+
+    text-align:center;
+
+    border-radius:15px;
+
+    background:#1d0b0e;
+
+    border:
+        1px solid rgba(255,79,95,.12);
+}
+
+.owner-stat-number{
+    color:#ff7480;
+
+    font-size:25px;
+
+    font-weight:1000;
+}
+
+.owner-stat-label{
+    margin-top:4px;
+
+    color:#ba9196;
+
+    font-size:12px;
+}
+
 .code-row{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+
+    grid-template-columns:
+        repeat(3,1fr);
+
     gap:9px;
 }
 
 .code-row input{
     text-align:center;
+
     letter-spacing:3px;
 }
 
 .error{
     color:#ff717d;
+
     margin-top:8px;
 }
 
 .success{
     color:#65ff93;
+
     margin-top:8px;
 }
 
-/* GOALS */
+.owner-tools{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(180px,1fr));
+
+    gap:10px;
+}
+
+.owner-tool{
+    padding:15px;
+
+    border-radius:15px;
+
+    background:#1c0b0e;
+
+    border:
+        1px solid rgba(255,79,95,.11);
+}
+
+.owner-tool h3{
+    margin-top:0;
+
+    color:#ff7984;
+}
+
+
+/* =========================================================
+   GOALS
+========================================================= */
 
 .goal{
     padding:18px;
+
     border-radius:18px;
-    background:linear-gradient(145deg,#291a06,#180f04);
-    border:1px solid rgba(255,174,66,.22);
+
+    background:
+        linear-gradient(
+            145deg,
+            #291a06,
+            #180f04
+        );
+
+    border:
+        1px solid rgba(255,174,66,.22);
 }
 
 .goal-big{
     color:#ffb94d;
+
     font-size:28px;
+
     font-weight:1000;
 }
 
 .milestones{
     display:grid;
-    grid-template-columns:repeat(5,1fr);
+
+    grid-template-columns:
+        repeat(5,1fr);
+
     gap:8px;
+
     margin-top:13px;
 }
 
 .milestone{
     padding:10px;
+
     text-align:center;
+
     border-radius:11px;
+
     background:#1b1207;
+
     color:#ead09e;
 }
 
-/* DONATIONS */
+
+/* =========================================================
+   DONATIONS
+========================================================= */
 
 .mini-list{
     display:grid;
+
     gap:8px;
 }
 
 .mini-row{
     display:grid;
-    grid-template-columns:1fr auto;
+
+    grid-template-columns:
+        1fr auto;
+
     gap:10px;
+
     align-items:center;
+
     padding:11px 0;
-    border-top:1px solid rgba(255,255,255,.05);
+
+    border-top:
+        1px solid rgba(255,255,255,.05);
 }
 
 .badge{
     display:inline-flex;
+
     align-items:center;
     justify-content:center;
+
     padding:5px 9px;
+
     border-radius:999px;
+
     color:#ffd36b;
+
     background:#332914;
+
     font-size:11px;
+
     font-weight:1000;
 }
 
 .donation-item{
     display:grid;
-    grid-template-columns:95px 1fr auto auto;
+
+    grid-template-columns:
+        95px 1fr auto auto;
+
     gap:10px;
+
     align-items:center;
+
     padding:11px 0;
-    border-top:1px solid rgba(255,255,255,.05);
+
+    border-top:
+        1px solid rgba(255,255,255,.05);
 }
 
-/* SAFE */
+
+/* =========================================================
+   SAFE
+========================================================= */
 
 .safe-grid{
     display:grid;
-    grid-template-columns:repeat(2,minmax(250px,1fr));
+
+    grid-template-columns:
+        repeat(2,minmax(250px,1fr));
+
     gap:18px;
 }
 
 .safe{
     position:relative;
+
     min-height:420px;
+
     overflow:hidden;
+
     padding:21px;
+
     border-radius:24px;
+
     background:
         linear-gradient(
             165deg,
@@ -567,23 +934,36 @@ summary{
             #2d352f 58%,
             #161c18 100%
         );
-    border:2px solid #7c877f;
+
+    border:
+        2px solid #7c877f;
+
     box-shadow:
         inset 0 0 0 3px #1e241f,
         inset 0 0 35px rgba(255,255,255,.04),
         0 15px 35px rgba(0,0,0,.4);
-    transition:transform .8s ease,opacity .8s ease;
+
+    transition:
+        transform .8s ease,
+        opacity .8s ease;
 }
 
 .safe:before{
     content:"";
+
     position:absolute;
+
     left:15px;
     right:15px;
+
     top:13px;
+
     height:9px;
+
     border-radius:6px;
+
     background:#111611;
+
     box-shadow:
         0 5px 0 #858f87,
         0 8px 0 #272e28;
@@ -591,37 +971,61 @@ summary{
 
 .safe-title{
     position:relative;
+
     z-index:5;
+
     margin-top:8px;
+
     font-size:25px;
+
     font-weight:1000;
 }
 
 .safe-max{
     position:relative;
+
     z-index:5;
+
     color:#c5cec8;
+
     font-size:13px;
 }
 
 .safe-visual{
     position:relative;
+
     z-index:2;
+
     height:180px;
+
     margin-top:12px;
 }
 
 .safe-body{
     position:absolute;
+
     left:50%;
     top:8px;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:175px;
     height:145px;
+
     border-radius:13px;
+
     background:
-        linear-gradient(150deg,#707a73,#424a44 60%,#242b26);
-    border:3px solid #252c27;
+        linear-gradient(
+            150deg,
+            #707a73,
+            #424a44 60%,
+            #242b26
+        );
+
+    border:
+        3px solid #252c27;
+
     box-shadow:
         inset 0 0 0 3px #868e88,
         inset 0 -15px 25px rgba(0,0,0,.25);
@@ -630,13 +1034,20 @@ summary{
 .safe-body:before,
 .safe-body:after{
     content:"";
+
     position:absolute;
+
     top:22px;
     bottom:22px;
+
     width:9px;
+
     border-radius:5px;
+
     background:#181e19;
-    border:1px solid #7a837c;
+
+    border:
+        1px solid #7a837c;
 }
 
 .safe-body:before{
@@ -649,25 +1060,40 @@ summary{
 
 .safe-lock{
     position:absolute;
+
     left:50%;
     top:66px;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:43px;
     height:26px;
+
     border-radius:7px;
+
     background:#151b17;
-    border:2px solid #9aa39d;
+
+    border:
+        2px solid #9aa39d;
+
     z-index:4;
 }
 
 .safe-wheel{
     position:absolute;
+
     left:50%;
     top:77px;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:46px;
     height:46px;
+
     border-radius:50%;
+
     background:
         radial-gradient(
             circle,
@@ -677,43 +1103,79 @@ summary{
             #737c75 54% 66%,
             #252b26 67%
         );
-    border:4px solid #1c221e;
+
+    border:
+        4px solid #1c221e;
+
     z-index:5;
-    box-shadow:0 3px 7px rgba(0,0,0,.5);
+
+    box-shadow:
+        0 3px 7px rgba(0,0,0,.5);
 }
 
 .crank{
     position:absolute;
+
     left:50%;
     top:96px;
-    transform:translateX(-50%);
+
+    transform:
+        translateX(-50%);
+
     width:150px;
     height:52px;
+
     z-index:6;
 }
 
 .crank-arm{
     position:absolute;
+
     left:18px;
     top:21px;
+
     width:95px;
     height:10px;
+
     border-radius:8px;
-    background:linear-gradient(#b3bbb5,#696f6a);
-    border:2px solid #252b27;
-    transform-origin:10px 50%;
-    box-shadow:0 3px 5px rgba(0,0,0,.55);
+
+    background:
+        linear-gradient(
+            #b3bbb5,
+            #696f6a
+        );
+
+    border:
+        2px solid #252b27;
+
+    transform-origin:
+        10px 50%;
+
+    box-shadow:
+        0 3px 5px rgba(0,0,0,.55);
 }
 
 .crank-handle{
     position:absolute;
+
     right:8px;
     top:5px;
+
     width:34px;
     height:34px;
+
     border-radius:50%;
-    background:linear-gradient(145deg,#c2c8c3,#686f69);
-    border:4px solid #262c28;
+
+    background:
+        linear-gradient(
+            145deg,
+            #c2c8c3,
+            #686f69
+        );
+
+    border:
+        4px solid #262c28;
+
     box-shadow:
         inset 0 0 0 2px #8f9891,
         0 3px 6px rgba(0,0,0,.6);
@@ -721,118 +1183,196 @@ summary{
 
 .crank-handle:after{
     content:"";
+
     position:absolute;
+
     left:50%;
     top:50%;
+
     width:8px;
     height:8px;
-    transform:translate(-50%,-50%);
+
+    transform:
+        translate(-50%,-50%);
+
     border-radius:50%;
+
     background:#303730;
 }
 
 .safe.cranking .crank-arm{
-    animation:crank .65s linear infinite;
+    animation:
+        crank .65s linear infinite;
 }
 
 @keyframes crank{
+
     to{
-        transform:rotate(360deg);
+        transform:
+            rotate(360deg);
     }
+
 }
 
 .safe.opening{
-    transform:translateY(-150px) scale(.9);
+    transform:
+        translateY(-150px)
+        scale(.9);
+
     opacity:0;
 }
 
 .safe.opening .safe-body{
-    animation:safeDoorOpen .75s ease forwards;
+    animation:
+        safeDoorOpen .75s ease forwards;
 }
 
 @keyframes safeDoorOpen{
+
     from{
-        transform:translateX(-50%) rotateX(0deg) translateY(0);
+        transform:
+            translateX(-50%)
+            rotateX(0deg)
+            translateY(0);
     }
+
     to{
-        transform:translateX(-50%) rotateX(72deg) translateY(-70px);
+        transform:
+            translateX(-50%)
+            rotateX(72deg)
+            translateY(-70px);
     }
+
 }
 
 .safe-money{
     position:relative;
+
     z-index:5;
+
     color:#effff3;
+
     font-size:26px;
+
     font-weight:1000;
 }
 
 .safe-bar{
     position:relative;
+
     z-index:5;
+
     height:13px;
+
     margin-top:8px;
+
     overflow:hidden;
+
     background:#101510;
-    border:1px solid #59635c;
+
+    border:
+        1px solid #59635c;
+
     border-radius:999px;
 }
 
 .safe-fill{
     height:100%;
+
     width:0%;
-    background:linear-gradient(90deg,#21cb58,#7bffa0);
-    transition:width .45s ease;
+
+    background:
+        linear-gradient(
+            90deg,
+            #21cb58,
+            #7bffa0
+        );
+
+    transition:
+        width .45s ease;
 }
 
 .safe-code{
     position:relative;
+
     z-index:5;
+
     margin-top:8px;
+
     color:#ffd35a;
+
     font-size:17px;
+
     font-weight:1000;
 }
 
 .safe-actions{
     position:relative;
+
     z-index:10;
+
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:7px;
-    margin-top:12px;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:8px;
+
+    margin-top:13px;
 }
 
 .safe-actions .btn{
-    min-height:42px;
-    padding:9px 5px;
-    font-size:12px;
+    min-height:44px;
+
+    padding:10px;
+
+    font-size:13px;
 }
 
 .full-badge{
     position:absolute;
+
     right:15px;
     top:25px;
+
     z-index:15;
+
     padding:7px 10px;
+
     color:#06230f;
+
     background:#72ff9a;
+
     border-radius:999px;
+
     font-size:11px;
+
     font-weight:1000;
 }
 
-/* MODALS */
+
+/* =========================================================
+   MODALS
+========================================================= */
 
 .modal-bg{
     position:fixed;
+
     inset:0;
+
     z-index:1000;
+
     display:none;
+
     place-items:center;
+
     padding:20px;
-    background:rgba(0,0,0,.72);
-    backdrop-filter:blur(5px);
+
+    background:
+        rgba(0,0,0,.72);
+
+    backdrop-filter:
+        blur(5px);
 }
 
 .modal-bg.show{
@@ -841,60 +1381,107 @@ summary{
 
 .modal{
     width:min(520px,100%);
+
     padding:23px;
+
     border-radius:24px;
-    background:linear-gradient(145deg,#12281a,#08130c);
-    border:1px solid rgba(53,255,115,.25);
-    box-shadow:0 25px 80px rgba(0,0,0,.55);
-    animation:modalIn .18s ease;
+
+    background:
+        linear-gradient(
+            145deg,
+            #12281a,
+            #08130c
+        );
+
+    border:
+        1px solid rgba(53,255,115,.25);
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.55);
+
+    animation:
+        modalIn .18s ease;
 }
 
 @keyframes modalIn{
+
     from{
         opacity:0;
         transform:scale(.96);
     }
+
     to{
         opacity:1;
         transform:scale(1);
     }
+
 }
 
-/* TOAST */
+
+/* =========================================================
+   TOAST
+========================================================= */
 
 .toast{
     position:fixed;
+
     left:50%;
     bottom:20px;
+
     z-index:5000;
+
     max-width:92vw;
+
     padding:13px 17px;
+
     color:#ebfff0;
+
     background:#12261a;
-    border:1px solid rgba(53,255,115,.25);
+
+    border:
+        1px solid rgba(53,255,115,.25);
+
     border-radius:15px;
-    transform:translate(-50%,20px);
+
+    transform:
+        translate(-50%,20px);
+
     opacity:0;
+
     pointer-events:none;
+
     transition:.22s;
+
     font-weight:900;
+
     text-align:center;
 }
 
 .toast.show{
     opacity:1;
-    transform:translate(-50%,0);
+
+    transform:
+        translate(-50%,0);
 }
 
-/* CELEBRATION */
+
+/* =========================================================
+   CELEBRATION
+========================================================= */
 
 .celebration{
     position:fixed;
+
     inset:0;
+
     z-index:9000;
+
     overflow:hidden;
+
     display:none;
+
     place-items:center;
+
     background:
         radial-gradient(
             circle at center,
@@ -909,141 +1496,258 @@ summary{
 
 .celebration-card{
     position:relative;
+
     z-index:20;
+
     width:min(700px,90%);
+
     padding:35px 25px;
+
     text-align:center;
-    border:3px solid var(--gold);
+
+    border:
+        3px solid var(--gold);
+
     border-radius:30px;
-    background:linear-gradient(145deg,#172b15,#08120b);
+
+    background:
+        linear-gradient(
+            145deg,
+            #172b15,
+            #08120b
+        );
+
     box-shadow:
         0 0 35px rgba(255,211,77,.3),
         0 20px 100px rgba(0,0,0,.65);
-    animation:celebrateCard .7s cubic-bezier(.2,.9,.25,1);
+
+    animation:
+        celebrateCard .7s cubic-bezier(.2,.9,.25,1);
 }
 
 @keyframes celebrateCard{
+
     0%{
         opacity:0;
-        transform:scale(.5) rotate(-4deg);
+        transform:
+            scale(.5)
+            rotate(-4deg);
     }
+
     70%{
-        transform:scale(1.06) rotate(1deg);
+        transform:
+            scale(1.06)
+            rotate(1deg);
     }
+
     100%{
         opacity:1;
-        transform:scale(1) rotate(0);
+        transform:
+            scale(1)
+            rotate(0);
     }
+
 }
 
 .celebration-title{
     color:#ffe16f;
-    font-size:clamp(34px,7vw,72px);
+
+    font-size:
+        clamp(34px,7vw,72px);
+
     font-weight:1000;
-    text-shadow:0 0 30px rgba(255,211,77,.4);
+
+    text-shadow:
+        0 0 30px
+        rgba(255,211,77,.4);
 }
 
 .celebration-sub{
     margin-top:10px;
+
     font-size:26px;
+
     font-weight:1000;
 }
 
 .celebration-amount{
     margin-top:8px;
+
     color:var(--green);
+
     font-size:35px;
+
     font-weight:1000;
 }
 
 .celebrate-item{
     position:absolute;
+
     z-index:5;
-    font-size:clamp(22px,4vw,48px);
-    animation:celebrateFloat 3.5s linear forwards;
+
+    font-size:
+        clamp(22px,4vw,48px);
+
+    animation:
+        celebrateFloat
+        3.5s linear forwards;
+
     pointer-events:none;
 }
 
 @keyframes celebrateFloat{
+
     0%{
-        transform:translateY(110vh) rotate(0deg) scale(.5);
+        transform:
+            translateY(110vh)
+            rotate(0deg)
+            scale(.5);
+
         opacity:0;
     }
+
     10%{
         opacity:1;
     }
+
     100%{
-        transform:translateY(-20vh) rotate(650deg) scale(1.2);
+        transform:
+            translateY(-20vh)
+            rotate(650deg)
+            scale(1.2);
+
         opacity:0;
     }
+
 }
 
 .confetti-piece{
     position:absolute;
+
     top:-20px;
+
     width:9px;
     height:16px;
+
     border-radius:2px;
-    animation:confettiFall 3.2s linear forwards;
+
+    animation:
+        confettiFall
+        3.2s linear forwards;
 }
 
 @keyframes confettiFall{
+
     to{
-        transform:translateY(115vh) rotate(900deg);
+        transform:
+            translateY(115vh)
+            rotate(900deg);
     }
+
 }
 
 .goldbar{
     position:absolute;
+
     width:72px;
     height:28px;
+
     border-radius:7px;
-    background:linear-gradient(145deg,#fff08a,#d89b17 55%,#9c6911);
-    border:2px solid #ffe275;
-    box-shadow:0 0 15px rgba(255,211,77,.4);
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff08a,
+            #d89b17 55%,
+            #9c6911
+        );
+
+    border:
+        2px solid #ffe275;
+
+    box-shadow:
+        0 0 15px
+        rgba(255,211,77,.4);
+
     color:#7b4c04;
+
     font-size:10px;
+
     font-weight:1000;
+
     display:grid;
+
     place-items:center;
-    animation:goldFloat 3.8s linear forwards;
+
+    animation:
+        goldFloat
+        3.8s linear forwards;
 }
 
 @keyframes goldFloat{
+
     0%{
-        transform:translateY(115vh) rotate(-10deg);
+        transform:
+            translateY(115vh)
+            rotate(-10deg);
+
         opacity:0;
     }
+
     15%{
         opacity:1;
     }
+
     100%{
-        transform:translateY(-15vh) rotate(35deg);
+        transform:
+            translateY(-15vh)
+            rotate(35deg);
+
         opacity:0;
     }
+
 }
 
 .scooter{
     position:absolute;
+
     font-size:46px;
-    animation:scooterFly 3.7s ease-in-out forwards;
+
+    animation:
+        scooterFly
+        3.7s ease-in-out forwards;
 }
 
 @keyframes scooterFly{
+
     from{
-        transform:translateX(-150px) translateY(80px) rotate(-8deg);
+        transform:
+            translateX(-150px)
+            translateY(80px)
+            rotate(-8deg);
+
         opacity:0;
     }
+
     15%{
         opacity:1;
     }
+
     to{
-        transform:translateX(110vw) translateY(-70px) rotate(8deg);
+        transform:
+            translateX(110vw)
+            translateY(-70px)
+            rotate(8deg);
+
         opacity:0;
     }
+
 }
 
-/* RESPONSIVE */
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media(max-width:800px){
 
@@ -1059,6 +1763,11 @@ summary{
         grid-template-columns:1fr;
     }
 
+    .owner-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
     .history-item{
         grid-template-columns:1fr;
     }
@@ -1068,58 +1777,72 @@ summary{
     }
 
     .milestones{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
     }
 
     .balance{
         font-size:48px;
     }
 
-    .safe{
-        min-height:400px;
-    }
 }
 
 </style>
 </head>
 
+
 <body>
 
 <div class="app">
 
+
 <header>
-    <div class="logo">ZBieranie</div>
-    <div class="subtitle">Wspólny licznik • Cel 6290 zł</div>
+
+<div class="logo">
+ZBieranie
+</div>
+
+<div class="subtitle">
+Wspólny licznik • Cel 6290 zł
+</div>
+
 </header>
+
 
 <nav>
 
-<button class="tab active"
+<button
+class="tab active"
 onclick="showPage('saldo',this)">
 💰 Saldo
 </button>
 
-<button class="tab"
+<button
+class="tab"
 onclick="showPage('cele',this)">
 🎯 Cele
 </button>
 
-<button class="tab"
+<button
+class="tab"
 onclick="showPage('pytania',this)">
 🟪 Pytania 📝
 </button>
 
-<button class="tab"
+<button
+class="tab"
 onclick="showPage('donaty',this)">
 💰 Donaty
 </button>
 
-<button class="tab"
+<button
+class="tab"
 onclick="showPage('karta',this)">
 💳 Karta
 </button>
 
-<button class="tab"
+<button
+class="tab"
 onclick="showPage('wlasciciel',this)">
 👑 Właściciel
 </button>
@@ -1127,11 +1850,14 @@ onclick="showPage('wlasciciel',this)">
 </nav>
 
 
-<!-- =================================================== -->
-<!-- SALDO -->
-<!-- =================================================== -->
+<!-- =====================================================
+     SALDO
+===================================================== -->
 
-<section id="saldo" class="page active">
+<section
+id="saldo"
+class="page active">
+
 
 <div class="card balance-wrap">
 
@@ -1140,8 +1866,8 @@ Aktualnie
 </div>
 
 <div
-class="balance"
-id="balance">
+id="balance"
+class="balance">
 0,00 zł
 </div>
 
@@ -1149,18 +1875,20 @@ id="balance">
 Cel: 6290,00 zł
 </div>
 
+
 <div class="progress-shell">
 
 <div
-class="progress"
-id="mainProgress">
+id="mainProgress"
+class="progress">
 </div>
 
 </div>
+
 
 <div
-class="progress-text"
-id="progressText">
+id="progressText"
+class="progress-text">
 0,00%
 </div>
 
@@ -1171,11 +1899,14 @@ id="progressText">
 
 <div class="card">
 
-<h2>⚡ Szybka wpłata</h2>
+<h2>
+⚡ Szybka wpłata
+</h2>
 
 <div class="notice">
-Ta funkcja działa tylko dla właściciela.
+Tylko właściciel może używać szybkiej wpłaty.
 </div>
+
 
 <div class="quick">
 
@@ -1205,7 +1936,9 @@ Ta funkcja działa tylko dla właściciela.
 
 </div>
 
-<div class="input-grid"
+
+<div
+class="input-grid"
 style="margin-top:10px">
 
 <input
@@ -1235,44 +1968,58 @@ onclick="ownerCustomAdd()">
 
 <div class="card">
 
-<h2>📊 Statystyki</h2>
+<h2>
+📊 Statystyki
+</h2>
 
 <div class="stats">
 
 <div class="stat">
+
 <div
-class="n"
-id="bottles">
+id="bottles"
+class="n">
 0
 </div>
+
 <div class="l">
 Butelki
 </div>
+
 </div>
 
+
 <div class="stat">
+
 <div
-class="n"
-id="days">
+id="days"
+class="n">
 0
 </div>
+
 <div class="l">
 Dni
 </div>
+
 </div>
 
+
 <div class="stat">
+
 <div
-class="n"
-id="remaining">
+id="remaining"
+class="n">
 6290,00 zł
 </div>
+
 <div class="l">
 Pozostało
 </div>
+
 </div>
 
 </div>
+
 </div>
 
 
@@ -1280,7 +2027,17 @@ Pozostało
 
 <div class="card">
 
-<h2>📈 Wykres</h2>
+<h2>
+📈 Wspólny wykres
+</h2>
+
+<div class="notice"
+style="margin-bottom:12px">
+
+Wykres pokazuje wspólne operacje ZBierania.
+
+</div>
+
 
 <div class="chart-wrap">
 
@@ -1293,23 +2050,26 @@ height="320">
 
 </div>
 
+
 <div class="small">
-Przewijaj wykres poziomo.
+Przewijaj poziomo, gdy będzie dużo operacji.
 </div>
 
 </div>
 
 
-<!-- HISTORIA -->
+<!-- OSTATNIE OPERACJE -->
 
 <div class="card">
 
-<h2>🧾 Ostatnie operacje</h2>
+<h2>
+🧾 Ostatnie operacje
+</h2>
 
 <details open>
 
 <summary>
-Kliknij, aby rozwinąć / zwinąć
+Rozwiń / zwiń historię
 </summary>
 
 <div class="details-body">
@@ -1326,61 +2086,23 @@ class="history-list">
 </div>
 
 
-<!-- CZYSZCZENIE -->
-
-<div class="card">
-
-<h2>🧹 Czyszczenie danych</h2>
-
-<div class="notice">
-Tylko właściciel może wyczyścić saldo, historię i wykres.
-</div>
-
-<button
-class="btn red"
-style="margin-top:12px"
-onclick="ownerClearEverything()">
-🗑️ Wyczyść saldo, historię i wykres
-</button>
-
-</div>
-
-
-<!-- JAK WPŁACIĆ -->
-
-<div class="card">
-
-<h2>🎬 Jak wpłacić?</h2>
-
-<div class="notice">
-Gotówką, przelewem lub z portfela.
-Donaty internetowe trafiają najpierw do oczekujących.
-</div>
-
-<button
-class="btn green"
-style="margin-top:12px"
-onclick="openModal('infoModal')">
-🎬 Pokaż instrukcję
-</button>
-
-</div>
-
-
 <!-- SEJFY -->
 
 <div class="card">
 
-<h2>🔐 Sejfy</h2>
+<h2>
+🔐 Sejfy
+</h2>
 
-<div class="notice"
+<div
+class="notice"
 style="margin-bottom:14px">
 
-Stan sejfów jest wspólny dla wszystkich.
-Wpłata, wypłata i wyczyszczenie sejfu są dostępne
-wyłącznie dla właściciela.
+Sejfy są wspólne.
+Wpłata, wyczyszczenie i odblokowanie są tylko dla właściciela.
 
 </div>
+
 
 <div
 id="safeGrid"
@@ -1389,18 +2111,48 @@ class="safe-grid">
 
 </div>
 
-</section>
 
-
-<!-- =================================================== -->
-<!-- CELE -->
-<!-- =================================================== -->
-
-<section id="cele" class="page">
+<!-- JAK WPŁACIĆ -->
 
 <div class="card">
 
-<h2>🎯 Cele</h2>
+<h2>
+🎬 Jak wpłacić?
+</h2>
+
+<div class="notice">
+
+Gotówką, przelewem lub z portfela.
+Donaty przez stronę najpierw czekają na akceptację.
+
+</div>
+
+<button
+class="btn green"
+style="margin-top:12px"
+onclick="openModal('infoModal')">
+🎬 Instrukcja
+</button>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+     CELE
+===================================================== -->
+
+<section
+id="cele"
+class="page">
+
+<div class="card">
+
+<h2>
+🎯 Cele
+</h2>
+
 
 <div class="goal">
 
@@ -1411,6 +2163,7 @@ Nowy komputer
 <div class="small">
 Główny cel projektu.
 </div>
+
 
 <div class="milestones">
 
@@ -1443,24 +2196,22 @@ Główny cel projektu.
 </section>
 
 
-<!-- =================================================== -->
-<!-- PYTANIA -->
-<!-- =================================================== -->
+<!-- =====================================================
+     PYTANIA
+===================================================== -->
 
-<section id="pytania" class="page">
+<section
+id="pytania"
+class="page">
 
 <div class="card">
 
-<h2>🟪 Pytania 📝</h2>
+<h2>
+🟪 Pytania 📝
+</h2>
+
 
 <div class="qna">
-
-<div class="notice">
-<b>❓ Kiedy powstało ZBieranie?</b>
-<br><br>
-Projekt został zrobiony do wspólnego zapisywania
-i kontrolowania zbieranych pieniędzy.
-</div>
 
 <div class="notice">
 <b>❓ Czy licznik jest wspólny?</b>
@@ -1468,10 +2219,18 @@ i kontrolowania zbieranych pieniędzy.
 Tak.
 </div>
 
+
 <div class="notice">
-<b>❓ Czy donata od razu zwiększa saldo?</b>
+<b>❓ Co dzieje się z donatą?</b>
 <br><br>
-Nie. Najpierw czeka na zatwierdzenie właściciela.
+Najpierw trafia do oczekujących, a właściciel może ją zatwierdzić.
+</div>
+
+
+<div class="notice">
+<b>❓ Czy sejfy są wspólne?</b>
+<br><br>
+Tak. Wszyscy widzą ich aktualny stan.
 </div>
 
 </div>
@@ -1481,22 +2240,27 @@ Nie. Najpierw czeka na zatwierdzenie właściciela.
 </section>
 
 
-<!-- =================================================== -->
-<!-- DONATY -->
-<!-- =================================================== -->
+<!-- =====================================================
+     DONATY
+===================================================== -->
 
-<section id="donaty" class="page">
+<section
+id="donaty"
+class="page">
 
 <div class="card">
 
-<h2>💰 Donata</h2>
+<h2>
+💰 Donata
+</h2>
 
 <div class="notice">
 
-Donata trafia do oczekujących.
-Dopiero właściciel może ją przyjąć.
+Donata nie zwiększa od razu wspólnego salda.
+Najpierw czeka na zatwierdzenie właściciela.
 
 </div>
+
 
 <div
 class="input-grid"
@@ -1522,6 +2286,7 @@ onclick="makeDonation()">
 
 </div>
 
+
 <div class="quick">
 
 <button onclick="setDonation(0.50)">
@@ -1543,7 +2308,9 @@ onclick="makeDonation()">
 
 <div class="card">
 
-<h2>⏳ Moje oczekujące donaty</h2>
+<h2>
+⏳ Moje oczekujące donaty
+</h2>
 
 <div
 id="myPendingList"
@@ -1555,19 +2322,24 @@ class="mini-list">
 </section>
 
 
-<!-- =================================================== -->
-<!-- KARTA -->
-<!-- =================================================== -->
+<!-- =====================================================
+     KARTA
+===================================================== -->
 
-<section id="karta" class="page">
+<section
+id="karta"
+class="page">
 
 <div class="card">
 
-<h2>💳 Karta</h2>
+<h2>
+💳 Karta
+</h2>
 
 <div class="notice">
-Tutaj znajdują się Twoje zatwierdzone wpłaty donatowe.
+Tutaj masz swoje zatwierdzone donaty.
 </div>
+
 
 <div
 id="myCardHistory"
@@ -1575,11 +2347,12 @@ class="history-list"
 style="margin-top:12px">
 </div>
 
+
 <button
 class="btn red"
 style="margin-top:12px"
 onclick="clearMyCardHistory()">
-🗑️ Wyczyść moje wpłaty z karty
+🗑️ Wyczyść moje wpłaty
 </button>
 
 </div>
@@ -1587,23 +2360,27 @@ onclick="clearMyCardHistory()">
 </section>
 
 
-<!-- =================================================== -->
-<!-- WŁAŚCICIEL -->
-<!-- =================================================== -->
+<!-- =====================================================
+     WŁAŚCICIEL
+===================================================== -->
 
-<section id="wlasciciel" class="page">
+<section
+id="wlasciciel"
+class="page">
+
 
 <div
 id="ownerLoginCard"
 class="card owner-panel">
 
 <h2 class="owner-title">
-👑 Właściciel
+👑 Panel właściciela
 </h2>
 
 <div class="notice">
-Wpisz wszystkie trzy kody.
+Wpisz trzy kody.
 </div>
+
 
 <div
 class="code-row"
@@ -1626,12 +2403,14 @@ placeholder="Kod 3">
 
 </div>
 
+
 <button
 class="btn red"
 style="width:100%;margin-top:12px"
 onclick="loginOwner()">
-👑 Wejdź
+👑 Wejdź jako właściciel
 </button>
+
 
 <div
 id="ownerLoginError"
@@ -1646,30 +2425,212 @@ id="ownerPanel"
 class="hidden">
 
 
+<!-- DASHBOARD -->
+
 <div class="card owner-panel">
 
 <h2 class="owner-title">
-👑 Panel właściciela
+👑 Centrum właściciela
 </h2>
+
 
 <div class="success">
 ✅ Właściciel jest aktywny.
 </div>
 
+
+<div class="owner-grid">
+
+
+<div class="owner-stat">
+
+<div
+id="ownerBalance"
+class="owner-stat-number">
+0,00 zł
+</div>
+
+<div class="owner-stat-label">
+Saldo
+</div>
+
+</div>
+
+
+<div class="owner-stat">
+
+<div
+id="ownerHistoryCount"
+class="owner-stat-number">
+0
+</div>
+
+<div class="owner-stat-label">
+Operacje
+</div>
+
+</div>
+
+
+<div class="owner-stat">
+
+<div
+id="ownerPendingCount"
+class="owner-stat-number">
+0
+</div>
+
+<div class="owner-stat-label">
+Oczekujące donaty
+</div>
+
+</div>
+
+
+<div class="owner-stat">
+
+<div
+id="ownerSafeTotal"
+class="owner-stat-number">
+0,00 zł
+</div>
+
+<div class="owner-stat-label">
+W sejfach
+</div>
+
+</div>
+
+</div>
+
+
 <div class="actions"
-style="margin-top:12px">
+style="margin-top:14px">
 
 <button
 class="btn gray"
 onclick="logoutOwner()">
-🔒 Wyjdź
+🔒 Wyloguj
 </button>
 
 <button
 class="btn blue"
 onclick="refreshEverything()">
-🔄 Odśwież
+🔄 Odśwież wszystko
 </button>
+
+</div>
+
+</div>
+
+
+<!-- SZYBKIE NARZĘDZIA -->
+
+<div class="card owner-panel">
+
+<h2 class="owner-title">
+🛠️ Szybkie narzędzia
+</h2>
+
+
+<div class="owner-tools">
+
+
+<div class="owner-tool">
+
+<h3>
+⚡ Saldo
+</h3>
+
+<div class="small">
+Szybkie dodawanie pieniędzy.
+</div>
+
+<div class="quick">
+
+<button
+onclick="ownerQuickAdd(1)">
++1 zł
+</button>
+
+<button
+onclick="ownerQuickAdd(5)">
++5 zł
+</button>
+
+<button
+onclick="ownerQuickAdd(10)">
++10 zł
+</button>
+
+<button
+onclick="ownerQuickAdd(20)">
++20 zł
+</button>
+
+</div>
+
+</div>
+
+
+<div class="owner-tool">
+
+<h3>
+📊 Dane
+</h3>
+
+<div class="small">
+Szybki podgląd aktualnych danych.
+</div>
+
+<button
+class="btn blue"
+style="margin-top:10px;width:100%"
+onclick="refreshEverything()">
+🔄 Odśwież dane
+</button>
+
+</div>
+
+
+<div class="owner-tool">
+
+<h3>
+⏳ Donaty
+</h3>
+
+<div class="small">
+Sprawdź nowe oczekujące donaty.
+</div>
+
+<button
+class="btn orange"
+style="margin-top:10px;width:100%"
+onclick="loadOwnerPending()">
+⏳ Pokaż donaty
+</button>
+
+</div>
+
+
+<div class="owner-tool">
+
+<h3>
+🔐 Sejfy
+</h3>
+
+<div class="small">
+Sprawdź stan wszystkich sejfów.
+</div>
+
+<button
+class="btn blue"
+style="margin-top:10px;width:100%"
+onclick="loadSafes()">
+🔐 Odśwież sejfy
+</button>
+
+</div>
 
 </div>
 
@@ -1681,11 +2642,11 @@ onclick="refreshEverything()">
 <div class="card owner-panel">
 
 <h2 class="owner-title">
-💸 Operacje
+💸 Operacje właściciela
 </h2>
 
-<div
-class="input-grid">
+
+<div class="input-grid">
 
 <input
 id="ownerAddAmount"
@@ -1727,7 +2688,7 @@ placeholder="Opis">
 <button
 class="btn red"
 onclick="ownerSpendMoney()">
-➖ Wypłacić
+➖ Wypłać
 </button>
 
 </div>
@@ -1735,7 +2696,7 @@ onclick="ownerSpendMoney()">
 </div>
 
 
-<!-- HISTORIA OWNER -->
+<!-- OSTATNIE OPERACJE -->
 
 <div class="card owner-panel">
 
@@ -1743,11 +2704,13 @@ onclick="ownerSpendMoney()">
 🧾 Ostatnie operacje
 </h2>
 
+
 <details>
 
 <summary>
-Rozwiń historię
+Rozwiń historię właściciela
 </summary>
+
 
 <div class="details-body">
 
@@ -1763,13 +2726,14 @@ class="history-list">
 </div>
 
 
-<!-- DONATY OWNER -->
+<!-- OCZEKUJĄCE DONATY -->
 
 <div class="card owner-panel">
 
 <h2 class="owner-title">
 ⏳ Oczekujące donaty
 </h2>
+
 
 <div class="actions">
 
@@ -1787,6 +2751,7 @@ onclick="ownerClearPending()">
 
 </div>
 
+
 <div
 id="ownerPendingList"
 class="mini-list"
@@ -1796,23 +2761,129 @@ style="margin-top:10px">
 </div>
 
 
-<!-- SEJFY OWNER -->
+<!-- SEJFY -->
 
 <div class="card owner-panel">
 
 <h2 class="owner-title">
-🔐 Sejfy
+🔐 Zarządzanie sejfami
 </h2>
 
+
 <div class="notice">
-Właściciel może wpłacać, wypłacać i czyścić sejfy.
-Po pełnym zapełnieniu pojawia się wspólny 4-cyfrowy kod.
+Wpłaty i czyszczenie sejfów wykonuje właściciel.
+Po pełnym zapełnieniu pokazuje się kod.
 </div>
+
 
 <div
 id="ownerSafeInfo"
 class="mini-list"
 style="margin-top:10px">
+</div>
+
+</div>
+
+
+<!-- CZYSZCZENIE -->
+
+<div class="card owner-panel">
+
+<h2 class="owner-title">
+🧹 Czyszczenie
+</h2>
+
+<div class="notice">
+Każdy rodzaj danych ma teraz osobny przycisk.
+Wszystkie opcje są dostępne tylko dla właściciela.
+</div>
+
+
+<div class="owner-tools"
+style="margin-top:12px">
+
+
+<div class="owner-tool">
+
+<h3>
+💰 Saldo
+</h3>
+
+<div class="small">
+Wyzeruje saldo i statystyki butelek/dni.
+Historia zostanie.
+</div>
+
+<button
+class="btn red"
+style="margin-top:10px;width:100%"
+onclick="ownerClearBalance()">
+🧹 Wyczyść saldo
+</button>
+
+</div>
+
+
+<div class="owner-tool">
+
+<h3>
+🧾 Historia
+</h3>
+
+<div class="small">
+Usunie wszystkie zapisane operacje.
+</div>
+
+<button
+class="btn red"
+style="margin-top:10px;width:100%"
+onclick="ownerClearHistory()">
+🧹 Wyczyść historię
+</button>
+
+</div>
+
+
+<div class="owner-tool">
+
+<h3>
+📈 Wykres
+</h3>
+
+<div class="small">
+Wyczyści tylko wykres od tego momentu.
+Historia pozostanie.
+</div>
+
+<button
+class="btn red"
+style="margin-top:10px;width:100%"
+onclick="ownerClearChart()">
+🧹 Wyczyść wykres
+</button>
+
+</div>
+
+
+<div class="owner-tool">
+
+<h3>
+☢️ Wszystko
+</h3>
+
+<div class="small">
+Saldo, historia i wykres.
+</div>
+
+<button
+class="btn red"
+style="margin-top:10px;width:100%"
+onclick="ownerClearEverything()">
+🗑️ Wyczyść wszystko
+</button>
+
+</div>
+
 </div>
 
 </div>
@@ -1824,9 +2895,9 @@ style="margin-top:10px">
 </div>
 
 
-<!-- =================================================== -->
-<!-- INFO MODAL -->
-<!-- =================================================== -->
+<!-- =====================================================
+     INFO MODAL
+===================================================== -->
 
 <div
 id="infoModal"
@@ -1846,7 +2917,7 @@ class="modal-bg">
 
 <b>3.</b> Z portfela.<br><br>
 
-<b>4.</b> Donatą przez stronę.
+<b>4.</b> Donatą na stronie.
 
 </div>
 
@@ -1862,9 +2933,9 @@ Zamknij
 </div>
 
 
-<!-- =================================================== -->
-<!-- OWNER REQUIRED -->
-<!-- =================================================== -->
+<!-- =====================================================
+     OWNER REQUIRED
+===================================================== -->
 
 <div
 id="ownerRequiredModal"
@@ -1892,9 +2963,9 @@ Rozumiem
 </div>
 
 
-<!-- =================================================== -->
-<!-- SAFE CODE -->
-<!-- =================================================== -->
+<!-- =====================================================
+     SAFE CODE
+===================================================== -->
 
 <div
 id="safeCodeModal"
@@ -1902,13 +2973,16 @@ class="modal-bg">
 
 <div class="modal">
 
-<h2 id="safeCodeTitle">
+<h2
+id="safeCodeTitle">
 🔐 Kod sejfu
 </h2>
+
 
 <div class="notice">
 Sejf jest pełny.
 </div>
+
 
 <div
 id="shownSafeCode"
@@ -1920,7 +2994,9 @@ font-weight:1000;
 letter-spacing:9px;
 color:#ffd34d;
 ">
-----</div>
+----
+</div>
+
 
 <input
 id="safeCodeInput"
@@ -1933,10 +3009,12 @@ text-align:center;
 font-size:25px;
 letter-spacing:7px">
 
+
 <div
 id="safeCodeError"
 class="error">
 </div>
+
 
 <div class="quick">
 
@@ -1959,9 +3037,9 @@ Anuluj
 </div>
 
 
-<!-- =================================================== -->
-<!-- SAFE PULL -->
-<!-- =================================================== -->
+<!-- =====================================================
+     SAFE PULL
+===================================================== -->
 
 <div
 id="safePullModal"
@@ -1973,21 +3051,29 @@ class="modal-bg">
 ⬆️ POCIĄGNIJ W GÓRĘ
 </h2>
 
+
 <div class="notice">
 Mechanizm jest odblokowany.
-Pociągnięcie przeniesie zawartość sejfu do salda.
+Pociągnięcie przeniesie pieniądze z sejfu do salda.
 </div>
+
 
 <button
 class="btn green"
-style="margin-top:13px;width:100%;font-size:19px"
+style="
+margin-top:13px;
+width:100%;
+font-size:19px"
 onclick="pullSafeUp()">
 ⬆️ POCIĄGNIJ W GÓRĘ
 </button>
 
+
 <button
 class="btn gray"
-style="margin-top:8px;width:100%"
+style="
+margin-top:8px;
+width:100%"
 onclick="closeModal('safePullModal')">
 Anuluj
 </button>
@@ -1997,9 +3083,9 @@ Anuluj
 </div>
 
 
-<!-- =================================================== -->
-<!-- SAFE DEPOSIT -->
-<!-- =================================================== -->
+<!-- =====================================================
+     SAFE DEPOSIT
+===================================================== -->
 
 <div
 id="safeDepositModal"
@@ -2011,10 +3097,12 @@ class="modal-bg">
 💰 Wpłata do sejfu
 </h2>
 
+
 <div
 id="safeDepositText"
 class="notice">
 </div>
+
 
 <input
 id="safeDepositAmount"
@@ -2024,10 +3112,12 @@ step="0.01"
 placeholder="Kwota"
 style="margin-top:10px">
 
+
 <div
 id="safeDepositError"
 class="error">
 </div>
+
 
 <div class="quick">
 
@@ -2050,9 +3140,9 @@ Anuluj
 </div>
 
 
-<!-- =================================================== -->
-<!-- SAFE CLEAR -->
-<!-- =================================================== -->
+<!-- =====================================================
+     SAFE CLEAR
+===================================================== -->
 
 <div
 id="safeClearModal"
@@ -2064,10 +3154,12 @@ class="modal-bg">
 🗑️ Wyczyść sejf
 </h2>
 
+
 <div
 id="safeClearText"
 class="notice">
 </div>
+
 
 <div class="quick">
 
@@ -2090,9 +3182,9 @@ Anuluj
 </div>
 
 
-<!-- =================================================== -->
-<!-- CELEBRATION -->
-<!-- =================================================== -->
+<!-- =====================================================
+     CELEBRATION
+===================================================== -->
 
 <div
 id="celebration"
@@ -2104,14 +3196,17 @@ class="celebration">
 🎉 CEL PRZEBITY! 🎉
 </div>
 
+
 <div class="celebration-sub">
 6290,00 zł ZDOBYTE!
 </div>
+
 
 <div
 id="celebrationAmount"
 class="celebration-amount">
 </div>
+
 
 <div style="
 margin-top:14px;
@@ -2119,9 +3214,12 @@ font-size:24px">
 💰 🪙 🥇 💵 💸 🛴⚡ 🚀 🎊
 </div>
 
+
 <button
 class="btn green"
-style="margin-top:20px;font-size:18px"
+style="
+margin-top:20px;
+font-size:18px"
 onclick="closeCelebration()">
 🔥 ZAMKNIJ
 </button>
@@ -2139,13 +3237,18 @@ class="toast">
 
 <script>
 
+/* =========================================================
+   SUPABASE
+========================================================= */
+
 const SUPABASE_URL =
 "https://jcgiteoaewnxjomnlkpe.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_n8Dv-miLjH8YjPVZHclUAg_mNFbQ3b2";
 
-const {createClient} = supabase;
+const {createClient} =
+supabase;
 
 const sb =
 createClient(
@@ -2154,17 +3257,19 @@ createClient(
 );
 
 
-/* =================================================== */
-/* USTAWIENIA */
-/* =================================================== */
+/* =========================================================
+   USTAWIENIA
+========================================================= */
 
 const TARGET = 6290;
+
 
 const OWNER_CODES = [
     "ButelKaucja",
     "KaucjaMM0",
     "DamianZbiera"
 ];
+
 
 const SAFE_MAX = {
     1:500,
@@ -2176,32 +3281,42 @@ const SAFE_MAX = {
 
 let currentUser = null;
 
+
 let sharedState = {
     balance:0,
     bottles:0,
-    days:0
+    days:0,
+    chartClearedAt:null
 };
 
-let myHistory = [];
+
+let publicHistory = [];
+let myDonationHistory = [];
 let myPending = [];
 let ownerPending = [];
 let allSafeData = [];
 
+
 let ownerLogged = false;
+
 
 let selectedSafeId = null;
 let unlockedSafeId = null;
 
+
 let refreshRunning = false;
 let refreshAgain = false;
 
+
 let previousDisplayedBalance = null;
+
+
 let celebrationRunning = false;
 
 
-/* =================================================== */
-/* START */
-/* =================================================== */
+/* =========================================================
+   START
+========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -2216,19 +3331,29 @@ async function start(){
         const sessionResult =
             await sb.auth.getSession();
 
-        if(sessionResult.data.session){
+
+        if(
+            sessionResult.data.session
+        ){
 
             currentUser =
-                sessionResult.data.session.user;
+                sessionResult
+                    .data
+                    .session
+                    .user;
 
         }else{
 
             const auth =
-                await sb.auth.signInAnonymously();
+                await sb.auth
+                    .signInAnonymously();
+
 
             if(auth.error){
 
-                console.error(auth.error);
+                console.error(
+                    auth.error
+                );
 
                 toast(
                     "Nie udało się uruchomić sesji."
@@ -2237,14 +3362,16 @@ async function start(){
                 return;
             }
 
+
             currentUser =
                 auth.data.user;
-
         }
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Błąd połączenia z Supabase."
@@ -2265,9 +3392,9 @@ async function start(){
 }
 
 
-/* =================================================== */
-/* HELPERY */
-/* =================================================== */
+/* =========================================================
+   HELPERS
+========================================================= */
 
 function money(value){
 
@@ -2278,19 +3405,27 @@ function money(value){
                 minimumFractionDigits:2,
                 maximumFractionDigits:2
             }
-        ) + " zł";
+        ) +
+        " zł";
 }
 
 
 function amountNumber(value){
 
-    const n = Number(value);
+    const n =
+        Number(value);
 
-    if(!Number.isFinite(n)){
+
+    if(
+        !Number.isFinite(n)
+    ){
         return 0;
     }
 
-    return Math.round(n * 100) / 100;
+
+    return Math.round(
+        n * 100
+    ) / 100;
 }
 
 
@@ -2308,24 +3443,35 @@ function escapeHtml(value){
 function toast(message){
 
     const el =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
+
 
     el.textContent =
         message;
 
-    el.classList.add("show");
+
+    el.classList.add(
+        "show"
+    );
+
 
     clearTimeout(
         window.toastTimer
     );
 
+
     window.toastTimer =
         setTimeout(
             ()=>{
-                el.classList.remove("show");
+                el.classList.remove(
+                    "show"
+                );
             },
             2800
         );
+
 }
 
 
@@ -2334,6 +3480,7 @@ function openModal(id){
     document
         .getElementById(id)
         .classList.add("show");
+
 }
 
 
@@ -2342,6 +3489,7 @@ function closeModal(id){
     document
         .getElementById(id)
         .classList.remove("show");
+
 }
 
 
@@ -2356,48 +3504,67 @@ function requireOwner(){
         return false;
     }
 
+
     return true;
 }
 
 
-/* =================================================== */
-/* STRONY */
-/* =================================================== */
+/* =========================================================
+   NAV
+========================================================= */
 
-function showPage(id,button){
+function showPage(
+    id,
+    button
+){
 
     document
-        .querySelectorAll(".page")
+        .querySelectorAll(
+            ".page"
+        )
         .forEach(
             page=>{
-                page.classList.remove("active");
+                page.classList.remove(
+                    "active"
+                );
             }
         );
 
+
     document
         .getElementById(id)
-        .classList.add("active");
+        .classList.add(
+            "active"
+        );
 
 
     document
-        .querySelectorAll(".tab")
+        .querySelectorAll(
+            ".tab"
+        )
         .forEach(
             tab=>{
-                tab.classList.remove("active");
+                tab.classList.remove(
+                    "active"
+                );
             }
         );
 
 
     if(button){
-        button.classList.add("active");
+
+        button.classList.add(
+            "active"
+        );
+
     }
 
 }
 
 
-/* =================================================== */
-/* ODŚWIEŻANIE */
-/* =================================================== */
+/* =========================================================
+   REFRESH
+========================================================= */
 
 async function refreshPublicData(){
 
@@ -2408,25 +3575,40 @@ async function refreshPublicData(){
         return;
     }
 
+
     refreshRunning = true;
+
 
     try{
 
         await Promise.all([
+
             loadSharedState(),
-            loadHistory(),
+
+            loadPublicHistory(),
+
+            loadMyDonationHistory(),
+
             loadPendingMine(),
+
             loadSafes()
+
         ]);
 
+
         drawAll();
+
 
         if(ownerLogged){
 
             await loadOwnerPending();
+
             await loadOwnerHistory();
 
             renderOwnerSafes();
+
+            updateOwnerDashboard();
+
         }
 
     }catch(error){
@@ -2440,11 +3622,13 @@ async function refreshPublicData(){
 
         refreshRunning = false;
 
+
         if(refreshAgain){
 
             refreshAgain = false;
 
             refreshPublicData();
+
         }
 
     }
@@ -2456,19 +3640,28 @@ async function refreshEverything(){
 
     await refreshPublicData();
 
+
     if(ownerLogged){
 
         await loadOwnerPending();
+
         await loadOwnerHistory();
+
+        renderOwnerSafes();
+
+        updateOwnerDashboard();
+
     }
 
+
     drawAll();
+
 }
 
 
-/* =================================================== */
-/* STATE */
-/* =================================================== */
+/* =========================================================
+   STATE
+========================================================= */
 
 async function loadSharedState(){
 
@@ -2477,11 +3670,16 @@ async function loadSharedState(){
         error
     } =
     await sb
-        .from("zbieranie_state")
-        .select(
-            "id,balance,bottles,days"
+        .from(
+            "zbieranie_state"
         )
-        .eq("id",1)
+        .select(
+            "id,balance,bottles,days,chart_cleared_at"
+        )
+        .eq(
+            "id",
+            1
+        )
         .maybeSingle();
 
 
@@ -2501,13 +3699,23 @@ async function loadSharedState(){
         sharedState = {
 
             balance:
-                amountNumber(data.balance),
+                amountNumber(
+                    data.balance
+                ),
 
             bottles:
-                Number(data.bottles || 0),
+                Number(
+                    data.bottles || 0
+                ),
 
             days:
-                Number(data.days || 0)
+                Number(
+                    data.days || 0
+                ),
+
+            chartClearedAt:
+                data.chart_cleared_at ||
+                null
 
         };
 
@@ -2515,6 +3723,10 @@ async function loadSharedState(){
 
 }
 
+
+/* =========================================================
+   DRAW STATE
+========================================================= */
 
 function drawState(){
 
@@ -2529,51 +3741,68 @@ function drawState(){
             0,
             Math.min(
                 100,
-                balance / TARGET * 100
+                balance /
+                TARGET *
+                100
             )
         );
 
 
     document
-        .getElementById("balance")
+        .getElementById(
+            "balance"
+        )
         .textContent =
             money(balance);
 
 
     document
-        .getElementById("bottles")
+        .getElementById(
+            "bottles"
+        )
         .textContent =
             sharedState.bottles;
 
 
     document
-        .getElementById("days")
+        .getElementById(
+            "days"
+        )
         .textContent =
             sharedState.days;
 
 
     document
-        .getElementById("remaining")
+        .getElementById(
+            "remaining"
+        )
         .textContent =
             balance >= TARGET
-            ? "CEL OSIĄGNIĘTY!"
-            : money(
-                TARGET - balance
-              );
+            ?
+                "CEL PRZEBITY!"
+            :
+                money(
+                    TARGET - balance
+                );
 
 
     document
-        .getElementById("progressText")
+        .getElementById(
+            "progressText"
+        )
         .textContent =
             balance >= TARGET
-            ? "100% • CEL PRZEBITY!"
-            : percent.toLocaleString(
-                "pl-PL",
-                {
-                    minimumFractionDigits:2,
-                    maximumFractionDigits:2
-                }
-              ) + "%";
+            ?
+                "100% • CEL PRZEBITY!"
+            :
+                percent.toLocaleString(
+                    "pl-PL",
+                    {
+                        minimumFractionDigits:2,
+                        maximumFractionDigits:2
+                    }
+                ) +
+                "%";
 
 
     const progress =
@@ -2583,18 +3812,19 @@ function drawState(){
 
 
     /*
-        Pamiętamy ostatnią wartość.
-        Opóźnione odświeżenie nie może cofnąć
-        paska do wcześniejszego stanu.
+       Nie pozwala starszemu odczytowi
+       cofnąć paska.
     */
 
     if(
-        previousDisplayedBalance === null ||
+        previousDisplayedBalance === null
+        ||
         balance >= previousDisplayedBalance
     ){
 
         progress.style.width =
             percent + "%";
+
 
         previousDisplayedBalance =
             balance;
@@ -2609,16 +3839,19 @@ function drawState(){
 }
 
 
-/* =================================================== */
-/* CEL */
-/* =================================================== */
+/* =========================================================
+   CELEBRATION
+========================================================= */
 
-function checkGoalCelebration(balance){
+function checkGoalCelebration(
+    balance
+){
 
     if(balance > TARGET){
 
         if(
-            !celebrationRunning &&
+            !celebrationRunning
+            &&
             sessionStorage.getItem(
                 "zbieranie_goal_seen"
             ) !== "1"
@@ -2626,14 +3859,17 @@ function checkGoalCelebration(balance){
 
             celebrationRunning = true;
 
+
             sessionStorage.setItem(
                 "zbieranie_goal_seen",
                 "1"
             );
 
+
             showCelebration(
                 balance
             );
+
         }
 
     }else{
@@ -2647,7 +3883,9 @@ function checkGoalCelebration(balance){
 }
 
 
-function showCelebration(balance){
+function showCelebration(
+    balance
+){
 
     const overlay =
         document.getElementById(
@@ -2669,11 +3907,14 @@ function showCelebration(balance){
             ".celebrate-item,.confetti-piece,.goldbar,.scooter"
         )
         .forEach(
-            el=>el.remove()
+            el=>{
+                el.remove();
+            }
         );
 
 
     const items = [
+
         "💰",
         "💵",
         "💸",
@@ -2685,16 +3926,25 @@ function showCelebration(balance){
         "🎊",
         "🚀",
         "🛴⚡"
+
     ];
 
 
-    for(let i=0;i<130;i++){
+    for(
+        let i=0;
+        i<130;
+        i++
+    ){
 
         const el =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         el.className =
             "celebrate-item";
+
 
         el.textContent =
             items[
@@ -2704,18 +3954,22 @@ function showCelebration(balance){
                 )
             ];
 
+
         el.style.left =
             Math.random()*100 +
             "%";
+
 
         el.style.animationDelay =
             Math.random()*1.7 +
             "s";
 
+
         el.style.animationDuration =
             2.5 +
             Math.random()*2 +
             "s";
+
 
         overlay.appendChild(
             el
@@ -2724,26 +3978,37 @@ function showCelebration(balance){
     }
 
 
-    for(let i=0;i<180;i++){
+    for(
+        let i=0;
+        i<180;
+        i++
+    ){
 
         const el =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         el.className =
             "confetti-piece";
+
 
         el.style.left =
             Math.random()*100 +
             "%";
 
+
         el.style.animationDelay =
             Math.random()*1.7 +
             "s";
+
 
         el.style.animationDuration =
             2.5 +
             Math.random()*1.6 +
             "s";
+
 
         el.style.background =
             [
@@ -2758,6 +4023,7 @@ function showCelebration(balance){
                 )
             ];
 
+
         overlay.appendChild(
             el
         );
@@ -2765,30 +4031,42 @@ function showCelebration(balance){
     }
 
 
-    for(let i=0;i<18;i++){
+    for(
+        let i=0;
+        i<18;
+        i++
+    ){
 
         const el =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         el.className =
             "goldbar";
 
+
         el.textContent =
             "GOLD";
+
 
         el.style.left =
             Math.random()*95 +
             "%";
 
+
         el.style.animationDelay =
             Math.random()*1.5 +
             "s";
+
 
         el.style.animationDuration =
             3 +
             Math.random()*1.5 +
             "s";
 
+
         overlay.appendChild(
             el
         );
@@ -2796,30 +4074,42 @@ function showCelebration(balance){
     }
 
 
-    for(let i=0;i<8;i++){
+    for(
+        let i=0;
+        i<8;
+        i++
+    ){
 
         const el =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
+
 
         el.className =
             "scooter";
 
+
         el.textContent =
             "🛴⚡";
+
 
         el.style.top =
             10 +
             Math.random()*75 +
             "%";
 
+
         el.style.animationDelay =
             Math.random()*1.5 +
             "s";
+
 
         el.style.animationDuration =
             2.8 +
             Math.random()*1.5 +
             "s";
+
 
         overlay.appendChild(
             el
@@ -2841,18 +4131,54 @@ function closeCelebration(){
         .getElementById(
             "celebration"
         )
-        .classList.remove("show");
+        .classList.remove(
+            "show"
+        );
 
-    celebrationRunning = false;
+
+    celebrationRunning =
+        false;
 
 }
 
 
-/* =================================================== */
-/* HISTORIA */
-/* =================================================== */
+/* =========================================================
+   PUBLIC HISTORY
+========================================================= */
 
-async function loadHistory(){
+async function loadPublicHistory(){
+
+    const {
+        data,
+        error
+    } =
+    await sb.rpc(
+        "get_public_history"
+    );
+
+
+    if(error){
+
+        console.error(
+            "get_public_history:",
+            error
+        );
+
+        return;
+    }
+
+
+    publicHistory =
+        data || [];
+
+}
+
+
+/* =========================================================
+   OWN DONATION HISTORY
+========================================================= */
+
+async function loadMyDonationHistory(){
 
     if(!currentUser){
         return;
@@ -2864,7 +4190,9 @@ async function loadHistory(){
         error
     } =
     await sb
-        .from("zbieranie_history")
+        .from(
+            "zbieranie_history"
+        )
         .select(
             "id,user_id,amount,description,balance_after,created_at"
         )
@@ -2884,7 +4212,7 @@ async function loadHistory(){
     if(error){
 
         console.error(
-            "loadHistory:",
+            "loadMyDonationHistory:",
             error
         );
 
@@ -2892,11 +4220,25 @@ async function loadHistory(){
     }
 
 
-    myHistory =
-        data || [];
+    myDonationHistory =
+        (data || [])
+            .filter(
+                item=>
+                    String(
+                        item.description || ""
+                    )
+                    .toLowerCase()
+                    .includes(
+                        "donat"
+                    )
+            );
 
 }
 
+
+/* =========================================================
+   RENDER HISTORY
+========================================================= */
 
 function renderHistory(){
 
@@ -2906,7 +4248,7 @@ function renderHistory(){
         );
 
 
-    if(!myHistory.length){
+    if(!publicHistory.length){
 
         el.innerHTML =
             `<div class="notice">
@@ -2918,61 +4260,67 @@ function renderHistory(){
 
 
     el.innerHTML =
-        myHistory
-            .map(
-                item=>{
+        publicHistory.map(
+            item=>{
 
-                    const amount =
-                        Number(
-                            item.amount || 0
-                        );
+                const amount =
+                    Number(
+                        item.amount || 0
+                    );
 
-                    return `
-                    <div class="history-item">
 
-                        <div class="history-date">
-                            ${escapeHtml(
-                                new Date(
-                                    item.created_at
-                                ).toLocaleString(
-                                    "pl-PL"
-                                )
-                            )}
-                        </div>
+                return `
 
-                        <div class="history-desc">
-                            ${escapeHtml(
-                                item.description ||
-                                "Operacja"
-                            )}
-                        </div>
+                <div class="history-item">
 
-                        <div class="amount ${
+                    <div class="history-date">
+                        ${escapeHtml(
+                            new Date(
+                                item.created_at
+                            ).toLocaleString(
+                                "pl-PL"
+                            )
+                        )}
+                    </div>
+
+
+                    <div class="history-desc">
+                        ${escapeHtml(
+                            item.description ||
+                            "Operacja"
+                        )}
+                    </div>
+
+
+                    <div class="amount ${
+                        amount >= 0
+                        ? "plus"
+                        : "minus"
+                    }">
+
+                        ${
                             amount >= 0
-                            ? "plus"
-                            : "minus"
-                        }">
-                            ${
-                                amount >= 0
-                                ? "+"
-                                : "-"
-                            }${money(
-                                Math.abs(amount)
-                            )}
-                        </div>
+                            ? "+"
+                            : "-"
+                        }${money(
+                            Math.abs(amount)
+                        )}
 
                     </div>
-                    `;
-                }
-            )
-            .join("");
+
+                </div>
+
+                `;
+
+            }
+        ).join("");
 
 }
 
 
-/* =================================================== */
-/* OWNER HISTORY */
-/* =================================================== */
+/* =========================================================
+   OWNER HISTORY
+========================================================= */
 
 async function loadOwnerHistory(){
 
@@ -2998,10 +4346,7 @@ async function loadOwnerHistory(){
 
     if(error){
 
-        console.error(
-            "owner_get_history:",
-            error
-        );
+        console.error(error);
 
         el.innerHTML =
             `<div class="notice">
@@ -3036,7 +4381,9 @@ async function loadOwnerHistory(){
                         item.amount || 0
                     );
 
+
                 return `
+
                 <div class="history-item">
 
                     <div class="history-date">
@@ -3049,6 +4396,7 @@ async function loadOwnerHistory(){
                         )}
                     </div>
 
+
                     <div class="history-desc">
                         ${escapeHtml(
                             item.description ||
@@ -3056,11 +4404,13 @@ async function loadOwnerHistory(){
                         )}
                     </div>
 
+
                     <div class="amount ${
                         amount >= 0
                         ? "plus"
                         : "minus"
                     }">
+
                         ${
                             amount >= 0
                             ? "+"
@@ -3068,19 +4418,22 @@ async function loadOwnerHistory(){
                         }${money(
                             Math.abs(amount)
                         )}
+
                     </div>
 
                 </div>
+
                 `;
+
             }
         ).join("");
 
 }
 
 
-/* =================================================== */
-/* CHART */
-/* =================================================== */
+/* =========================================================
+   CHART
+========================================================= */
 
 function drawChart(){
 
@@ -3089,8 +4442,11 @@ function drawChart(){
             "chart"
         );
 
+
     const ctx =
-        canvas.getContext("2d");
+        canvas.getContext(
+            "2d"
+        );
 
 
     ctx.clearRect(
@@ -3101,7 +4457,38 @@ function drawChart(){
     );
 
 
-    if(!myHistory.length){
+    let rows =
+        [...publicHistory]
+            .reverse();
+
+
+    /*
+       Wyczyść wykres = pokazuj tylko
+       historię po ustalonym czasie.
+    */
+
+    if(
+        sharedState.chartClearedAt
+    ){
+
+        const cutoff =
+            new Date(
+                sharedState.chartClearedAt
+            );
+
+
+        rows =
+            rows.filter(
+                row=>
+                    new Date(
+                        row.created_at
+                    ) >= cutoff
+            );
+
+    }
+
+
+    if(!rows.length){
 
         ctx.fillStyle =
             "#769080";
@@ -3109,25 +4496,22 @@ function drawChart(){
         ctx.font =
             "13px Arial";
 
+
         ctx.fillText(
             "Brak danych do wykresu",
             25,
             160
         );
 
+
         return;
     }
-
-
-    const rows =
-        [...myHistory]
-            .reverse();
 
 
     const chartWidth =
         Math.max(
             1200,
-            80 +
+            90 +
             Math.max(
                 0,
                 rows.length - 1
@@ -3150,49 +4534,63 @@ function drawChart(){
     ctx.strokeStyle =
         "rgba(185,225,195,.16)";
 
+
     ctx.lineWidth = 1;
 
 
     ctx.beginPath();
+
 
     ctx.moveTo(
         45,
         15
     );
 
+
     ctx.lineTo(
         45,
         285
     );
+
 
     ctx.lineTo(
         canvas.width - 20,
         285
     );
 
+
     ctx.stroke();
 
 
-    for(let i=0;i<6;i++){
+    for(
+        let i=0;
+        i<6;
+        i++
+    ){
 
         const y =
             15 +
             i * 54;
 
+
         ctx.strokeStyle =
             "rgba(53,255,115,.06)";
 
+
         ctx.beginPath();
+
 
         ctx.moveTo(
             45,
             y
         );
 
+
         ctx.lineTo(
             canvas.width - 20,
             y
         );
+
 
         ctx.stroke();
 
@@ -3214,6 +4612,7 @@ function drawChart(){
                         )
                     );
 
+
                 return {
 
                     x:
@@ -3233,7 +4632,38 @@ function drawChart(){
         );
 
 
-    for(let i=1;i<points.length;i++){
+    /*
+       Pierwszy punkt.
+    */
+
+    if(points.length){
+
+        ctx.fillStyle =
+            "#35ff73";
+
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+            points[0].x,
+            points[0].y,
+            5,
+            0,
+            Math.PI*2
+        );
+
+
+        ctx.fill();
+
+    }
+
+
+    for(
+        let i=1;
+        i<points.length;
+        i++
+    ){
 
         const a =
             points[i-1];
@@ -3253,20 +4683,25 @@ function drawChart(){
             ? "#35ff73"
             : "#ff4c5c";
 
-        ctx.lineWidth = 4;
+
+        ctx.lineWidth =
+            4;
 
 
         ctx.beginPath();
+
 
         ctx.moveTo(
             a.x,
             a.y
         );
 
+
         ctx.lineTo(
             b.x,
             b.y
         );
+
 
         ctx.stroke();
 
@@ -3279,6 +4714,7 @@ function drawChart(){
 
         ctx.beginPath();
 
+
         ctx.arc(
             b.x,
             b.y,
@@ -3287,11 +4723,13 @@ function drawChart(){
             Math.PI*2
         );
 
+
         ctx.fill();
 
 
         ctx.fillStyle =
             "#879d8d";
+
 
         ctx.font =
             "11px Arial";
@@ -3300,25 +4738,32 @@ function drawChart(){
         const date =
             new Date(
                 rows[i].created_at
-            ).toLocaleDateString(
+            )
+            .toLocaleDateString(
                 "pl-PL"
             );
 
 
         ctx.save();
 
+
         ctx.translate(
             b.x,
             305
         );
 
-        ctx.rotate(-.2);
+
+        ctx.rotate(
+            -.2
+        );
+
 
         ctx.fillText(
             date,
             0,
             0
         );
+
 
         ctx.restore();
 
@@ -3332,21 +4777,26 @@ function drawChart(){
         1000,
         500,
         0
-    ].forEach(
+    ]
+    .forEach(
         (value,index)=>{
 
             const y =
                 15 +
                 index * 54;
 
+
             ctx.fillStyle =
                 "#789280";
+
 
             ctx.font =
                 "11px Arial";
 
+
             ctx.fillText(
-                value + " zł",
+                value +
+                " zł",
                 3,
                 y
             );
@@ -3357,9 +4807,9 @@ function drawChart(){
 }
 
 
-/* =================================================== */
-/* DONATY */
-/* =================================================== */
+/* =========================================================
+   DONACJE
+========================================================= */
 
 function setDonation(amount){
 
@@ -3373,7 +4823,9 @@ function setDonation(amount){
 }
 
 
-function donationMessage(amount){
+function donationMessage(
+    amount
+){
 
     if(amount >= 500){
         return "💰 LEGENDARNA DONATA!!!";
@@ -3448,7 +4900,9 @@ async function makeDonation(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Nie udało się wysłać donaty."
@@ -3474,12 +4928,15 @@ async function makeDonation(){
 
     await loadPendingMine();
 
+
     renderMyPending();
 
 
     toast(
-        donationMessage(amount) +
-        " Czeka na zatwierdzenie właściciela."
+        donationMessage(
+            amount
+        ) +
+        " Czeka na zatwierdzenie."
     );
 
 }
@@ -3518,7 +4975,6 @@ async function loadPendingMine(){
     if(error){
 
         console.error(
-            "loadPendingMine:",
             error
         );
 
@@ -3560,7 +5016,9 @@ function renderMyPending(){
                 <div>
 
                     <b>
-                        ${money(item.amount)}
+                        ${money(
+                            item.amount
+                        )}
                     </b>
 
                     <div class="small">
@@ -3577,15 +5035,16 @@ function renderMyPending(){
                 </span>
 
             </div>
+
             `
         ).join("");
 
 }
 
 
-/* =================================================== */
-/* OWNER DONATIONS */
-/* =================================================== */
+/* =========================================================
+   OWNER DONATIONS
+========================================================= */
 
 async function loadOwnerPending(){
 
@@ -3611,7 +5070,9 @@ async function loadOwnerPending(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         el.innerHTML =
             `<div class="notice">
@@ -3627,6 +5088,9 @@ async function loadOwnerPending(){
 
 
     renderOwnerPending();
+
+
+    updateOwnerDashboard();
 
 }
 
@@ -3660,10 +5124,13 @@ function renderOwnerPending(){
                     OCZEKUJE
                 </span>
 
+
                 <div>
 
                     <b>
-                        ${money(item.amount)}
+                        ${money(
+                            item.amount
+                        )}
                     </b>
 
                     <div class="small">
@@ -3685,15 +5152,25 @@ function renderOwnerPending(){
 
                 </div>
 
+
                 <button
                     class="btn green"
-                    onclick="acceptDonation(${Number(item.id)})">
+                    onclick="
+                        acceptDonation(
+                            ${Number(item.id)}
+                        )
+                    ">
                     ✅ Przyjmij
                 </button>
 
+
                 <button
                     class="btn red"
-                    onclick="deletePendingDonation(${Number(item.id)})">
+                    onclick="
+                        deletePendingDonation(
+                            ${Number(item.id)}
+                        )
+                    ">
                     🗑️ Usuń
                 </button>
 
@@ -3725,7 +5202,9 @@ async function acceptDonation(id){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Nie udało się przyjąć donaty."
@@ -3736,7 +5215,7 @@ async function acceptDonation(id){
 
 
     toast(
-        "✅ Donata została dodana do salda."
+        "✅ Donata dodana do salda."
     );
 
 
@@ -3752,9 +5231,11 @@ async function deletePendingDonation(id){
     }
 
 
-    if(!confirm(
-        "Czy na pewno usunąć tę donatę?"
-    )){
+    if(
+        !confirm(
+            "Czy na pewno usunąć tę donatę?"
+        )
+    ){
         return;
     }
 
@@ -3772,7 +5253,9 @@ async function deletePendingDonation(id){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Nie udało się usunąć donaty."
@@ -3783,7 +5266,7 @@ async function deletePendingDonation(id){
 
 
     toast(
-        "🗑️ Donata została usunięta."
+        "🗑️ Donata usunięta."
     );
 
 
@@ -3799,16 +5282,20 @@ async function ownerClearPending(){
     }
 
 
-    if(!confirm(
-        "Czy na pewno wyczyścić wszystkie oczekujące donaty?"
-    )){
+    if(
+        !confirm(
+            "Czy na pewno wyczyścić wszystkie oczekujące donaty?"
+        )
+    ){
         return;
     }
 
 
-    if(!confirm(
-        "Usuń wszystkie oczekujące donaty?"
-    )){
+    if(
+        !confirm(
+            "Usuń wszystkie oczekujące donaty?"
+        )
+    ){
         return;
     }
 
@@ -3823,7 +5310,9 @@ async function ownerClearPending(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Nie udało się wyczyścić donat."
@@ -3834,7 +5323,7 @@ async function ownerClearPending(){
 
 
     toast(
-        "🗑️ Oczekujące donaty wyczyszczone."
+        "🗑️ Donaty wyczyszczone."
     );
 
 
@@ -3843,9 +5332,9 @@ async function ownerClearPending(){
 }
 
 
-/* =================================================== */
-/* OWNER LOGIN */
-/* =================================================== */
+/* =========================================================
+   OWNER LOGIN
+========================================================= */
 
 function loginOwner(){
 
@@ -3856,12 +5345,14 @@ function loginOwner(){
             )
             .value;
 
+
     const c2 =
         document
             .getElementById(
                 "ownerCode2"
             )
             .value;
+
 
     const c3 =
         document
@@ -3880,7 +5371,9 @@ function loginOwner(){
     error.textContent = "";
 
 
-    if(c1 !== OWNER_CODES[0]){
+    if(
+        c1 !== OWNER_CODES[0]
+    ){
 
         error.textContent =
             "Nieprawidłowy pierwszy kod.";
@@ -3889,7 +5382,9 @@ function loginOwner(){
     }
 
 
-    if(c2 !== OWNER_CODES[1]){
+    if(
+        c2 !== OWNER_CODES[1]
+    ){
 
         error.textContent =
             "Nieprawidłowy drugi kod.";
@@ -3898,7 +5393,9 @@ function loginOwner(){
     }
 
 
-    if(c3 !== OWNER_CODES[2]){
+    if(
+        c3 !== OWNER_CODES[2]
+    ){
 
         error.textContent =
             "Nieprawidłowy trzeci kod.";
@@ -3907,21 +5404,26 @@ function loginOwner(){
     }
 
 
-    ownerLogged = true;
+    ownerLogged =
+        true;
 
 
     document
         .getElementById(
             "ownerLoginCard"
         )
-        .classList.add("hidden");
+        .classList.add(
+            "hidden"
+        );
 
 
     document
         .getElementById(
             "ownerPanel"
         )
-        .classList.remove("hidden");
+        .classList.remove(
+            "hidden"
+        );
 
 
     document
@@ -3930,11 +5432,13 @@ function loginOwner(){
         )
         .value = "";
 
+
     document
         .getElementById(
             "ownerCode2"
         )
         .value = "";
+
 
     document
         .getElementById(
@@ -3946,6 +5450,7 @@ function loginOwner(){
     loadOwnerPending();
     loadOwnerHistory();
     renderOwnerSafes();
+    updateOwnerDashboard();
 
 
     toast(
@@ -3957,20 +5462,26 @@ function loginOwner(){
 
 function logoutOwner(){
 
-    ownerLogged = false;
+    ownerLogged =
+        false;
+
 
     document
         .getElementById(
             "ownerLoginCard"
         )
-        .classList.remove("hidden");
+        .classList.remove(
+            "hidden"
+        );
 
 
     document
         .getElementById(
             "ownerPanel"
         )
-        .classList.add("hidden");
+        .classList.add(
+            "hidden"
+        );
 
 
     toast(
@@ -3980,11 +5491,76 @@ function logoutOwner(){
 }
 
 
-/* =================================================== */
-/* OWNER MONEY */
-/* =================================================== */
+/* =========================================================
+   OWNER DASHBOARD
+========================================================= */
 
-async function ownerQuickAdd(amount){
+function updateOwnerDashboard(){
+
+    if(!ownerLogged){
+        return;
+    }
+
+
+    document
+        .getElementById(
+            "ownerBalance"
+        )
+        .textContent =
+            money(
+                sharedState.balance
+            );
+
+
+    document
+        .getElementById(
+            "ownerHistoryCount"
+        )
+        .textContent =
+            publicHistory.length;
+
+
+    document
+        .getElementById(
+            "ownerPendingCount"
+        )
+        .textContent =
+            ownerPending.length;
+
+
+    const safeTotal =
+        allSafeData.reduce(
+            (
+                total,
+                safe
+            )=>
+                total +
+                Number(
+                    safe.amount || 0
+                ),
+            0
+        );
+
+
+    document
+        .getElementById(
+            "ownerSafeTotal"
+        )
+        .textContent =
+            money(
+                safeTotal
+            );
+
+}
+
+
+/* =========================================================
+   OWNER MONEY
+========================================================= */
+
+async function ownerQuickAdd(
+    amount
+){
 
     if(!requireOwner()){
         return;
@@ -4136,7 +5712,9 @@ async function doOwnerAdd(
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Nie udało się dodać pieniędzy."
@@ -4209,7 +5787,9 @@ async function ownerSpendMoney(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Nie udało się wypłacić."
@@ -4244,9 +5824,242 @@ async function ownerSpendMoney(){
 }
 
 
-/* =================================================== */
-/* OWNER CLEAR — NAPRAWIONE */
-/* =================================================== */
+/* =========================================================
+   OWNER CLEAR BALANCE
+========================================================= */
+
+async function ownerClearBalance(){
+
+    if(!requireOwner()){
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Czy na pewno wyzerować saldo?"
+        )
+    ){
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Saldo zostanie ustawione na 0,00 zł. Historia pozostanie."
+        )
+    ){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await sb.rpc(
+        "owner_clear_balance",
+        {
+            p_code1:
+                OWNER_CODES[0],
+            p_code2:
+                OWNER_CODES[1],
+            p_code3:
+                OWNER_CODES[2]
+        }
+    );
+
+
+    if(error){
+
+        console.error(
+            error
+        );
+
+        toast(
+            "❌ Nie udało się wyczyścić salda."
+        );
+
+        return;
+    }
+
+
+    sharedState.balance = 0;
+    sharedState.bottles = 0;
+    sharedState.days = 0;
+
+
+    previousDisplayedBalance =
+        null;
+
+
+    document
+        .getElementById(
+            "mainProgress"
+        )
+        .style.width =
+            "0%";
+
+
+    drawAll();
+
+
+    toast(
+        "🧹 Saldo wyczyszczone."
+    );
+
+
+    await refreshEverything();
+
+}
+
+
+/* =========================================================
+   OWNER CLEAR HISTORY
+========================================================= */
+
+async function ownerClearHistory(){
+
+    if(!requireOwner()){
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Czy na pewno usunąć całą historię?"
+        )
+    ){
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Historia zostanie usunięta bezpowrotnie."
+        )
+    ){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await sb.rpc(
+        "owner_clear_history",
+        {
+            p_code1:
+                OWNER_CODES[0],
+            p_code2:
+                OWNER_CODES[1],
+            p_code3:
+                OWNER_CODES[2]
+        }
+    );
+
+
+    if(error){
+
+        console.error(
+            error
+        );
+
+        toast(
+            "❌ Nie udało się wyczyścić historii."
+        );
+
+        return;
+    }
+
+
+    publicHistory = [];
+    myDonationHistory = [];
+
+
+    drawAll();
+
+
+    toast(
+        "🧾 Historia wyczyszczona."
+    );
+
+
+    await refreshEverything();
+
+}
+
+
+/* =========================================================
+   OWNER CLEAR CHART
+========================================================= */
+
+async function ownerClearChart(){
+
+    if(!requireOwner()){
+        return;
+    }
+
+
+    if(
+        !confirm(
+            "Czy wyczyścić wykres?"
+        )
+    ){
+        return;
+    }
+
+
+    const {
+        error
+    } =
+    await sb.rpc(
+        "owner_clear_chart",
+        {
+            p_code1:
+                OWNER_CODES[0],
+            p_code2:
+                OWNER_CODES[1],
+            p_code3:
+                OWNER_CODES[2]
+        }
+    );
+
+
+    if(error){
+
+        console.error(
+            error
+        );
+
+        toast(
+            "❌ Nie udało się wyczyścić wykresu."
+        );
+
+        return;
+    }
+
+
+    sharedState.chartClearedAt =
+        new Date()
+            .toISOString();
+
+
+    drawChart();
+
+
+    toast(
+        "📈 Wykres wyczyszczony."
+    );
+
+
+    await refreshEverything();
+
+}
+
+
+/* =========================================================
+   OWNER CLEAR EVERYTHING
+========================================================= */
 
 async function ownerClearEverything(){
 
@@ -4255,186 +6068,179 @@ async function ownerClearEverything(){
     }
 
 
-    if(!confirm(
-        "Czy na pewno wyczyścić saldo, historię i wykres?"
-    )){
+    if(
+        !confirm(
+            "Czy na pewno wyczyścić saldo, historię i wykres?"
+        )
+    ){
         return;
     }
 
 
-    if(!confirm(
-        "Usuń wszystko? Tej operacji nie można cofnąć."
-    )){
+    if(
+        !confirm(
+            "USUNĄĆ WSZYSTKO?"
+        )
+    ){
         return;
     }
 
 
-    try{
-
-        const result =
-            await sb.rpc(
-                "owner_clear_all_data"
-            );
-
-
-        if(result.error){
-            throw result.error;
+    const {
+        error
+    } =
+    await sb.rpc(
+        "owner_clear_all_data",
+        {
+            p_code1:
+                OWNER_CODES[0],
+            p_code2:
+                OWNER_CODES[1],
+            p_code3:
+                OWNER_CODES[2]
         }
+    );
 
 
-        /*
-            ZERUJEMY WSZYSTKO OD RAZU
-            NA EKRANIE.
-        */
-
-        sharedState = {
-            balance:0,
-            bottles:0,
-            days:0
-        };
-
-
-        myHistory = [];
-
-
-        /*
-            Bardzo ważne:
-            pozwalamy paskowi zjechać do zera,
-            bo użytkownik świadomie wyczyścił dane.
-        */
-
-        previousDisplayedBalance = null;
-
-
-        sessionStorage.removeItem(
-            "zbieranie_goal_seen"
-        );
-
-
-        const progress =
-            document.getElementById(
-                "mainProgress"
-            );
-
-
-        progress.style.width =
-            "0%";
-
-
-        document
-            .getElementById(
-                "balance"
-            )
-            .textContent =
-                "0,00 zł";
-
-
-        document
-            .getElementById(
-                "bottles"
-            )
-            .textContent =
-                "0";
-
-
-        document
-            .getElementById(
-                "days"
-            )
-            .textContent =
-                "0";
-
-
-        document
-            .getElementById(
-                "remaining"
-            )
-            .textContent =
-                money(TARGET);
-
-
-        document
-            .getElementById(
-                "progressText"
-            )
-            .textContent =
-                "0,00%";
-
-
-        document
-            .getElementById(
-                "historyList"
-            )
-            .innerHTML =
-                `<div class="notice">
-                    Brak operacji.
-                 </div>`;
-
-
-        drawChart();
-
-
-        if(
-            document
-                .getElementById(
-                    "ownerHistoryList"
-                )
-        ){
-
-            document
-                .getElementById(
-                    "ownerHistoryList"
-                )
-                .innerHTML =
-                    `<div class="notice">
-                        Brak operacji.
-                     </div>`;
-        }
-
-
-        toast(
-            "🧹 Saldo, historia i wykres wyczyszczone."
-        );
-
-
-        /*
-            Jeszcze jedno odświeżenie z bazy,
-            żeby wszyscy użytkownicy zobaczyli 0.
-        */
-
-        await refreshEverything();
-
-
-    }catch(error){
+    if(error){
 
         console.error(
-            "ownerClearEverything:",
             error
         );
 
-
         toast(
-            "❌ Nie udało się wyczyścić danych: " +
-            (
-                error.message ||
-                "nieznany błąd"
-            )
+            "❌ Nie udało się wyczyścić danych."
         );
 
+        return;
     }
+
+
+    sharedState = {
+
+        balance:0,
+
+        bottles:0,
+
+        days:0,
+
+        chartClearedAt:null
+
+    };
+
+
+    publicHistory = [];
+
+    myDonationHistory = [];
+
+
+    previousDisplayedBalance =
+        null;
+
+
+    sessionStorage.removeItem(
+        "zbieranie_goal_seen"
+    );
+
+
+    drawAll();
+
+
+    toast(
+        "🧹 Wszystko zostało wyczyszczone."
+    );
+
+
+    await refreshEverything();
 
 }
 
 
-/* =================================================== */
-/* KARTA */
-/* =================================================== */
+/* =========================================================
+   KARTA
+========================================================= */
+
+function renderMyCardHistory(){
+
+    const el =
+        document.getElementById(
+            "myCardHistory"
+        );
+
+
+    if(
+        !myDonationHistory.length
+    ){
+
+        el.innerHTML =
+            `<div class="notice">
+                Brak wpłat z karty.
+             </div>`;
+
+        return;
+    }
+
+
+    el.innerHTML =
+        myDonationHistory
+            .map(
+                item=>{
+
+                    const amount =
+                        Number(
+                            item.amount ||
+                            0
+                        );
+
+
+                    return `
+
+                    <div class="history-item">
+
+                        <div class="history-date">
+                            ${escapeHtml(
+                                new Date(
+                                    item.created_at
+                                )
+                                .toLocaleString(
+                                    "pl-PL"
+                                )
+                            )}
+                        </div>
+
+
+                        <div class="history-desc">
+                            ${escapeHtml(
+                                item.description ||
+                                "Donata"
+                            )}
+                        </div>
+
+
+                        <div class="amount plus">
+                            +${money(
+                                amount
+                            )}
+                        </div>
+
+                    </div>
+
+                    `;
+
+                }
+            )
+            .join("");
+
+}
+
 
 async function clearMyCardHistory(){
 
-    if(!confirm(
-        "Czy na pewno wyczyścić Twoje wpłaty z karty?"
-    )){
+    if(
+        !confirm(
+            "Czy na pewno wyczyścić Twoje wpłaty z karty?"
+        )
+    ){
         return;
     }
 
@@ -4450,7 +6256,9 @@ async function clearMyCardHistory(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Nie udało się wyczyścić wpłat z karty."
@@ -4472,9 +6280,9 @@ async function clearMyCardHistory(){
 }
 
 
-/* =================================================== */
-/* SEJFY */
-/* =================================================== */
+/* =========================================================
+   SEJFY
+========================================================= */
 
 async function loadSafes(){
 
@@ -4489,7 +6297,9 @@ async function loadSafes(){
         .select(
             "id,amount,max_amount,unlock_code,updated_at"
         )
-        .order("id");
+        .order(
+            "id"
+        );
 
 
     if(error){
@@ -4509,9 +6319,14 @@ async function loadSafes(){
 
     renderSafes();
     renderOwnerSafes();
+    updateOwnerDashboard();
 
 }
 
+
+/* =========================================================
+   PUBLIC SAFE RENDER
+========================================================= */
 
 function renderSafes(){
 
@@ -4521,7 +6336,9 @@ function renderSafes(){
         );
 
 
-    if(!allSafeData.length){
+    if(
+        !allSafeData.length
+    ){
 
         grid.innerHTML =
             `<div class="notice">
@@ -4541,20 +6358,27 @@ function renderSafes(){
                         safe.amount
                     );
 
+
                 const max =
                     amountNumber(
                         safe.max_amount ||
-                        SAFE_MAX[safe.id]
+                        SAFE_MAX[
+                            safe.id
+                        ]
                     );
+
 
                 const percent =
                     Math.max(
                         0,
                         Math.min(
                             100,
-                            amount / max * 100
+                            amount /
+                            max *
+                            100
                         )
                     );
+
 
                 const full =
                     amount >= max;
@@ -4566,14 +6390,17 @@ function renderSafes(){
                     class="safe"
                     id="safe-${safe.id}">
 
+
                     ${
                         full
-                        ? `
+                        ?
+                        `
                         <div class="full-badge">
                             PEŁNY
                         </div>
                         `
-                        : ""
+                        :
+                        ""
                     }
 
 
@@ -4581,8 +6408,10 @@ function renderSafes(){
                         🔐 Sejf ${safe.id}
                     </div>
 
+
                     <div class="safe-max">
-                        MAX: ${money(max)}
+                        MAX:
+                        ${money(max)}
                     </div>
 
 
@@ -4591,11 +6420,14 @@ function renderSafes(){
                         <div class="safe-body">
                         </div>
 
+
                         <div class="safe-lock">
                         </div>
 
+
                         <div class="safe-wheel">
                         </div>
+
 
                         <div class="crank">
 
@@ -4619,17 +6451,22 @@ function renderSafes(){
 
                         <div
                             class="safe-fill"
-                            style="width:${percent}%">
+                            style="
+                                width:${percent}%
+                            ">
                         </div>
 
                     </div>
 
 
                     ${
-                        full && safe.unlock_code
-                        ? `
+                        full &&
+                        safe.unlock_code
+                        ?
+                        `
                         <div class="safe-code">
-                            🔑 KOD: ${escapeHtml(
+                            🔑 KOD:
+                            ${escapeHtml(
                                 safe.unlock_code
                             )}
                         </div>
@@ -4641,45 +6478,58 @@ function renderSafes(){
                             style="
                                 color:#9eaea4;
                                 font-size:13px">
-                            🔒 Kod pojawi się po pełnym zapełnieniu
+
+                            🔒 Kod pojawi się po
+                            pełnym zapełnieniu.
+
                         </div>
                         `
                     }
 
 
+                    <!--
+                        WAŻNE:
+                        Nie ma tutaj przycisku WYPŁATA.
+                        Pełny sejf odblokowuje się przez
+                        przycisk ZAKRĘĆ.
+                    -->
+
                     <div class="safe-actions">
 
+
                         <button
                             class="btn gray"
-                            ${
-                                ownerLogged
-                                ? `onclick="safeDepositClick(${safe.id})"`
-                                : `onclick="requireOwner()"`
-                            }>
+                            onclick="safeDepositClick(${safe.id})">
+
                             💰 Wpłata
+
                         </button>
 
 
-                        <button
-                            class="btn blue"
-                            ${
-                                ownerLogged && full
-                                ? `onclick="safeWithdrawClick(${safe.id})"`
-                                : `onclick="requireOwner()"`
-                            }>
-                            ⬆️ Wypłata
-                        </button>
+                        ${
+                            full
+                            ?
+                            `
+                            <button
+                                class="btn blue"
+                                onclick="safeCrank(${safe.id})">
 
+                                🔄 Zakręć
 
-                        <button
-                            class="btn gray"
-                            ${
-                                ownerLogged
-                                ? `onclick="safeClearClick(${safe.id})"`
-                                : `onclick="requireOwner()"`
-                            }>
-                            🗑️ Wyczyść
-                        </button>
+                            </button>
+                            `
+                            :
+                            `
+                            <button
+                                class="btn gray"
+                                disabled>
+
+                                🔒 Zakręć
+
+                            </button>
+                            `
+                        }
+
 
                     </div>
 
@@ -4693,7 +6543,9 @@ function renderSafes(){
                             style="
                                 margin-top:10px;
                                 text-align:center">
+
                             🔒 Tylko właściciel
+
                         </div>
                         `
                         :
@@ -4710,9 +6562,9 @@ function renderSafes(){
 }
 
 
-/* =================================================== */
-/* OWNER SAFE LIST */
-/* =================================================== */
+/* =========================================================
+   OWNER SAFE RENDER
+========================================================= */
 
 function renderOwnerSafes(){
 
@@ -4739,11 +6591,15 @@ function renderOwnerSafes(){
                         safe.amount
                     );
 
+
                 const max =
                     amountNumber(
                         safe.max_amount ||
-                        SAFE_MAX[safe.id]
+                        SAFE_MAX[
+                            safe.id
+                        ]
                     );
+
 
                 const full =
                     amount >= max;
@@ -4760,13 +6616,17 @@ function renderOwnerSafes(){
                         </b>
 
                         <div class="small">
+
                             ${money(amount)}
                             /
                             ${money(max)}
+
                         </div>
 
+
                         ${
-                            full && safe.unlock_code
+                            full &&
+                            safe.unlock_code
                             ?
                             `
                             <div
@@ -4774,10 +6634,12 @@ function renderOwnerSafes(){
                                     margin-top:4px;
                                     color:#ffd34d;
                                     font-weight:1000">
+
                                 🔑 KOD:
                                 ${escapeHtml(
                                     safe.unlock_code
                                 )}
+
                             </div>
                             `
                             :
@@ -4790,9 +6652,14 @@ function renderOwnerSafes(){
                     <div class="quick"
                          style="margin:0">
 
+
                         <button
                             class="btn green"
-                            onclick="safeDepositClick(${safe.id})">
+                            onclick="
+                                safeDepositClick(
+                                    ${safe.id}
+                                )
+                            ">
                             💰
                         </button>
 
@@ -4803,8 +6670,12 @@ function renderOwnerSafes(){
                             `
                             <button
                                 class="btn blue"
-                                onclick="safeWithdrawClick(${safe.id})">
-                                ⬆️
+                                onclick="
+                                    safeCrank(
+                                        ${safe.id}
+                                    )
+                                ">
+                                🔄
                             </button>
                             `
                             :
@@ -4814,9 +6685,14 @@ function renderOwnerSafes(){
 
                         <button
                             class="btn red"
-                            onclick="safeClearClick(${safe.id})">
+                            onclick="
+                                safeClearClick(
+                                    ${safe.id}
+                                )
+                            ">
                             🗑️
                         </button>
+
 
                     </div>
 
@@ -4830,9 +6706,9 @@ function renderOwnerSafes(){
 }
 
 
-/* =================================================== */
-/* SAFE DEPOSIT */
-/* =================================================== */
+/* =========================================================
+   SAFE DEPOSIT
+========================================================= */
 
 function safeDepositClick(id){
 
@@ -4847,7 +6723,9 @@ function safeDepositClick(id){
 
     const safe =
         allSafeData.find(
-            x=>Number(x.id) === Number(id)
+            x=>
+                Number(x.id) ===
+                Number(id)
         );
 
 
@@ -4861,7 +6739,11 @@ function safeDepositClick(id){
             "safeDepositText"
         )
         .textContent =
-            `Sejf ${id}: ${money(safe.amount)} / ${money(safe.max_amount)}`;
+            `Sejf ${id}: ${
+                money(safe.amount)
+            } / ${
+                money(safe.max_amount)
+            }`;
 
 
     document
@@ -4922,7 +6804,9 @@ async function confirmSafeDeposit(){
         "safe_deposit",
         {
             p_safe_id:
-                Number(selectedSafeId),
+                Number(
+                    selectedSafeId
+                ),
 
             p_amount:
                 amount
@@ -4932,7 +6816,9 @@ async function confirmSafeDeposit(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         document
             .getElementById(
@@ -4953,9 +6839,7 @@ async function confirmSafeDeposit(){
 
     toast(
         "💰 Dodano " +
-        money(amount) +
-        " do sejfu " +
-        selectedSafeId
+        money(amount)
     );
 
 
@@ -4964,9 +6848,9 @@ async function confirmSafeDeposit(){
 }
 
 
-/* =================================================== */
-/* SAFE CLEAR */
-/* =================================================== */
+/* =========================================================
+   SAFE CLEAR
+========================================================= */
 
 function safeClearClick(id){
 
@@ -4981,7 +6865,9 @@ function safeClearClick(id){
 
     const safe =
         allSafeData.find(
-            x=>Number(x.id) === Number(id)
+            x=>
+                Number(x.id) ===
+                Number(id)
         );
 
 
@@ -4995,7 +6881,9 @@ function safeClearClick(id){
             "safeClearText"
         )
         .textContent =
-            `Sejf ${id} zawiera ${money(safe.amount)}.`;
+            `Sejf ${id} zawiera ${money(
+                safe.amount
+            )}.`;
 
 
     openModal(
@@ -5013,7 +6901,9 @@ async function confirmSafeClear(){
 
 
     const id =
-        Number(selectedSafeId);
+        Number(
+            selectedSafeId
+        );
 
 
     const {
@@ -5029,7 +6919,9 @@ async function confirmSafeClear(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
 
         toast(
             "Nie udało się wyczyścić sejfu."
@@ -5054,45 +6946,9 @@ async function confirmSafeClear(){
 }
 
 
-/* =================================================== */
-/* SAFE WITHDRAW */
-/* =================================================== */
-
-function safeWithdrawClick(id){
-
-    if(!requireOwner()){
-        return;
-    }
-
-
-    const safe =
-        allSafeData.find(
-            x=>Number(x.id) === Number(id)
-        );
-
-
-    if(!safe){
-        return;
-    }
-
-
-    if(
-        Number(safe.amount) <
-        Number(safe.max_amount)
-    ){
-
-        toast(
-            "Sejf nie jest jeszcze pełny."
-        );
-
-        return;
-    }
-
-
-    safeCrank(id);
-
-}
-
+/* =========================================================
+   SAFE CRANK
+========================================================= */
 
 function safeCrank(id){
 
@@ -5103,7 +6959,9 @@ function safeCrank(id){
 
     const safe =
         allSafeData.find(
-            x=>Number(x.id) === Number(id)
+            x=>
+                Number(x.id) ===
+                Number(id)
         );
 
 
@@ -5118,7 +6976,7 @@ function safeCrank(id){
     ){
 
         toast(
-            "Sejf nie jest jeszcze pełny."
+            "🔒 Sejf nie jest jeszcze pełny."
         );
 
         return;
@@ -5169,7 +7027,8 @@ function safeCrank(id){
             "safeCodeTitle"
         )
         .textContent =
-            "🔐 Kod sejfu " + id;
+            "🔐 Kod sejfu " +
+            id;
 
 
     document
@@ -5201,6 +7060,10 @@ function safeCrank(id){
 }
 
 
+/* =========================================================
+   SAFE CODE
+========================================================= */
+
 function checkSafeCode(){
 
     if(!selectedSafeId){
@@ -5210,8 +7073,9 @@ function checkSafeCode(){
 
     const safe =
         allSafeData.find(
-            x=>Number(x.id) ===
-            Number(selectedSafeId)
+            x=>
+                Number(x.id) ===
+                Number(selectedSafeId)
         );
 
 
@@ -5231,7 +7095,9 @@ function checkSafeCode(){
 
     if(
         value !==
-        String(safe.unlock_code)
+        String(
+            safe.unlock_code
+        )
     ){
 
         document
@@ -5261,9 +7127,9 @@ function checkSafeCode(){
 }
 
 
-/* =================================================== */
-/* PULL SAFE */
-/* =================================================== */
+/* =========================================================
+   PULL SAFE
+========================================================= */
 
 async function pullSafeUp(){
 
@@ -5278,12 +7144,16 @@ async function pullSafeUp(){
 
 
     const id =
-        Number(unlockedSafeId);
+        Number(
+            unlockedSafeId
+        );
 
 
     const safe =
         allSafeData.find(
-            x=>Number(x.id) === id
+            x=>
+                Number(x.id) ===
+                Number(id)
         );
 
 
@@ -5338,37 +7208,51 @@ async function pullSafeUp(){
 
     if(error){
 
-        console.error(error);
+        console.error(
+            error
+        );
+
 
         if(box){
+
             box.classList.remove(
                 "opening"
             );
+
         }
+
 
         toast(
             error.message ||
             "Nie udało się wypłacić sejfu."
         );
 
+
         return;
     }
 
 
     showSafeMoneyEffect(
-        Number(safe.amount)
+        Number(
+            safe.amount
+        )
     );
 
 
     toast(
         "🎉 " +
-        money(safe.amount) +
+        money(
+            safe.amount
+        ) +
         " trafiło do salda!"
     );
 
 
-    unlockedSafeId = null;
-    selectedSafeId = null;
+    unlockedSafeId =
+        null;
+
+    selectedSafeId =
+        null;
 
 
     await refreshEverything();
@@ -5376,9 +7260,9 @@ async function pullSafeUp(){
 }
 
 
-/* =================================================== */
-/* SAFE EFFECT */
-/* =================================================== */
+/* =========================================================
+   SAFE EFFECT
+========================================================= */
 
 function showSafeMoneyEffect(
     amount
@@ -5386,12 +7270,18 @@ function showSafeMoneyEffect(
 
     const count =
         amount >= 2000
-        ? 120
-        : amount >= 1000
-        ? 90
-        : amount >= 500
-        ? 65
-        : 35;
+        ?
+            120
+        :
+        amount >= 1000
+        ?
+            90
+        :
+        amount >= 500
+        ?
+            65
+        :
+            35;
 
 
     const items = [
@@ -5404,7 +7294,11 @@ function showSafeMoneyEffect(
     ];
 
 
-    for(let i=0;i<count;i++){
+    for(
+        let i=0;
+        i<count;
+        i++
+    ){
 
         const el =
             document.createElement(
@@ -5415,7 +7309,8 @@ function showSafeMoneyEffect(
         el.textContent =
             items[
                 Math.floor(
-                    Math.random()*items.length
+                    Math.random() *
+                    items.length
                 )
             ];
 
@@ -5423,26 +7318,38 @@ function showSafeMoneyEffect(
         el.style.position =
             "fixed";
 
+
         el.style.left =
             "50%";
+
 
         el.style.top =
             "50%";
 
+
         el.style.zIndex =
             "7000";
 
+
         el.style.fontSize =
-            (18 +
-             Math.random()*28) +
+            (
+                18 +
+                Math.random()*28
+            ) +
             "px";
+
 
         el.style.pointerEvents =
             "none";
 
 
         const dx =
-            (Math.random()-.5)*700;
+            (
+                Math.random() -
+                .5
+            ) *
+            700;
+
 
         const dy =
             -100 -
@@ -5456,14 +7363,24 @@ function showSafeMoneyEffect(
 
         requestAnimationFrame(
             ()=>{
+
                 el.style.transition =
                     "transform 1s ease,opacity 1s";
 
-                el.style.transform =
-                    `translate(${dx}px,${dy}px)
-                     rotate(${Math.random()*800}deg)`;
 
-                el.style.opacity = "0";
+                el.style.transform =
+                    `translate(
+                        ${dx}px,
+                        ${dy}px
+                    )
+                    rotate(
+                        ${Math.random()*800}deg
+                    )`;
+
+
+                el.style.opacity =
+                    "0";
+
             }
         );
 
@@ -5480,9 +7397,9 @@ function showSafeMoneyEffect(
 }
 
 
-/* =================================================== */
-/* RENDER */
-/* =================================================== */
+/* =========================================================
+   DRAW ALL
+========================================================= */
 
 function drawAll(){
 
@@ -5499,85 +7416,12 @@ function drawAll(){
     drawChart();
 
     if(ownerLogged){
+
         renderOwnerSafes();
+
+        updateOwnerDashboard();
+
     }
-
-}
-
-
-/* =================================================== */
-/* KARTA */
-/* =================================================== */
-
-function renderMyCardHistory(){
-
-    const el =
-        document.getElementById(
-            "myCardHistory"
-        );
-
-
-    const rows =
-        myHistory.filter(
-            item=>
-                String(
-                    item.description || ""
-                )
-                .toLowerCase()
-                .includes("donat")
-        );
-
-
-    if(!rows.length){
-
-        el.innerHTML =
-            `<div class="notice">
-                Brak wpłat z karty.
-             </div>`;
-
-        return;
-    }
-
-
-    el.innerHTML =
-        rows.map(
-            item=>{
-
-                const amount =
-                    Number(
-                        item.amount || 0
-                    );
-
-
-                return `
-                <div class="history-item">
-
-                    <div class="history-date">
-                        ${escapeHtml(
-                            new Date(
-                                item.created_at
-                            ).toLocaleString(
-                                "pl-PL"
-                            )
-                        )}
-                    </div>
-
-                    <div class="history-desc">
-                        ${escapeHtml(
-                            item.description ||
-                            "Donata"
-                        )}
-                    </div>
-
-                    <div class="amount plus">
-                        +${money(amount)}
-                    </div>
-
-                </div>
-                `;
-
-            }
-        ).join("");
 
 }
 
